@@ -1,4 +1,4 @@
-class Contattabile():
+class Contattabile:
     
     def __init__(self, email : str, cellulare : str, **kwargs):
         self._email = email
