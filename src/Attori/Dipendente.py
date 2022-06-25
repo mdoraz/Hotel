@@ -1,8 +1,12 @@
 from __future__ import annotations
+from datetime import date
+from pathlib import Path
 from Attori.Utente import Utente
 from Attori.Persona import Persona
 from Attori.Ruolo import Ruolo
-from datetime import date
+from Gestori.GestoreFile import GestoreFile
+from Utilities.exeptions import CreationError
+
 
 class Dipendente(Persona, Utente):
 
@@ -11,7 +15,10 @@ class Dipendente(Persona, Utente):
         
         credenziali = {'username': username, 'password': password}
         super().__init__(nome, cognome, dataNascita, luogoNascita, email, cellulare, **credenziali)
-        self._id = Dipendente._calcolaUltimoId()
+        try:
+            self._id = Dipendente._calcolaId()
+        except TypeError as e:
+            raise CreationError(f"{str(e)} Cannot generate a valid id for this Dipendente object.")
         self._IBAN = IBAN
         self._turno = turno
         self._ruolo = ruolo
@@ -64,6 +71,25 @@ class Dipendente(Persona, Utente):
     def setTurno(self, turno : bool):
         self._turno = turno
 
+
     @staticmethod
-    def _calcolaUltimoId() -> int:
-        pass
+    def _calcolaId() -> int:
+        
+        paths = GestoreFile.leggiJson(Path('paths.json'))
+        try:
+            dipendenti = GestoreFile.leggiPickle(Path(paths['dipendenti']))
+        except FileNotFoundError:
+            return 1
+        
+        if not isinstance(dipendenti, dict):
+            raise TypeError(f"{Path(paths['dipendenti']).name} has been corrupted.")
+        
+        ultimoId = 0
+        for dipendente in dipendenti.values():
+            if dipendente.getId() > ultimoId:
+                ultimoId = dipendente.getId()
+        
+        return ultimoId + 1
+    
+    def __str__(self):
+        return f"{super().__str__()} --> {self._ruolo.name}"

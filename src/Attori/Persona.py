@@ -1,12 +1,18 @@
-from Attori.Contattabile import Contattabile
 from datetime import date
+from pathlib import Path
+from Attori.Contattabile import Contattabile
+from Gestori.GestoreFile import GestoreFile
+from Utilities.exeptions import CreationError
 
 
 class Persona(Contattabile):
 
     def __init__(self, nome : str, cognome : str, dataNascita : date, luogoNascita : str, email : str, cellulare : str, **kwargs):
         super().__init__(email, cellulare, **kwargs)
-        self._id = Persona._calcolaUltimoId()
+        try:
+            self._id = Persona._calcolaId()
+        except TypeError as e:
+            raise CreationError(f"{str(e)} Cannot generate a valid id for this Persona object.")
         self._nome = nome
         self._cognome = cognome
         self._dataNascita = dataNascita
@@ -39,6 +45,26 @@ class Persona(Contattabile):
     def setLuogoNascita(self, luogoNascita : str):
         self._luogoNascita = luogoNascita
 
+
     @staticmethod
-    def _calcolaUltimoId() -> int:
-        pass
+    def _calcolaId() -> int:
+
+        paths = GestoreFile.leggiJson(Path('paths.json'))
+        try:
+            clienti = GestoreFile.leggiPickle(Path(paths['clienti']))
+        except FileNotFoundError:
+            return 1
+        
+        if not isinstance(clienti, dict):
+            raise TypeError(f"{Path(paths['clienti']).name} has been corrupted.")
+        
+        ultimoId = 0
+        for cliente in clienti.values():
+            if cliente.getId() > ultimoId:
+                ultimoId = cliente.getId()
+        
+        return ultimoId + 1
+
+
+    def __str__(self):
+        return f"ID: {self._id} - {self._nome} {self._cognome}, nato il {self._dataNascita} a {self._luogoNascita}"
