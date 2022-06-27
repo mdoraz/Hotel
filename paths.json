@@ -1,0 +1,4 @@
+{
+	"dipendenti": "files/pickles/dipendenti.pickle", 
+	"clienti": "files/pickles/clienti.pickle"
+}

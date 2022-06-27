@@ -1,3 +1,4 @@
+import json
 import pickle
 from pathlib import Path
 
@@ -8,15 +9,20 @@ class GestoreFile:
         pass
 
     @staticmethod
-    def leggiDaFile(pathFile : Path) -> object:
+    def leggiPickle(pathFile : Path) -> object:
         with open(pathFile, 'rb') as file:
             return pickle.load(file)
 
     @staticmethod
-    def salvaSuFile(oggetto : object, pathFile : Path):
+    def salvaPickle(oggetto : object, pathFile : Path):
         
         if not pathFile.exists():
             with open(pathFile, 'w') as file:
                 pass
         with open(pathFile, 'wb') as file:
             pickle.dump(oggetto, file, pickle.HIGHEST_PROTOCOL)
+
+    @staticmethod
+    def leggiJson(pathFile : Path) -> dict:
+        with open(pathFile, 'r') as file:
+            return json.load(file)
