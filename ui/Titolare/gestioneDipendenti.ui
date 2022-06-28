@@ -26,7 +26,7 @@
    <string>Gestione Dipendenti</string>
   </property>
   <property name="currentIndex">
-   <number>0</number>
+   <number>2</number>
   </property>
   <property name="elideMode">
    <enum>Qt::ElideLeft</enum>
@@ -58,7 +58,7 @@
      <number>11</number>
     </property>
     <item row="0" column="1">
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="btnNuovoDipendente">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
         <horstretch>0</horstretch>
@@ -99,7 +99,7 @@ dipendente</string>
      </widget>
     </item>
     <item row="0" column="0">
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="labelDipendenti">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -147,7 +147,7 @@ dipendente</string>
      </widget>
     </item>
     <item row="2" column="0">
-     <widget class="QTreeWidget" name="treeWidget">
+     <widget class="QTreeWidget" name="treeWidgetDipendenti">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -197,7 +197,7 @@ dipendente</string>
        <bool>true</bool>
       </property>
       <property name="sortingEnabled">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <column>
        <property name="text">
@@ -214,43 +214,10 @@ dipendente</string>
         <string>Nome</string>
        </property>
       </column>
-      <item>
-       <property name="text">
-        <string>1</string>
-       </property>
-       <property name="text">
-        <string>Rossi</string>
-       </property>
-       <property name="text">
-        <string>Mario</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>2</string>
-       </property>
-       <property name="text">
-        <string>Verdi</string>
-       </property>
-       <property name="text">
-        <string>Giuseppe</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>3</string>
-       </property>
-       <property name="text">
-        <string>......</string>
-       </property>
-       <property name="text">
-        <string>.....</string>
-       </property>
-      </item>
      </widget>
     </item>
     <item row="1" column="1" rowspan="2">
-     <widget class="QWidget" name="widget" native="true">
+     <widget class="QWidget" name="widgetButtonsDipendenti" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -259,7 +226,7 @@ dipendente</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <spacer name="spacer1">
+        <spacer name="vSpacerDipendenti1">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -272,7 +239,7 @@ dipendente</string>
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="btnVisualizzaAccount">
          <property name="text">
           <string>Visualizza 
 account</string>
@@ -280,7 +247,7 @@ account</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_4">
+        <widget class="QPushButton" name="btnVisualizzaAssenze">
          <property name="text">
           <string>Visualizza 
 assenze</string>
@@ -288,7 +255,7 @@ assenze</string>
         </widget>
        </item>
        <item>
-        <spacer name="spacer2">
+        <spacer name="vSpacerDipendenti2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -301,7 +268,7 @@ assenze</string>
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="btnIndietro1">
          <property name="text">
           <string>Indietro</string>
          </property>
@@ -324,7 +291,7 @@ assenze</string>
    </attribute>
    <layout class="QGridLayout" name="gridLayout_5">
     <item row="0" column="1">
-     <widget class="QGroupBox" name="groupCamerieri">
+     <widget class="QGroupBox" name="groupBoxCamerieri">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -449,7 +416,7 @@ assenze</string>
         </widget>
        </item>
        <item row="2" column="0" alignment="Qt::AlignRight|Qt::AlignBottom">
-        <widget class="QPushButton" name="btnCamerieri">
+        <widget class="QPushButton" name="btnModificaCamerieri">
          <property name="text">
           <string>Modifica</string>
          </property>
@@ -459,7 +426,7 @@ assenze</string>
      </widget>
     </item>
     <item row="0" column="0">
-     <widget class="QGroupBox" name="groupReceptionist">
+     <widget class="QGroupBox" name="groupBoxReceptionist">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -590,7 +557,7 @@ assenze</string>
         </widget>
        </item>
        <item row="1" column="0" alignment="Qt::AlignRight|Qt::AlignBottom">
-        <widget class="QPushButton" name="btnReceptionist">
+        <widget class="QPushButton" name="btnModificaReceptionist">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -606,7 +573,7 @@ assenze</string>
      </widget>
     </item>
     <item row="1" column="1" alignment="Qt::AlignRight|Qt::AlignBottom">
-     <widget class="QPushButton" name="pushButton_5">
+     <widget class="QPushButton" name="btnIndietro">
       <property name="text">
        <string>Indietro</string>
       </property>
@@ -625,8 +592,21 @@ assenze</string>
     <string>Assenze ID 1</string>
    </attribute>
    <layout class="QGridLayout" name="gridLayout_4">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_2">
+    <item row="1" column="0">
+     <spacer name="hSpacerAssenze">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="0" column="0" colspan="3">
+     <widget class="QLabel" name="labelAssenzeDi">
       <property name="font">
        <font>
         <family>Arial</family>
@@ -641,7 +621,7 @@ assenze</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0" alignment="Qt::AlignHCenter">
+    <item row="1" column="1">
      <widget class="QListWidget" name="listWidget">
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
@@ -649,8 +629,14 @@ assenze</string>
       <property name="editTriggers">
        <set>QAbstractItemView::NoEditTriggers</set>
       </property>
+      <property name="movement">
+       <enum>QListView::Static</enum>
+      </property>
       <property name="resizeMode">
        <enum>QListView::Adjust</enum>
+      </property>
+      <property name="layoutMode">
+       <enum>QListView::SinglePass</enum>
       </property>
       <property name="viewMode">
        <enum>QListView::ListMode</enum>
@@ -677,9 +663,60 @@ assenze</string>
       </item>
      </widget>
     </item>
+    <item row="1" column="2">
+     <widget class="QWidget" name="widgetButtonsAssenze" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QPushButton" name="pushButton">
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Aggiungi assenza</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButton_2">
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Rimuovi assenza</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="vSpacerAssenze">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="tab">
+  <widget class="QWidget" name="tabVisualizza">
    <attribute name="title">
     <string>Visualizza ID 1</string>
    </attribute>
@@ -716,7 +753,7 @@ color: rgb(0, 85, 0);</string>
         <number>0</number>
        </property>
        <item>
-        <widget class="QLabel" name="labelIntestazioneNome_2">
+        <widget class="QLabel" name="labelIntestazioneNome">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -748,7 +785,7 @@ color: rgb(0, 85, 0);</string>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="labelIntestazioneID_2">
+        <widget class="QLabel" name="labelIntestazioneID">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -946,7 +983,7 @@ color: rgb(0, 85, 0);</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_7">
           <item row="0" column="0" alignment="Qt::AlignRight">
-           <widget class="QPushButton" name="btnContatti">
+           <widget class="QPushButton" name="btnModificaContatti">
             <property name="font">
              <font>
               <family>Arial</family>
@@ -1138,7 +1175,7 @@ color: rgb(0, 85, 0);</string>
            <number>0</number>
           </property>
           <item row="0" column="0" alignment="Qt::AlignRight">
-           <widget class="QPushButton" name="btnDatiLavorativi">
+           <widget class="QPushButton" name="btnModificaDatiLavorativi">
             <property name="font">
              <font>
               <family>Arial</family>
@@ -1245,7 +1282,7 @@ color: rgb(0, 85, 0);</string>
         <widget class="QWidget" name="widget_4" native="true">
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0" alignment="Qt::AlignRight">
-           <widget class="QPushButton" name="btnCredenziali">
+           <widget class="QPushButton" name="btnModificaCredenziali">
             <property name="font">
              <font>
               <family>Arial</family>
@@ -1264,7 +1301,7 @@ color: rgb(0, 85, 0);</string>
      </widget>
     </item>
     <item row="3" column="1">
-     <spacer name="verticalSpacer">
+     <spacer name="vSpacerVisualizza">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
