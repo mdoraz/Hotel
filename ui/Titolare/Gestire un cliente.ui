@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>tabwidgetHomeGestioneClienti</class>
+ <widget class="QTabWidget" name="tabwidgetHomeGestioneClienti">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>794</width>
+    <height>505</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gestire un Cliente</string>
+  </property>
+  <widget class="QWidget" name="tab">
+   <attribute name="title">
+    <string>Home Gestione Clienti</string>
+   </attribute>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="1" column="1">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="btnTornareHomeReceptionist">
+      <property name="text">
+       <string>Ritornare alla home receptionist</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="3">
+     <widget class="QTabWidget" name="tabwidgetScelteHomeGestioneClienti">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tabRegistraClienti">
+       <attribute name="title">
+        <string>Registra Cliente</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="1" column="0">
+         <widget class="QPushButton" name="btnNo">
+          <property name="text">
+           <string>No</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="btnRegistraCliente">
+          <property name="text">
+           <string>Registare Cliente</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0" colspan="3">
+         <widget class="QGroupBox" name="groupboxSchedaCompilareRegistrazioneCliente">
+          <property name="title">
+           <string>Scheda da compilare per la registrazione del cliente:</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="3" column="1" colspan="2">
+            <widget class="QLineEdit" name="lineeditTelefonoAsterisco">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>Telefono</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="labelDataDiNascitaAsterisco">
+             <property name="text">
+              <string>Data di nascita*:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="2">
+            <widget class="QPushButton" name="btnHelpAsterisco">
+             <property name="text">
+              <string>Help *</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelCognomeAsterisco">
+             <property name="text">
+              <string>Cognome*:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1" colspan="2">
+            <widget class="QDateEdit" name="dateeditDataDiNascitaAsterisco">
+             <property name="displayFormat">
+              <string>dd/MM/yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="2">
+            <widget class="QLineEdit" name="lineeditNomeAsterisco">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>Nome</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="labelEmailAsterisco">
+             <property name="text">
+              <string>Email*:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="QLineEdit" name="lineeditEmailAsterisco">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>myEmail@domain.com</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="2">
+            <widget class="QLineEdit" name="lineeditCognomeAsterisco">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>Cognome</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="labelLuogoDiNascitaProvinciaAsterisco">
+             <property name="text">
+              <string>Luogo di nascita(provincia)*:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelNomeAsterisco">
+             <property name="text">
+              <string>Nome*:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="labelTelefonoAsterisco">
+             <property name="text">
+              <string>Telefono*:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" colspan="2">
+            <widget class="QLineEdit" name="lineeditLuogoDiNascitaProvinciaAsterisco">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>Luogo di nascita(Provincia)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0" colspan="2">
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabVisualizzaClienti">
+       <attribute name="title">
+        <string>Visualizza Cliente</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="btnRicercaCliente">
+          <property name="text">
+           <string>Ricerca Cliente</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="2">
+         <widget class="QLabel" name="labelVisualizzaClienteRicercato">
+          <property name="text">
+           <string>Qui è dove puoi vedere i dati del cliente ricercato:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <widget class="QGroupBox" name="groupboxSchedaClienteRicercato">
+          <property name="title">
+           <string>Scheda Cliente Ricercato:</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="7" column="1" colspan="2">
+            <widget class="QLineEdit" name="lineeditLuogoDiNascitaProvincia">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>Luogo di nascita(Provincia)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="1" colspan="2">
+            <widget class="QDateEdit" name="dateeditDataDiNascita">
+             <property name="displayFormat">
+              <string>dd/MM/yyyy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelNome">
+             <property name="text">
+              <string>Nome:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="1" colspan="2">
+            <widget class="QLineEdit" name="lineeditTelefono">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>Telefono</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1" colspan="2">
+            <widget class="QLineEdit" name="lineeditEmail">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>myEmail@domain.com</string>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QLabel" name="labelTelefono">
+             <property name="text">
+              <string>Telefono:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="labelCognome">
+             <property name="text">
+              <string>Cognome:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <widget class="QLabel" name="labelDataDiNascita">
+             <property name="text">
+              <string>Data di nascita:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QLabel" name="labelLuogoDiNascitaProvincia">
+             <property name="text">
+              <string>Luogo di nascita(provincia):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" colspan="2">
+            <widget class="QLineEdit" name="lineeditCognome">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>Cognome</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="2">
+            <widget class="QLineEdit" name="lineeditNome">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="placeholderText">
+              <string>Nome</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="labelEmail">
+             <property name="text">
+              <string>Email:</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="labelRicercaCliente">
+          <property name="text">
+           <string>Innanzitutto ricerchiamo nel sistema il cliente:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QPushButton" name="btnModificaClienteRicercato">
+          <property name="text">
+           <string>Modifica cliente ricercato</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="btnEliminaClienteRicercato">
+          <property name="text">
+           <string>elimina cliente ricercato</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
