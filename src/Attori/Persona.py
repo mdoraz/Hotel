@@ -1,8 +1,8 @@
 from datetime import date
 from pathlib import Path
-from Attori.Contattabile import Contattabile
-from Gestori.GestoreFile import GestoreFile
-from Utilities.exeptions import CreationError
+from src.Attori.Contattabile import Contattabile
+from src.Gestori.GestoreFile import GestoreFile
+from src.Utilities.exeptions import CreationError
 
 
 class Persona(Contattabile):

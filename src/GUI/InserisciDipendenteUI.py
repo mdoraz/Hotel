@@ -1,15 +1,16 @@
 import sys
+import os
 from datetime import date
 from pathlib import Path
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
-from Attori.Ruolo import Ruolo
-from GUI.FormUI import FormUI
+from src.Attori.Ruolo import Ruolo
+from src.GUI.FormUI import FormUI
 
-from Gestori.GestoreFile import GestoreFile
-from Gestori.GestorePersona import GestorePersona
-from Utilities.encrypter import encrypt
+from src.Gestori.GestoreFile import GestoreFile
+from src.Gestori.GestorePersona import GestorePersona
+from src.Utilities.encrypter import encrypt
 
 
 class InserisciDipendenteUI(QTabWidget, FormUI):
@@ -17,7 +18,9 @@ class InserisciDipendenteUI(QTabWidget, FormUI):
 	def __init__(self):
 		kwargs = {'n' : 100} # parametro fittizio, utile a far attivare anche il costruttore di FormUI
 		super().__init__(**kwargs)
-		
+
+		print(os.getcwd())
+
 		loadUi('ui/Titolare/inserisciDipendente1.ui', self)
 		tabWidgetPage2 = InserisciDipendentePage2(self)
 		self.page2 = tabWidgetPage2.tabInserisciDipendente

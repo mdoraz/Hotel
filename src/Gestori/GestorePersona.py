@@ -1,10 +1,10 @@
 from datetime import date
 from pathlib import Path
-from Attori.Dipendente import Dipendente
-from Attori.Persona import Persona
-from Attori.Ruolo import Ruolo
-from Gestori.GestoreFile import GestoreFile
-from Utilities.exeptions import CreationError, DuplicateError
+from src.Attori.Dipendente import Dipendente
+from src.Attori.Persona import Persona
+from src.Attori.Ruolo import Ruolo
+from src.Gestori.GestoreFile import GestoreFile
+from src.Utilities.exeptions import CreationError, DuplicateError
 
 
 class GestorePersona():

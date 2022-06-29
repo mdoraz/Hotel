@@ -1,18 +1,19 @@
 from __future__ import annotations
+import os
 from datetime import date
 from pathlib import Path
-from Attori.Utente import Utente
-from Attori.Persona import Persona
-from Attori.Ruolo import Ruolo
-from Gestori.GestoreFile import GestoreFile
-from Utilities.exeptions import CreationError
+from src.Attori.Utente import Utente
+from src.Attori.Persona import Persona
+from src.Attori.Ruolo import Ruolo
+from src.Gestori.GestoreFile import GestoreFile
+from src.Utilities.exeptions import CreationError
 
 
 class Dipendente(Persona, Utente):
 
     def __init__(self, nome : str, cognome : str, dataNascita : date, luogoNascita : str, email : str, cellulare : str,
                  IBAN : str, turno : bool, ruolo : Ruolo, username : str, password : str):
-        
+
         credenziali = {'username': username, 'password': password}
         super().__init__(nome, cognome, dataNascita, luogoNascita, email, cellulare, **credenziali)
         try:

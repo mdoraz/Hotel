@@ -1,5 +1,5 @@
-from Attori.Contattabile import Contattabile
-from Attori.Utente import Utente
+from src.Attori.Contattabile import Contattabile
+from src.Attori.Utente import Utente
 
 class Amministratore(Contattabile, Utente):
     

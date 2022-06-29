@@ -1,6 +1,7 @@
 import json
 import pickle
 from pathlib import Path
+import src.Attori
 
 class GestoreFile:
 
@@ -11,7 +12,8 @@ class GestoreFile:
     @staticmethod
     def leggiPickle(pathFile : Path) -> object:
         with open(pathFile, 'rb') as file:
-            return pickle.load(file)
+            oggetto = pickle.load(file)
+            return oggetto
 
     @staticmethod
     def salvaPickle(oggetto : object, pathFile : Path):

@@ -1,10 +1,10 @@
 from pathlib import Path
 from datetime import date
 import unittest
-from Attori.Ruolo import Ruolo
-from Gestori.GestoreFile import GestoreFile
-from Gestori.GestorePersona import GestorePersona
-from Utilities.exeptions import DuplicateError
+from src.Attori.Ruolo import Ruolo
+from src.Gestori.GestoreFile import GestoreFile
+from src.Gestori.GestorePersona import GestorePersona
+from src.Utilities.exeptions import DuplicateError
 
 
 class TestGestorePersona(unittest.TestCase):
