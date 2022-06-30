@@ -31,8 +31,6 @@ class InserisciDipendenteUI(QTabWidget):
 
 		self.addTab(self.page1, 'Inserici Dipendente')
 
-		self._readDipendenti()
-
 		self.page1.btnAnnulla.clicked.connect(self.close)
 		self.page1.btnAvanti.clicked.connect(self._avantiClicked)
 
@@ -42,19 +40,17 @@ class InserisciDipendenteUI(QTabWidget):
 		self.msg = QMessageBox() # per futuri messaggi
 	
 
-	def _readDipendenti(self):
+	def _readDipendenti(self) -> dict:
 		paths = GestoreFile.leggiJson(Path('paths.json'))
 		try:
-			dipendenti = GestoreFile.leggiPickle(Path(paths['dipendenti']))
-			if not isinstance(dipendenti, dict):
-				self._showMessage(f"{Path(paths['dipendenti']).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
-									QMessageBox.Icon.Critical, 'Errore')
-				self.close()
-				return
-		except FileNotFoundError:
-			dipendenti = {}
+			dipendenti = GestoreFile.leggiDictPickle(Path(paths['dipendenti']))
+		except TypeError:
+			self._showMessage(f"{Path(paths['dipendenti']).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
+								 QMessageBox.Icon.Critical, 'Errore')
+			self.close()
+			raise
 		
-		self.dipendenti = dipendenti
+		return dipendenti
 
 
 	def _avantiClicked(self):
@@ -63,7 +59,8 @@ class InserisciDipendenteUI(QTabWidget):
 				self._showMessage('Inserisci tutti i campi, per favore.', QMessageBox.Icon.Warning, 'Errore')
 				return
 		
-		for dipendente in self.dipendenti.values():
+		dipendenti = self._readDipendenti()
+		for dipendente in dipendenti.values():
 			if (dipendente.getNome() == self.page1.lineEditNome.text() and dipendente.getCognome() == self.page1.lineEditCognome.text() and 
                 dipendente.getDataNascita() == self.page1.dateEdit.date().toPyDate() and dipendente.getLuogoNascita() == self.page1.lineEditLuogoNascita.text()):
 				self._showMessage('Questo dipendente è già presente nel sistema, non può essere inserito nuovamente.', QMessageBox.Icon.Warning, 'Errore')
@@ -96,7 +93,8 @@ class InserisciDipendenteUI(QTabWidget):
 
 		def isUsernameUsed(paths : dict) -> bool:
 			toReturn = False
-			for dipendente in self.dipendenti.values():
+			dipendenti = self._readDipendenti()
+			for dipendente in dipendenti.values():
 				if dipendente.getUsername() == self.page2.lineEditUsername.text():
 					self._showMessage('Username già in uso, inserirne un altro.', QMessageBox.Icon.Warning, 'Errore')
 					toReturn = True
