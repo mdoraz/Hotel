@@ -5,7 +5,7 @@ from PyQt5.uic import loadUi
 
 
 class HomeCamerieriUI(QTabWidget):
-    def __init__(self, previous : QWidget = None):
+    def __init__(self):
         super().__init__()
         loadUi('ui/Cameriere/Home/HomeCamerieri.ui', self)
         self.setMinimumSize(600, 300)
@@ -23,8 +23,8 @@ class HomeCamerieriUI(QTabWidget):
         self.close()
 
     def btnTornareHomeHotelHomeCamerieriClicked(self):
-        self.addTab(self.page1,'Home Page')
-        self.removeTab(0)
+        self.HomeCamerieri.show()
+        self.close()
 
 
 if __name__ == "__main__":
