@@ -2,11 +2,10 @@ from PyQt5.QtWidgets import *
 
 class FormUI(QWidget):
 	
-	def __init__(self, n, **kwargs):
+	def __init__(self, formParent : QWidget = None, **kwargs): # type: ignore
 		"""n è un parametro fittizio. Senza di esso il costruttore non verrebbe chiamato in caso di ereditarietà multipla,
 		in particolare nel caso in cui FormUI non sia nell'MRO la prima delle superclassi."""
-		i = n
-		super().__init__(**kwargs)
+		super().__init__(formParent, **kwargs)
 
 
 	def hideLabels(self, lineEditLabelPairs : dict):
