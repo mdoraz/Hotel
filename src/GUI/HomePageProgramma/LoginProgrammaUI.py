@@ -40,6 +40,6 @@ class LoginProgrammaUI(QTabWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWidget = LoginProgrammaUI()
+    mainWidget = LoginProgrammaUI(pathFile='src/GUI/HomePageProgramma')
     mainWidget.show()
     sys.exit(app.exec_())
