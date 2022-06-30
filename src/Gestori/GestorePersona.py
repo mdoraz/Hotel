@@ -13,12 +13,9 @@ class GestorePersona():
 	def _verificaEsistenzaPersona(pathFile : Path, nome : str, cognome : str, dataNascita : date, luogoNascita : str):
 		
 		try:
-			persone = GestoreFile.leggiPickle(pathFile)
-		except FileNotFoundError:
-			persone = {}
-		
-		if not isinstance(persone, dict):
-			raise TypeError(f"{pathFile.name} has been corrupted.") 
+			persone = GestoreFile.leggiDictPickle(pathFile)
+		except TypeError:
+			raise
 		
 		flag = False
 		for persona in persone.values():
@@ -51,14 +48,10 @@ class GestorePersona():
 					raise TypeError("some argument hasn't the right type to create a Dipendente object")
 			except KeyError: # se qualche chiave nell'if precedente non è contenuta in kwargs
 				raise CreationError('the arguments are not the right ones to create a Dipendente object')
-		
 		try:
-			persone = GestoreFile.leggiPickle(pathFile)
-		except FileNotFoundError:
-			persone = {}
-		
-		if not isinstance(persone, dict):
-			raise TypeError(f"{pathFile.name} has been corrupted and can't be resotred.\nTo make the program run again, delete it.")
+			persone = GestoreFile.leggiDictPickle(pathFile)
+		except TypeError:
+			raise
 			
 		persone[nuovaPersona.getId()] = nuovaPersona
 		GestoreFile.salvaPickle(persone, pathFile)
@@ -66,10 +59,10 @@ class GestorePersona():
 
 	@staticmethod
 	def rimuoviPersona(pathFile : Path, persona : Persona):
-		
-		persone = GestoreFile.leggiPickle(pathFile)
-		if not isinstance(persone, dict):
-			raise TypeError(f"{pathFile.name} has been corrupted and can't be restored.\nTo make the program run again, delete it.")
+		try:
+			persone = GestoreFile.leggiDictPickle(pathFile)
+		except TypeError:
+			raise
 		
 		del persone[persona.getId()]
 

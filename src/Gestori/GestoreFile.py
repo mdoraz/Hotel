@@ -1,7 +1,6 @@
 import json
 import pickle
 from pathlib import Path
-import src.Attori
 
 class GestoreFile:
 
@@ -28,3 +27,25 @@ class GestoreFile:
     def leggiJson(pathFile : Path) -> dict:
         with open(pathFile, 'r') as file:
             return json.load(file)
+
+    @staticmethod
+    def leggiDictPickle(pathFile : Path) -> dict:
+        try:
+            dictionary = GestoreFile.leggiPickle(pathFile)
+        except FileNotFoundError:
+            dictionary = {}
+        
+        if not isinstance(dictionary, dict):
+            raise TypeError(f"{pathFile.name} has been corrupted and can't be restored.\nTo fix the issue, delete it.")
+        return dictionary
+    
+    @staticmethod
+    def leggiListPickle(pathFile : Path) -> list:
+        try:
+            mylist = GestoreFile.leggiPickle(pathFile)
+        except FileNotFoundError:
+            mylist = {}
+        
+        if not isinstance(mylist, list):
+            raise TypeError(f"{pathFile.name} has been corrupted and can't be restored.\nTo fix the issue, delete it.")
+        return mylist
