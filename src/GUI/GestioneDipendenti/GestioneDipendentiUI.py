@@ -1,4 +1,5 @@
 import sys
+import platform
 from pathlib import Path
 
 from PyQt5.QtWidgets import *
@@ -17,10 +18,15 @@ class GestioneDipendentiUI(QTabWidget):
 
 		loadUi('ui/Titolare/gestioneDipendenti.ui', self)
 
-		self.tabBar().tabButton(0, QTabBar.ButtonPosition.RightSide).deleteLater() # il tab button all'indice 0 della tab bar sarà eliminato
-		self.tabBar().setTabButton(0, QTabBar.ButtonPosition.RightSide, None) # type: ignore
-		self.tabBar().tabButton(1, QTabBar.ButtonPosition.RightSide).deleteLater() # il tab button all'indice 1 della tab bar sarà eliminato
-		self.tabBar().setTabButton(1, QTabBar.ButtonPosition.RightSide, None)  # type: ignore
+		if platform.system() == 'Darwin':
+			position = QTabBar.ButtonPosition.LeftSide  #se sistema operativo è Mac
+		else:
+			position = QTabBar.ButtonPosition.RightSide  #se sistema operativo è diverso da Mac
+
+		self.tabBar().tabButton(0,position).deleteLater()  # il tab button all'indice 0 della tab bar sarà eliminato
+		self.tabBar().setTabButton(0, position, None)  # type: ignore
+		self.tabBar().tabButton(1, position).deleteLater()  # il tab button all'indice 1 della tab bar sarà eliminato
+		self.tabBar().setTabButton(1, position, None)  # type: ignore
 
 		self.tabCloseRequested.connect(self.removeTab) # il click della x di una tab fa chiudere quella tab
 		self._fillTreeWidgetDipendenti() # riempita la tree widget con i dipendenti in memoria
