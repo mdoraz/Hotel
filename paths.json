@@ -1,4 +1,5 @@
 {
 	"dipendenti": "files/pickles/dipendenti.pickle", 
-	"clienti": "files/pickles/clienti.pickle"
+	"clienti": "files/pickles/clienti.pickle",
+	"titolare": "file/pickles/titolare.pickle"
 }
