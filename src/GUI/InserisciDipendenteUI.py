@@ -21,7 +21,7 @@ class InserisciDipendenteUI(QTabWidget, FormUI):
 
 		print(os.getcwd())
 
-		loadUi('ui/Titolare/inserisciDipendente1.ui', self)
+		loadUi('ui/Titolare/GestisciDipendenti/inserisciDipendente1.ui', self)
 		tabWidgetPage2 = InserisciDipendentePage2(self)
 		self.page2 = tabWidgetPage2.tabInserisciDipendente
 		
@@ -130,7 +130,7 @@ class InserisciDipendentePage2(QTabWidget, FormUI):
 		kwargs = {'n' : 100} # parametro fittizio, utile a far attivare anche il costruttore di FormUI
 		super().__init__(**kwargs)
 		
-		loadUi('ui/Titolare/inserisciDipendente2.ui', self)
+		loadUi('ui/Titolare/GestisciDipendenti/inserisciDipendente2.ui', self)
 		
 		self.msg = QMessageBox() #per futuri messaggi
 
