@@ -11,7 +11,7 @@ class VisualizzaDipendenteUI(QWidget):
 	def __init__(self, dipendente : Dipendente, parent : QWidget = None):  # type: ignore
 		super().__init__(parent)
 
-		loadUi('ui/Titolare/visualizzaDipendente.ui', self)
+		loadUi('ui/Titolare/GestisciDipendenti/visualizzaDipendente.ui', self)
 
 		self.dipendente = dipendente
 		self._fillFields()

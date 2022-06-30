@@ -16,7 +16,7 @@ class GestioneDipendentiUI(QTabWidget):
 	def __init__(self):
 		super().__init__()
 
-		loadUi('ui/Titolare/gestioneDipendenti.ui', self)
+		loadUi('ui/Titolare/GestisciDipendenti/gestioneDipendenti.ui', self)
 
 		if platform.system() == 'Darwin':
 			position = QTabBar.ButtonPosition.LeftSide  #se sistema operativo è Mac

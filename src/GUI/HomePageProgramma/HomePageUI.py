@@ -11,7 +11,7 @@ class HomePageUI(QTabWidget):
     def __init__(self):
         super().__init__()
         self.page1 = QWidget()
-        loadUi('ui/Titolare/homePage.ui', self.page1)
+        loadUi('ui/HomeELoginProgramma/homePage.ui', self.page1)
         self.addTab(self.page1, 'Home Programma')
         self.setMinimumSize(500,300)
 

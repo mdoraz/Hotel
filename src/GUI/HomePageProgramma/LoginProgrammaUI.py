@@ -8,7 +8,7 @@ class LoginProgrammaUI(QTabWidget):
     def __init__(self, pathFile:Path):
         super().__init__()
         self.page1 = QWidget()
-        loadUi('ui/Titolare/login.ui', self.page1)
+        loadUi('ui/HomeELoginProgramma/login.ui', self.page1)
         self.addTab(self.page1, 'Login Programma')
 
         eyeBtn = QToolButton()  # creati i bottoni per mostrare/nascondere la password

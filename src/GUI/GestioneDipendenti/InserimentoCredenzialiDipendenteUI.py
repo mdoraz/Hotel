@@ -10,7 +10,7 @@ class InserimentoCredenzialiDipendenteUI(FormUI):
 		
 		self.previous = previous # per tornare alla pagina precedente al click del bottone "indietro"
 		
-		loadUi('ui/Titolare/inserimentoCredenzialiDipendente.ui', self)
+		loadUi('ui/Titolare/GestisciDipendenti/inserimentoCredenzialiDipendente.ui', self)
 		
 		self.msg = QMessageBox() #per futuri messaggi
 

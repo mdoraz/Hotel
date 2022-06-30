@@ -10,7 +10,7 @@ class InserimentoDatiDipendenteUI(FormUI):
 		super().__init__()
 		
 		self.pevious = previous
-		loadUi('ui/Titolare/inserimentoDatiDipendente.ui', self)
+		loadUi('ui/Titolare/GestisciDipendenti/inserimentoDatiDipendente.ui', self)
 		
 		self.msg = QMessageBox() # per futuri messaggi
 		
