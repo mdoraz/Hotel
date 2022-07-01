@@ -1,4 +1,5 @@
 import sys
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
@@ -9,6 +10,7 @@ class HomeCamerieriUI(QTabWidget):
         super().__init__()
         loadUi('ui/Cameriere/Home/HomeCamerieri.ui', self)
         self.setMinimumSize(600, 300)
+        self.setFont(QtGui.QFont('Arial', 10))
 
     def connectButtons(self):
         self.btnVisualizzaDatiPersonaliCamerieri.clicked.connect(self._btnVisualizzaDatiPersonaliCamerieriClicked)
