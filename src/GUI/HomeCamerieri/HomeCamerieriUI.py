@@ -3,6 +3,8 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
+from src.GUI.HomeCamerieri.VisualizzaDatiPersonali.VisualizzaDatiPersonaliCamerieriUI import \
+    VisualizzaDatiPersonaliCamerieriUI
 
 
 class HomeCamerieriUI(QTabWidget):
@@ -11,21 +13,22 @@ class HomeCamerieriUI(QTabWidget):
         loadUi('ui/Cameriere/Home/HomeCamerieri.ui', self)
         self.setMinimumSize(600, 300)
         self.setFont(QtGui.QFont('Arial', 10))
+        self._connectButtons()
 
-    def connectButtons(self):
+    def _connectButtons(self):
         self.btnVisualizzaDatiPersonaliCamerieri.clicked.connect(self._btnVisualizzaDatiPersonaliCamerieriClicked)
         self.btnGestisciCucinaCamerieri.clicked.connect(self._btnTornareHomeHotelHomeCamerieriClicked)
         self.btnTornareHomeHotelHomeCamerieri.clicked.connect(self._btnTornareHomeHotelHomeCamerieriClicked)
 
-    def btnVisualizzaDatiPersonaliCamerieriClicked(self):
+    def _btnVisualizzaDatiPersonaliCamerieriClicked(self):
+        self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliCamerieriUI()
+        self.widgetVisualizzaDatiPersonali.show()
+
+    def _btnGestisciCucinaCamerieriClicked(self):
         self.HomeCamerieri.show()
         self.close()
 
-    def btnGestisciCucinaCamerieriClicked(self):
-        self.HomeCamerieri.show()
-        self.close()
-
-    def btnTornareHomeHotelHomeCamerieriClicked(self):
+    def _btnTornareHomeHotelHomeCamerieriClicked(self):
         self.HomeCamerieri.show()
         self.close()
 
