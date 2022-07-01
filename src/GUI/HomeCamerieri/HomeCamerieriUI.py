@@ -10,9 +10,10 @@ class HomeCamerieriUI(QTabWidget):
         loadUi('ui/Cameriere/Home/HomeCamerieri.ui', self)
         self.setMinimumSize(600, 300)
 
-        self.btnVisualizzaDatiPersonaliCamerieri.clicked.connect(self.btnVisualizzaDatiPersonaliCamerieriClicked)
-        self.btnGestisciCucinaCamerieri.clicked.connect(self.btnTornareHomeHotelHomeCamerieriClicked)
-        self.btnTornareHomeHotelHomeCamerieri.clicked.connect(self.btnTornareHomeHotelHomeCamerieriClicked)
+    def connectButtons(self):
+        self.btnVisualizzaDatiPersonaliCamerieri.clicked.connect(self._btnVisualizzaDatiPersonaliCamerieriClicked)
+        self.btnGestisciCucinaCamerieri.clicked.connect(self._btnTornareHomeHotelHomeCamerieriClicked)
+        self.btnTornareHomeHotelHomeCamerieri.clicked.connect(self._btnTornareHomeHotelHomeCamerieriClicked)
 
     def btnVisualizzaDatiPersonaliCamerieriClicked(self):
         self.HomeCamerieri.show()
