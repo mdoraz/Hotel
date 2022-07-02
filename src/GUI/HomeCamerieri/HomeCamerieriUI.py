@@ -25,12 +25,10 @@ class HomeCamerieriUI(QTabWidget):
         self.widgetVisualizzaDatiPersonali.show()
 
     def _btnGestisciCucinaCamerieriClicked(self):
-        self.HomeCamerieri.show()
-        self.close()
+        pass
 
     def _btnTornareHomeHotelHomeCamerieriClicked(self):
-        self.HomeCamerieri.show()
-        self.close()
+       pass
 
 
 if __name__ == "__main__":

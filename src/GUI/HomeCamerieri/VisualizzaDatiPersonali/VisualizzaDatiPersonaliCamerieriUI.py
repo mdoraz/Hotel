@@ -1,7 +1,10 @@
 import sys
-from PyQt5 import QtGui,QtCore
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+
+
+
 
 class VisualizzaDatiPersonaliCamerieriUI(QTabWidget):
     def __init__(self):
@@ -20,6 +23,13 @@ class VisualizzaDatiPersonaliCamerieriUI(QTabWidget):
             self.lineEditTurnoDiLavoroCamerieri: self.labelTurnoDiLavoroCamerieri,
             self.lineEditRuoloCamerieri: self.labelRuoloCamerieri
         }
+
+    def _connectButtons(self):
+        self.btnTornareIndietro.clicked.connect(self._btnTornareIndietroClicked)
+
+    def _btnTornareIndietroClicked(self):
+        pass
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
