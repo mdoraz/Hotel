@@ -3,6 +3,7 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
+from src.GUI.HomeTitolare.RicercaEVisualizzaVacanze.VisualizzaRicercaVacanze import VisualizzaRicercaVacanzeUI
 from src.GUI.HomeTitolare.VisualizzaDatiPersonali.datiTitolareUI import datiTitolareUI
 from src.GUI.HomeTitolare.VisualizzaStatistiche.VisualizzaStatisticheUI import VisualizzaStatisticheUI
 
@@ -40,7 +41,8 @@ class HomeTitolareUI(QTabWidget):
         pass
 
     def _btnVacanzeClicked(self):
-        pass
+        self.widgetVisualizzaRicercaVacanze = VisualizzaRicercaVacanzeUI()
+        self.widgetVisualizzaRicercaVacanze.show()
 
 
 if __name__ == "__main__":
