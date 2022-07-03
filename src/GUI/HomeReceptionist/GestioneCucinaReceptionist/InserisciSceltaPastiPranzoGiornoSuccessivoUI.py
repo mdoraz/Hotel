@@ -16,10 +16,8 @@ class InserisciSceltaPastiPranzoGiornoSuccessivoUI(QTabWidget):
 
     def _connectButtons(self):
         self.btnAvanti.clicked.connect(self._btnAvantiClicked)
-        self.btnTornarePaginaPrecedente.clicked.connect(self._btnTornarePaginaPrecedenteClicked)
+        self.btnTornarePaginaPrecedente.clicked.connect(self.close)
 
-    def _btnTornarePaginaPrecedenteClicked(self):
-        pass
     def _btnAvantiClicked(self):
         self.widgetConfermaSceltaPastiPranzo = ConfermaSceltaPastiPranzoUI()
         self.widgetConfermaSceltaPastiPranzo.show()

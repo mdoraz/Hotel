@@ -9,6 +9,7 @@ class VisualizzaDatiPersonaliReceptionistUI(QTabWidget):
         loadUi('ui/Receptionist/VisualizzaDatiPersonali/VisualizzaDatiPersonali.ui', self)
         self.setMinimumSize(600, 400)
         self.setFont(QtGui.QFont('Arial', 10))
+        self._connectButtons()
 
         self.lineEditLabelPairs = {
             self.lineeditNome: self.labelNome,
@@ -20,6 +21,9 @@ class VisualizzaDatiPersonaliReceptionistUI(QTabWidget):
             self.lineeditTurnoDiLavoro: self.labelTurnoDiLavoro,
             self.lineeditRuolo: self.labelRuolo
         }
+
+    def _connectButtons(self):
+        self.btnOk.clicked.connect(self.close)
 
 
 

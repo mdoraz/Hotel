@@ -13,10 +13,8 @@ class ConfermaSceltaPastiPranzoUI(QTabWidget):
 
     def _connectButtons(self):
         self.btnConfermaPrenotazione.clicked.connect(self._btnConfermaPrenotazioneClicked)
-        self.btnIndietro.clicked.connect(self._btnIndietroClicked)
+        self.btnIndietro.clicked.connect(self.close)
 
-    def _btnIndietroClicked(self):
-        pass
     def _btnConfermaPrenotazioneClicked(self):
         pass
 

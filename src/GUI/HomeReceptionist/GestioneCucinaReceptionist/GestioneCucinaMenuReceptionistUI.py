@@ -20,7 +20,9 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
     def _connectButtons(self):
         self.btnInserisciSceltaPastiPranzo.clicked.connect(self._btnInserisciSceltaPastiPranzoClicked)
         self.btnInserisciSceltaPastiCena.clicked.connect(self._btnInserisciSceltaPastiCenaClicked)
-        self.btnTornarePaginaPrecedente.clicked.connect(self._btnTornarePaginaPrecedenteClicked)
+        self.btnTornarePaginaPrecedente.clicked.connect(self.close)
+        self.btnTornarePaginaPrecedente_2.clicked.connect(self.close)
+        self.btnTornarePaginaPrecedente_3.clicked.connect(self.close)
 
     def _btnInserisciSceltaPastiPranzoClicked(self):
         self.widgetInserisciSceltaPastiPranzoGiornoSuccessivo = InserisciSceltaPastiPranzoGiornoSuccessivoUI()
@@ -29,8 +31,6 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
         self.widgetInserisciSceltaPastiCenaGiornoSuccessivo = InserisciSceltaPastiCenaGiornoSuccessivoUI()
         self.widgetInserisciSceltaPastiCenaGiornoSuccessivo.show()
 
-    def _btnTornarePaginaPrecedenteClicked(self):
-        pass
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

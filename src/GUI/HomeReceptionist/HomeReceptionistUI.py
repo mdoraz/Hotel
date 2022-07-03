@@ -23,7 +23,7 @@ class HomeReceptionistUI(QTabWidget):
         self.btnGestireNoleggioBici.clicked.connect(self._btnGestireNoleggioBiciClicked)
         self.btnGestireLaVacanza.clicked.connect(self._btnGestireLaVacanzaClicked)
         self.btnInserisciSceltaPastiPranzoCena.clicked.connect(self._btnInserisciSceltaPastiPranzoCenaClicked)
-        self.btnTornareHomeHotel.clicked.connect(self._btnTornareHomeHotelClicked)
+        self.btnTornareHomeHotel.clicked.connect(self.close)
 
     def _btnVisualizzaDatiPersonaliClicked(self):
         self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliReceptionistUI()
@@ -42,8 +42,6 @@ class HomeReceptionistUI(QTabWidget):
         self.tabGestioneCucinaMenuReceptionist = GestioneCucinaMenuReceptionistUI()
         self.tabGestioneCucinaMenuReceptionist.show()
 
-    def _btnTornareHomeHotelClicked(self):
-        pass
 
 
 if __name__ == "__main__":
