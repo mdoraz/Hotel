@@ -4,6 +4,9 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
+from src.GUI.HomeTitolare.HomeTitolareUI import HomeTitolareUI
+
+
 class LoginProgrammaUI(QTabWidget):
     def __init__(self, pathFile:Path):
         super().__init__()
@@ -15,7 +18,15 @@ class LoginProgrammaUI(QTabWidget):
         self._connectEye(eyeBtn, self.page1.lineeditPassword) # collega eyeBtn alla line edit corrispondente
 
         self.pathFile = pathFile
+        self._connectButtons()
 
+
+    def _connectButtons(self):
+        self.page1.btnAccedi.clicked.connect(self._btnAccediClicked)
+
+    def _btnAccediClicked(self):
+        self.mainwidgetHomeTitolare = HomeTitolareUI()
+        self.mainwidgetHomeTitolare.show()
 
 
 

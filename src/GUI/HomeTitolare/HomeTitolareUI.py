@@ -13,6 +13,7 @@ class HomeTitolareUI(QTabWidget):
         self.addTab(self.page1, 'Home Titolare')
         self.setMinimumSize(500, 300)
         self.setFont(QtGui.QFont('Arial', 10))
+        self._connectButtons()
 
     def _connectButtons(self):
         self.page1.btnDatiPersonali.clicked.connect(self._btnDatiPersonaliClicked)
@@ -20,26 +21,22 @@ class HomeTitolareUI(QTabWidget):
         self.page1.btnStatistiche.clicked.connect(self._btnStatisticheClicked)
         self.page1.btnCucina.clicked.connect(self._btnCucinaClicked)
         self.page1.btnVacanze.clicked.connect(self._btnVacanzeClicked)
+        self.page1.btnIndietro.clicked.connect(self.close)
 
-    def btnDatiPersonaliClicked(self):
-        self.HomeTitolare.show()
-        self.close()
+    def _btnDatiPersonaliClicked(self):
+        pass
 
-    def btnDipendentiClicked(self):
-        self.HomeTitolare.show()
-        self.close()
+    def _btnDipendentiClicked(self):
+        pass
 
-    def btnStatisticheClicked(self):
-        self.HomeTitolare.show()
-        self.close()
+    def _btnStatisticheClicked(self):
+        pass
 
-    def btnCucinaClicked(self):
-        self.HomeTitolare.show()
-        self.close()
+    def _btnCucinaClicked(self):
+        pass
 
-    def btnVacanzeClicked(self):
-        self.HomeTitolare.show()
-        self.close()
+    def _btnVacanzeClicked(self):
+        pass
 
 
 if __name__ == "__main__":

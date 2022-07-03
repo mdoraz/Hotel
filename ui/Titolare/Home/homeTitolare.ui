@@ -57,8 +57,8 @@
    <item>
     <widget class="QWidget" name="buttonsWidget" native="true">
      <layout class="QGridLayout" name="gridLayout">
-      <item row="2" column="0">
-       <widget class="QPushButton" name="btnDipendenti">
+      <item row="3" column="1">
+       <widget class="QPushButton" name="btnVacanze">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -66,20 +66,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Gestisci i dipendenti</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QPushButton" name="btnStatistiche">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Visualizza le statistiche</string>
+         <string>Ricerca e visualizza vacanze</string>
         </property>
        </widget>
       </item>
@@ -96,6 +83,19 @@
         </property>
        </widget>
       </item>
+      <item row="2" column="1">
+       <widget class="QPushButton" name="btnStatistiche">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Visualizza le statistiche</string>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="0" colspan="2">
        <widget class="QPushButton" name="btnDatiPersonali">
         <property name="sizePolicy">
@@ -109,8 +109,8 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QPushButton" name="btnVacanze">
+      <item row="2" column="0">
+       <widget class="QPushButton" name="btnDipendenti">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -118,11 +118,31 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Ricerca e visualizza vacanze</string>
+         <string>Gestisci i dipendenti</string>
         </property>
        </widget>
       </item>
+      <item row="4" column="0" colspan="2">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnIndietro">
+     <property name="text">
+      <string>Tornare alla Pagina Precedente</string>
+     </property>
     </widget>
    </item>
   </layout>
