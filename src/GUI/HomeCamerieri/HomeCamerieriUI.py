@@ -1,7 +1,12 @@
 import sys
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
+from src.GUI.HomeCamerieri.GestioneCucinaCamerieri.GestioneCucinaMenuCamerieriUI import \
+    GestioneCucinaMenuCamerieriUI
+from src.GUI.HomeCamerieri.VisualizzaDatiPersonali.VisualizzaDatiPersonaliCamerieriUI import \
+    VisualizzaDatiPersonaliCamerieriUI
 
 
 class HomeCamerieriUI(QTabWidget):
@@ -9,22 +14,25 @@ class HomeCamerieriUI(QTabWidget):
         super().__init__()
         loadUi('ui/Cameriere/Home/HomeCamerieri.ui', self)
         self.setMinimumSize(600, 300)
+        self.setFont(QtGui.QFont('Arial', 10))
+        self._connectButtons()
 
-        self.btnVisualizzaDatiPersonaliCamerieri.clicked.connect(self.btnVisualizzaDatiPersonaliCamerieriClicked)
-        self.btnGestisciCucinaCamerieri.clicked.connect(self.btnTornareHomeHotelHomeCamerieriClicked)
-        self.btnTornareHomeHotelHomeCamerieri.clicked.connect(self.btnTornareHomeHotelHomeCamerieriClicked)
+    def _connectButtons(self):
+        self.btnVisualizzaDatiPersonaliCamerieri.clicked.connect(self._btnVisualizzaDatiPersonaliCamerieriClicked)
+        self.btnGestisciCucinaCamerieri.clicked.connect(self._btnGestisciCucinaCamerieriClicked)
+        self.btnTornareHomeHotelHomeCamerieri.clicked.connect(self._btnTornareHomeHotelHomeCamerieriClicked)
 
-    def btnVisualizzaDatiPersonaliCamerieriClicked(self):
-        self.HomeCamerieri.show()
-        self.close()
+    def _btnVisualizzaDatiPersonaliCamerieriClicked(self):
+        self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliCamerieriUI()
+        self.widgetVisualizzaDatiPersonali.show()
 
-    def btnGestisciCucinaCamerieriClicked(self):
-        self.HomeCamerieri.show()
-        self.close()
+    def _btnGestisciCucinaCamerieriClicked(self):
+        self.tabGestioneCucinaMenuCamerieri = GestioneCucinaMenuCamerieriUI()
+        self.tabGestioneCucinaMenuCamerieri.show()
 
-    def btnTornareHomeHotelHomeCamerieriClicked(self):
-        self.HomeCamerieri.show()
-        self.close()
+
+    def _btnTornareHomeHotelHomeCamerieriClicked(self):
+       pass
 
 
 if __name__ == "__main__":
