@@ -18,14 +18,11 @@ class PrenotaColazioneInCameraGiornoSuccessivoUI(QTabWidget):
 
     def _connectButtons(self):
         self.btnAvanti.clicked.connect(self._btnAvantiClicked)
-        self.btnIndietro.clicked.connect(self._btnIndietroClicked)
+        self.btnIndietro.clicked.connect(self.close)
 
     def _btnAvantiClicked(self):
         self.widgetConfermaPrenotazioneColazioneInCameraGiornoSuccessivo = ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI()
         self.widgetConfermaPrenotazioneColazioneInCameraGiornoSuccessivo.show()
-
-    def _btnIndietroClicked(self):
-        pass
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

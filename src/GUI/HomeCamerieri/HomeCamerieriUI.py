@@ -35,6 +35,7 @@ class HomeCamerieriUI(QTabWidget):
        pass
 
 
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     mainWidget = HomeCamerieriUI()

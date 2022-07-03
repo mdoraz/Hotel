@@ -12,12 +12,11 @@ class ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI(QTabWidget):
 
     def _connectButtons(self):
         self.btnConfermaPrenotazione.clicked.connect(self._btnConfermaPrenotazioneClicked)
-        self.btnIndietro.clicked.connect(self._btnIndietroClicked)
+        self.btnIndietro.clicked.connect(self.close)
 
     def _btnConfermaPrenotazioneClicked(self):
         pass
-    def _btnIndietroClicked(self):
-        pass
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

@@ -5,13 +5,13 @@ from PyQt5.uic import loadUi
 
 
 
-
 class VisualizzaDatiPersonaliCamerieriUI(QTabWidget):
     def __init__(self):
         super().__init__()
         loadUi('ui/Cameriere/VisualizzaDatiPersonali/VisualizzaDatiPersonali.ui', self)
         self.setMinimumSize(600, 300)
         self.setFont(QtGui.QFont('Arial', 10))
+        self._connectButtons()
 
         self.lineEditLabelPairs = {
             self.lineEditNomeCamerieri: self.labelNomeCamerieri,
@@ -24,11 +24,10 @@ class VisualizzaDatiPersonaliCamerieriUI(QTabWidget):
             self.lineEditRuoloCamerieri: self.labelRuoloCamerieri
         }
 
-    def _connectButtons(self):
-        self.btnTornareIndietro.clicked.connect(self._btnTornareIndietroClicked)
 
-    def _btnTornareIndietroClicked(self):
-        pass
+    def _connectButtons(self):
+        self.btnTornareIndietro.clicked.connect(self.close)
+
 
 
 if __name__ == "__main__":

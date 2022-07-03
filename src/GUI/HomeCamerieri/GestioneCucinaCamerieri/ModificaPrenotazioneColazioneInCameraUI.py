@@ -13,12 +13,11 @@ class ModificaPrenotazioneColazioneInCameraUI(QTabWidget):
 
     def _connectButtons(self):
         self.btnConfermaModifiche.clicked.connect(self._btnConfermaModificheClicked)
-        self.btnTornarePaginaPrecedente.clicked.connect(self._btnTornarePaginaPrecedenteClicked)
+        self.btnTornarePaginaPrecedente.clicked.connect(self.close)
 
     def _btnConfermaModificheClicked(self):
         pass
-    def _btnTornarePaginaPrecedenteClicked(self):
-        pass
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

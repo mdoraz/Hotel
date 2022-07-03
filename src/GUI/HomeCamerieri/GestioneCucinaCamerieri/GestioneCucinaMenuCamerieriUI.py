@@ -20,7 +20,10 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
     def _connectButtons(self):
         self.btnPrenotaColazioneInCameraGiornoSuccessivo.clicked.connect(self._btnPrenotaColazioneInCameraGiornoSuccessivoClicked)
         self.btnModificaPrenotazioneColazioneInCamera.clicked.connect(self._btnModificaPrenotazioneColazioneInCameraClicked)
-        self.btnTornarePaginaPrecedente.clicked.connect(self._btnTornarePaginaPrecedenteClicked)
+        self.btnTornarePaginaPrecedente.clicked.connect(self.close)
+        self.btnTornarePaginaPrecedente_2.clicked.connect(self.close)
+        self.btnTornarePaginaPrecedente_3.clicked.connect(self.close)
+
 
     def _btnPrenotaColazioneInCameraGiornoSuccessivoClicked(self):
         self.widgetPrenotaColazioneInCameraGiornoSuccessivo= PrenotaColazioneInCameraGiornoSuccessivoUI()
@@ -29,8 +32,6 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
         self.widgetModificaPrenotazioneColazioneInCamera = ModificaPrenotazioneColazioneInCameraUI()
         self.widgetModificaPrenotazioneColazioneInCamera.show()
 
-    def _btnTornarePaginaPrecedenteClicked(self):
-       pass
 
 
 if __name__ == "__main__":
