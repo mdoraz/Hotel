@@ -11,6 +11,7 @@ class VisualizzaStatisticheUI(QTabWidget):
         loadUi('ui/Titolare/GestioneStatistiche/VisualizzaStatistiche.ui', self)
         self.setMinimumSize(700,200)
         self.setFont(QtGui.QFont('Arial', 10))
+        self._connectButtons()
 
 
     def _connectButtons(self):
@@ -18,24 +19,18 @@ class VisualizzaStatisticheUI(QTabWidget):
         self.btnStatisticheNoleggioBici.clicked.connect(self._btnStatisticheNoleggioBiciClicked)
         self.btnStatisticheAssenzeDipendenti.clicked.connect(self._btnStatisticheAssenzeDipendentiClicked)
         self.btnStatisticheTipologiaSoggiorno.clicked.connect(self._btnStatisticheTipologiaSoggiornoClicked)
-        self.btnTornareIndietro.clicked.connect(self._btnTornareIndietroClicked)
+        self.btnTornareIndietro.clicked.connect(self.close)
 
 
-    def btnStatisticheColazioneInCameraClicked(self):
-        self.VisualizzaStatistiche.show()
-        self.close()
-    def btnStatisticheNoleggioBiciClicked(self):
-        self.VisualizzaStatistiche.show()
-        self.close()
-    def btnStatisticheAssenzeDipendentiClicked(self):
-        self.VisualizzaStatistiche.show()
-        self.close()
-    def btnStatisticheTipologiaSoggiornoClicked(self):
-        self.VisualizzaStatistiche.show()
-        self.close()
-    def btnTornareIndietroClicked(self):
-        self.VisualizzaStatistiche.show()
-        self.close()
+    def _btnStatisticheColazioneInCameraClicked(self):
+        pass
+    def _btnStatisticheNoleggioBiciClicked(self):
+        pass
+    def _btnStatisticheAssenzeDipendentiClicked(self):
+        pass
+    def _btnStatisticheTipologiaSoggiornoClicked(self):
+        pass
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
