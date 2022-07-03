@@ -3,7 +3,7 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
-from src.GUI.HomeCamerieri.GestioneCucina.ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI import \
+from src.GUI.HomeCamerieri.GestioneCucinaCamerieri.ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI import \
     ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI
 
 
@@ -15,12 +15,17 @@ class PrenotaColazioneInCameraGiornoSuccessivoUI(QTabWidget):
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
 
+
     def _connectButtons(self):
         self.btnAvanti.clicked.connect(self._btnAvantiClicked)
+        self.btnIndietro.clicked.connect(self._btnIndietroClicked)
 
     def _btnAvantiClicked(self):
         self.widgetConfermaPrenotazioneColazioneInCameraGiornoSuccessivo = ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI()
         self.widgetConfermaPrenotazioneColazioneInCameraGiornoSuccessivo.show()
+
+    def _btnIndietroClicked(self):
+        pass
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

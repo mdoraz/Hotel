@@ -3,14 +3,19 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
+from src.GUI.HomeReceptionist.VisualizzaDatiPersonali.VisualizzaDatiPersonaliReceptionistUI import \
+    VisualizzaDatiPersonaliReceptionistUI
+
+
 class HomeReceptionistUI(QTabWidget):
     def __init__(self):
         super().__init__()
         loadUi('ui/Receptionist/Home/HomeReceptionist.ui', self)
         self.setMinimumSize(600, 300)
         self.setFont(QtGui.QFont('Arial', 10))
+        self._connectButtons()
 
-    def connectButtons(self):
+    def _connectButtons(self):
         self.btnVisualizzaDatiPersonali.clicked.connect(self._btnVisualizzaDatiPersonaliClicked)
         self.btnGestireClienti.clicked.connect(self._btnGestireClientiClicked)
         self.btnGestireNoleggioBici.clicked.connect(self._btnGestireNoleggioBiciClicked)
@@ -18,29 +23,24 @@ class HomeReceptionistUI(QTabWidget):
         self.btnInserisciSceltaPastiPranzoCena.clicked.connect(self._btnInserisciSceltaPastiPranzoCenaClicked)
         self.btnTornareHomeHotel.clicked.connect(self._btnTornareHomeHotelClicked)
 
-    def btnVisualizzaDatiPersonaliClicked(self):
-        self.HomeReceptionist.show()
-        self.close()
+    def _btnVisualizzaDatiPersonaliClicked(self):
+        self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliReceptionistUI()
+        self.widgetVisualizzaDatiPersonali.show()
 
-    def btnGestireClientiClicked(self):
-        self.HomeReceptionist.show()
-        self.close()
+    def _btnGestireClientiClicked(self):
+        pass
 
-    def btnGestireNoleggioBiciClicked(self):
-        self.HomeReceptionist.show()
-        self.close()
+    def _btnGestireNoleggioBiciClicked(self):
+        pass
 
-    def btnGestireLaVacanzaClicked(self):
-        self.HomeReceptionist.show()
-        self.close()
+    def _btnGestireLaVacanzaClicked(self):
+        pass
 
-    def btnInserisciSceltaPastiPranzoCenaClicked(self):
-        self.HomeReceptionist.show()
-        self.close()
+    def _btnInserisciSceltaPastiPranzoCenaClicked(self):
+        pass
 
-    def btnTornareHomeHotelClicked(self):
-        self.HomeReceptionist.show()
-        self.close()
+    def _btnTornareHomeHotelClicked(self):
+        pass
 
 
 if __name__ == "__main__":

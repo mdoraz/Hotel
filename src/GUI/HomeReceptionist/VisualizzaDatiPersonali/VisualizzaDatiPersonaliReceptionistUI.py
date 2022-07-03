@@ -7,7 +7,7 @@ class VisualizzaDatiPersonaliReceptionistUI(QTabWidget):
     def __init__(self):
         super().__init__()
         loadUi('ui/Receptionist/VisualizzaDatiPersonali/VisualizzaDatiPersonali.ui', self)
-        self.setMinimumSize(600, 300)
+        self.setMinimumSize(600, 400)
         self.setFont(QtGui.QFont('Arial', 10))
 
         self.lineEditLabelPairs = {
