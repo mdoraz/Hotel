@@ -28,3 +28,20 @@ class FormUI(QWidget):
 	def showLabels(self, lineEditLabelPairs : dict):
 		for label in lineEditLabelPairs.values():
 			label.show()
+
+	
+	def fieldsFilled(self, lineEditLabelPairs : dict) -> bool:
+		"""Returns true if all line edits are not empty."""
+		toReturn = True
+		for lineEdit in lineEditLabelPairs:
+			if lineEdit.text().strip() == '': # se la line edit è vuota o contiene solo spazi
+				self._showMessage('Inserisci tutti i campi, per favore.', QMessageBox.Icon.Warning, 'Errore')
+				toReturn = False
+		return toReturn
+
+	
+	def _showMessage(self, text : str, icon : QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle : str = 'Messaggio'):
+		self.msg.setWindowTitle(windowTitle)
+		self.msg.setIcon(icon)
+		self.msg.setText(text)
+		self.msg.show()

@@ -32,10 +32,10 @@ class InserisciDipendenteUI(QTabWidget):
 		self.addTab(self.page1, 'Inserici Dipendente')
 
 		self.page1.btnAnnulla.clicked.connect(self.close)
-		self.page1.btnAvanti.clicked.connect(self._avantiClicked)
+		self.page1.btnAvanti.clicked.connect(self._btnAvantiClicked)
 
-		self.page2.btnIndietro.clicked.connect(self._indietroClicked)
-		self.page2.btnInserisci.clicked.connect(self._inserisciDipendenteClicked)
+		self.page2.btnIndietro.clicked.connect(self._btnIndietroClicked)
+		self.page2.btnInserisci.clicked.connect(self._btnInserisciClicked)
 
 		self.msg = QMessageBox() # per futuri messaggi
 	
@@ -53,64 +53,27 @@ class InserisciDipendenteUI(QTabWidget):
 		return dipendenti
 
 
-	def _avantiClicked(self):
-		for lineEdit in self.page1.lineEditLabelPairs:
-			if lineEdit.text().strip() == '': # se la line edit è vuota o contiene solo spazi
-				self._showMessage('Inserisci tutti i campi, per favore.', QMessageBox.Icon.Warning, 'Errore')
-				return
-		
-		dipendenti = self._readDipendenti()
-		for dipendente in dipendenti.values():
-			if (dipendente.getNome() == self.page1.lineEditNome.text() and dipendente.getCognome() == self.page1.lineEditCognome.text() and 
-                dipendente.getDataNascita() == self.page1.dateEdit.date().toPyDate() and dipendente.getLuogoNascita() == self.page1.lineEditLuogoNascita.text()):
-				self._showMessage('Questo dipendente è già presente nel sistema, non può essere inserito nuovamente.', QMessageBox.Icon.Warning, 'Errore')
-				return
-
-		styleSheet = f"color: rgb(0, 170, 0); font-family: Arial; font-size: 10pt"
-		if [self.page1.lineEditEmail.styleSheet(), self.page1.lineEditCellulare.styleSheet(), self.page1.lineEditIBAN.styleSheet()] != [styleSheet] * 3: # se le 3 line edit non hanno il testo verde
-			self._showMessage('I dati in rosso non sono accettabili.\nQuando lo saranno il loro colore diventerà verde.', QMessageBox.Icon.Warning, 'Errore')
-			return
-		
-		self.addTab(self.page2, 'Inserisci Dipendente')
-		self.removeTab(0)
+	def _btnAvantiClicked(self):
+		if (self.page1.fieldsFilled(self.page1.lineEditLabelPairs) and self.page1.fieldsValid()
+		   and not self.page1.isUserInSystem()):
+			
+			self.addTab(self.page2, 'Inserisci Dipendente')
+			self.removeTab(0)
 
 
-	def _indietroClicked(self):
+	def _btnIndietroClicked(self):
 		self.addTab(self.page1, 'Inserisci Dipendente')
 		self.removeTab(0)
 
 	
-	def _inserisciDipendenteClicked(self):
-		def isPasswordCorrect() -> bool:
-			toReturn = True
-			if self.page2.lineEditPassword.validator().validate(self.page2.lineEditPassword.text(), 0)[0] != QtGui.QValidator.State.Acceptable:
-				self._showMessage('La password non rispetta la struttura richiesta.', QMessageBox.Icon.Warning, 'Errore')
-				toReturn = False
-			elif self.page2.lineEditConfermaPassword.text() != self.page2.lineEditPassword.text():
-				self._showMessage('La password e la sua conferma non corrispondono.', QMessageBox.Icon.Warning, 'Errore')
-				toReturn = False
-			return toReturn
-
-		def isUsernameUsed(paths : dict) -> bool:
-			toReturn = False
-			dipendenti = self._readDipendenti()
-			for dipendente in dipendenti.values():
-				if dipendente.getUsername() == self.page2.lineEditUsername.text():
-					self._showMessage('Username già in uso, inserirne un altro.', QMessageBox.Icon.Warning, 'Errore')
-					toReturn = True
-			return toReturn
+	def _btnInserisciClicked(self):
 		
-		for lineEdit in self.page2.lineEditLabelPairs:
-			if lineEdit.text().strip() == '': # se la line edit è vuota o contiene solo spazi
-				self._showMessage('Inserisci tutti i campi, per favore.', QMessageBox.Icon.Warning, 'Errore')
-				return
-		
-		paths = GestoreFile.leggiJson(Path('paths.json'))
-		
-		if isPasswordCorrect() and not isUsernameUsed(paths):
-			nome = self.page1.lineEditNome.text(); 				cognome = self.page1.lineEditCognome.text()
+		if self.page2.verifyFields():
+			paths = GestoreFile.leggiJson(Path('paths.json'))
+				
+			nome = self.page1.lineEditNome.text(); 				 cognome = self.page1.lineEditCognome.text()
 			dataNascita = self.page1.dateEdit.date().toPyDate(); luogoNascita = self.page1.lineEditLuogoNascita.text()
-			email = self.page1.lineEditEmail.text(); 			cellulare = self.page1.lineEditCellulare.text()
+			email = self.page1.lineEditEmail.text(); 			 cellulare = self.page1.lineEditCellulare.text()
 			
 			datiAggiuntivi = {
 				'IBAN' : self.page1.lineEditIBAN.text(),
@@ -123,8 +86,9 @@ class InserisciDipendenteUI(QTabWidget):
 				GestorePersona.aggiungiPersona(Path(paths['dipendenti']), nome, cognome, dataNascita, luogoNascita, email, cellulare, **datiAggiuntivi)
 			except DuplicateError:
 				pass # è stato già verificato che il dipendente non è già presente nel sistema
+			
 			self.dipendenteAggiunto.emit(Dipendente(nome, cognome, dataNascita, luogoNascita, email, cellulare, datiAggiuntivi['IBAN'],
-									  datiAggiuntivi['turno'], datiAggiuntivi['ruolo'], datiAggiuntivi['username'], datiAggiuntivi['password']))
+										datiAggiuntivi['turno'], datiAggiuntivi['ruolo'], datiAggiuntivi['username'], datiAggiuntivi['password']))
 			
 			self._showMessage('Il dipendente è stato inserito con successo!', QMessageBox.Icon.Information)
 			self.close()
@@ -135,7 +99,6 @@ class InserisciDipendenteUI(QTabWidget):
 		self.msg.setIcon(icon)
 		self.msg.setText(text)
 		self.msg.show()
-
 
 
 

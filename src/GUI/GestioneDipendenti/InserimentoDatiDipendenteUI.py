@@ -1,7 +1,12 @@
 from datetime import date
+from pathlib import Path
+
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+
+from src.Utilities.GUIUtils import GUIUtils
+from src.Gestori.GestoreFile import GestoreFile
 from src.GUI.GestioneDipendenti.FormUI import FormUI
 
 class InserimentoDatiDipendenteUI(FormUI):
@@ -10,7 +15,7 @@ class InserimentoDatiDipendenteUI(FormUI):
 		super().__init__()
 		
 		self.pevious = previous
-		loadUi('ui/Titolare/GestisciDipendenti/inserimentoDatiDipendente.ui', self)
+		loadUi(GestoreFile.getAbsolutePath('inserimentoDatiDipendente.ui', Path.cwd()), self)
 		
 		self.msg = QMessageBox() # per futuri messaggi
 		
@@ -29,6 +34,19 @@ class InserimentoDatiDipendenteUI(FormUI):
 		self._setDataNascitaBoundaries() # imposta un limite superiore e inferiore per la data di nascita
 		self._setValidators() # imposta i validator restringere gli input accettati dalle lineEdit.
 		self._setColorHints() # i dati inseriti sono rossi se non accettabili, verdi se accettabili.
+
+	
+	def _readDipendenti(self) -> dict:
+		paths = GestoreFile.leggiJson(Path('paths.json'))
+		try:
+			dipendenti = GestoreFile.leggiDictPickle(Path(paths['dipendenti']))
+		except TypeError:
+			self._showMessage(f"{Path(paths['dipendenti']).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
+								 QMessageBox.Icon.Critical, 'Errore')
+			self.close()
+			raise
+		
+		return dipendenti
 
 
 	def _setDataNascitaBoundaries(self):
@@ -52,20 +70,16 @@ class InserimentoDatiDipendenteUI(FormUI):
 
 
 	def _setValidators(self):
-		self.lineEditNome.setValidator(QtGui.QRegularExpressionValidator(QtCore.QRegularExpression("[a-zA-Z'àèòìù ]+"))) # solo lettere e spazi
-		self.lineEditCognome.setValidator(QtGui.QRegularExpressionValidator(QtCore.QRegularExpression("[a-zA-Z'àèòìù ]+")))
-		self.lineEditLuogoNascita.setValidator(QtGui.QRegularExpressionValidator(QtCore.QRegularExpression("[a-zA-Z'àèòìù ]+")))
-		
-		self.lineEditCellulare.setValidator(QtGui.QRegularExpressionValidator(QtCore.QRegularExpression("[0-9]{10,10}"))) # 10 numeri
-		self.lineEditIBAN.setValidator(QtGui.QRegularExpressionValidator(QtCore.QRegularExpression("[0-9]{27,27}"))) #27 numeri
-		
-		# provider email accettati: gmail, outlook, hotmail, yahoo, tim, alice, libero, aruba
-		pattern = ".+@(gmail\\.com|outlook\\.(com|it)|hotmail\\.com|yahoo\\.(com|it)|tim\\.it|alice\\.it|libero\\.it|aruba\\.(com|it))"
-		self.lineEditEmail.setValidator(QtGui.QRegularExpressionValidator(QtCore.QRegularExpression(pattern)))
+		self.lineEditNome.setValidator(GUIUtils.validators['soloLettere'])
+		self.lineEditCognome.setValidator(GUIUtils.validators['soloLettere'])
+		self.lineEditLuogoNascita.setValidator(GUIUtils.validators['soloLettere'])
+		self.lineEditEmail.setValidator(GUIUtils.validators['email'])
+		self.lineEditCellulare.setValidator(GUIUtils.validators['cellulare'])
+		self.lineEditIBAN.setValidator(GUIUtils.validators['IBAN'])
 	
 
 	def _setColorHints(self):
-		def setColorHint(text): # text è il testo della line edit da controllare, fixedLength la lunghezza che deve avere per essere accettabile
+		def setColorHint(text): # text è il testo della line edit da controllare
 			fontType = "font-family: Arial; font-size: 10pt"
 			lineEdit = self.sender()
 			
@@ -81,8 +95,24 @@ class InserimentoDatiDipendenteUI(FormUI):
 		self.lineEditIBAN.textChanged.connect(setColorHint)
 
 	
-	def _showMessage(self, text : str, icon : QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle : str = 'Messaggio'):
-		self.msg.setWindowTitle(windowTitle)
-		self.msg.setIcon(icon)
-		self.msg.setText(text)
-		self.msg.show()
+	def isUserInSystem(self) -> bool:
+		toReturn = False
+		dipendenti = self._readDipendenti()
+		for dipendente in dipendenti.values():
+			if (dipendente.getNome() == self.lineEditNome.text() and dipendente.getCognome() == self.lineEditCognome.text() and 
+				dipendente.getDataNascita() == self.dateEdit.date().toPyDate() and dipendente.getLuogoNascita() == self.lineEditLuogoNascita.text()):
+				self._showMessage('Questo dipendente è già presente nel sistema, non può essere inserito nuovamente.', QMessageBox.Icon.Warning, 'Errore')
+				toReturn = True
+		return toReturn
+
+	
+	def fieldsValid(self) -> bool:
+		toReturn = True
+		styleSheet = f"color: rgb(0, 170, 0); font-family: Arial; font-size: 10pt"
+		if [self.lineEditEmail.styleSheet(), self.lineEditCellulare.styleSheet(), self.lineEditIBAN.styleSheet()] != [styleSheet] * 3: # se le 3 line edit non hanno il testo verde
+			self._showMessage('I dati in rosso non sono accettabili.\nQuando lo saranno il loro colore diventerà verde.', QMessageBox.Icon.Warning, 'Errore')
+			toReturn = False
+		return toReturn
+
+	
+	
