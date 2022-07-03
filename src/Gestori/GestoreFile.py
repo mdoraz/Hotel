@@ -28,16 +28,18 @@ class GestoreFile:
         with open(pathFile, 'r') as file:
             return json.load(file)
 
+
     @staticmethod
     def leggiDictPickle(pathFile : Path) -> dict:
         try:
             dictionary = GestoreFile.leggiPickle(pathFile)
+            if not isinstance(dictionary, dict):
+                raise TypeError(f"{pathFile.name} has been corrupted and can't be restored.\nTo fix the issue, delete it.")
         except FileNotFoundError:
             dictionary = {}
         
-        if not isinstance(dictionary, dict):
-            raise TypeError(f"{pathFile.name} has been corrupted and can't be restored.\nTo fix the issue, delete it.")
         return dictionary
+    
     
     @staticmethod
     def leggiListPickle(pathFile : Path) -> list:
@@ -49,3 +51,19 @@ class GestoreFile:
         if not isinstance(mylist, list):
             raise TypeError(f"{pathFile.name} has been corrupted and can't be restored.\nTo fix the issue, delete it.")
         return mylist
+
+    
+    @staticmethod
+    def getAbsolutePath(fileName : str, directory : Path) -> str:  # type: ignore
+        """Searches fileName in the given directory. If the file is found, its absolute path is returned, else an empty string."""
+        if not directory.is_dir():
+            return ''
+        for path in directory.iterdir():
+            if path.is_file() and path.name == fileName:
+                return str(path.resolve())
+            elif path.is_dir():
+                absolutePath = GestoreFile.getAbsolutePath(fileName, path) # se path è una directory applico ricorsivamente la funzione
+                if absolutePath != '': # se è stato trovato il file nella directory 'path'
+                    return absolutePath
+        return '' # se non entro in nessun if che contiene return, quindi se non ho trovato nessun file che corrisponde a fileName in directory
+

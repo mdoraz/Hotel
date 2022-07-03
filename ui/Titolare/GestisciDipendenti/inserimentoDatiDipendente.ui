@@ -29,7 +29,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Inserisci Dipendente</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">

@@ -27,7 +27,7 @@ class Dipendente(Persona, Utente):
         
         STIPENDIO_RECEPTIONIST = 1200
         STIPENDIO_CAMERIERE = 1000
-        if self._ruolo.name == Ruolo.RECEPTIONIST:
+        if self._ruolo == Ruolo.RECEPTIONIST:
             self._stipendio = STIPENDIO_RECEPTIONIST
         else:
             self._stipendio = STIPENDIO_CAMERIERE

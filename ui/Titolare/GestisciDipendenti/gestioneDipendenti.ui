@@ -573,7 +573,7 @@ assenze</string>
      </widget>
     </item>
     <item row="1" column="1" alignment="Qt::AlignRight|Qt::AlignBottom">
-     <widget class="QPushButton" name="btnIndietro">
+     <widget class="QPushButton" name="btnIndietro2">
       <property name="text">
        <string>Indietro</string>
       </property>

@@ -1,5 +1,6 @@
 from datetime import date
 from pathlib import Path
+
 from src.Attori.Dipendente import Dipendente
 from src.Attori.Persona import Persona
 from src.Attori.Ruolo import Ruolo
@@ -43,7 +44,7 @@ class GestorePersona():
 					isinstance(kwargs['username'], str) and isinstance(kwargs['password'], str)):
 					
 					nuovaPersona = Dipendente.initConPersona(nuovaPersona, kwargs['IBAN'], kwargs['turno'], kwargs['ruolo'],
-													 kwargs['username'], kwargs['password'])
+													 		 kwargs['username'], kwargs['password'])
 				else:
 					raise TypeError("some argument hasn't the right type to create a Dipendente object")
 			except KeyError: # se qualche chiave nell'if precedente non è contenuta in kwargs
