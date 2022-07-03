@@ -3,6 +3,8 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
+from src.GUI.HomeCamerieri.GestioneCucinaCamerieri.GestioneCucinaMenuCamerieriUI import \
+    GestioneCucinaMenuCamerieriUI
 from src.GUI.HomeCamerieri.VisualizzaDatiPersonali.VisualizzaDatiPersonaliCamerieriUI import \
     VisualizzaDatiPersonaliCamerieriUI
 
@@ -17,7 +19,7 @@ class HomeCamerieriUI(QTabWidget):
 
     def _connectButtons(self):
         self.btnVisualizzaDatiPersonaliCamerieri.clicked.connect(self._btnVisualizzaDatiPersonaliCamerieriClicked)
-        self.btnGestisciCucinaCamerieri.clicked.connect(self._btnTornareHomeHotelHomeCamerieriClicked)
+        self.btnGestisciCucinaCamerieri.clicked.connect(self._btnGestisciCucinaCamerieriClicked)
         self.btnTornareHomeHotelHomeCamerieri.clicked.connect(self._btnTornareHomeHotelHomeCamerieriClicked)
 
     def _btnVisualizzaDatiPersonaliCamerieriClicked(self):
@@ -25,7 +27,9 @@ class HomeCamerieriUI(QTabWidget):
         self.widgetVisualizzaDatiPersonali.show()
 
     def _btnGestisciCucinaCamerieriClicked(self):
-        pass
+        self.tabGestioneCucinaMenuCamerieri = GestioneCucinaMenuCamerieriUI()
+        self.tabGestioneCucinaMenuCamerieri.show()
+
 
     def _btnTornareHomeHotelHomeCamerieriClicked(self):
        pass

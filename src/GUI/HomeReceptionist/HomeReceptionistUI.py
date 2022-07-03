@@ -3,6 +3,8 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
+from src.GUI.HomeReceptionist.GestioneCucinaReceptionist.GestioneCucinaMenuReceptionistUI import \
+    GestioneCucinaMenuReceptionistUI
 from src.GUI.HomeReceptionist.VisualizzaDatiPersonali.VisualizzaDatiPersonaliReceptionistUI import \
     VisualizzaDatiPersonaliReceptionistUI
 
@@ -37,7 +39,8 @@ class HomeReceptionistUI(QTabWidget):
         pass
 
     def _btnInserisciSceltaPastiPranzoCenaClicked(self):
-        pass
+        self.tabGestioneCucinaMenuReceptionist = GestioneCucinaMenuReceptionistUI()
+        self.tabGestioneCucinaMenuReceptionist.show()
 
     def _btnTornareHomeHotelClicked(self):
         pass
