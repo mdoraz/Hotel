@@ -15,7 +15,7 @@ class InserimentoDatiDipendenteUI(FormUI):
 		super().__init__()
 		
 		self.pevious = previous
-		loadUi(GestoreFile.getAbsolutePath('inserimentoDatiDipendente.ui', Path.cwd()), self)
+		loadUi(GestoreFile.absolutePath('inserimentoDatiDipendente.ui', Path.cwd()), self)
 		
 		self.msg = QMessageBox() # per futuri messaggi
 		

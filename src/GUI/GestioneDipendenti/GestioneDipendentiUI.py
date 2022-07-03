@@ -9,6 +9,7 @@ from PyQt5.uic import loadUi
 from src.Attori.Dipendente import Dipendente
 from src.GUI.GestioneDipendenti.InserisciDipendenteUI import InserisciDipendenteUI
 from src.GUI.GestioneDipendenti.VisualizzaDipendenteUI import VisualizzaDipendenteUI
+from src.GUI.GestioneDipendenti.VisualizzaAssenzeUI import VisualizzaAssenzeUI
 from src.Gestori.GestoreFile import GestoreFile
 
 class GestioneDipendentiUI(QTabWidget):
@@ -16,7 +17,7 @@ class GestioneDipendentiUI(QTabWidget):
 	def __init__(self, previous : QWidget):
 		super().__init__()
 
-		loadUi(GestoreFile.getAbsolutePath('gestioneDipendenti.ui', Path.cwd()), self)
+		loadUi(GestoreFile.absolutePath('gestioneDipendenti.ui', Path.cwd()), self)
 
 		self.previous = previous
 
@@ -71,11 +72,11 @@ class GestioneDipendentiUI(QTabWidget):
 	
 	def _btnVisualizzaAccountClicked(self):
 		if self.treeWidgetDipendenti.currentItem() == None:
-			self._showMessage("Seleziona prima il dipendente di cui viualizzare l'account", QMessageBox.Icon.Warning, 'Errore')
+			self._showMessage("Seleziona prima il dipendente di cui viusalizzare l'account", QMessageBox.Icon.Warning, 'Errore')
 		else:
 			id = self.treeWidgetDipendenti.currentItem().text(0) # prendo l'id del dipendente slezionato
 			dipendenti = self._readDipendenti()
-			self.widgetVisualizzaDipendente = VisualizzaDipendenteUI(dipendenti[int(id)])
+			self.widgetVisualizzaDipendente = VisualizzaDipendenteUI(dipendenti[int(id)], self)
 			self.addTab(self.widgetVisualizzaDipendente, f"Visualizza ID {dipendenti[int(id)].getId()}")
 			index = self.count() - 1
 			self.setCurrentIndex(index)
@@ -90,7 +91,15 @@ class GestioneDipendentiUI(QTabWidget):
 
 
 	def _btnVisualizzaAssenzeClicked(self):
-		pass
+		if self.treeWidgetDipendenti.currentItem() == None:
+			self._showMessage("Seleziona prima il dipendente di cui viualizzare le assenze.", QMessageBox.Icon.Warning, 'Errore')
+		else:
+			id = self.treeWidgetDipendenti.currentItem().text(0) # prendo l'id del dipendente slezionato
+			dipendenti = self._readDipendenti()
+			self.widgetVisualizzaAssenze = VisualizzaAssenzeUI(dipendenti[int(id)], self)
+			self.addTab(self.widgetVisualizzaAssenze, f"Assenze ID {dipendenti[int(id)].getId()}")
+			index = self.count() - 1
+			self.setCurrentIndex(index)
 	
 
 	def _btnNuovoDipendenteClicked(self):

@@ -54,7 +54,7 @@ class GestoreFile:
 
     
     @staticmethod
-    def getAbsolutePath(fileName : str, directory : Path) -> str:  # type: ignore
+    def absolutePath(fileName : str, directory : Path) -> str:  # type: ignore
         """Searches fileName in the given directory. If the file is found, its absolute path is returned, else an empty string."""
         if not directory.is_dir():
             return ''
@@ -62,7 +62,7 @@ class GestoreFile:
             if path.is_file() and path.name == fileName:
                 return str(path.resolve())
             elif path.is_dir():
-                absolutePath = GestoreFile.getAbsolutePath(fileName, path) # se path è una directory applico ricorsivamente la funzione
+                absolutePath = GestoreFile.absolutePath(fileName, path) # se path è una directory applico ricorsivamente la funzione
                 if absolutePath != '': # se è stato trovato il file nella directory 'path'
                     return absolutePath
         return '' # se non entro in nessun if che contiene return, quindi se non ho trovato nessun file che corrisponde a fileName in directory

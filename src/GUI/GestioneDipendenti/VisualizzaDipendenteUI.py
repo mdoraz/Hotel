@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
 from PyQt5.uic import loadUi
@@ -18,7 +19,7 @@ class VisualizzaDipendenteUI(QWidget):
 	def __init__(self, dipendente : Dipendente, parent : QWidget = None):  # type: ignore
 		super().__init__(parent)
 
-		loadUi(GestoreFile.getAbsolutePath('visualizzaDipendente.ui', Path.cwd()), self)
+		loadUi(GestoreFile.absolutePath('visualizzaDipendente.ui', Path.cwd()), self)
 
 		self.dipendente = dipendente
 		self._fillFields() # riempio tutti i campi
@@ -87,14 +88,14 @@ class VisualizzaDipendenteUI(QWidget):
 		self.btnElimina.clicked.connect(self._btnEliminaClicked)
 
 	
-	def _modificaDatiLavorativiClicked(self, dontShowComboBox : bool = True): # When connected to the 'clicked' signal, this method recieves the default chedked=False.
-		self.btnDatiLavorativi.setText('Salva')								  # In the _connectButtons method, no parameter is given and dontShowComboBox is True
+	def _modificaDatiLavorativiClicked(self):
+		self.btnDatiLavorativi.setText('Salva')
 		self.btnDatiLavorativi.clicked.disconnect(self._modificaDatiLavorativiClicked)
 		self.btnDatiLavorativi.clicked.connect(self._salvaDatiLavoraiviClicked)
 		
 		# sostituisco le line edit di ruolo e turno con due combo
-		row, ruolo = self.groupBoxDatiLavorativi.layout().getWidgetPosition(self.lineEditRuolo)
-		rowResult = self.groupBoxDatiLavorativi.layout().takeRow(row) # rimuovo dal layout la riga 'row' e la restituisce
+		row, ruolo = self.groupBoxDatiLavorativi.layout().getWidgetPosition(self.lineEditRuolo) # recupero la riga di linEditRuolo nella group box in cui si trova
+		rowResult = self.groupBoxDatiLavorativi.layout().takeRow(row) # rimuove dal layout la riga 'row' e la restituisce
 		rowResult.fieldItem.widget().hide() # nascondo self.lineEditRuolo
 		if self.showComboBox == True:
 			self.comboBoxRuolo.show()
@@ -143,8 +144,8 @@ class VisualizzaDipendenteUI(QWidget):
 		self.btnDatiLavorativi.clicked.connect(self._modificaDatiLavorativiClicked)
 		
 		# sostituisco le combo box di ruolo e turno con line edit immodificabili
-		row, role = self.groupBoxDatiLavorativi.layout().getWidgetPosition(self.comboBoxRuolo)
-		rowResult = self.groupBoxDatiLavorativi.layout().takeRow(row) # rimuovo dal layout la riga 'row' e la restituisce
+		row, role = self.groupBoxDatiLavorativi.layout().getWidgetPosition(self.comboBoxRuolo) # recupero la riga di comboBoxRuolo nella group box in cui si trova
+		rowResult = self.groupBoxDatiLavorativi.layout().takeRow(row) # rimuove dal layout la riga 'row' e la restituisce
 		rowResult.fieldItem.widget().hide() # nascondo self.comboBoxRuolo
 		self.lineEditRuolo.setText(rowResult.fieldItem.widget().currentText())
 		self.lineEditRuolo.show()
@@ -158,7 +159,7 @@ class VisualizzaDipendenteUI(QWidget):
 		self.groupBoxDatiLavorativi.layout().insertRow(row, rowResult.labelItem.widget(), self.lineEditTurno)
 
 		if self.showComboBox == False:
-			self.showComboBox = True # la prossima volta che verrà cliccato 'modifica' verranno mostrate le combo box, visto che sono state nascoste in questo metodo
+			self.showComboBox = True # la prossima volta che verrà cliccato 'modifica' verranno mostrate le combo box, visto che sono state nascoste precedentemente in questo metodo
 		
 		# le line edit non sono piu modificabili
 		self.lineEditIBAN.setReadOnly(True)
