@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>tabGestireLaVacanza</class>
+ <widget class="QTabWidget" name="tabGestireLaVacanza">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1345</width>
+    <height>626</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Gestione Vacanze</string>
+  </property>
+  <widget class="QWidget" name="tabGestioneVacanze">
+   <attribute name="title">
+    <string>Gestione Vacanze</string>
+   </attribute>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="3" column="0">
+     <widget class="QPushButton" name="btnTornareHomeReceptionist">
+      <property name="text">
+       <string>Tornare alla home receptionist</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <spacer name="horizontalSpacer_13">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="2" column="0" colspan="2">
+     <widget class="QTabWidget" name="tabHomeGestioneVacanzeReceptionist">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tabInserisciPrenotazioneVacanza">
+       <attribute name="title">
+        <string>Inserisci Prenotazione Vacanza</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="2" column="4" colspan="2">
+         <widget class="QDateEdit" name="dateeditDataFineSoggiorno">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="displayFormat">
+           <string>dd/MM/yyyy</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="labelNumeroCartaCreditoCliente">
+          <property name="text">
+           <string>Ora bisogna inserire il numero di carta di credito del cliente:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="btnRicercaCliente">
+          <property name="text">
+           <string>Ricerca Cliente</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="labelInserirePeriodoSoggiornoDa">
+          <property name="text">
+           <string>Inserire periodo di soggiorno in Hotel:                                                                                      Da:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <spacer name="horizontalSpacer_9">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="7" column="0" colspan="4">
+         <spacer name="horizontalSpacer_10">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="1" colspan="4">
+         <widget class="QLineEdit" name="lineeditNumeroCartaCreditoCliente">
+          <property name="text">
+           <string/>
+          </property>
+          <property name="placeholderText">
+           <string>Numero carta di credito</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QComboBox" name="comboboxTipoSoggiornoDaEffettuare">
+          <item>
+           <property name="text">
+            <string>B&amp;B</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Mezza Pensione</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Pensione Completa</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="btnSelezionaCamera">
+          <property name="text">
+           <string>Seleziona Camera</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="labelTipoSoggiornoDaEffettuare">
+          <property name="text">
+           <string>Ora dobbiamo selezionare il tipo di soggiorno che il cliente vuole effettuare nell'hotel:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="labelClienteMaiStatoInHotelOppureGiaStato">
+          <property name="text">
+           <string>Il cliente che sta effettuando la prenotazione è gia stato in hotel oppure è un nuovo cliente?</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2" colspan="2">
+         <spacer name="horizontalSpacer_8">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="3">
+         <widget class="QLabel" name="labelInserirePeriodoSoggiornoA">
+          <property name="text">
+           <string>a:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLabel" name="labelVisualizzaCameraSelezionata">
+          <property name="text">
+           <string>Camera selezionata:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QDateEdit" name="dateeditDataInizioSoggiorno">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="displayFormat">
+           <string>dd/MM/yyyy</string>
+          </property>
+          <property name="calendarPopup">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="labelSelezionareCameraDaAssociareCliente">
+          <property name="text">
+           <string>Selezionare innanzitutto la camera da associare al cliente per la prenotazione della vacanza:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="3" colspan="3">
+         <widget class="QLineEdit" name="lineeditVisualizzaCameraSelezionata">
+          <property name="text">
+           <string>numero camera</string>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="5">
+         <widget class="QPushButton" name="btnConfermaPrenotazioneVacanza">
+          <property name="text">
+           <string>Conferma Prenotazione Vacanza</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="4" colspan="2">
+         <widget class="QPushButton" name="btnRegistraCliente">
+          <property name="text">
+           <string>Registra Cliente</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="6">
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="5" column="2" colspan="3">
+         <widget class="QPushButton" name="btnPrelevaCaparraPrenotazione">
+          <property name="text">
+           <string>Preleva Caparra per la prenotazione</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="5">
+         <spacer name="horizontalSpacer_7">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabVisualizzaPrenotazionaVacanza">
+       <attribute name="title">
+        <string>Visualizza Prenotazione Vacanza</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="4" column="0" colspan="2">
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="5" column="0" rowspan="2" colspan="3">
+         <widget class="QGroupBox" name="groupBoxCheckIn">
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
+          <property name="title">
+           <string>CheckIn nella struttura aberghiera della prenotazione vacanza ricercata:</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelQuantiClientiInserireNelCheckIn">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Vuoi inserire altri clienti che fanno parte di questa vacanza?</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="3">
+            <widget class="QGroupBox" name="groupboxSchedaVisualizzazioneOmbrelloniDisponibiliCheckIn">
+             <property name="title">
+              <string>Scheda ombrelloni disponibili nel periodo di soggiorno selezionato:</string>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_6">
+              <item row="0" column="1">
+               <widget class="QListWidget" name="listwidgetOmbrelloniDisponibiliVacanza">
+                <property name="selectionMode">
+                 <enum>QAbstractItemView::SingleSelection</enum>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>Ombrellone 1</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Ombrellone 2</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Ombrellone 3</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Ombrellone 4</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Ombrellone 5</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Ombrellone 6</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Ombrellone 7</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QPushButton" name="btnAggiungiClientiVacanza">
+             <property name="text">
+              <string>Aggiungi Clienti</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="2" column="2">
+            <widget class="QPushButton" name="btnEseguiCheckIn">
+             <property name="text">
+              <string>Esegui CheckIn</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="0" colspan="2">
+         <spacer name="horizontalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="2">
+         <widget class="QPushButton" name="btnEliminaPrenotazioneVacanza">
+          <property name="text">
+           <string>Elimina Prenotazione Vacanza</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2">
+         <widget class="QPushButton" name="btnModificaPrenotazioneVacanza">
+          <property name="text">
+           <string>Modifica Prenotazione Vacanza</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="btnRicercaPrenotazioneVacanza">
+          <property name="text">
+           <string>Ricerca Prenotazione Vacanza</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="labelQualePrenotazioneDiVacanzaVisualizzare">
+          <property name="text">
+           <string>Quale prenotazione di una vacanza si intende visualizzare?</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QGroupBox" name="groupboxSchedaVisualizzazionePrenotazionevacanzaRicercata">
+          <property name="title">
+           <string>Scheda visualizzazione prenotazione della vacanza ricercata:</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="2" column="6">
+            <widget class="QDateEdit" name="dateeditClienteSoggiorneraStrutturaA_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="displayFormat">
+              <string>dd/MM/yyyy</string>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="label_23">
+             <property name="text">
+              <string>La cemera del cliente è:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelTipoSoggiornoVacanza">
+             <property name="text">
+              <string>Tipo soggiorno vacanza:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="labelClienteSoggiorneraStrutturaDa">
+             <property name="text">
+              <string>Il cliente soggiornerà nella struttura dal:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QDateEdit" name="dateeditClienteSoggiorneraStrutturaDa_2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="displayFormat">
+              <string>dd/MM/yyyy</string>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="labelClienteSoggiorneraStrutturaA">
+             <property name="text">
+              <string>al:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="6">
+            <widget class="QLineEdit" name="lineeditTipoSoggiornoVacanza">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="placeholderText">
+              <string>B&amp;B /Mezza Pensione / Pensione Completa</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="lineEdit_7">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="placeholderText">
+              <string>Numero camera</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabVisualizzaVacanza">
+       <attribute name="title">
+        <string>Visualizza Vacanza</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="1" column="0" colspan="2">
+         <widget class="QGroupBox" name="groupboxSchedaVisualizzazioneVacanzaRicercata">
+          <property name="title">
+           <string>Scheda visualizzazione vacanza ricercata:</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_9">
+           <item row="1" column="0">
+            <widget class="QLabel" name="labelTipoSoggiorno">
+             <property name="text">
+              <string>Tipo Soggiorno:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="labelNumeroCamera">
+             <property name="text">
+              <string>Numero camera:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="QLabel" name="labelClienteSoggiorneraA">
+             <property name="text">
+              <string>a:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="labelClientePresoCaricoPrenotazione">
+             <property name="text">
+              <string>Il cliente che si è preso carico della prenotazione in hotel è:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" colspan="4">
+            <widget class="QLineEdit" name="lineeditNumeroCartaCredito">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="placeholderText">
+              <string>numero carta di credito</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3" colspan="2">
+            <widget class="QTreeWidget" name="treewidgetSpecificheClientiInPiu">
+             <property name="selectionMode">
+              <enum>QAbstractItemView::NoSelection</enum>
+             </property>
+             <column>
+              <property name="text">
+               <string>Nome</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Cognome</string>
+              </property>
+             </column>
+             <item>
+              <property name="text">
+               <string>Marco</string>
+              </property>
+              <property name="text">
+               <string>Rossi</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="labelNumeroCartaCredito">
+             <property name="text">
+              <string>Numero Carta di Credito:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="labelClienteSoggiorneraDa">
+             <property name="text">
+              <string>Il cliente soggiornerà nella struttura:                    Da:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLabel" name="labelAltriClientiPrenotazione">
+             <property name="text">
+              <string>Fanno parte della vacanza anche:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="4">
+            <widget class="QDateEdit" name="dateeditClienteSoggiorneraStrutturaA">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="displayFormat">
+              <string>dd/MM/yyyy</string>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1" colspan="4">
+            <widget class="QLineEdit" name="lineeditNumeroCameraCliente">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="placeholderText">
+              <string>numero</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="4">
+            <widget class="QLineEdit" name="lineeditTipoSoggiornoPrenotato">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="placeholderText">
+              <string>B&amp;B/Mezza Pensione/Pensione Completa</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QLabel" name="labelOmbrelloneAssociatoVacanza">
+             <property name="text">
+              <string>Ombrellone associato alla vacanza dalla struttura:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="2">
+            <widget class="QDateEdit" name="dateeditClienteSoggiorneraStrutturaDa">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="displayFormat">
+              <string>dd/MM/yyyy</string>
+             </property>
+             <property name="calendarPopup">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1" colspan="4">
+            <widget class="QLineEdit" name="lineeditNumeroOmbrelloneAssociatoVacanza">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="placeholderText">
+              <string>numero dell'ombrellone</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLineEdit" name="lineeditClientePresoCaricoPrenotazione">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+             <property name="placeholderText">
+              <string>Nome Cognome</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="btnRicercaVacanza">
+          <property name="text">
+           <string>Ricerca Vacanza</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QPushButton" name="btnModificatermineVacanzaOmbrellone">
+          <property name="text">
+           <string>Modifica TermineVacanza/Ombrellone</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="labelDomandaDiQualeVacanzaHaiBisogno">
+          <property name="text">
+           <string>Di quale vacanza hai bisogno?</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <spacer name="horizontalSpacer_11">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="labelDomandaEseguireCheckOutVacanza">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Vuoi eseguire il CheckOut della vacanza ricercata?</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QPushButton" name="btnEseguireCheckOut">
+          <property name="text">
+           <string>Esegui CheckOut</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabVisualizzaArriviPartenze">
+       <attribute name="title">
+        <string>Visualizza Arrivi e Partenze</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_10">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupboxSchedaArrivi">
+          <property name="title">
+           <string>Scheda Arrivi:</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_11">
+           <item row="0" column="0">
+            <widget class="QTreeWidget" name="treewidgetSpecificheArrivi">
+             <property name="selectionMode">
+              <enum>QAbstractItemView::NoSelection</enum>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectItems</enum>
+             </property>
+             <column>
+              <property name="text">
+               <string>Camera n:</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Tipo soggiorno</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Data Inzio Soggiorno</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Data Fine Soggiorno</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Cliente</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Numero carta credito</string>
+              </property>
+             </column>
+             <item>
+              <property name="text">
+               <string>1</string>
+              </property>
+              <property name="text">
+               <string>B&amp;B/..</string>
+              </property>
+              <property name="text">
+               <string>gg/mm/aa</string>
+              </property>
+              <property name="text">
+               <string>gg/mm/aa</string>
+              </property>
+              <property name="text">
+               <string>Mario rossi</string>
+              </property>
+              <property name="text">
+               <string>22639816</string>
+              </property>
+              <property name="flags">
+               <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QGroupBox" name="groupboxSchedaPartenze">
+          <property name="title">
+           <string>Scheda Partenze:</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_12">
+           <item row="0" column="0">
+            <widget class="QTreeWidget" name="treewidgetSpecifichePartenze">
+             <property name="selectionMode">
+              <enum>QAbstractItemView::NoSelection</enum>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectItems</enum>
+             </property>
+             <column>
+              <property name="text">
+               <string>Camera n:</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Tipo soggiorno</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Data Inzio Soggiorno</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Data Fine Soggiorno</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Cliente</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Numero carta credito</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Ombrellone</string>
+              </property>
+             </column>
+             <item>
+              <property name="text">
+               <string>1</string>
+              </property>
+              <property name="text">
+               <string>B&amp;B/..</string>
+              </property>
+              <property name="text">
+               <string>gg/mm/aa</string>
+              </property>
+              <property name="text">
+               <string>gg/mm/aa</string>
+              </property>
+              <property name="text">
+               <string>Mario rossi</string>
+              </property>
+              <property name="text">
+               <string>22639816</string>
+              </property>
+              <property name="text">
+               <string>1</string>
+              </property>
+              <property name="flags">
+               <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

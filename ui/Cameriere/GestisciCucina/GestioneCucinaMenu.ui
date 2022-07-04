@@ -1,0 +1,890 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>tabGestioneCucina</class>
+ <widget class="QTabWidget" name="tabGestioneCucina">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>802</width>
+    <height>745</height>
+   </rect>
+  </property>
+  <property name="tabletTracking">
+   <bool>true</bool>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Gestione Cucina</string>
+  </property>
+  <property name="currentIndex">
+   <number>1</number>
+  </property>
+  <property name="movable">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="ColazioneInCamera">
+   <attribute name="title">
+    <string>Colazione in camera</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_13">
+    <item>
+     <widget class="QLabel" name="labelIntroduzionePagina">
+      <property name="text">
+       <string>Benvenuto, di seguito il menù dell'hotel per la colazione in camera:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupboxMenuColazioneInCameraCamerieri">
+      <property name="title">
+       <string>Menù:</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_14">
+       <item>
+        <widget class="QGroupBox" name="groupboxGestioneCucinaDolceCamerieri">
+         <property name="title">
+          <string>Dolce:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="treewidgetDolceColazioneInCamera">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Piatto</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+             <property name="flags">
+              <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupboxGestioneCucinaSalatoCamerieri">
+         <property name="title">
+          <string>Salato:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="treewidgetSalatoColazioneInCamera">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Piatto</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+             <property name="flags">
+              <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+             <property name="flags">
+              <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupboxGestioneCucinaBevandeCamerieri">
+         <property name="title">
+          <string>Bevande:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_3">
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="treewidgetBevandeColazioneInCamera">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Bevande</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnPrenotaColazioneInCameraGiornoSuccessivo">
+      <property name="text">
+       <string>Prenota colazione in camera per giorno successivo</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnModificaPrenotazioneColazioneInCamera">
+      <property name="text">
+       <string>Modifica Prenotazione colazione in camera</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnTornarePaginaPrecedente">
+      <property name="text">
+       <string>Tornare indietro alla pagina precedente</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="Pranzo">
+   <attribute name="title">
+    <string>Pranzo</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <widget class="QLabel" name="labelIntroduzionePagina_2">
+      <property name="text">
+       <string> Benvenuto, di seguito il menù dell'hotel per il pranzo:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupboxMenuPranzoCamerieri">
+      <property name="title">
+       <string>Menù:</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QGroupBox" name="groupboxGestioneCucinaAntipastiPranzoCamerieri">
+         <property name="title">
+          <string>Antipasti:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="treewidgetAntipastiPranzo">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Antipasto</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupboxGestioneCucinaPrimiPranzoCamerieri">
+         <property name="title">
+          <string>Primi:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_5">
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="treewidgetPrimiPranzo">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Primo</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupboxGestioneCucinaSecondiContorniPranzoCamerieri">
+         <property name="title">
+          <string>Secondi e Contorni:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_6">
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="treewidgetSecondiContorniPranzo">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Secondo/Contorno</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupboxGestioneCucinaDolciBevandePranzoCamerieri">
+         <property name="title">
+          <string>Dolci e Bevande:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="treewidgetDolciBevandePranzo">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Dolce/Bevanda</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnTornarePaginaPrecedente_2">
+      <property name="text">
+       <string>Tornare Indietro alla pagina precedente</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="Cena">
+   <attribute name="title">
+    <string>Cena</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_4">
+    <item>
+     <widget class="QLabel" name="labelIntroduzionePagina_3">
+      <property name="text">
+       <string>Benvenuto, di seguito il menù dell'hotel per la cena:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupboxMenuCenaCamerieri">
+      <property name="title">
+       <string>Menù:</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QGroupBox" name="groupboxAntipastiCena">
+         <property name="title">
+          <string>Antipasti:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="treewidgetAntipastiCena">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Antipasto</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupboxGestioneCucinaPrimiCenaCamerieri">
+         <property name="title">
+          <string>Primi:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="treewidgetPrimiCena">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Primo</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupboxGestioneCucinaSecondiContorniCenaCamerieri">
+         <property name="title">
+          <string>Secondi e Contorni:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_10">
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="treewidgetSecondiContorniCena">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Secondo/Contorno</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupboxGestioneCucinaDolciBevandeCenaCamerieri">
+         <property name="title">
+          <string>Dolci e Bevande:</string>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_11">
+          <item row="0" column="0">
+           <widget class="QTreeWidget" name="treewidgetDolciBevandeCena">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::NoSelection</enum>
+            </property>
+            <column>
+             <property name="text">
+              <string>Dolce/Bevanda</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </column>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <spacer name="horizontalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnTornarePaginaPrecedente_3">
+      <property name="text">
+       <string>Tornare indietro alla pagina precedente</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

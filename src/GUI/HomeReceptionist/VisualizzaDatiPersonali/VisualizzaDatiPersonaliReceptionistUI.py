@@ -1,12 +1,14 @@
 import sys
-from PyQt5 import QtGui,QtCore
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+from pathlib import Path
+from src.Gestori.GestoreFile import GestoreFile
 
 class VisualizzaDatiPersonaliReceptionistUI(QTabWidget):
     def __init__(self):
         super().__init__()
-        loadUi('ui/Receptionist/VisualizzaDatiPersonali/VisualizzaDatiPersonali.ui', self)
+        loadUi(GestoreFile.absolutePath('VisualizzaDatiPersonali.ui',Path.cwd()), self)
         self.setMinimumSize(600, 400)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()

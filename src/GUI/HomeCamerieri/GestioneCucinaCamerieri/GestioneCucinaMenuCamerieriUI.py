@@ -2,6 +2,8 @@ import sys
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+from pathlib import Path
+from src.Gestori.GestoreFile import GestoreFile
 
 from src.GUI.HomeCamerieri.GestioneCucinaCamerieri.ModificaPrenotazioneColazioneInCameraUI import \
     ModificaPrenotazioneColazioneInCameraUI
@@ -12,7 +14,7 @@ from src.GUI.HomeCamerieri.GestioneCucinaCamerieri.PrenotaColazioneInCameraGiorn
 class GestioneCucinaMenuCamerieriUI(QTabWidget):
     def __init__(self):
         super().__init__()
-        loadUi('ui/Cameriere/GestisciCucina/GestioneCucinaMenu.ui', self)
+        loadUi(GestoreFile.absolutePath('GestioneCucinaMenu.ui', Path.cwd()), self)
         self.setMinimumSize(600, 600)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>tabwidgetAvvisoPiattiModificati</class>
+ <widget class="QTabWidget" name="tabwidgetAvvisoPiattiModificati">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>693</width>
+    <height>262</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Avviso Piatti Modificati</string>
+  </property>
+  <widget class="QWidget" name="tab">
+   <attribute name="title">
+    <string>! AVVISO PIATTI MODIFICATI !</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="labelIntroduzione">
+      <property name="text">
+       <string>Salve,  si prega di contattare i clienti che avevano come scelta dei pasti per i loro menu i piatti ora sostituiti!!</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupboxSchedaPiattiModificati">
+      <property name="title">
+       <string>Scheda piatti modificati:</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QTreeWidget" name="treewidgetListaPiattiModificati">
+         <column>
+          <property name="text">
+           <string>Piatto </string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Camera</string>
+          </property>
+         </column>
+         <item>
+          <property name="text">
+           <string>PiattoVecchio</string>
+          </property>
+          <property name="text">
+           <string>Numero camera</string>
+          </property>
+          <property name="flags">
+           <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

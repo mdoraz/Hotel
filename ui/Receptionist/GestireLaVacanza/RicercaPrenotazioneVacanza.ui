@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>tabwidgetRicercaPrenotazioneVacanza</class>
+ <widget class="QTabWidget" name="tabwidgetRicercaPrenotazioneVacanza">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>813</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Ricerca Prenotazione Vacanza</string>
+  </property>
+  <widget class="QWidget" name="tab">
+   <attribute name="title">
+    <string>Ricerca Prenotazione Vacanza</string>
+   </attribute>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="1">
+     <widget class="QPushButton" name="btnRicercaCliente">
+      <property name="text">
+       <string>Ricerca Cliente</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QGroupBox" name="groupboxSchedaVisualizzazionePrenotazioniVacanza">
+      <property name="title">
+       <string>Scheda visualizzazione prenotazioni di vacanze associate a tale cliente:</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="2" column="1">
+        <widget class="QPushButton" name="btnOkConferma">
+         <property name="text">
+          <string>Ok</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0" colspan="2">
+        <widget class="QTreeWidget" name="treewidgetSpecificheVacanzaRicercata">
+         <column>
+          <property name="text">
+           <string>Vacanza(TipoSoggiorno)</string>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+           </font>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Data Inizio Vacanza</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Data Fine Vacanza</string>
+          </property>
+         </column>
+         <item>
+          <property name="text">
+           <string>B&amp;B/MezzaPensione/PensioneCompleta</string>
+          </property>
+          <property name="text">
+           <string>gg/mm/aa</string>
+          </property>
+          <property name="text">
+           <string>gg/mm/aa</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="labelQualeVacanzaStaiCercandoAssociataCliente">
+      <property name="text">
+       <string>La vacanza che stai cercando a quale cliente è associata?</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

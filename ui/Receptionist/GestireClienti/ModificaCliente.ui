@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>tabwidgetModificaCliente</class>
+ <widget class="QTabWidget" name="tabwidgetModificaCliente">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>472</width>
+    <height>311</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Modifica Cliente </string>
+  </property>
+  <widget class="QWidget" name="tab">
+   <attribute name="title">
+    <string>Modifica Cliente</string>
+   </attribute>
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="1" column="3">
+     <widget class="QPushButton" name="btnSalvaModifiche">
+      <property name="text">
+       <string>Salvare modifiche</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1" colspan="2">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="btnTornareIndietro">
+      <property name="text">
+       <string>Tornare alla pagina precedente</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="4">
+     <widget class="QGroupBox" name="groupboxSchedaClienteTrovato">
+      <property name="title">
+       <string>Scheda Cliente trovato:</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="lineeditEmail">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>myEmail@domain.com</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="labelDataDiNascita">
+         <property name="text">
+          <string>Data di nascita:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineeditNome">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>Nome</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="labelTelefono">
+         <property name="text">
+          <string>Telefono:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineeditCognome">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>Cognome</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelNome">
+         <property name="text">
+          <string>Nome:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="lineeditTelefono">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>Telefono</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="labelEmail">
+         <property name="text">
+          <string>Email:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="lineeditLuogoDiNascitaProvincia">
+         <property name="text">
+          <string/>
+         </property>
+         <property name="placeholderText">
+          <string>Luogo di nascita(Provincia)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="labelLuogoDiNascitaProvincia">
+         <property name="text">
+          <string>Luogo di nascita(provincia):</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="labelCognome">
+         <property name="text">
+          <string>Cognome:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QDateEdit" name="dateeditDataDiNascita">
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

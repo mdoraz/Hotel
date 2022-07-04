@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>tabwidgetHomeVisualizzaStatistiche</class>
+ <widget class="QTabWidget" name="tabwidgetHomeVisualizzaStatistiche">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>915</width>
+    <height>216</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>14</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Visualizza Statistiche Struttura Alberghiera</string>
+  </property>
+  <widget class="QWidget" name="tab">
+   <attribute name="title">
+    <string>Home Visualizza Statistiche</string>
+   </attribute>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="4" column="0">
+     <widget class="QPushButton" name="btnStatisticheAssenzeDipendenti">
+      <property name="text">
+       <string>Statistiche relative alle assenze dei dipendenti</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QPushButton" name="btnStatisticheTipologiaSoggiorno">
+      <property name="text">
+       <string>Statistiche relative alla tipologia di soggiorno</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QPushButton" name="btnStatisticheNoleggioBici">
+      <property name="text">
+       <string>Statistiche realtive al noleggio di biciclette</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="btnStatisticheColazioneInCamera">
+      <property name="text">
+       <string>Statistiche relative alla colazione in camera</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="2">
+     <widget class="QLabel" name="labelIntroduzione">
+      <property name="font">
+       <font>
+        <pointsize>20</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Benvenuto, quali statistiche desidera visualizzare?</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QPushButton" name="btnTornareIndietro">
+      <property name="text">
+       <string>Tornare indietro alla pagina precedente</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
