@@ -83,12 +83,12 @@ class LoginProgrammaUI(QTabWidget):
         def showHidePassword(checked):
             if checked:
                 lineEdit.setEchoMode(QLineEdit.EchoMode.Normal)
-                eyeButton.setIcon(QtGui.QIcon('files/icons/eye-close.jpg'))
+                eyeButton.setIcon(QtGui.QIcon(GestoreFile.absolutePath('eye-closed.png',Path.cwd())))
             else:
                 lineEdit.setEchoMode(QLineEdit.EchoMode.Password)
-                eyeButton.setIcon(QtGui.QIcon('files/icons/eye-open.jpg'))
+                eyeButton.setIcon(QtGui.QIcon((QtGui.QIcon(GestoreFile.absolutePath('eye-opened.png',Path.cwd())))))
 
-        eyeButton.setIcon(QtGui.QIcon('files/icons/eye-open.jpg'))
+        eyeButton.setIcon(QtGui.QIcon(GestoreFile.absolutePath('eye-opened.png',Path.cwd())))
         eyeButton.setCursor(QtCore.Qt.CursorShape.PointingHandCursor)
         eyeButton.setCheckable(True)
         eyeButton.clicked.connect(showHidePassword)
