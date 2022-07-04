@@ -7,6 +7,7 @@ from PyQt5.uic import loadUi
 from src.Attori.Dipendente import Dipendente
 from src.Attori.Ruolo import Ruolo
 from src.GUI.GestioneDipendenti.InserimentoCredenzialiDipendenteUI import InserimentoCredenzialiDipendenteUI
+from src.GUI.GestioneDipendenti.VisualizzaAssenzeUI import VisualizzaAssenzeUI
 from src.Gestori.GestoreFile import GestoreFile
 from src.Utilities.GUIUtils import GUIUtils
 from src.Utilities.encrypter import encrypt, decrypt
@@ -14,6 +15,7 @@ from src.Utilities.encrypter import encrypt, decrypt
 class VisualizzaDipendenteUI(QWidget):
 
 	showComboBox = False
+	vecchiaPasswordAdded = False
 	dipendenteEliminato = QtCore.pyqtSignal()
 
 	def __init__(self, dipendente : Dipendente, parent : QWidget = None):  # type: ignore
@@ -41,6 +43,7 @@ class VisualizzaDipendenteUI(QWidget):
 			raise
 		
 		return dipendenti
+	
 
 	def _fillFields(self):
 		# riempio l'intestazione
@@ -59,9 +62,6 @@ class VisualizzaDipendenteUI(QWidget):
 		# riempio i contatti
 		self.lineEditEmail.setText(self.dipendente.getEmail())
 		self.lineEditCellulare.setText(self.dipendente.getCellulare())
-		# riempio le credenziali
-		self.lineEditUsername.setText(self.dipendente.getUsername())
-		self.lineEditPassword.setText('password')
 
 	
 	def _createComboBoxes(self):
@@ -82,16 +82,17 @@ class VisualizzaDipendenteUI(QWidget):
 
 
 	def _connectButtons(self):
-		self.btnDatiLavorativi.clicked.connect(self._modificaDatiLavorativiClicked)
-		self.btnContatti.clicked.connect(self._modificaContattiClicked)
-		self.btnCredenziali.clicked.connect(self._modificaCredenzialiClicked)
+		self.btnModificaDatiLavorativi.clicked.connect(self._btnModificaDatiLavorativiClicked)
+		self.btnModificaContatti.clicked.connect(self._btnModificaContattiClicked)
+		self.btnCredenziali.clicked.connect(self._mostraCredenziali)
+		self.btnAssenze.clicked.connect(self._mostraAssenze)
 		self.btnElimina.clicked.connect(self._btnEliminaClicked)
 
 	
-	def _modificaDatiLavorativiClicked(self):
-		self.btnDatiLavorativi.setText('Salva')
-		self.btnDatiLavorativi.clicked.disconnect(self._modificaDatiLavorativiClicked)
-		self.btnDatiLavorativi.clicked.connect(self._salvaDatiLavoraiviClicked)
+	def _btnModificaDatiLavorativiClicked(self):
+		self.btnModificaDatiLavorativi.setText('Salva')
+		self.btnModificaDatiLavorativi.clicked.disconnect(self._btnModificaDatiLavorativiClicked)
+		self.btnModificaDatiLavorativi.clicked.connect(self._salvaDatiLavoraiviClicked)
 		
 		# sostituisco le line edit di ruolo e turno con due combo
 		row, ruolo = self.groupBoxDatiLavorativi.layout().getWidgetPosition(self.lineEditRuolo) # recupero la riga di linEditRuolo nella group box in cui si trova
@@ -139,9 +140,9 @@ class VisualizzaDipendenteUI(QWidget):
 		self._salvaDipendente()
 		
 		# il bottone torna ad essere connesso alla modifica
-		self.btnDatiLavorativi.setText('Modifica')
-		self.btnDatiLavorativi.clicked.disconnect(self._salvaDatiLavoraiviClicked)
-		self.btnDatiLavorativi.clicked.connect(self._modificaDatiLavorativiClicked)
+		self.btnModificaDatiLavorativi.setText('Modifica')
+		self.btnModificaDatiLavorativi.clicked.disconnect(self._salvaDatiLavoraiviClicked)
+		self.btnModificaDatiLavorativi.clicked.connect(self._btnModificaDatiLavorativiClicked)
 		
 		# sostituisco le combo box di ruolo e turno con line edit immodificabili
 		row, role = self.groupBoxDatiLavorativi.layout().getWidgetPosition(self.comboBoxRuolo) # recupero la riga di comboBoxRuolo nella group box in cui si trova
@@ -169,10 +170,10 @@ class VisualizzaDipendenteUI(QWidget):
 		self.lineEditStipendio.setStyleSheet("font-family: Arial; font-size: 11pt")
 
 
-	def _modificaContattiClicked(self):
-		self.btnContatti.setText('Salva')
-		self.btnContatti.clicked.disconnect(self._modificaContattiClicked)
-		self.btnContatti.clicked.connect(self._salvaContattiClicked)
+	def _btnModificaContattiClicked(self):
+		self.btnModificaContatti.setText('Salva')
+		self.btnModificaContatti.clicked.disconnect(self._btnModificaContattiClicked)
+		self.btnModificaContatti.clicked.connect(self._salvaContattiClicked)
 		
 		# imposto le line edit di IBAN e stipendio come modificabili
 		self.lineEditEmail.setReadOnly(False)
@@ -197,9 +198,9 @@ class VisualizzaDipendenteUI(QWidget):
 		self._salvaDipendente()
 
 		# il bottone torna ad essere connesso alla modifica
-		self.btnContatti.setText('Modifica')
-		self.btnContatti.clicked.disconnect(self._salvaContattiClicked)
-		self.btnContatti.clicked.connect(self._modificaContattiClicked)
+		self.btnModificaContatti.setText('Modifica')
+		self.btnModificaContatti.clicked.disconnect(self._salvaContattiClicked)
+		self.btnModificaContatti.clicked.connect(self._btnModificaContattiClicked)
 		
 		# le line edit non sono piu modificabili
 		self.lineEditEmail.setReadOnly(True)
@@ -209,67 +210,113 @@ class VisualizzaDipendenteUI(QWidget):
 		self.lineEditCellulare.setStyleSheet("font-family: Arial; font-size: 11pt")
 
 
-	def _modificaCredenzialiClicked(self):
-		self.modificaCredenzialiWidget = InserimentoCredenzialiDipendenteUI()
-		self.modificaCredenzialiWidget.setWindowTitle('Modifica credenziali')
-		self.modificaCredenzialiWidget.addField(3, 'Vecchia password')
-
-		# monkey patching per aggiungere a runtime label e line edit della vecchia password agli attributi di credenzialiWidget
-		self.modificaCredenzialiWidget.labelVecchiaPassword = self.modificaCredenzialiWidget.layout().itemAt(3).widget().layout().itemAtPosition(0,1).widget()
-		self.modificaCredenzialiWidget.lineEditVecchiaPassword = self.modificaCredenzialiWidget.layout().itemAt(3).widget().layout().itemAtPosition(1,1).widget()
-		#self.modificaCredenzialiWidget.lineEditLabelPairs[self.modificaCredenzialiWidget.lineEditVecchiaPassword] = self.modificaCredenzialiWidget.labelVecchiaPassword
-
-		# vecchia password nascosta, aggiornato il campo relatio alla password, username ha inizialmente line edit piena e label visibile
-		self.modificaCredenzialiWidget.lineEditVecchiaPassword.setEchoMode(QLineEdit.EchoMode.Password)
-		self.modificaCredenzialiWidget.lineEditPassword.setPlaceholderText('Nuova password')
-		self.modificaCredenzialiWidget.labelPassword.setText('Nuova password')
-		self.modificaCredenzialiWidget.lineEditUsername.setText(self.dipendente.getUsername())
-		self.modificaCredenzialiWidget.labelUsername.show()
+	def _mostraCredenziali(self):
+		self.credenzialiWidget = InserimentoCredenzialiDipendenteUI()
+		self.vecchiaPasswordAdded = False # al primo click sul bottone modifica, saranno aggiunti label e line edit per la vecchia password
+		self.credenzialiWidget.setWindowTitle('Modifica credenziali')
+		self.credenzialiWidget.labelIntestazione.hide()
+		self.credenzialiWidget.lineEditUsername.setText(self.dipendente.getUsername()) # username inizialmente ha line edit piena
+		self.credenzialiWidget.labelUsername.show()									# e label visibile
+		self._widgetCredenzialiSoloVisualizzazione()
+		self.credenzialiWidget.show()
 		
-		self.modificaCredenzialiWidget.btnIndietro.clicked.connect(self.modificaCredenzialiWidget.close)
-		self.modificaCredenzialiWidget.btnInserisci.setText('Salva modifiche')
-		self.modificaCredenzialiWidget.btnInserisci.clicked.connect(self._salvaCredenzialiClicked)
-		self.modificaCredenzialiWidget.show()
+
+	def _widgetCredenzialiSoloVisualizzazione(self): # configura credenzialiWidget per la sola visualizzazione
+		self.credenzialiWidget.lineEditUsername.setReadOnly(True)
+		self.credenzialiWidget.lineEditPassword.setReadOnly(True)
+
+		self.credenzialiWidget.labelIstruzioniPassword.hide()
+		self.credenzialiWidget.lineEditConfermaPassword.hide() # nascondo conferma password
+		self.credenzialiWidget.lineEditPassword.setText('password') # per riempire la password con pallini neri
+		self.credenzialiWidget.lineEditPassword.actions()[0].defaultWidget().hide() # nascondo l'occhiolino
+		self.credenzialiWidget.labelPassword.show()
+
+		self.credenzialiWidget.btnInserisci.setText('Modifica')
+		try:
+			self.credenzialiWidget.btnInserisci.clicked.disconnect(self._salvaCredenzialiClicked)
+			self.credenzialiWidget.lineEditVecchiaPassword.hide() # se riesco a disconnettere btnInserisci senza andare in eccezione, è stato cliccato almeno una volta il bottone modifica
+			self.credenzialiWidget.labelPassword.setText('Password')
+		except:
+			pass
+		self.credenzialiWidget.btnInserisci.clicked.connect(self._modificaCredenzialiClicked)
+		self.credenzialiWidget.btnIndietro.clicked.connect(self.credenzialiWidget.close)
+
+
+	def _modificaCredenzialiClicked(self):
+		self.credenzialiWidget.lineEditUsername.setReadOnly(False)
+		self.credenzialiWidget.lineEditPassword.setReadOnly(False)
+
+		self.credenzialiWidget.labelIstruzioniPassword.show()
+		self.credenzialiWidget.lineEditConfermaPassword.show()
+		if not self.vecchiaPasswordAdded:
+			self.credenzialiWidget.addField(3, 'Vecchia password')
+			self.vecchiaPasswordAdded = True
+
+			# monkey patching per aggiungere a runtime label e line edit della vecchia password agli attributi di credenzialiWidget
+			self.credenzialiWidget.labelVecchiaPassword = self.credenzialiWidget.layout().itemAt(3).widget().layout().itemAtPosition(0,1).widget()
+			self.credenzialiWidget.lineEditVecchiaPassword = self.credenzialiWidget.layout().itemAt(3).widget().layout().itemAtPosition(1,1).widget()
+
+			# impostata l'eco mode della vecchia password
+			self.credenzialiWidget.lineEditVecchiaPassword.setEchoMode(QLineEdit.EchoMode.Password)
+		else:
+			self.credenzialiWidget.lineEditVecchiaPassword.show()
+		
+		# aggiornate label e line edit relative alla password
+		self.credenzialiWidget.lineEditPassword.setText('')
+		self.credenzialiWidget.lineEditPassword.setPlaceholderText('Nuova password')
+		self.credenzialiWidget.labelPassword.setText('Nuova password')
+		self.credenzialiWidget.lineEditPassword.actions()[0].defaultWidget().show() # mostro l'occhiolino
+
+		self.credenzialiWidget.btnInserisci.setText('Salva')
+		self.credenzialiWidget.btnInserisci.clicked.disconnect(self._modificaCredenzialiClicked)
+		self.credenzialiWidget.btnInserisci.clicked.connect(self._salvaCredenzialiClicked)
+		self.credenzialiWidget.btnIndietro.setText('Annulla')
+		self.credenzialiWidget.btnIndietro.clicked.disconnect(self.credenzialiWidget.close)
+		self.credenzialiWidget.btnIndietro.clicked.connect(self._widgetCredenzialiSoloVisualizzazione)
 		
 	
 	def _salvaCredenzialiClicked(self):
+		
 		usernameChanged = passwordChanged = False
 		# se lo username è vuoto o contiene solo spazi
-		if self.modificaCredenzialiWidget.lineEditUsername.text().strip() == '':
+		if self.credenzialiWidget.lineEditUsername.text().strip() == '':
 			self._showMessage('Username non valido.', QMessageBox.Icon.Warning, 'Errore')
 			return
 		# se è stato cambiato username
-		if self.modificaCredenzialiWidget.lineEditUsername.text() != self.dipendente.getUsername():
+		if self.credenzialiWidget.lineEditUsername.text() != self.dipendente.getUsername():
 			# se non è già in uso da un altro utente
-			if not self.modificaCredenzialiWidget.isUsernameUsed():
-				self.dipendente.setUsername(self.modificaCredenzialiWidget.lineEditUsername.text())
+			if not self.credenzialiWidget.isUsernameUsed():
+				self.dipendente.setUsername(self.credenzialiWidget.lineEditUsername.text())
 				self.lineEditUsername.setText(self.dipendente.getUsername())
 				usernameChanged = True
 			else:
 				return
 		
 		lineEditLabelPairs = {
-			self.modificaCredenzialiWidget.lineEditVecchiaPassword : self.modificaCredenzialiWidget.labelVecchiaPassword,
-			self.modificaCredenzialiWidget.lineEditPassword : self.modificaCredenzialiWidget.labelPassword,
-			self.modificaCredenzialiWidget.lineEditConfermaPassword : self.modificaCredenzialiWidget.labelConfermaPassword
+			self.credenzialiWidget.lineEditVecchiaPassword : self.credenzialiWidget.labelVecchiaPassword,
+			self.credenzialiWidget.lineEditPassword : self.credenzialiWidget.labelPassword,
+			self.credenzialiWidget.lineEditConfermaPassword : self.credenzialiWidget.labelConfermaPassword
 		}
 		# se almeno una delle line edit delle password non è vuota
-		if (self.modificaCredenzialiWidget.lineEditVecchiaPassword.text().strip() != '' or
-			self.modificaCredenzialiWidget.lineEditPassword.text().strip() != '' or
-			self.modificaCredenzialiWidget.lineEditConfermaPassword.text().strip() != ''):
+		if (self.credenzialiWidget.lineEditVecchiaPassword.text().strip() != '' or
+			self.credenzialiWidget.lineEditPassword.text().strip() != '' or
+			self.credenzialiWidget.lineEditConfermaPassword.text().strip() != ''):
+			
 			# se non sono tutte piene
-			if not self.modificaCredenzialiWidget.fieldsFilled(lineEditLabelPairs):
+			if not self.credenzialiWidget.fieldsFilled(lineEditLabelPairs):
 				self._showMessage('Se si vuole modificare la password, inserire tutti i campi relativi alle password.\nSe non si vuole modificarla, lasciare vuoti tutti i campi.',
 								  QMessageBox.Icon.Warning, 'Errore')
-				self.modificaCredenzialiWidget.msg.hide()
+				self.credenzialiWidget.msg.hide()
 				return
 			# se la vecchia password non è corretta
-			elif self.modificaCredenzialiWidget.lineEditVecchiaPassword.text() != decrypt(self.dipendente.getPassword()):
+			elif self.credenzialiWidget.lineEditVecchiaPassword.text() != decrypt(self.dipendente.getPassword()):
 				self._showMessage('La vecchia password non è corretta, riprovare.', QMessageBox.Icon.Warning, 'Errore')
 				return
+
+			print('vecchia pwd: ' + self.credenzialiWidget.lineEditVecchiaPassword.text())
 			# se la password rispetta la struttura specificata e coincide con la conferma password
-			if self.modificaCredenzialiWidget.isPasswordCorrect():
-				self.dipendente.setPassword(encrypt(self.modificaCredenzialiWidget.lineEditPassword.text()))
+			if self.credenzialiWidget.isPasswordCorrect():
+				self.dipendente.setPassword(encrypt(self.credenzialiWidget.lineEditPassword.text()))
 				passwordChanged = True
 			else:
 				return
@@ -289,7 +336,11 @@ class VisualizzaDipendenteUI(QWidget):
 
 		if msg != '':
 			self._showMessage(msg, QMessageBox.Icon.Warning, 'Errore')
-		self.modificaCredenzialiWidget.close()
+		self.credenzialiWidget.close()
+
+	def _mostraAssenze(self):
+		self.assenzeWidget = VisualizzaAssenzeUI(self.dipendente)
+		self.assenzeWidget.show()
 
 
 	def _btnEliminaClicked(self):
@@ -297,7 +348,7 @@ class VisualizzaDipendenteUI(QWidget):
 		richiestaConferma.setIcon(QMessageBox.Icon.Warning)
 		richiestaConferma.setWindowTitle('ConfermaEliminazione')
 		richiestaConferma.setText("Sei sicuro di voler eliminare dal sistema questo dipendente?")
-		siButton = richiestaConferma.addButton('Si', QMessageBox.ButtonRole.YesRole)
+		richiestaConferma.addButton('Si', QMessageBox.ButtonRole.YesRole)
 		noButton = richiestaConferma.addButton(QMessageBox.StandardButton.No)
 		richiestaConferma.exec()
 
@@ -312,8 +363,6 @@ class VisualizzaDipendenteUI(QWidget):
 			self._showMessage('Dipendente eliminato dal sistema!', QMessageBox.Icon.Information)
 			self.close()
 
-
-	
 
 	def _setColorHint(self, text): # text è il testo della line edit da controllare
 		fontType = "font-family: Arial; font-size: 11pt"
