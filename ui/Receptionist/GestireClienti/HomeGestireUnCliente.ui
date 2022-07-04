@@ -41,7 +41,7 @@
     <item row="0" column="0" colspan="3">
      <widget class="QTabWidget" name="tabwidgetScelteHomeGestioneClienti">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tabRegistraClienti">
        <attribute name="title">
@@ -210,21 +210,7 @@
         <string>Visualizza Cliente</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="1">
-         <widget class="QPushButton" name="btnRicercaCliente">
-          <property name="text">
-           <string>Ricerca Cliente</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0" colspan="2">
-         <widget class="QLabel" name="labelVisualizzaClienteRicercato">
-          <property name="text">
-           <string>Qui è dove puoi vedere i dati del cliente ricercato:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0" colspan="2">
          <widget class="QGroupBox" name="groupboxSchedaClienteRicercato">
           <property name="title">
            <string>Scheda Cliente Ricercato:</string>
@@ -235,6 +221,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
              <property name="placeholderText">
               <string>Luogo di nascita(Provincia)</string>
              </property>
@@ -242,6 +231,9 @@
            </item>
            <item row="8" column="1" colspan="2">
             <widget class="QDateEdit" name="dateeditDataDiNascita">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
              <property name="displayFormat">
               <string>dd/MM/yyyy</string>
              </property>
@@ -259,6 +251,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
              <property name="placeholderText">
               <string>Telefono</string>
              </property>
@@ -268,6 +263,9 @@
             <widget class="QLineEdit" name="lineeditEmail">
              <property name="text">
               <string/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
              </property>
              <property name="placeholderText">
               <string>myEmail@domain.com</string>
@@ -307,6 +305,9 @@
              <property name="text">
               <string/>
              </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
              <property name="placeholderText">
               <string>Cognome</string>
              </property>
@@ -316,6 +317,9 @@
             <widget class="QLineEdit" name="lineeditNome">
              <property name="text">
               <string/>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
              </property>
              <property name="placeholderText">
               <string>Nome</string>
@@ -339,14 +343,21 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="0" column="1">
+         <widget class="QPushButton" name="btnRicercaCliente">
+          <property name="text">
+           <string>Ricerca Cliente</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
          <widget class="QPushButton" name="btnModificaClienteRicercato">
           <property name="text">
            <string>Modifica cliente ricercato</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="2" column="1">
          <widget class="QPushButton" name="btnEliminaClienteRicercato">
           <property name="text">
            <string>elimina cliente ricercato</string>

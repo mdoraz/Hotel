@@ -19,9 +19,9 @@
    </attribute>
    <layout class="QGridLayout" name="gridLayout">
     <item row="1" column="2">
-     <widget class="QPushButton" name="btnSi">
+     <widget class="QPushButton" name="btnAvanti">
       <property name="text">
-       <string>Si</string>
+       <string>Avanti</string>
       </property>
      </widget>
     </item>
