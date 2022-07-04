@@ -2,6 +2,8 @@ import sys
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+from pathlib import Path
+from src.Gestori.GestoreFile import GestoreFile
 
 from src.GUI.HomeReceptionist.GestioneCucinaReceptionist.InserisciSceltaPastiCenaGiornoSuccessivoUI import \
     InserisciSceltaPastiCenaGiornoSuccessivoUI
@@ -12,7 +14,7 @@ from src.GUI.HomeReceptionist.GestioneCucinaReceptionist.InserisciSceltaPastiPra
 class GestioneCucinaMenuReceptionistUI(QTabWidget):
     def __init__(self):
         super().__init__()
-        loadUi('ui/Receptionist/InserisciSceltaPastiPranzoCena/GestioneCucina.ui', self)
+        loadUi(GestoreFile.absolutePath('GestioneCucina.ui', Path.cwd()), self)
         self.setMinimumSize(600, 700)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()

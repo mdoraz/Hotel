@@ -1,8 +1,9 @@
 import sys
-from pathlib import Path
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+from pathlib import Path
+from src.Gestori.GestoreFile import GestoreFile
 
 from src.Attori.Ruolo import Ruolo
 from src.Gestori.GestoreFile import GestoreFile
@@ -16,8 +17,9 @@ class LoginProgrammaUI(QTabWidget):
     def __init__(self, previous : QWidget , pathFile:Path):
         super().__init__()
         self.page1 = QWidget()
-        loadUi('ui/HomeELoginProgramma/login.ui', self.page1)
+        loadUi(GestoreFile.absolutePath('login.ui',Path.cwd()), self.page1)
         self.addTab(self.page1, 'Login Programma')
+        self.setFont(QtGui.QFont('Arial', 10))
 
         eyeBtn = QToolButton()  # creati i bottoni per mostrare/nascondere la password
         self._connectEye(eyeBtn, self.page1.lineeditPassword) # collega eyeBtn alla line edit corrispondente
@@ -61,7 +63,7 @@ class LoginProgrammaUI(QTabWidget):
                     self.widgetHomeReceptionist = HomeReceptionistUI(self)
                     self.widgetHomeReceptionist.show()
                 else :
-                    self.widgetHomeCamerieri = HomeCamerieriUI()
+                    self.widgetHomeCamerieri = HomeCamerieriUI(self)
                     self.widgetHomeCamerieri.show()
 
         elif self.pathFile == Path(dictyonary['titolare']):

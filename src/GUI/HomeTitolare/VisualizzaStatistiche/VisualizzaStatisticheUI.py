@@ -2,13 +2,15 @@ import sys
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+from pathlib import Path
+from src.Gestori.GestoreFile import GestoreFile
 
 
 
 class VisualizzaStatisticheUI(QTabWidget):
     def __init__(self, previous : QWidget):
         super().__init__()
-        loadUi('ui/Titolare/GestioneStatistiche/VisualizzaStatistiche.ui', self)
+        loadUi(GestoreFile.absolutePath('VisualizzaStatistiche.ui', Path.cwd()), self)
         self.setMinimumSize(700,200)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()

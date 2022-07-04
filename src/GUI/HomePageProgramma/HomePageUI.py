@@ -1,5 +1,5 @@
 import sys
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
@@ -15,6 +15,7 @@ class HomePageUI(QTabWidget):
         loadUi(GestoreFile.absolutePath('homePage.ui', Path.cwd()), self.page1)
         self.addTab(self.page1, 'Home Programma')
         self.setMinimumSize(500,300)
+        self.setFont(QtGui.QFont('Arial', 10))
 
         self.page1.btnDipendente.clicked.connect(self.btnDipendenteClicked)
         self.page1.btnTitolare.clicked.connect(self.btnTitolareClicked)

@@ -2,6 +2,8 @@ import sys
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+from pathlib import Path
+from src.Gestori.GestoreFile import GestoreFile
 
 from src.GUI.HomeReceptionist.GestioneCucinaReceptionist.GestioneCucinaMenuReceptionistUI import \
     GestioneCucinaMenuReceptionistUI
@@ -10,9 +12,9 @@ from src.GUI.HomeReceptionist.VisualizzaDatiPersonali.VisualizzaDatiPersonaliRec
 
 
 class HomeReceptionistUI(QTabWidget):
-    def __init__(self,previous : QWidget):
+    def __init__(self, previous: QWidget):
         super().__init__()
-        loadUi('ui/Receptionist/Home/HomeReceptionist.ui', self)
+        loadUi(GestoreFile.absolutePath('HomeReceptionist.ui', Path.cwd()), self)
         self.setMinimumSize(600, 300)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
@@ -45,9 +47,6 @@ class HomeReceptionistUI(QTabWidget):
     def _TornareHomeHotelClicked(self):
         self.close()
         self.previous.show()
-
-
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     mainWidget = HomeReceptionistUI()

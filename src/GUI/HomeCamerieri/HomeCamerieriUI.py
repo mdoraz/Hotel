@@ -1,4 +1,6 @@
 import sys
+from pathlib import Path
+
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
@@ -7,12 +9,13 @@ from src.GUI.HomeCamerieri.GestioneCucinaCamerieri.GestioneCucinaMenuCamerieriUI
     GestioneCucinaMenuCamerieriUI
 from src.GUI.HomeCamerieri.VisualizzaDatiPersonali.VisualizzaDatiPersonaliCamerieriUI import \
     VisualizzaDatiPersonaliCamerieriUI
+from src.Gestori.GestoreFile import GestoreFile
 
 
 class HomeCamerieriUI(QTabWidget):
-    def __init__(self, previous : QWidget):
+    def __init__(self, previous: QWidget):
         super().__init__()
-        loadUi('ui/Cameriere/Home/HomeCamerieri.ui', self)
+        loadUi(GestoreFile.absolutePath('HomeCamerieri.ui', Path.cwd()), self)
         self.setMinimumSize(600, 300)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()

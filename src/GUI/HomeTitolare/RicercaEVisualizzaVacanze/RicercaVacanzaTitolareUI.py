@@ -3,12 +3,14 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
+from src.Gestori.GestoreFile import GestoreFile
+
 
 class RicercaVacanzaTitolareUI(QTabWidget):
     def __init__(self):
         super().__init__()
 
-        loadUi('ui/Titolare/RicercaEVisualizzaVacanze/RicercaVacanzaTitolare.ui', self)
+        loadUi(GestoreFile.absolutePath('RicercaVacanzaTitolare.ui', Path.cwd()), self)
         self.setMinimumSize(400,200)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()

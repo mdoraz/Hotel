@@ -46,7 +46,7 @@
     <item row="0" column="0" colspan="3">
      <widget class="QTabWidget" name="tabwidgetScelteHomeNoleggioBici">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tabPrenotaBici">
        <attribute name="title">

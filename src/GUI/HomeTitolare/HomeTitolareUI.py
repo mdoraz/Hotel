@@ -2,6 +2,8 @@ import sys
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+from pathlib import Path
+from src.Gestori.GestoreFile import GestoreFile
 
 from src.GUI.GestioneDipendenti.GestioneDipendentiUI import GestioneDipendentiUI
 from src.GUI.HomeTitolare.RicercaEVisualizzaVacanze.VisualizzaRicercaVacanze import VisualizzaRicercaVacanzeUI
@@ -13,7 +15,7 @@ class HomeTitolareUI(QTabWidget):
     def __init__(self, previous : QWidget):
         super().__init__()
         self.page1 = QWidget()
-        loadUi('ui/Titolare/Home/homeTitolare.ui', self.page1)
+        loadUi(GestoreFile.absolutePath('homeTitolare.ui', Path.cwd()), self.page1)
         self.addTab(self.page1, 'Home Titolare')
         self.setMinimumSize(500, 300)
         self.setFont(QtGui.QFont('Arial', 10))
