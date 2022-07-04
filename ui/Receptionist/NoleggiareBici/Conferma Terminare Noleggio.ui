@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>tabwidgetConfermaTerminaNoleggio</class>
+ <widget class="QTabWidget" name="tabwidgetConfermaTerminaNoleggio">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>845</width>
+    <height>401</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Conferma terminare Noleggio</string>
+  </property>
+  <widget class="QWidget" name="tab">
+   <attribute name="title">
+    <string>Conferma terminare Noleggio</string>
+   </attribute>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="1">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="btnTerminareNoleggio">
+      <property name="text">
+       <string>Terminare Noleggio</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="btnTornareIndietro">
+      <property name="text">
+       <string>Tornare Indietro</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="3">
+     <widget class="QGroupBox" name="groupboxSchedaTerminaNoleggio">
+      <property name="title">
+       <string>Scheda di termine del noleggio</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0" colspan="2">
+        <widget class="QTreeWidget" name="treewidgetTabellaNoleggioBiciTerminare">
+         <column>
+          <property name="text">
+           <string>Numero</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Minuti Ritardo</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Tipo</string>
+          </property>
+         </column>
+         <item>
+          <property name="text">
+           <string>Bici</string>
+          </property>
+          <property name="text">
+           <string>10</string>
+          </property>
+          <property name="text">
+           <string>UomoSenzaSeggiolino/DonnaConSeggiolino</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="btnPrelevaMulta">
+         <property name="text">
+          <string>Preleva Multa</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelAvvisoPrelevaMulta">
+         <property name="text">
+          <string>PRELEVARE DALLA CARTA DEL CLIENTE LA MULTA PER IL RITARDO SE NECESSARIO!! </string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" colspan="2">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

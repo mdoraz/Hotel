@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>tabAggiungereClientiCheckIn</class>
+ <widget class="QTabWidget" name="tabAggiungereClientiCheckIn">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>871</width>
+    <height>168</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Aggiungere Clienti CheckIn</string>
+  </property>
+  <widget class="QWidget" name="tab">
+   <attribute name="title">
+    <string>Aggiungere Clienti CheckIn</string>
+   </attribute>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="1">
+     <widget class="QPushButton" name="btnRicercaCliente">
+      <property name="text">
+       <string>Ricerca Cliente</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="labelDoamandaSeClienteGiaStatoInHotelOppureNo">
+      <property name="text">
+       <string>Il cliente che sta effettuando la prenotazione è gia stato in hotel oppure è un nuovo cliente?</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="btnRegistraCliente">
+      <property name="text">
+       <string>Registra Cliente</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="labelNumeroClientiDaAggiungere">
+      <property name="text">
+       <string>Quanti clienti si desidera aggiungere alla vacanza?</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QPushButton" name="btnConfermaAggiungereClienti">
+      <property name="text">
+       <string>Ok</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QComboBox" name="comboboxInserireNumeroClientiDaAggiungere">
+      <item>
+       <property name="text">
+        <string>1</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>2</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>3</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
