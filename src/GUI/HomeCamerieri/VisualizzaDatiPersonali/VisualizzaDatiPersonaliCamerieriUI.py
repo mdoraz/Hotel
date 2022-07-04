@@ -16,19 +16,18 @@ class VisualizzaDatiPersonaliCamerieriUI(QTabWidget):
         self._connectButtons()
 
         self.lineEditLabelPairs = {
-            self.lineEditNomeCamerieri: self.labelNomeCamerieri,
-            self.lineEditCognomeCamerieri: self.labelCognomeCamerieri,
-            self.lineEditLuogoDiNascitaProvinciaCamerieri: self.labelLuogoDiNascitaCamerieri,
-            self.lineEditTelefonoCamerieri: self.labelTelefonoCamerieri,
-            self.lineEditIndirizzoEmailCamerieri: self.labelIndirizzoEmailCamerieri,
-            self.lineEditIBANCamerieri: self.labelIBANCamerieri,
-            self.lineEditTurnoDiLavoroCamerieri: self.labelTurnoDiLavoroCamerieri,
-            self.lineEditRuoloCamerieri: self.labelRuoloCamerieri
+            self.lineeditNome: self.labelNome,
+            self.lineeditCognome: self.labelCognome,
+            self.lineeditLuogoDiNascitaProvincia: self.labelLuogoDiNascitaProvincia,
+            self.lineeditTelefono: self.labelTelefono,
+            self.lineeditIndirizzoEmail: self.labelIndirizzoEmail,
+            self.lineeditIBAN: self.labelIBAN,
+            self.lineeditTurnoDiLavoro: self.labelTurnoDiLavoro,
+            self.lineeditRuolo: self.labelRuolo
         }
 
-
     def _connectButtons(self):
-        self.btnTornareIndietro.clicked.connect(self.close)
+        self.btnOk.clicked.connect(self.close)
 
 
 
