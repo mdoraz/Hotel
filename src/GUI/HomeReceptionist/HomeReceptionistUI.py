@@ -5,6 +5,7 @@ from PyQt5.uic import loadUi
 from pathlib import Path
 
 from src.GUI.HomeReceptionist.GestireClienti.HomeGestireUnClienteUI import HomeGestireUnClienteUI
+from src.GUI.HomeReceptionist.NoleggiareBici.HomeNoleggiareUnaBiciUI import HomeNoleggiareUnaBiciUI
 from src.Gestori.GestoreFile import GestoreFile
 
 from src.GUI.HomeReceptionist.GestioneCucinaReceptionist.GestioneCucinaMenuReceptionistUI import \
@@ -40,7 +41,9 @@ class HomeReceptionistUI(QTabWidget):
         self.tabHomeGestireUnCliente.show()
 
     def _btnGestireNoleggioBiciClicked(self):
-        pass
+        self.close()
+        self.widgetHomeNoleggiareUnaBici = HomeNoleggiareUnaBiciUI(self)
+        self.widgetHomeNoleggiareUnaBici.show()
 
     def _btnGestireLaVacanzaClicked(self):
         pass
