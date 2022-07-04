@@ -14,7 +14,7 @@ from src.Gestori.GestoreFile import GestoreFile
 
 class GestioneDipendentiUI(QTabWidget):
 	
-	def __init__(self, previous : QWidget):
+	def __init__(self, previous : QWidget): #previous è un oggetto che rappresente la pagina precedente al oggetto della classe attuale
 		super().__init__()
 
 		loadUi(GestoreFile.absolutePath('gestioneDipendenti.ui', Path.cwd()), self)

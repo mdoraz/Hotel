@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>609</width>
-    <height>695</height>
+    <height>754</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -37,20 +37,6 @@
           <string>Dolce:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
-          <item row="3" column="0">
-           <widget class="QLabel" name="labelNomePiatto_3">
-            <property name="text">
-             <string>Nome Piatto:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="labelNomePiatto_2">
-            <property name="text">
-             <string>Nome Piatto:</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="labelNomePiatto">
             <property name="text">
@@ -59,23 +45,52 @@
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="lineeditNomePiatto">
-            <property name="placeholderText">
-             <string>NomePiatto</string>
+           <widget class="QComboBox" name="comboBox">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelNomePiatto_2">
+            <property name="text">
+             <string>Nome Piatto:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboBox_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelNomePiatto_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Nome Piatto:</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineeditNomePiatto_2">
-            <property name="placeholderText">
-             <string>NomePiatto</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="lineeditNomePiatto_3">
-            <property name="placeholderText">
-             <string>NomePiatto</string>
+           <widget class="QComboBox" name="comboBox_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
            </widget>
           </item>
@@ -88,29 +103,8 @@
           <string>Salato:</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="lineeditNomePiatto_5">
-            <property name="placeholderText">
-             <string>NomePiatto</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="lineeditNomePiatto_4">
-            <property name="placeholderText">
-             <string>NomePiatto</string>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="labelNomePiatto_5">
-            <property name="text">
-             <string>Nome Piatto:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="labelNomePiatto_6">
             <property name="text">
              <string>Nome Piatto:</string>
             </property>
@@ -123,10 +117,46 @@
             </property>
            </widget>
           </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboBox_5">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboBox_4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineeditNomePiatto_6">
-            <property name="placeholderText">
-             <string>NomePiatto</string>
+           <widget class="QComboBox" name="comboBox_6">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelNomePiatto_6">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Nome Piatto:</string>
             </property>
            </widget>
           </item>
@@ -141,6 +171,12 @@
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="3" column="0">
            <widget class="QLabel" name="labelNomePiatto_9">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Nome Piatto:</string>
             </property>
@@ -148,6 +184,12 @@
           </item>
           <item row="1" column="0">
            <widget class="QLabel" name="labelNomePiatto_7">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Nome Piatto:</string>
             </property>
@@ -155,29 +197,44 @@
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="labelNomePiatto_8">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="text">
              <string>Nome Piatto:</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="lineeditNomePiatto_7">
-            <property name="placeholderText">
-             <string>NomePiatto</string>
+           <widget class="QComboBox" name="comboBox_7">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="lineeditNomePiatto_8">
-            <property name="placeholderText">
-             <string>NomePiatto</string>
+           <widget class="QComboBox" name="comboBox_8">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="lineeditNomePiatto_9">
-            <property name="placeholderText">
-             <string>NomePiatto</string>
+           <widget class="QComboBox" name="comboBox_9">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
            </widget>
           </item>

@@ -7,11 +7,12 @@ from src.Gestori.GestoreFile import GestoreFile
 from src.GUI.HomePageProgramma.LoginProgrammaUI import LoginProgrammaUI
 
 
+
 class HomePageUI(QTabWidget):
     def __init__(self):
         super().__init__()
         self.page1 = QWidget()
-        loadUi('ui/HomeELoginProgramma/homePage.ui', self.page1)
+        loadUi(GestoreFile.absolutePath('homePage.ui', Path.cwd()), self.page1)
         self.addTab(self.page1, 'Home Programma')
         self.setMinimumSize(500,300)
 
@@ -20,18 +21,15 @@ class HomePageUI(QTabWidget):
 
     def btnDipendenteClicked(self):
         dictyonary = GestoreFile.leggiJson(Path('paths.json'))
-        self.loginDipendente = LoginProgrammaUI(Path(dictyonary['dipendenti']))
+        self.loginDipendente = LoginProgrammaUI(self, Path(dictyonary['dipendenti']))
         self.loginDipendente.show()
         self.close()
 
     def btnTitolareClicked(self):
         dictyonary = GestoreFile.leggiJson(Path('paths.json'))
-        self. loginTitolare = LoginProgrammaUI(Path(dictyonary['titolare']))
+        self. loginTitolare = LoginProgrammaUI(self, Path(dictyonary['titolare']))
         self.loginTitolare.show()
         self.close()
-
-
-
 
 
 if __name__ == "__main__":

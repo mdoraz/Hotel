@@ -10,12 +10,13 @@ from src.GUI.HomeReceptionist.VisualizzaDatiPersonali.VisualizzaDatiPersonaliRec
 
 
 class HomeReceptionistUI(QTabWidget):
-    def __init__(self):
+    def __init__(self,previous : QWidget):
         super().__init__()
         loadUi('ui/Receptionist/Home/HomeReceptionist.ui', self)
         self.setMinimumSize(600, 300)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
+        self.previous = previous
 
     def _connectButtons(self):
         self.btnVisualizzaDatiPersonali.clicked.connect(self._btnVisualizzaDatiPersonaliClicked)
@@ -23,7 +24,7 @@ class HomeReceptionistUI(QTabWidget):
         self.btnGestireNoleggioBici.clicked.connect(self._btnGestireNoleggioBiciClicked)
         self.btnGestireLaVacanza.clicked.connect(self._btnGestireLaVacanzaClicked)
         self.btnInserisciSceltaPastiPranzoCena.clicked.connect(self._btnInserisciSceltaPastiPranzoCenaClicked)
-        self.btnTornareHomeHotel.clicked.connect(self.close)
+        self.btnTornareHomeHotel.clicked.connect(self._TornareHomeHotelClicked)
 
     def _btnVisualizzaDatiPersonaliClicked(self):
         self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliReceptionistUI()
@@ -41,6 +42,9 @@ class HomeReceptionistUI(QTabWidget):
     def _btnInserisciSceltaPastiPranzoCenaClicked(self):
         self.tabGestioneCucinaMenuReceptionist = GestioneCucinaMenuReceptionistUI()
         self.tabGestioneCucinaMenuReceptionist.show()
+    def _TornareHomeHotelClicked(self):
+        self.close()
+        self.previous.show()
 
 
 
