@@ -33,7 +33,8 @@ class HomeReceptionistUI(QTabWidget):
         self.btnTornareHomeHotel.clicked.connect(self._TornareHomeHotelClicked)
 
     def _btnVisualizzaDatiPersonaliClicked(self):
-        self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliReceptionistUI()
+        self.close()
+        self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliReceptionistUI(self)
         self.widgetVisualizzaDatiPersonali.show()
 
     def _btnGestireClientiClicked(self):

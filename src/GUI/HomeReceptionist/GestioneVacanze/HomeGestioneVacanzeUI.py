@@ -42,6 +42,7 @@ class HomeGestioneVacanzeUI(QTabWidget):
         self.btnTornareHomeReceptionist.clicked.connect(self._btnTornareHomeReceptionistClicked)
 
     def _btnSelezionaCameraClicked(self):
+        self.close()
         self.widgetSelezionaCamera = SelezionaCameraUI(self)
         self.widgetSelezionaCamera.show()
 
@@ -66,14 +67,17 @@ class HomeGestioneVacanzeUI(QTabWidget):
         self.widgetRicercaPrenotazioneVacanza.show()
 
     def _btnModificaPrenotazioneVacanzaClicked(self):
+        self.close()
         self.widgetModificaPrenotazioneVacanza = ModificaPrenotazioneVacanzaUI(self)
         self.widgetModificaPrenotazioneVacanza.show()
 
     def _btnEliminaPrenotazioneVacanzaClicked(self):
+        self.close()
         self.widgetEliminaPrenotazioneVacanza = EliminaPrenotazioneVacanzaUI(self)
         self.widgetEliminaPrenotazioneVacanza.show()
 
     def _btnAggiungiClientiVacanzaClicked(self):
+        self.close()
         self.widgetAggiungereClientiCheckIn = AggiungereClientiCheckInUI(self)
         self.widgetAggiungereClientiCheckIn.show()
 
@@ -81,10 +85,12 @@ class HomeGestioneVacanzeUI(QTabWidget):
         pass
 
     def _btnRicercaVacanzaClicked(self):
+        self.close()
         self.widgetRicercaVacanza = RicercaVacanzaUI(self)
         self.widgetRicercaVacanza.show()
 
     def _btnModificatermineVacanzaOmbrelloneClicked(self):
+        self.close()
         self.widgetModificaTermineVacanzaOmbrellone = ModificaTermineVacanzaOmbrelloneUI(self)
         self.widgetModificaTermineVacanzaOmbrellone.show()
 

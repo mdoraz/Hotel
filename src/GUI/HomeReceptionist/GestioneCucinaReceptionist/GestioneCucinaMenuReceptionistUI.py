@@ -28,10 +28,10 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
         self.btnTornarePaginaPrecedente_3.clicked.connect(self._btnTornarePaginaPrecedente_3Clicked)
 
     def _btnInserisciSceltaPastiPranzoClicked(self):
-        self.widgetInserisciSceltaPastiPranzoGiornoSuccessivo = InserisciSceltaPastiPranzoGiornoSuccessivoUI()
+        self.widgetInserisciSceltaPastiPranzoGiornoSuccessivo = InserisciSceltaPastiPranzoGiornoSuccessivoUI(self)
         self.widgetInserisciSceltaPastiPranzoGiornoSuccessivo.show()
     def _btnInserisciSceltaPastiCenaClicked(self):
-        self.widgetInserisciSceltaPastiCenaGiornoSuccessivo = InserisciSceltaPastiCenaGiornoSuccessivoUI()
+        self.widgetInserisciSceltaPastiCenaGiornoSuccessivo = InserisciSceltaPastiCenaGiornoSuccessivoUI(self)
         self.widgetInserisciSceltaPastiCenaGiornoSuccessivo.show()
 
     def _btnTornarePaginaPrecedenteClicked(self):

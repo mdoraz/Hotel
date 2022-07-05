@@ -50,22 +50,27 @@ class HomeNoleggiareUnaBiciUI(QTabWidget):
         pass
 
     def _btnRicercaPrenotazioneBiciClicked(self):
+        self.close()
         self.widgetRicercaPrenotazioneBici = RicercaPrenotazioneBiciUI(self)
         self.widgetRicercaPrenotazioneBici.show()
 
     def _btnModificaPrenotazioneClicked(self):
+        self.close()
         self.widgetModificaPrenotazioneBici = ModificaPrenotazioneBiciUI(self)
         self.widgetModificaPrenotazioneBici.show()
 
     def _btnEliminaPrenotazioneClicked(self):
+        self.close()
         self.widgetEliminaPrenotazioneBici = EliminaPrenotazioneBiciUI(self)
         self.widgetEliminaPrenotazioneBici.show()
 
     def _btnNoClicked(self):
+        self.close()
         self.widgetAssegnaBiciSenzaPrenotazione = AssegnaBiciSenzaPrenotazioneUI(self)
         self.widgetAssegnaBiciSenzaPrenotazione.show()
 
     def _btnSiClicked(self):
+        self.close()
         self.widgetAssegnaBiciPrenotate = AssegnaBiciPrenotateUI(self)
         self.widgetAssegnaBiciPrenotate.show()
 
@@ -73,6 +78,7 @@ class HomeNoleggiareUnaBiciUI(QTabWidget):
         pass
 
     def _btnConfermaTerminareNoleggioClicked(self):
+        self.close()
         self.widgetConfermaTerminareNoleggio = ConfermaTerminareNoleggioUI(self)
         self.widgetConfermaTerminareNoleggio.show()
 

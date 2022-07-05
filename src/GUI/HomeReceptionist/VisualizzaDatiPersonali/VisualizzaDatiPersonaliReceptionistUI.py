@@ -6,12 +6,13 @@ from pathlib import Path
 from src.Gestori.GestoreFile import GestoreFile
 
 class VisualizzaDatiPersonaliReceptionistUI(QTabWidget):
-    def __init__(self):
+    def __init__(self,previous: QWidget):
         super().__init__()
         loadUi(GestoreFile.absolutePath('VisualizzaDatiPersonali.ui',Path.cwd()), self)
         self.setMinimumSize(600, 400)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
+        self.previous = previous
 
         self.lineEditLabelPairs = {
             self.lineeditNome: self.labelNome,
@@ -25,10 +26,11 @@ class VisualizzaDatiPersonaliReceptionistUI(QTabWidget):
         }
 
     def _connectButtons(self):
-        self.btnOk.clicked.connect(self.close)
+        self.btnOk.clicked.connect(self._btnOkClicked)
 
-
-
+    def _btnOkClicked(self):
+        self.close()
+        self.previous.show()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
