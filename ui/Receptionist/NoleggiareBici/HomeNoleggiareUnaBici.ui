@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>984</width>
+    <width>1191</width>
     <height>622</height>
    </rect>
   </property>
@@ -46,7 +46,7 @@
     <item row="0" column="0" colspan="3">
      <widget class="QTabWidget" name="tabwidgetScelteHomeNoleggioBici">
       <property name="currentIndex">
-       <number>3</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tabPrenotaBici">
        <attribute name="title">
@@ -113,7 +113,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>860</width>
+                <width>1067</width>
                 <height>514</height>
                </rect>
               </property>
@@ -783,11 +783,11 @@
           <property name="font">
            <font>
             <family>Arial</family>
-            <pointsize>25</pointsize>
+            <pointsize>18</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>No</string>
+           <string>No , assegna senza precedente prenotazione </string>
           </property>
          </widget>
         </item>
@@ -796,11 +796,11 @@
           <property name="font">
            <font>
             <family>Arial</family>
-            <pointsize>25</pointsize>
+            <pointsize>18</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>Le bici da assegnare sono prenotate oppure no?</string>
+           <string>Le bici da assegnare sono già state prenotate oppure vuoi assegnare una bici senza prenotazione?</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -818,11 +818,11 @@
           <property name="font">
            <font>
             <family>Arial</family>
-            <pointsize>25</pointsize>
+            <pointsize>18</pointsize>
            </font>
           </property>
           <property name="text">
-           <string>Si</string>
+           <string>Si ,  assegna bici già prenotate</string>
           </property>
          </widget>
         </item>
