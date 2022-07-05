@@ -31,23 +31,27 @@ class HomeTitolareUI(QTabWidget):
         self.page1.btnIndietro.clicked.connect(self._btnIndietroClicked)
 
     def _btnDatiPersonaliClicked(self):
-        self.widgetdatiTitolare = datiTitolareUI()
+        self.close()
+        self.widgetdatiTitolare = datiTitolareUI(self)
         self.widgetdatiTitolare.show()
 
     def _btnDipendentiClicked(self):
+        self.close()
         self.tabwidgetGestioneDipendenti = GestioneDipendentiUI(self)
         self.tabwidgetGestioneDipendenti.show()
 
     def _btnStatisticheClicked(self):
+        self.close()
         self.widgetVisualizzaStatistiche = VisualizzaStatisticheUI(self)
         self.widgetVisualizzaStatistiche.show()
-        self.close()  #per chiudere la home titolare
+
 
     def _btnCucinaClicked(self):
         pass
 
     def _btnVacanzeClicked(self):
-        self.widgetVisualizzaRicercaVacanze = VisualizzaRicercaVacanzeUI()
+        self.close()
+        self.widgetVisualizzaRicercaVacanze = VisualizzaRicercaVacanzeUI(self)
         self.widgetVisualizzaRicercaVacanze.show()
 
     def _btnIndietroClicked(self):
