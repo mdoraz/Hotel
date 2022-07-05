@@ -18,8 +18,12 @@ class RicercaVacanzaTitolareUI(QTabWidget):
 
     def _connectButtons(self):
         self.btnCercaVacanza.clicked.connect(self._btnCercaVacanzaClicked)
+        self.btnIndietro.clicked.connect(self._btnIndietroClicked)
 
     def _btnCercaVacanzaClicked(self):
+        pass
+
+    def _btnIndietroClicked(self):
         self.close()
         self.previous.show()
 
