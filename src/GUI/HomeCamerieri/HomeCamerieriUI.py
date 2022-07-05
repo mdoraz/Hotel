@@ -27,13 +27,14 @@ class HomeCamerieriUI(QTabWidget):
         self.btnTornareHomeHotelHomeCamerieri.clicked.connect(self._btnTornareHomeHotelHomeCamerieriClicked)
 
     def _btnVisualizzaDatiPersonaliCamerieriClicked(self):
-        self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliCamerieriUI()
+        self.close()
+        self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliCamerieriUI(self)
         self.widgetVisualizzaDatiPersonali.show()
 
     def _btnGestisciCucinaCamerieriClicked(self):
-        self.tabGestioneCucinaMenuCamerieri = GestioneCucinaMenuCamerieriUI()
+        self.close()
+        self.tabGestioneCucinaMenuCamerieri = GestioneCucinaMenuCamerieriUI(self)
         self.tabGestioneCucinaMenuCamerieri.show()
-
 
     def _btnTornareHomeHotelHomeCamerieriClicked(self):
         self.close()
