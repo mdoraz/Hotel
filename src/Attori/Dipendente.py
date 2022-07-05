@@ -1,7 +1,7 @@
 from __future__ import annotations
-import os
 from datetime import date
 from pathlib import Path
+
 from src.Attori.Utente import Utente
 from src.Attori.Persona import Persona
 from src.Attori.Ruolo import Ruolo
@@ -102,3 +102,4 @@ class Dipendente(Persona, Utente):
     
     def __str__(self):
         return f"{super().__str__()} --> {self._ruolo.name}"
+    

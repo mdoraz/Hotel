@@ -1,5 +1,7 @@
+from __future__ import annotations
 from datetime import date
 from pathlib import Path
+
 from src.Attori.Contattabile import Contattabile
 from src.Gestori.GestoreFile import GestoreFile
 from src.Utilities.exeptions import CreationError
@@ -64,6 +66,11 @@ class Persona(Contattabile):
                 ultimoId = cliente.getId()
         
         return ultimoId + 1
+
+    
+    def isTheSame(self, other : Persona):
+        return (self._nome == other.getNome() and self._cognome == other.getCognome() and 
+                self._dataNascita == other.getDataNascita() and self._luogoNascita == other.getLuogoNascita())
 
 
     def __str__(self):

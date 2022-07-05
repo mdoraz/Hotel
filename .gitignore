@@ -3,6 +3,7 @@ src/**/__pycache__/
 # ignore pickle files
 *.pickle
 **/*.pickle
+files/pickles/dipendenti.pickle
 
 ### IntelliJ IDEA ###
 .idea

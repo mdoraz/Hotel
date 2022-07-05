@@ -17,6 +17,7 @@ class VisualizzaDipendenteUI(QWidget):
 	showComboBox = False
 	vecchiaPasswordAdded = False
 	dipendenteEliminato = QtCore.pyqtSignal()
+	turnoModificato = QtCore.pyqtSignal(Dipendente, bool)
 
 	def __init__(self, dipendente : Dipendente, parent : QWidget = None):  # type: ignore
 		super().__init__(parent)
@@ -128,8 +129,11 @@ class VisualizzaDipendenteUI(QWidget):
 			return
 		# se tutto è corretto, modifico il dipendente visualizzato
 		self.dipendente.setIBAN(IBAN)
-		self.dipendente.setTurno(True if self.comboBoxTurno.currentText() == 'Mattina' else False)
 		self.dipendente.setAutorizzazione(Ruolo.RECEPTIONIST if self.comboBoxRuolo.currentText() == 'Receptionist' else Ruolo.CAMERIERE)
+		turno = 'Mattina' if self.dipendente.getTurno() == True else 'Pomeriggio'
+		if turno != self.comboBoxTurno.currentText():
+			self.dipendente.setTurno(True if self.comboBoxTurno.currentText() == 'Mattina' else False)
+			self.turnoModificato.emit(self.dipendente, self.dipendente.getTurno()) # emetto il segnale passando il nuovo turno del dipendente
 
 		if stipendio != str(self.dipendente.getStipendio()): # se lo stipendio è stato cambiato manualmente
 			self.dipendente.setStipendio(stipendio)

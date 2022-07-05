@@ -273,7 +273,23 @@ dipendente</string>
     <string>Turni</string>
    </attribute>
    <layout class="QGridLayout" name="gridLayout_5">
-    <item row="0" column="1">
+    <property name="leftMargin">
+     <number>15</number>
+    </property>
+    <property name="rightMargin">
+     <number>15</number>
+    </property>
+    <property name="bottomMargin">
+     <number>15</number>
+    </property>
+    <item row="2" column="0" alignment="Qt::AlignLeft">
+     <widget class="QPushButton" name="btnHelp">
+      <property name="text">
+       <string>Help</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
      <widget class="QGroupBox" name="groupBoxCamerieri">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -283,9 +299,15 @@ dipendente</string>
       </property>
       <property name="maximumSize">
        <size>
-        <width>290</width>
+        <width>440</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>9</pointsize>
+       </font>
       </property>
       <property name="title">
        <string>Camerieri</string>
@@ -293,122 +315,40 @@ dipendente</string>
       <property name="flat">
        <bool>false</bool>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2">
+      <layout class="QGridLayout" name="layoutGroupCamerieri">
        <property name="topMargin">
         <number>11</number>
        </property>
        <property name="bottomMargin">
         <number>11</number>
        </property>
-       <item row="1" column="0">
-        <widget class="QTableWidget" name="tableCamerieri">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>259</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>259</width>
-           <height>16777215</height>
-          </size>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="btnScambiaCamerieri">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
          <property name="font">
           <font>
            <family>Arial</family>
-           <pointsize>9</pointsize>
+           <pointsize>10</pointsize>
           </font>
          </property>
-         <property name="contextMenuPolicy">
-          <enum>Qt::DefaultContextMenu</enum>
-         </property>
-         <property name="acceptDrops">
-          <bool>false</bool>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::Box</enum>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Sunken</enum>
-         </property>
-         <property name="sizeAdjustPolicy">
-          <enum>QAbstractScrollArea::AdjustToContents</enum>
-         </property>
-         <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
-         </property>
-         <property name="dragEnabled">
-          <bool>false</bool>
-         </property>
-         <property name="dragDropOverwriteMode">
-          <bool>true</bool>
-         </property>
-         <property name="dragDropMode">
-          <enum>QAbstractItemView::InternalMove</enum>
-         </property>
-         <property name="defaultDropAction">
-          <enum>Qt::MoveAction</enum>
-         </property>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <column>
-          <property name="text">
-           <string>Mattina</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Pomeriggio</string>
-          </property>
-         </column>
-         <item row="0" column="0">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-         <item row="0" column="1">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-         <item row="1" column="0">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-         <item row="1" column="1">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="2" column="0" alignment="Qt::AlignRight|Qt::AlignBottom">
-        <widget class="QPushButton" name="btnModificaCamerieri">
          <property name="text">
-          <string>Modifica</string>
+          <string>Scambia</string>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
     </item>
-    <item row="0" column="0">
+    <item row="2" column="1" alignment="Qt::AlignRight">
+     <widget class="QPushButton" name="btnIndietro2">
+      <property name="text">
+       <string>Indietro</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
      <widget class="QGroupBox" name="groupBoxReceptionist">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -418,9 +358,15 @@ dipendente</string>
       </property>
       <property name="maximumSize">
        <size>
-        <width>290</width>
+        <width>440</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>9</pointsize>
+       </font>
       </property>
       <property name="title">
        <string>Receptionist</string>
@@ -434,133 +380,50 @@ dipendente</string>
       <property name="checked">
        <bool>false</bool>
       </property>
-      <layout class="QGridLayout" name="gridLayout_3">
+      <layout class="QGridLayout" name="layoutGroupReceptionist">
        <property name="sizeConstraint">
         <enum>QLayout::SetDefaultConstraint</enum>
        </property>
        <item row="0" column="0">
-        <widget class="QTableWidget" name="tableReceptionist">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>259</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>259</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <family>Arial</family>
-           <pointsize>9</pointsize>
-          </font>
-         </property>
-         <property name="frameShape">
-          <enum>QFrame::Box</enum>
-         </property>
-         <property name="sizeAdjustPolicy">
-          <enum>QAbstractScrollArea::AdjustToContents</enum>
-         </property>
-         <property name="editTriggers">
-          <set>QAbstractItemView::NoEditTriggers</set>
-         </property>
-         <property name="showDropIndicator" stdset="0">
-          <bool>true</bool>
-         </property>
-         <property name="dragEnabled">
+        <widget class="QPushButton" name="btnScambiaReceptionist">
+         <property name="enabled">
           <bool>false</bool>
          </property>
-         <property name="dragDropMode">
-          <enum>QAbstractItemView::InternalMove</enum>
-         </property>
-         <property name="defaultDropAction">
-          <enum>Qt::MoveAction</enum>
-         </property>
-         <property name="alternatingRowColors">
-          <bool>false</bool>
-         </property>
-         <property name="showGrid">
-          <bool>true</bool>
-         </property>
-         <property name="gridStyle">
-          <enum>Qt::SolidLine</enum>
-         </property>
-         <property name="columnCount">
-          <number>2</number>
-         </property>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string/>
-          </property>
-         </row>
-         <column>
-          <property name="text">
-           <string>Mattina</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Pomeriggio</string>
-          </property>
-         </column>
-         <item row="0" column="0">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-         <item row="0" column="1">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-         <item row="1" column="0">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-         <item row="1" column="1">
-          <property name="text">
-           <string/>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="1" column="0" alignment="Qt::AlignRight|Qt::AlignBottom">
-        <widget class="QPushButton" name="btnModificaReceptionist">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <property name="text">
-          <string>Modifica</string>
+          <string>Scambia</string>
          </property>
         </widget>
        </item>
       </layout>
      </widget>
     </item>
-    <item row="1" column="1" alignment="Qt::AlignRight|Qt::AlignBottom">
-     <widget class="QPushButton" name="btnIndietro2">
-      <property name="text">
-       <string>Indietro</string>
+    <item row="0" column="0" colspan="2">
+     <spacer name="vSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
-     </widget>
+      <property name="sizeType">
+       <enum>QSizePolicy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>5</height>
+       </size>
+      </property>
+     </spacer>
     </item>
    </layout>
   </widget>
