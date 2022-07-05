@@ -5,28 +5,29 @@ from PyQt5.uic import loadUi
 from pathlib import Path
 from src.Gestori.GestoreFile import GestoreFile
 
-class ConfermaSceltaPastiPranzoUI(QTabWidget):
+class ModificaTermineVacanzaOmbrelloneUI(QTabWidget):
     def __init__(self, previous: QWidget):
         super().__init__()
-        loadUi(GestoreFile.absolutePath('ConfermaSceltaPastiPranzo.ui', Path.cwd()), self)
-        self.setMinimumSize(600, 600)
+        loadUi(GestoreFile.absolutePath('ModificaTermineVacanzaOmbrellone.ui', Path.cwd()), self)
+        self.setMinimumSize(500,400)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
         self.previous = previous
 
     def _connectButtons(self):
-        self.btnConfermaPrenotazione.clicked.connect(self._btnConfermaPrenotazioneClicked)
-        self.btnIndietro.clicked.connect(self._btnIndietroClicked)
+        self.btnConfermaModificheEffettuate.clicked.connect(self._btnConfermaModificheEffettuateClicked)
+        self.btnTornareIndietro.clicked.connect(self._btnTornareIndietroClicked)
 
-    def _btnConfermaPrenotazioneClicked(self):
+    def _btnConfermaModificheEffettuateClicked(self):
         pass
 
-    def _btnIndietroClicked(self):
+    def _btnTornareIndietroClicked(self):
         self.close()
         self.previous.show()
 
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWidget = ConfermaSceltaPastiPranzoUI()
+    mainWidget = ModificaTermineVacanzaOmbrelloneUI()
     mainWidget.show()
     sys.exit(app.exec_())

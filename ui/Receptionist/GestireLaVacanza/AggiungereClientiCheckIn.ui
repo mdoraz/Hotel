@@ -72,6 +72,19 @@
       </item>
      </widget>
     </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="btnIndietro">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Indietro</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>

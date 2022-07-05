@@ -8,12 +8,13 @@ from src.Gestori.GestoreFile import GestoreFile
 
 
 class VisualizzaDatiPersonaliCamerieriUI(QTabWidget):
-    def __init__(self):
+    def __init__(self, previous: QWidget):
         super().__init__()
         loadUi(GestoreFile.absolutePath('VisualizzaDatiPersonali.ui', Path.cwd()), self)
         self.setMinimumSize(600, 300)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
+        self.previous = previous
 
         self.lineEditLabelPairs = {
             self.lineeditNome: self.labelNome,
@@ -27,7 +28,11 @@ class VisualizzaDatiPersonaliCamerieriUI(QTabWidget):
         }
 
     def _connectButtons(self):
-        self.btnOk.clicked.connect(self.close)
+        self.btnOk.clicked.connect(self._btnOkClicked)
+
+    def _btnOkClicked(self):
+        self.close()
+        self.previous.show()
 
 
 

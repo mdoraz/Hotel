@@ -37,15 +37,18 @@ class HomeGestireUnClienteUI(QTabWidget):
         self._showMessage("L'asterisco accanto ad ogni campo vuol dire che la registrazione non può essere effettuata se prima tutti i campi non sono stati inseriti.", QMessageBox.Icon.Warning)
 
     def _btnRicercaClienteClicked(self):
-        self.widgetRicercaDelCliente1 = RicercaDelCliente1UI()
+        self.close()
+        self.widgetRicercaDelCliente1 = RicercaDelCliente1UI(self)
         self.widgetRicercaDelCliente1.show()
 
     def _btnModificaClienteRicercatoClicked(self):
-        self.widgetModificaCliente = ModificaClienteUI()
+        self.close()
+        self.widgetModificaCliente = ModificaClienteUI(self)
         self.widgetModificaCliente.show()
 
     def _btnEliminaClienteRicercatoClicked(self):
-        self.widgetEliminaCliente = EliminaClienteUI()
+        self.close()
+        self.widgetEliminaCliente = EliminaClienteUI(self)
         self.widgetEliminaCliente.show()
 
     def _btnTornareHomeReceptionistClicked(self):

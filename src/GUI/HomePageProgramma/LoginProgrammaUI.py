@@ -35,6 +35,7 @@ class LoginProgrammaUI(QTabWidget):
         self.page1.btnIndietro.clicked.connect(self._btnIndietroClicked)
 
     def _btnAccediClicked(self):
+        self.close()
         if self.page1.lineeditUsername.text().strip() == '' or self.page1.lineeditPassword.text().strip == '': #Se lineeditUsername o lineeditPassword è vuota da errore e non conta gli spazi iniziali
             self._showMessage('Attenzione non hai riempito entrambi i campi richiesti!', QMessageBox.Icon.Warning)
             return

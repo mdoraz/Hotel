@@ -25,6 +25,13 @@
       </property>
      </widget>
     </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="labelQualeVacanzaStaiCercandoAssociataCliente">
+      <property name="text">
+       <string>La vacanza che stai cercando a quale cliente è associata?</string>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0" colspan="2">
      <widget class="QGroupBox" name="groupboxSchedaVisualizzazionePrenotazioniVacanza">
       <property name="title">
@@ -32,7 +39,7 @@
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="2" column="1">
-        <widget class="QPushButton" name="btnOkConferma">
+        <widget class="QPushButton" name="btnOk">
          <property name="text">
           <string>Ok</string>
          </property>
@@ -89,10 +96,23 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="labelQualeVacanzaStaiCercandoAssociataCliente">
+    <item row="2" column="1">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="2" column="0">
+     <widget class="QPushButton" name="btnTornareIndietro">
       <property name="text">
-       <string>La vacanza che stai cercando a quale cliente è associata?</string>
+       <string>Indietro</string>
       </property>
      </widget>
     </item>

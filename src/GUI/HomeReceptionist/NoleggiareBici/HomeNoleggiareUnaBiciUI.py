@@ -5,12 +5,19 @@ from PyQt5.uic import loadUi
 from pathlib import Path
 from src.Gestori.GestoreFile import GestoreFile
 
+from src.GUI.HomeReceptionist.NoleggiareBici.AssegnaBiciPrenotateUI import AssegnaBiciPrenotateUI
+from src.GUI.HomeReceptionist.NoleggiareBici.AssegnaBiciSenzaPrenotazioneUI import AssegnaBiciSenzaPrenotazioneUI
+from src.GUI.HomeReceptionist.NoleggiareBici.ConfermaTerminareNoleggioUI import ConfermaTerminareNoleggioUI
+from src.GUI.HomeReceptionist.NoleggiareBici.EliminaPrenotazioneBiciUI import EliminaPrenotazioneBiciUI
+from src.GUI.HomeReceptionist.NoleggiareBici.ModificaPrenotazioneBiciUI import ModificaPrenotazioneBiciUI
+from src.GUI.HomeReceptionist.NoleggiareBici.RicercaPrenotazioneBiciUI import RicercaPrenotazioneBiciUI
+
 
 class HomeNoleggiareUnaBiciUI(QTabWidget):
     def __init__(self, previous: QWidget):
         super().__init__()
         loadUi(GestoreFile.absolutePath('HomeNoleggiareUnaBici.ui', Path.cwd()), self)
-        self.setMinimumSize(500,300)
+        self.setMinimumSize(1000,600)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
         self.previous = previous
@@ -30,6 +37,7 @@ class HomeNoleggiareUnaBiciUI(QTabWidget):
         self.btnTornareHomeReceptionist.clicked.connect(self._btnTornareHomeReceptionistClicked)
 
     def _btnRicercaOrarioRicercatoClicked(self):
+        #vedere a schermo messaggio di errore se non ci sono bici nell'orario inserito
         pass
 
     def _btnAssociaBiciSelezionataAllaPrenotazioneClicked(self):
@@ -42,25 +50,37 @@ class HomeNoleggiareUnaBiciUI(QTabWidget):
         pass
 
     def _btnRicercaPrenotazioneBiciClicked(self):
-        pass
+        self.close()
+        self.widgetRicercaPrenotazioneBici = RicercaPrenotazioneBiciUI(self)
+        self.widgetRicercaPrenotazioneBici.show()
 
     def _btnModificaPrenotazioneClicked(self):
-        pass
+        self.close()
+        self.widgetModificaPrenotazioneBici = ModificaPrenotazioneBiciUI(self)
+        self.widgetModificaPrenotazioneBici.show()
 
     def _btnEliminaPrenotazioneClicked(self):
-        pass
+        self.close()
+        self.widgetEliminaPrenotazioneBici = EliminaPrenotazioneBiciUI(self)
+        self.widgetEliminaPrenotazioneBici.show()
 
     def _btnNoClicked(self):
-        pass
+        self.close()
+        self.widgetAssegnaBiciSenzaPrenotazione = AssegnaBiciSenzaPrenotazioneUI(self)
+        self.widgetAssegnaBiciSenzaPrenotazione.show()
 
     def _btnSiClicked(self):
-        pass
+        self.close()
+        self.widgetAssegnaBiciPrenotate = AssegnaBiciPrenotateUI(self)
+        self.widgetAssegnaBiciPrenotate.show()
 
     def _btnRicercaNoleggiAssociatiClicked(self):
         pass
 
     def _btnConfermaTerminareNoleggioClicked(self):
-        pass
+        self.close()
+        self.widgetConfermaTerminareNoleggio = ConfermaTerminareNoleggioUI(self)
+        self.widgetConfermaTerminareNoleggio.show()
 
     def _btnTornareHomeReceptionistClicked(self):
         self.close()

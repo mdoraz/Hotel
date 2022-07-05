@@ -34,14 +34,14 @@
     <item row="1" column="0">
      <widget class="QPushButton" name="btnTornareHomeReceptionist">
       <property name="text">
-       <string>Ritornare alla home receptionist</string>
+       <string>Tornare Indietro</string>
       </property>
      </widget>
     </item>
     <item row="0" column="0" colspan="3">
      <widget class="QTabWidget" name="tabwidgetScelteHomeGestioneClienti">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabRegistraClienti">
        <attribute name="title">

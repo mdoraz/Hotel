@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1026</width>
+    <width>1161</width>
     <height>300</height>
    </rect>
   </property>
@@ -18,7 +18,31 @@
     <string>Seleziona Camera</string>
    </attribute>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="2">
+    <item row="1" column="5">
+     <widget class="QPushButton" name="btnRicercaCamerePeriodoSelezionato">
+      <property name="text">
+       <string>Ricerca camere nel periodo selezionato</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="4">
+     <widget class="QLabel" name="labelInserirePeriodoSvolgereVacanzaA">
+      <property name="text">
+       <string>                                   a:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="5">
+     <widget class="QDateEdit" name="dateeditInserirePeriodoSvolgereVacanzaA">
+      <property name="displayFormat">
+       <string>dd/MM/yyyy</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
      <widget class="QDateEdit" name="dateeditInserirePeriodoSvolgereVacanzaDa">
       <property name="displayFormat">
        <string>dd/MM/yyyy</string>
@@ -28,7 +52,21 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0" colspan="5">
+    <item row="3" column="5">
+     <widget class="QPushButton" name="btnScegliereCameraSelezionata">
+      <property name="text">
+       <string>Scegliere camera selezionata</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="btnTornareIndietro">
+      <property name="text">
+       <string>Tornare Indietro</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="6">
      <widget class="QGroupBox" name="groupboxSchedaVisualizzazioneCamereDisponibiliPeriodoSelezionato">
       <property name="title">
        <string>Scheda di visualizzazione delle camere disponibili in tale periodo:</string>
@@ -67,31 +105,14 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="0" colspan="2">
+    <item row="0" column="0" colspan="3">
      <widget class="QLabel" name="labelInserirePeriodoSvolgereVacanzaDa">
       <property name="text">
        <string>Inserire il periodo nel quale il cliente desidera effettuare la vacanza:                              Da:</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="3">
-     <widget class="QLabel" name="labelInserirePeriodoSvolgereVacanzaA">
-      <property name="text">
-       <string>a:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="4">
-     <widget class="QDateEdit" name="dateeditInserirePeriodoSvolgereVacanzaA">
-      <property name="displayFormat">
-       <string>dd/MM/yyyy</string>
-      </property>
-      <property name="calendarPopup">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
+    <item row="3" column="1" colspan="4">
      <spacer name="horizontalSpacer_2">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -104,28 +125,7 @@
       </property>
      </spacer>
     </item>
-    <item row="3" column="4">
-     <widget class="QPushButton" name="btnScegliereCameraSelezionata">
-      <property name="text">
-       <string>Scegliere camera selezionata</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="2">
-     <widget class="QPushButton" name="btnTornareIndietro">
-      <property name="text">
-       <string>Tornare Indietro</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="4">
-     <widget class="QPushButton" name="btnRicercaCamerePeriodoSelezionato">
-      <property name="text">
-       <string>Ricerca camere nel periodo selezionato</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0" colspan="3">
+    <item row="1" column="0" colspan="5">
      <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>

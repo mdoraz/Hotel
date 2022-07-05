@@ -9,21 +9,27 @@ from src.GUI.HomeTitolare.RicercaEVisualizzaVacanze.RicercaVacanzaTitolareUI imp
 
 
 class VisualizzaRicercaVacanzeUI(QTabWidget):
-    def __init__(self):
+    def __init__(self,previous: QWidget):
         super().__init__()
 
         loadUi(GestoreFile.absolutePath('VisualizzaRicercaVacanze.ui', Path.cwd()), self)
         self.setMinimumSize(1000,600)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
+        self.previous = previous
 
     def _connectButtons(self):
         self.btnRicercaVacanza.clicked.connect(self._btnRicercaVacanzaClicked)
-        self.btnTornareHomeTitolare.clicked.connect(self.close)
+        self.btnTornareHomeTitolare.clicked.connect(self._TornareHomeTitolareClicked)
 
     def _btnRicercaVacanzaClicked(self):
-        self.widgetRicercaVacanzaTitolare = RicercaVacanzaTitolareUI()
+        self.close()
+        self.widgetRicercaVacanzaTitolare = RicercaVacanzaTitolareUI(self)
         self.widgetRicercaVacanzaTitolare.show()
+
+    def _TornareHomeTitolareClicked(self):
+        self.close()
+        self.previous.show()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

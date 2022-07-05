@@ -9,12 +9,13 @@ from src.GUI.HomeReceptionist.GestioneCucinaReceptionist.ConfermaSceltaPastiCena
 
 
 class InserisciSceltaPastiCenaGiornoSuccessivoUI(QTabWidget):
-    def __init__(self):
+    def __init__(self, previous: QWidget):
         super().__init__()
         loadUi(GestoreFile.absolutePath('InserisciSceltaPastiCenaGiornoSuccessivo.ui', Path.cwd()), self)
         self.setMinimumSize(600, 700)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
+        self.previous = previous
 
     def _connectButtons(self):
         self.btnAvanti.clicked.connect(self._btnAvantiClicked)
@@ -22,7 +23,7 @@ class InserisciSceltaPastiCenaGiornoSuccessivoUI(QTabWidget):
 
 
     def _btnAvantiClicked(self):
-        self.widgetConfermaSceltaPastiCena = ConfermaSceltaPastiCenaUI()
+        self.widgetConfermaSceltaPastiCena = ConfermaSceltaPastiCenaUI(self)
         self.widgetConfermaSceltaPastiCena.show()
 
 if __name__ == "__main__":

@@ -53,6 +53,9 @@
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0" colspan="2">
         <widget class="QTreeWidget" name="treewidgetTabellaNoleggioBiciTerminare">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::NoSelection</enum>
+         </property>
          <column>
           <property name="text">
            <string>Numero</string>

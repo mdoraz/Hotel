@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 
+from src.GUI.HomeReceptionist.GestioneVacanze.HomeGestioneVacanzeUI import HomeGestioneVacanzeUI
 from src.GUI.HomeReceptionist.GestireClienti.HomeGestireUnClienteUI import HomeGestireUnClienteUI
 from src.GUI.HomeReceptionist.NoleggiareBici.HomeNoleggiareUnaBiciUI import HomeNoleggiareUnaBiciUI
 from src.Gestori.GestoreFile import GestoreFile
@@ -32,7 +33,8 @@ class HomeReceptionistUI(QTabWidget):
         self.btnTornareHomeHotel.clicked.connect(self._TornareHomeHotelClicked)
 
     def _btnVisualizzaDatiPersonaliClicked(self):
-        self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliReceptionistUI()
+        self.close()
+        self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliReceptionistUI(self)
         self.widgetVisualizzaDatiPersonali.show()
 
     def _btnGestireClientiClicked(self):
@@ -46,7 +48,9 @@ class HomeReceptionistUI(QTabWidget):
         self.widgetHomeNoleggiareUnaBici.show()
 
     def _btnGestireLaVacanzaClicked(self):
-        pass
+        self.close()
+        self.widgetHomegestioneVacanze = HomeGestioneVacanzeUI(self)
+        self.widgetHomegestioneVacanze.show()
 
     def _btnInserisciSceltaPastiPranzoCenaClicked(self):
         self.close()

@@ -19,13 +19,6 @@
    </attribute>
    <layout class="QGridLayout" name="gridLayout">
     <item row="3" column="1">
-     <widget class="QPushButton" name="btnRicercaCliente">
-      <property name="text">
-       <string>Ricerca Cliente</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
      <spacer name="horizontalSpacer">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -38,14 +31,21 @@
       </property>
      </spacer>
     </item>
-    <item row="1" column="0" colspan="2">
-     <widget class="QLabel" name="labelInserireDatiPersonali">
+    <item row="3" column="2">
+     <widget class="QPushButton" name="btnRicercaCliente">
       <property name="text">
-       <string>Inserire i dati per la ricerca del cliente:</string>
+       <string>Ricerca Cliente</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="0" colspan="2">
+    <item row="3" column="0">
+     <widget class="QPushButton" name="btnIndietro">
+      <property name="text">
+       <string>Indietro</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="3">
      <widget class="QGroupBox" name="groupboxSchedaDatiCliente">
       <property name="title">
        <string>Dati:</string>
@@ -103,6 +103,13 @@
         </widget>
        </item>
       </layout>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="3">
+     <widget class="QLabel" name="labelInserireDatiPersonali">
+      <property name="text">
+       <string>Inserire i dati per la ricerca del cliente:</string>
+      </property>
      </widget>
     </item>
    </layout>
