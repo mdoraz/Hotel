@@ -8,7 +8,7 @@ from PyQt5.uic import loadUi
 
 from src.Attori.Dipendente import Dipendente
 from src.Gestori.GestoreFile import GestoreFile
-from src.Utilities.customQtClasses import myListWidgetItem
+from src.Utilities.customQtClasses import MyListWidgetItem
 
 class VisualizzaAssenzeUI(QWidget):
 
@@ -42,7 +42,7 @@ class VisualizzaAssenzeUI(QWidget):
 	def _fillListWidget(self):
 		row = 1
 		for data in self.dipendente.getAssenze():
-			newItem = myListWidgetItem(data.strftime('%d/%m/%Y'), data)
+			newItem = MyListWidgetItem(data.strftime('%d/%m/%Y'), data)
 			newItem.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
 			self.listWidget.addItem(newItem)
 
@@ -87,7 +87,7 @@ class VisualizzaAssenzeUI(QWidget):
 
 
 	def _insertSortedDate(self, dataDaInserire : date):
-		newItem = myListWidgetItem(dataDaInserire.strftime('%d/%m/%Y'), dataDaInserire)
+		newItem = MyListWidgetItem(dataDaInserire.strftime('%d/%m/%Y'), dataDaInserire)
 		newItem.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
 		dataInserita = False
 		for row in range(0, self.listWidget.count()):
