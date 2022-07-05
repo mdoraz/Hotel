@@ -3,6 +3,17 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
+
+from src.GUI.HomeReceptionist.GestioneVacanze.AggiungereClientiCheckInUI import AggiungereClientiCheckInUI
+from src.GUI.HomeReceptionist.GestioneVacanze.EliminaPrenotazioneVacanzaUI import EliminaPrenotazioneVacanzaUI
+from src.GUI.HomeReceptionist.GestioneVacanze.ModificaPrenotazioneVacanzaUI import ModificaPrenotazioneVacanzaUI
+from src.GUI.HomeReceptionist.GestioneVacanze.ModificaTermineVacanzaOmbrelloneUI import \
+    ModificaTermineVacanzaOmbrelloneUI
+from src.GUI.HomeReceptionist.GestioneVacanze.RicercaPrenotazioneVacanzaUI import RicercaPrenotazioneVacanzaUI
+from src.GUI.HomeReceptionist.GestioneVacanze.RicercaVacanzaUI import RicercaVacanzaUI
+from src.GUI.HomeReceptionist.GestioneVacanze.SelezionaCameraUI import SelezionaCameraUI
+from src.GUI.HomeReceptionist.GestireClienti.HomeGestireUnClienteUI import HomeGestireUnClienteUI
+from src.GUI.HomeReceptionist.GestireClienti.RicercaDelCliente1UI import RicercaDelCliente1UI
 from src.Gestori.GestoreFile import GestoreFile
 
 class HomeGestioneVacanzeUI(QTabWidget):
@@ -31,31 +42,55 @@ class HomeGestioneVacanzeUI(QTabWidget):
         self.btnTornareHomeReceptionist.clicked.connect(self._btnTornareHomeReceptionistClicked)
 
     def _btnSelezionaCameraClicked(self):
-        pass
+        self.widgetSelezionaCamera = SelezionaCameraUI(self)
+        self.widgetSelezionaCamera.show()
+
     def _btnRicercaClienteClicked(self):
-        pass
+        self.close()
+        self.widgetRicercaDelCliente1 = RicercaDelCliente1UI(self)
+        self.widgetRicercaDelCliente1.show()
     def _btnRegistraClienteClicked(self):
-        pass
+        self.close()
+        self.tabHomeGestireUnCliente = HomeGestireUnClienteUI(self)
+        self.tabHomeGestireUnCliente.show()
+
     def _btnPrelevaCaparraPrenotazioneClicked(self):
         pass
+
     def _btnConfermaPrenotazioneVacanzaClicked(self):
         pass
+
     def _btnRicercaPrenotazioneVacanzaClicked(self):
-        pass
+        self.close()
+        self.widgetRicercaPrenotazioneVacanza = RicercaPrenotazioneVacanzaUI(self)
+        self.widgetRicercaPrenotazioneVacanza.show()
+
     def _btnModificaPrenotazioneVacanzaClicked(self):
-        pass
+        self.widgetModificaPrenotazioneVacanza = ModificaPrenotazioneVacanzaUI(self)
+        self.widgetModificaPrenotazioneVacanza.show()
+
     def _btnEliminaPrenotazioneVacanzaClicked(self):
-        pass
+        self.widgetEliminaPrenotazioneVacanza = EliminaPrenotazioneVacanzaUI(self)
+        self.widgetEliminaPrenotazioneVacanza.show()
+
     def _btnAggiungiClientiVacanzaClicked(self):
-        pass
+        self.widgetAggiungereClientiCheckIn = AggiungereClientiCheckInUI(self)
+        self.widgetAggiungereClientiCheckIn.show()
+
     def _btnEseguiCheckInClicked(self):
         pass
+
     def _btnRicercaVacanzaClicked(self):
-        pass
+        self.widgetRicercaVacanza = RicercaVacanzaUI(self)
+        self.widgetRicercaVacanza.show()
+
     def _btnModificatermineVacanzaOmbrelloneClicked(self):
-        pass
+        self.widgetModificaTermineVacanzaOmbrellone = ModificaTermineVacanzaOmbrelloneUI(self)
+        self.widgetModificaTermineVacanzaOmbrellone.show()
+
     def _btnEseguireCheckOutClicked(self):
         pass
+
     def _btnTornareHomeReceptionistClicked(self):
         self.close()
         self.previous.show()

@@ -5,30 +5,28 @@ from PyQt5.uic import loadUi
 from pathlib import Path
 from src.Gestori.GestoreFile import GestoreFile
 
-class RicercaDelCliente2UI(QTabWidget):
+class EliminaPrenotazioneVacanzaUI(QTabWidget):
     def __init__(self, previous: QWidget):
         super().__init__()
-
-        loadUi(GestoreFile.absolutePath('RicercaDelCliente2.ui', Path.cwd()), self)
-        self.setMinimumSize(400,200)
+        loadUi(GestoreFile.absolutePath('EliminaPrenotazioneVacanza.ui', Path.cwd()), self)
+        self.setMinimumSize(500,250)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
         self.previous = previous
 
     def _connectButtons(self):
-        self.btnRicercaCliente.clicked.connect(self._btnRicercaClienteClicked)
-        self.btnIndietro.clicked.connect(self._btnIndietroClicked)
+        self.btnConfermaEliminazione.clicked.connect(self._btnConfermaEliminazione)
+        self.btnTornareIndietro.clicked.connect(self._btnTornareIndietro)
 
-    def _btnRicercaClienteClicked(self):
+    def _btnConfermaEliminazione(self):
         pass
 
-    def _btnIndietroClicked(self):
+    def _btnTornareIndietro(self):
         self.close()
         self.previous.show()
 
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWidget = RicercaDelCliente2UI()
+    mainWidget = EliminaPrenotazioneVacanzaUI()
     mainWidget.show()
     sys.exit(app.exec_())

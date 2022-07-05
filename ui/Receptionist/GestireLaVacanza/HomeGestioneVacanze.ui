@@ -41,7 +41,7 @@
     <item row="2" column="0" colspan="2">
      <widget class="QTabWidget" name="tabHomeGestioneVacanzeReceptionist">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tabInserisciPrenotazioneVacanza">
        <attribute name="title">
@@ -78,7 +78,7 @@
         <item row="2" column="0">
          <widget class="QLabel" name="labelInserirePeriodoSoggiornoDa">
           <property name="text">
-           <string>Inserire periodo di soggiorno in Hotel:                                                                                      Da:</string>
+           <string>Periodo di soggiorno in Hotel:                                                                                                  Da:</string>
           </property>
          </widget>
         </item>

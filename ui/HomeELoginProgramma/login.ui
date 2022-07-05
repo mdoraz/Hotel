@@ -91,7 +91,7 @@
    <item row="5" column="0">
     <widget class="QPushButton" name="btnIndietro">
      <property name="text">
-      <string>Indietro</string>
+      <string>Tornare Home Page</string>
      </property>
     </widget>
    </item>
