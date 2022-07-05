@@ -3,6 +3,7 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
+from src.Gestori.GestoreFile import GestoreFile
 
 from src.GUI.HomeReceptionist.NoleggiareBici.AssegnaBiciPrenotateUI import AssegnaBiciPrenotateUI
 from src.GUI.HomeReceptionist.NoleggiareBici.AssegnaBiciSenzaPrenotazioneUI import AssegnaBiciSenzaPrenotazioneUI
@@ -10,14 +11,13 @@ from src.GUI.HomeReceptionist.NoleggiareBici.ConfermaTerminareNoleggioUI import 
 from src.GUI.HomeReceptionist.NoleggiareBici.EliminaPrenotazioneBiciUI import EliminaPrenotazioneBiciUI
 from src.GUI.HomeReceptionist.NoleggiareBici.ModificaPrenotazioneBiciUI import ModificaPrenotazioneBiciUI
 from src.GUI.HomeReceptionist.NoleggiareBici.RicercaPrenotazioneBiciUI import RicercaPrenotazioneBiciUI
-from src.Gestori.GestoreFile import GestoreFile
 
 
 class HomeNoleggiareUnaBiciUI(QTabWidget):
     def __init__(self, previous: QWidget):
         super().__init__()
         loadUi(GestoreFile.absolutePath('HomeNoleggiareUnaBici.ui', Path.cwd()), self)
-        self.setMinimumSize(500,300)
+        self.setMinimumSize(1000,600)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
         self.previous = previous
