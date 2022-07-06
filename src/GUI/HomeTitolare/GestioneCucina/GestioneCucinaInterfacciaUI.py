@@ -3,6 +3,9 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
+
+from src.GUI.HomeTitolare.GestioneCucina.ModificaMenuColazioneInCameraUI import ModificaMenuColazioneInCameraUI
+from src.GUI.HomeTitolare.GestioneCucina.ModificaMenuUI import ModificaMenuUI
 from src.Gestori.GestoreFile import GestoreFile
 
 
@@ -24,13 +27,19 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
         self.btnTornarePaginaPrecedente_3.clicked.connect(self._btnTornarePaginaPrecedente_3Clicked)
 
     def _btnModificaMenuColazioneInCameraClicked(self):
-        pass
+        self.close()
+        self.widgetModificaMenuColazioneInCamera = ModificaMenuColazioneInCameraUI(self)
+        self.widgetModificaMenuColazioneInCamera.show()
 
     def _btnModificaMenuPranzoClicked(self):
-        pass
+        self.close()
+        self.widgetModificaMenu = ModificaMenuUI(self)
+        self.widgetModificaMenu.show()
 
     def _btnModificaMenuCenaClicked(self):
-        pass
+        self.close()
+        self.widgetModificaMenu = ModificaMenuUI(self)
+        self.widgetModificaMenu.show()
 
     def _btnTornarePaginaPrecedenteClicked(self):
         self.close()
@@ -43,3 +52,9 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
     def _btnTornarePaginaPrecedente_3Clicked(self):
         self.close()
         self.previous.show()
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    mainWidget = GestioneCucinaInterfacciaUI()
+    mainWidget.show()
+    sys.exit(app.exec_())

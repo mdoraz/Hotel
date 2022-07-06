@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>693</width>
-    <height>262</height>
+    <width>810</width>
+    <height>238</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,18 +17,28 @@
    <attribute name="title">
     <string>! AVVISO PIATTI MODIFICATI !</string>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QLabel" name="labelIntroduzione">
-      <property name="text">
-       <string>Salve,  si prega di contattare i clienti che avevano come scelta dei pasti per i loro menu i piatti ora sostituiti!!</string>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="2" column="0">
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item row="2" column="1">
+     <widget class="QPushButton" name="btnOk">
+      <property name="text">
+       <string>OK</string>
       </property>
      </widget>
     </item>
-    <item>
+    <item row="1" column="0" colspan="2">
      <widget class="QGroupBox" name="groupboxSchedaPiattiModificati">
       <property name="title">
        <string>Scheda piatti modificati:</string>
@@ -57,9 +67,59 @@
            <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
           </property>
          </item>
+         <item>
+          <property name="text">
+           <string>PiattoVecchio</string>
+          </property>
+          <property name="text">
+           <string>Numero camera</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PiattoVecchio</string>
+          </property>
+          <property name="text">
+           <string>Numero camera</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PiattoVecchio</string>
+          </property>
+          <property name="text">
+           <string>Numero camera</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PiattoVecchio</string>
+          </property>
+          <property name="text">
+           <string>Numero camera</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PiattoVecchio</string>
+          </property>
+          <property name="text">
+           <string>Numero camera</string>
+          </property>
+         </item>
         </widget>
        </item>
       </layout>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="2">
+     <widget class="QLabel" name="labelIntroduzione">
+      <property name="text">
+       <string>Salve,  si prega di contattare i clienti che avevano come scelta dei pasti per i loro menu i piatti ora sostituiti!!</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
    </layout>
