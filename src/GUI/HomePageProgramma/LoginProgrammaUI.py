@@ -56,8 +56,7 @@ class LoginProgrammaUI(QTabWidget):
                 return
 
             if decrypt(dipendenteUsername.getPassword()) != password:
-                self._showMessage("La password non è corretta", QMessageBox.Icon.Warning)
-                print(dipendenteUsername.getPassword())
+                self._showMessage("La password non è corretta. Reinseriscila!", QMessageBox.Icon.Warning)
             else:
                 ruolo = dipendenteUsername.getAutorizzazione()
                 if ruolo == Ruolo.RECEPTIONIST:
