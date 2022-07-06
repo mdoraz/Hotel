@@ -8,20 +8,23 @@ class GestoreFile:
     def backup():
         pass
 
+
     @staticmethod
     def leggiPickle(pathFile : Path) -> object:
         with open(pathFile, 'rb') as file:
             oggetto = pickle.load(file)
             return oggetto
 
+
     @staticmethod
     def salvaPickle(oggetto : object, pathFile : Path):
         
-        if not pathFile.exists():
-            with open(pathFile, 'w') as file:
+        if not pathFile.exists(): # se il file non esiste (ma il percorso fino alla cartella in cui si trova esiste)
+            with open(pathFile, 'x') as file: # il file viene creato
                 pass
         with open(pathFile, 'wb') as file:
             pickle.dump(oggetto, file, pickle.HIGHEST_PROTOCOL)
+
 
     @staticmethod
     def leggiJson(pathFile : Path) -> dict:
