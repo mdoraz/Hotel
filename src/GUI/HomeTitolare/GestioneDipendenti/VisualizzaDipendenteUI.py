@@ -6,16 +6,17 @@ from PyQt5.uic import loadUi
 
 from src.Attori.Dipendente import Dipendente
 from src.Attori.Ruolo import Ruolo
-from src.GUI.GestioneDipendenti.InserimentoCredenzialiDipendenteUI import InserimentoCredenzialiDipendenteUI
-from src.GUI.GestioneDipendenti.VisualizzaAssenzeUI import VisualizzaAssenzeUI
+from src.GUI.HomeTitolare.GestioneDipendenti.FormUI import FormUI
+from src.GUI.HomeTitolare.GestioneDipendenti.InserimentoCredenzialiUI import InserimentoCredenzialiUI
+from src.GUI.HomeTitolare.GestioneDipendenti.VisualizzaAssenzeUI import VisualizzaAssenzeUI
 from src.Gestori.GestoreFile import GestoreFile
 from src.Utilities.GUIUtils import GUIUtils
 from src.Utilities.encrypter import encrypt, decrypt
 
-class VisualizzaDipendenteUI(QWidget):
+
+class VisualizzaDipendenteUI(FormUI):
 
 	showComboBox = False
-	vecchiaPasswordAdded = False
 	dipendenteEliminato = QtCore.pyqtSignal()
 	turnoModificato = QtCore.pyqtSignal(Dipendente, bool)
 
@@ -29,8 +30,6 @@ class VisualizzaDipendenteUI(QWidget):
 		self._createComboBoxes() # creo le combo box di ruilo e turno da mostrare in caso di modifica
 		self._setValidators() # imposto validator e colori per il testo per IBAN, stipendio, email e cellulare
 		self._connectButtons()
-
-		self.msg = QMessageBox() # perr futuri messaggi
 
 
 	def _readDipendenti(self):
@@ -172,6 +171,8 @@ class VisualizzaDipendenteUI(QWidget):
 		# rimossi i colori del testo
 		self.lineEditIBAN.setStyleSheet("font-family: Arial; font-size: 11pt")
 		self.lineEditStipendio.setStyleSheet("font-family: Arial; font-size: 11pt")
+		self.lineEditIBAN.textChanged.disconnect(self._setColorHint)
+		self.lineEditStipendio.textChanged.disconnect(self._setColorHint)
 
 
 	def _btnModificaContattiClicked(self):
@@ -212,13 +213,17 @@ class VisualizzaDipendenteUI(QWidget):
 		# rimossi i colori del testo
 		self.lineEditEmail.setStyleSheet("font-family: Arial; font-size: 11pt")
 		self.lineEditCellulare.setStyleSheet("font-family: Arial; font-size: 11pt")
+		self.lineEditEmail.textChanged.disconnect(self._setColorHint)
+		self.lineEditCellulare.textChanged.disconnect(self._setColorHint)
 
 
 	def _mostraCredenziali(self):
-		self.credenzialiWidget = InserimentoCredenzialiDipendenteUI()
+		self.credenzialiWidget = InserimentoCredenzialiUI()
 		self.vecchiaPasswordAdded = False # al primo click sul bottone modifica, saranno aggiunti label e line edit per la vecchia password
+		
 		self.credenzialiWidget.setWindowTitle('Modifica credenziali')
 		self.credenzialiWidget.labelIntestazione.hide()
+		
 		self.credenzialiWidget.lineEditUsername.setText(self.dipendente.getUsername()) # username inizialmente ha line edit piena
 		self.credenzialiWidget.labelUsername.show()									# e label visibile
 		self._widgetCredenzialiSoloVisualizzazione()
@@ -231,6 +236,8 @@ class VisualizzaDipendenteUI(QWidget):
 
 		self.credenzialiWidget.labelIstruzioniPassword.hide()
 		self.credenzialiWidget.lineEditConfermaPassword.hide() # nascondo conferma password
+		self.credenzialiWidget.lineEditVecchiaPassword.hide() # e vecchia password
+		
 		self.credenzialiWidget.lineEditPassword.setText('password') # per riempire la password con pallini neri
 		self.credenzialiWidget.lineEditPassword.actions()[0].defaultWidget().hide() # nascondo l'occhiolino
 		self.credenzialiWidget.labelPassword.show()
@@ -243,6 +250,7 @@ class VisualizzaDipendenteUI(QWidget):
 		except:
 			pass
 		self.credenzialiWidget.btnInserisci.clicked.connect(self._modificaCredenzialiClicked)
+		self.credenzialiWidget.btnIndietro.setText('Indietro')
 		self.credenzialiWidget.btnIndietro.clicked.connect(self.credenzialiWidget.close)
 
 
@@ -252,18 +260,7 @@ class VisualizzaDipendenteUI(QWidget):
 
 		self.credenzialiWidget.labelIstruzioniPassword.show()
 		self.credenzialiWidget.lineEditConfermaPassword.show()
-		if not self.vecchiaPasswordAdded:
-			self.credenzialiWidget.addField(3, 'Vecchia password')
-			self.vecchiaPasswordAdded = True
-
-			# monkey patching per aggiungere a runtime label e line edit della vecchia password agli attributi di credenzialiWidget
-			self.credenzialiWidget.labelVecchiaPassword = self.credenzialiWidget.layout().itemAt(3).widget().layout().itemAtPosition(0,1).widget()
-			self.credenzialiWidget.lineEditVecchiaPassword = self.credenzialiWidget.layout().itemAt(3).widget().layout().itemAtPosition(1,1).widget()
-
-			# impostata l'eco mode della vecchia password
-			self.credenzialiWidget.lineEditVecchiaPassword.setEchoMode(QLineEdit.EchoMode.Password)
-		else:
-			self.credenzialiWidget.lineEditVecchiaPassword.show()
+		self.credenzialiWidget.lineEditVecchiaPassword.show()
 		
 		# aggiornate label e line edit relative alla password
 		self.credenzialiWidget.lineEditPassword.setText('')
@@ -296,49 +293,42 @@ class VisualizzaDipendenteUI(QWidget):
 			else:
 				return
 		
-		lineEditLabelPairs = {
-			self.credenzialiWidget.lineEditVecchiaPassword : self.credenzialiWidget.labelVecchiaPassword,
-			self.credenzialiWidget.lineEditPassword : self.credenzialiWidget.labelPassword,
-			self.credenzialiWidget.lineEditConfermaPassword : self.credenzialiWidget.labelConfermaPassword
-		}
+		# tolgo da credenzialiWidget.lineEditLabelPairs la entry dello username
+		lineEditLabelPairs = {k : v for k, v in self.credenzialiWidget.lineEditLabelPairs.items() if v != self.credenzialiWidget.labelUsername}
+		
 		# se almeno una delle line edit delle password non è vuota
-		if (self.credenzialiWidget.lineEditVecchiaPassword.text().strip() != '' or
-			self.credenzialiWidget.lineEditPassword.text().strip() != '' or
-			self.credenzialiWidget.lineEditConfermaPassword.text().strip() != ''):
+		if ([lineEdit.text().strip() for lineEdit in lineEditLabelPairs] != [''] * len(lineEditLabelPairs.keys())):
 			
 			# se non sono tutte piene
-			if not self.credenzialiWidget.fieldsFilled(lineEditLabelPairs):
+			if not self.credenzialiWidget.fieldsFilled(lineEditLabelPairs): # linEditLabelPairs senza username
 				self._showMessage('Se si vuole modificare la password, inserire tutti i campi relativi alle password.\nSe non si vuole modificarla, lasciare vuoti tutti i campi.',
 								  QMessageBox.Icon.Warning, 'Errore')
 				self.credenzialiWidget.msg.hide()
 				return
 			# se la vecchia password non è corretta
-			elif self.credenzialiWidget.lineEditVecchiaPassword.text() != decrypt(self.dipendente.getPassword()):
+			if self.credenzialiWidget.lineEditVecchiaPassword.text() != decrypt(self.dipendente.getPassword()):
 				self._showMessage('La vecchia password non è corretta, riprovare.', QMessageBox.Icon.Warning, 'Errore')
 				return
 
-			print('vecchia pwd: ' + self.credenzialiWidget.lineEditVecchiaPassword.text())
 			# se la password rispetta la struttura specificata e coincide con la conferma password
-			if self.credenzialiWidget.isPasswordCorrect():
+			if not self.credenzialiWidget.isPasswordCorrect():
+				return # l'errore opportuno è stato già mostrato dal metodo isPasswordCorrect
+			else:
 				self.dipendente.setPassword(encrypt(self.credenzialiWidget.lineEditPassword.text()))
 				passwordChanged = True
-			else:
-				return
 		
 		# se sono avvenute modifiche, le salvo e imposto il messaggio da mostrare alla fine
 		if usernameChanged and passwordChanged:
-			self._salvaDipendente()
 			msg = 'Username e password modificati con successo!'
 		elif usernameChanged:
-			self._salvaDipendente()
 			msg = 'Username modificato con successo!'
 		elif passwordChanged:
-			self._salvaDipendente()
 			msg = 'Password modificata con successo!'
 		else:
 			msg = ''
 
 		if msg != '':
+			self._salvaDipendente()
 			self._showMessage(msg, QMessageBox.Icon.Warning, 'Errore')
 		self.credenzialiWidget.close()
 
@@ -366,18 +356,6 @@ class VisualizzaDipendenteUI(QWidget):
 			self.dipendenteEliminato.emit()
 			self._showMessage('Dipendente eliminato dal sistema!', QMessageBox.Icon.Information)
 			self.close()
-
-
-	def _setColorHint(self, text): # text è il testo della line edit da controllare
-		fontType = "font-family: Arial; font-size: 11pt"
-		lineEdit = self.sender()
-		
-		if text != '' and lineEdit.validator().validate(text, 0)[0] == QtGui.QValidator.State.Acceptable: # se il testo è accettato dal validator
-			if lineEdit.styleSheet() != f"color: rgb(0, 170, 0); {fontType}":
-				lineEdit.setStyleSheet(f"color: rgb(0, 170, 0); {fontType}") # il testo diventa verde
-		
-		elif lineEdit.styleSheet() != f"color: rgb(255, 0, 0); {fontType}":
-			lineEdit.setStyleSheet(f"color: rgb(255, 0, 0); {fontType}") # il testo diventa rosso
 
 
 	def _salvaDipendente(self):

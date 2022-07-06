@@ -8,8 +8,8 @@ from src.Attori.Dipendente import Dipendente
 from src.Attori.Ruolo import Ruolo
 from src.Gestori.GestoreFile import GestoreFile
 from src.Gestori.GestorePersona import GestorePersona
-from src.GUI.GestioneDipendenti.InserimentoDatiDipendenteUI import InserimentoDatiDipendenteUI
-from src.GUI.GestioneDipendenti.InserimentoCredenzialiDipendenteUI import InserimentoCredenzialiDipendenteUI
+from src.GUI.HomeTitolare.GestioneDipendenti.InserimentoDatiDipendenteUI import InserimentoDatiDipendenteUI
+from src.GUI.HomeTitolare.GestioneDipendenti.InserimentoCredenzialiUI import InserimentoCredenzialiUI
 from src.Utilities.exeptions import DuplicateError
 from src.Utilities.encrypter import encrypt
 
@@ -27,7 +27,8 @@ class InserisciDipendenteUI(QTabWidget):
 
 		self.previous = previous
 		self.page1 = InserimentoDatiDipendenteUI(previous)
-		self.page2 = InserimentoCredenzialiDipendenteUI(self.page1)
+		self.page2 = InserimentoCredenzialiUI(self.page1)
+		self.page2.widgetVecchiaPassword.deleteLater() # non servirà inserire la vecchia password
 
 		self.addTab(self.page1, 'Inserici Dipendente')
 

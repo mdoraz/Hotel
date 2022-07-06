@@ -10,6 +10,7 @@ from src.Attori.Dipendente import Dipendente
 from src.Gestori.GestoreFile import GestoreFile
 from src.Utilities.customQtClasses import MyListWidgetItem
 
+
 class VisualizzaAssenzeUI(QWidget):
 
 	def __init__(self, dipendente : Dipendente, parent : QWidget = None): # type: ignore

@@ -7,7 +7,8 @@ from PyQt5.uic import loadUi
 
 from src.Utilities.GUIUtils import GUIUtils
 from src.Gestori.GestoreFile import GestoreFile
-from src.GUI.GestioneDipendenti.FormUI import FormUI
+from src.GUI.HomeTitolare.GestioneDipendenti.FormUI import FormUI
+
 
 class InserimentoDatiDipendenteUI(FormUI):
 
@@ -16,8 +17,6 @@ class InserimentoDatiDipendenteUI(FormUI):
 		
 		self.pevious = previous
 		loadUi(GestoreFile.absolutePath('inserimentoDatiDipendente.ui', Path.cwd()), self)
-		
-		self.msg = QMessageBox() # per futuri messaggi
 		
 		self.lineEditLabelPairs = {
 			self.lineEditNome : self.labelNome,
@@ -79,20 +78,9 @@ class InserimentoDatiDipendenteUI(FormUI):
 	
 
 	def _setColorHints(self):
-		def setColorHint(text): # text è il testo della line edit da controllare
-			fontType = "font-family: Arial; font-size: 10pt"
-			lineEdit = self.sender()
-			
-			if text != '' and lineEdit.validator().validate(text, 0)[0] == QtGui.QValidator.State.Acceptable: # se il testo è accettato dal validator
-				if lineEdit.styleSheet() != f"color: rgb(0, 170, 0); {fontType}":
-					lineEdit.setStyleSheet(f"color: rgb(0, 170, 0); {fontType}") # il testo diventa verde
-			
-			elif lineEdit.styleSheet() != f"color: rgb(255, 0, 0); {fontType}":
-				lineEdit.setStyleSheet(f"color: rgb(255, 0, 0); {fontType}") # il testo diventa rosso
-
-		self.lineEditEmail.textChanged.connect(setColorHint)
-		self.lineEditCellulare.textChanged.connect(setColorHint)
-		self.lineEditIBAN.textChanged.connect(setColorHint)
+		self.lineEditEmail.textChanged.connect(self._setColorHint)
+		self.lineEditCellulare.textChanged.connect(self._setColorHint)
+		self.lineEditIBAN.textChanged.connect(self._setColorHint)
 
 	
 	def isUserInSystem(self) -> bool:
@@ -108,7 +96,7 @@ class InserimentoDatiDipendenteUI(FormUI):
 	
 	def fieldsValid(self) -> bool:
 		toReturn = True
-		styleSheet = f"color: rgb(0, 170, 0); font-family: Arial; font-size: 10pt"
+		styleSheet = f"color: rgb(0, 170, 0);"
 		if [self.lineEditEmail.styleSheet(), self.lineEditCellulare.styleSheet(), self.lineEditIBAN.styleSheet()] != [styleSheet] * 3: # se le 3 line edit non hanno il testo verde
 			self._showMessage('I dati in rosso non sono accettabili.\nQuando lo saranno il loro colore diventerà verde.', QMessageBox.Icon.Warning, 'Errore')
 			toReturn = False

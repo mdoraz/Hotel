@@ -6,31 +6,30 @@ from PyQt5.uic import loadUi
 
 from src.Utilities.GUIUtils import GUIUtils
 from src.Gestori.GestoreFile import GestoreFile
-from src.GUI.GestioneDipendenti.FormUI import FormUI
+from src.GUI.HomeTitolare.GestioneDipendenti.FormUI import FormUI
 
-class InserimentoCredenzialiDipendenteUI(FormUI):
+
+class InserimentoCredenzialiUI(FormUI):
 
 	def __init__(self, previous : QWidget = None): # type: ignore
 		super().__init__()
 		
 		self.previous = previous # per tornare alla pagina precedente al click del bottone "indietro"
-		
-		loadUi(GestoreFile.absolutePath('inserimentoCredenzialiDipendente.ui', Path.cwd()), self)
-		
-		self.msg = QMessageBox() #per futuri messaggi
+
+		loadUi(GestoreFile.absolutePath('inserimentoCredenziali.ui', Path.cwd()), self)
 
 		self.lineEditLabelPairs = {
 			self.lineEditUsername : self.labelUsername,
+			self.lineEditVecchiaPassword : self.labelVecchiaPassword,
 			self.lineEditPassword : self.labelPassword,
 			self.lineEditConfermaPassword : self.labelConfermaPassword
 		}
 		self.hideLabels(self.lineEditLabelPairs) # all'inizio tutte le label sono nascoste
 		self.connectLabelAndText(self.lineEditLabelPairs) # rende la label visibile solo se la corrispondente line edit non è vuota.
 		
-		eyeBtn1 = QToolButton() # creati i bottoni per mostrare/nascondere la password
-		eyeBtn2 = QToolButton()
-		self._connectEye(eyeBtn1, self.lineEditPassword) # collega eyeBtn alla line edit corrispondente
-		self._connectEye(eyeBtn2, self.lineEditConfermaPassword)
+		self._addAndConnectEye(self.lineEditPassword) # aggiunge e collega il bottone col l'occhio per mostrare/nascondere la password
+		self._addAndConnectEye(self.lineEditConfermaPassword)
+		self._addAndConnectEye(self.lineEditVecchiaPassword)
 		
 		self.lineEditPassword.setValidator(GUIUtils.validators['password'])
 
@@ -46,25 +45,6 @@ class InserimentoCredenzialiDipendenteUI(FormUI):
 			raise
 		
 		return dipendenti
-
-
-
-	def _connectEye(self, eyeButton : QToolButton, lineEdit : QLineEdit):
-		def showHidePassword(checked):
-			if checked:
-				lineEdit.setEchoMode(QLineEdit.EchoMode.Normal)
-				eyeButton.setIcon(QtGui.QIcon(GestoreFile.absolutePath('eye-closed.png', Path.cwd())))
-			else:
-				lineEdit.setEchoMode(QLineEdit.EchoMode.Password)
-				eyeButton.setIcon(QtGui.QIcon(GestoreFile.absolutePath('eye-opened.png', Path.cwd())))
-
-		eyeButton.setIcon(QtGui.QIcon(GestoreFile.absolutePath('eye-opened.png', Path.cwd())))
-		eyeButton.setCursor(QtCore.Qt.CursorShape.PointingHandCursor)
-		eyeButton.setCheckable(True)
-		eyeButton.clicked.connect(showHidePassword)
-		widgetAction = QWidgetAction(lineEdit)
-		widgetAction.setDefaultWidget(eyeButton)
-		lineEdit.addAction(widgetAction, QLineEdit.ActionPosition.TrailingPosition) # azione aggiunta nella parte destra della line edit
 
 	
 	def isPasswordCorrect(self) -> bool:
@@ -99,6 +79,7 @@ class InserimentoCredenzialiDipendenteUI(FormUI):
 		
 	
 	def addField(self, index : int, textLabel : str):
+		"""Adds a field (label and line edit pair) at index from the verticalBoxLayout with the specified textLabel"""
 		widget = QWidget()
 		gridLayout = QGridLayout(widget)
 		# elementi del layout
@@ -119,3 +100,5 @@ class InserimentoCredenzialiDipendenteUI(FormUI):
 		
 		newLabel.hide()
 		self.connectLabelAndText({newLineEdit : newLabel})
+
+	

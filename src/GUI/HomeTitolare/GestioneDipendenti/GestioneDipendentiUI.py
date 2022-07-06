@@ -8,8 +8,8 @@ from PyQt5.uic import loadUi
 
 from src.Attori.Dipendente import Dipendente
 from src.Attori.Ruolo import Ruolo
-from src.GUI.GestioneDipendenti.InserisciDipendenteUI import InserisciDipendenteUI
-from src.GUI.GestioneDipendenti.VisualizzaDipendenteUI import VisualizzaDipendenteUI
+from src.GUI.HomeTitolare.GestioneDipendenti.InserisciDipendenteUI import InserisciDipendenteUI
+from src.GUI.HomeTitolare.GestioneDipendenti.VisualizzaDipendenteUI import VisualizzaDipendenteUI
 from src.Gestori.GestoreFile import GestoreFile
 from src.Utilities.customQtClasses import MyTableWidget, MyTableWidgetItem
 
