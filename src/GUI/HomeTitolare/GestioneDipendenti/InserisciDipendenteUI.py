@@ -69,9 +69,12 @@ class InserisciDipendenteUI(QTabWidget):
 	
 	def _btnInserisciClicked(self):
 		
-		if self.page2.verifyFields():
+		# page2.lineEditLabelPairs senza l'entry della vecchia password
+		lineEditLabelPairs = {k : v for k, v in self.page2.lineEditLabelPairs.items() if v != self.page2.labelVecchiaPassword}
+
+		if self.page2.fieldsFilled(lineEditLabelPairs) and not self.page2.isUsernameUsed() and self.page2.isPasswordCorrect():
 			paths = GestoreFile.leggiJson(Path('paths.json'))
-				
+			
 			nome = self.page1.lineEditNome.text(); 				 cognome = self.page1.lineEditCognome.text()
 			dataNascita = self.page1.dateEdit.date().toPyDate(); luogoNascita = self.page1.lineEditLuogoNascita.text()
 			email = self.page1.lineEditEmail.text(); 			 cellulare = self.page1.lineEditCellulare.text()

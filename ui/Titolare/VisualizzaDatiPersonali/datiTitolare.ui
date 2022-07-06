@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>565</width>
-    <height>366</height>
+    <width>528</width>
+    <height>363</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>330</height>
+   </size>
   </property>
   <property name="font">
    <font>
@@ -38,6 +44,12 @@
     </property>
     <item>
      <widget class="QGroupBox" name="groupBoxContatti">
+      <property name="minimumSize">
+       <size>
+        <width>450</width>
+        <height>110</height>
+       </size>
+      </property>
       <property name="title">
        <string>Contatti</string>
       </property>
@@ -120,6 +132,12 @@
     </item>
     <item>
      <widget class="QGroupBox" name="groupBoxCredenziali">
+      <property name="minimumSize">
+       <size>
+        <width>450</width>
+        <height>110</height>
+       </size>
+      </property>
       <property name="title">
        <string>Credenziali</string>
       </property>

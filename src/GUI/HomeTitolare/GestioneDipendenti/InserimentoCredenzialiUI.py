@@ -68,14 +68,6 @@ class InserimentoCredenzialiUI(FormUI):
 				self._showMessage('Username già in uso, inserirne un altro.', QMessageBox.Icon.Warning, 'Errore')
 				toReturn = True
 		return toReturn
-
-	
-	def verifyFields(self):
-		"""Returns true if all fields are filled, the password respects the correct structure and username is not already in use."""
-		toReturn = False
-		if (self.fieldsFilled(self.lineEditLabelPairs) and self.isPasswordCorrect() and not self.isUsernameUsed()):
-			toReturn = True
-		return toReturn
 		
 	
 	def addField(self, index : int, textLabel : str):

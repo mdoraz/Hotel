@@ -55,15 +55,10 @@ class Dipendente(Persona, Utente):
         return self._turno
     
     def aggiungiAssenza(self, data : date): # inserimento ordinato di "data" nella lista di date "self._assenze"
-        dataInserita = False
-        for i in range(0, len(self._assenze)):
-            if data < self._assenze[i] and not dataInserita:
-                self._assenze.insert(i, data)
-                dataInserita = True
-        if not dataInserita:
-            self._assenze.append(data)
-
-
+        i = 0
+        while i < len(self._assenze) and data > self._assenze[i]:
+            i += 1
+        self._assenze.insert(i, data)
 
     def rimuoviAssenza(self, data : date):
         self._assenze.remove(data)
