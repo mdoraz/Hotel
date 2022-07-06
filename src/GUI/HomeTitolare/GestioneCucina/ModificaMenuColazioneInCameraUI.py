@@ -8,10 +8,10 @@ from src.GUI.HomeTitolare.GestioneCucina.AvvisoPiattiModificatiUI import AvvisoP
 from src.Gestori.GestoreFile import GestoreFile
 
 
-class ModificaMenuUI(QTabWidget):
+class ModificaMenuColazioneInCameraUI(QTabWidget):
     def __init__(self, previous: QWidget):
         super().__init__()
-        loadUi(GestoreFile.absolutePath('ModificaMenu.ui', Path.cwd()), self)
+        loadUi(GestoreFile.absolutePath('ModificaMenuColazioneInCamera.ui', Path.cwd()), self)
         self.setMinimumSize(600, 700)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
@@ -25,12 +25,13 @@ class ModificaMenuUI(QTabWidget):
         self.close()
         self.widgetAvvisoPiattiModificati = AvvisoPiattiModificatiUI(self)
         self.widgetAvvisoPiattiModificati.show()
+
     def _btnIndietroClicked(self):
         self.close()
         self.previous.show()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWidget = ModificaMenuUI()
+    mainWidget = ModificaMenuColazioneInCameraUI()
     mainWidget.show()
     sys.exit(app.exec_())

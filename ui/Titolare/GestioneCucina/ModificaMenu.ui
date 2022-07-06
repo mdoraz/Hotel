@@ -79,6 +79,12 @@
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="0" colspan="2">
            <widget class="QTreeWidget" name="treewidgetAntipasti">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::MultiSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectItems</enum>
+            </property>
             <column>
              <property name="text">
               <string>Antipasto</string>
@@ -104,16 +110,8 @@
              <property name="text">
               <string>Prezzo</string>
              </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>Prezzo</string>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
              </property>
             </item>
             <item>
@@ -125,6 +123,23 @@
              </property>
              <property name="text">
               <string>Prezzo</string>
+             </property>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
              </property>
             </item>
            </widget>
@@ -140,6 +155,12 @@
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
            <widget class="QTreeWidget" name="treewidgetPrimi">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::MultiSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectItems</enum>
+            </property>
             <column>
              <property name="text">
               <string>Primo</string>
@@ -165,16 +186,8 @@
              <property name="text">
               <string>Prezzo</string>
              </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>Prezzo</string>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
              </property>
             </item>
             <item>
@@ -186,6 +199,23 @@
              </property>
              <property name="text">
               <string>Prezzo</string>
+             </property>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
              </property>
             </item>
            </widget>
@@ -201,6 +231,12 @@
          <layout class="QGridLayout" name="gridLayout_3">
           <item row="0" column="0">
            <widget class="QTreeWidget" name="treewidgetSecondiContorni">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::MultiSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectItems</enum>
+            </property>
             <column>
              <property name="text">
               <string>Secondo/Contorno</string>
@@ -226,16 +262,8 @@
              <property name="text">
               <string>Prezzo</string>
              </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>Prezzo</string>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
              </property>
             </item>
             <item>
@@ -247,6 +275,23 @@
              </property>
              <property name="text">
               <string>Prezzo</string>
+             </property>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
              </property>
             </item>
            </widget>
@@ -262,6 +307,12 @@
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="0">
            <widget class="QTreeWidget" name="treewidgetDolciBevande">
+            <property name="selectionMode">
+             <enum>QAbstractItemView::MultiSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectItems</enum>
+            </property>
             <column>
              <property name="text">
               <string>Dolce/Bevanda</string>
@@ -287,16 +338,8 @@
              <property name="text">
               <string>Prezzo</string>
              </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>Prezzo</string>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
              </property>
             </item>
             <item>
@@ -308,6 +351,23 @@
              </property>
              <property name="text">
               <string>Prezzo</string>
+             </property>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Nome</string>
+             </property>
+             <property name="text">
+              <string>Ingredienti</string>
+             </property>
+             <property name="text">
+              <string>Prezzo</string>
+             </property>
+             <property name="flags">
+              <set>ItemIsEditable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
              </property>
             </item>
            </widget>

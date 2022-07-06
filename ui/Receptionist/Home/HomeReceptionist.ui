@@ -94,14 +94,14 @@
     <item row="3" column="3">
      <widget class="QPushButton" name="btnGestireLaVacanza">
       <property name="text">
-       <string>Gestire la Vacanza</string>
+       <string>Gestire Vacanza</string>
       </property>
      </widget>
     </item>
     <item row="1" column="2">
      <widget class="QPushButton" name="btnVisualizzaDatiPersonali">
       <property name="text">
-       <string>Visualizza dati personali</string>
+       <string>Visualizza Dati Personali</string>
       </property>
      </widget>
     </item>

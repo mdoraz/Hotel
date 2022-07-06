@@ -67,6 +67,46 @@
            <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
           </property>
          </item>
+         <item>
+          <property name="text">
+           <string>PiattoVecchio</string>
+          </property>
+          <property name="text">
+           <string>Numero camera</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PiattoVecchio</string>
+          </property>
+          <property name="text">
+           <string>Numero camera</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PiattoVecchio</string>
+          </property>
+          <property name="text">
+           <string>Numero camera</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PiattoVecchio</string>
+          </property>
+          <property name="text">
+           <string>Numero camera</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>PiattoVecchio</string>
+          </property>
+          <property name="text">
+           <string>Numero camera</string>
+          </property>
+         </item>
         </widget>
        </item>
       </layout>
