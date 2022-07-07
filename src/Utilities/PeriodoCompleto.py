@@ -1,5 +1,5 @@
 from datetime import datetime
-from Utilities.exeptions import ArgumentTypeError, InvalidPeriodError
+from src.Utilities.exceptions import ArgumentTypeError, InvalidPeriodError
 
 class PeriodoCompleto:
     

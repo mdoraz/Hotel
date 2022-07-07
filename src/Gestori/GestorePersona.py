@@ -5,7 +5,7 @@ from src.Attori.Dipendente import Dipendente
 from src.Attori.Persona import Persona
 from src.Attori.Ruolo import Ruolo
 from src.Gestori.GestoreFile import GestoreFile
-from src.Utilities.exeptions import CreationError, DuplicateError
+from src.Utilities.exceptions import CreationError, DuplicateError
 
 
 class GestorePersona():

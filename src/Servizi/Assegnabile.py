@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 
 class Assegnabile(metaclass = ABCMeta):
 
-    def __init__(self):
+    def __init__(self, **kwargs):
         self._assegnato = False
 
     @abstractmethod

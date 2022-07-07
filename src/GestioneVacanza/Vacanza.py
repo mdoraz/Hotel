@@ -1,22 +1,22 @@
-from Servizi.Ombrellone import Ombrellone
-from Servizi.Camera import Camera
-from GestioneVacanza.NoleggioBici import NoleggioBici
-from GestioneVacanza.PrenotazioneVacanza import PrenotazioneVacanza
 from datetime import date
+from src.Attori.Persona import Persona
+from src.Servizi.Ombrellone import Ombrellone
+from src.Servizi.Camera import Camera
+from src.GestioneVacanza.NoleggioBici import NoleggioBici
+from src.GestioneVacanza.PrenotazioneVacanza import PrenotazioneVacanza
 
 class Vacanza(PrenotazioneVacanza):
 
-    def __init__(self, prenotazione : PrenotazioneVacanza, altriClienti : list, ombrellone : Ombrellone):
+    def __init__(self, prenotazione : PrenotazioneVacanza, clienti : list[Persona], ombrellone : Ombrellone):
         super().__init__(prenotazione.getPeriodo(), prenotazione.getCamera(), prenotazione.getTipoSoggiorno(),
                          prenotazione.getNominativo(), prenotazione.getNumeroCarta())
-        self._clienti = altriClienti
-        self._clienti.append(prenotazione.getNominativo())
+        self._clienti = clienti
         self._ombrellone = ombrellone
-        self._inCorso = True
         self._prenotazioniBici = []
         self._noleggiBici = []
         self._colazioniInCamera = {}
         self._sceltePasti = {}
+        self._inCorso = True
 
     def aggiungiPrenotazioneBici(self, prenotazioneNoleggio : NoleggioBici):
         i = 0

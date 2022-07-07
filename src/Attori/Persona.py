@@ -4,7 +4,7 @@ from pathlib import Path
 
 from src.Attori.Contattabile import Contattabile
 from src.Gestori.GestoreFile import GestoreFile
-from src.Utilities.exeptions import CreationError
+from src.Utilities.exceptions import CreationError
 
 
 class Persona(Contattabile):

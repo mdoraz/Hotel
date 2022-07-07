@@ -1,7 +1,8 @@
 src/**/__pycache__/
 
 # ignore pickle files
-*.pickle
+dipendenti.pickle
+clienti.pickle
 
 ### IntelliJ IDEA ###
 .idea

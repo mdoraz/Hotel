@@ -1,7 +1,7 @@
-from Servizi.Camera import Camera
-from GestioneVacanza.Stato import Stato
-from Servizi.Bici import Bici
 from datetime import datetime
+from src.Servizi.Camera import Camera
+from src.GestioneVacanza.Stato import Stato
+from src.Servizi.Bici import Bici
 
 class NoleggioBici:
 

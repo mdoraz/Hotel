@@ -10,7 +10,7 @@ from src.Gestori.GestoreFile import GestoreFile
 from src.Gestori.GestorePersona import GestorePersona
 from src.GUI.HomeTitolare.GestioneDipendenti.InserimentoDatiDipendenteUI import InserimentoDatiDipendenteUI
 from src.GUI.HomeTitolare.GestioneDipendenti.InserimentoCredenzialiUI import InserimentoCredenzialiUI
-from src.Utilities.exeptions import DuplicateError
+from src.Utilities.exceptions import DuplicateError
 from src.Utilities.encrypter import encrypt
 
 

@@ -1,6 +1,6 @@
-from Attori.Dipendente import Dipendente
-from GestioneVacanza.PrenotazioneVacanza import PrenotazioneVacanza
-from GestioneVacanza.Vacanza import Vacanza
+from src.Attori.Dipendente import Dipendente
+from src.GestioneVacanza.PrenotazioneVacanza import PrenotazioneVacanza
+from src.GestioneVacanza.Vacanza import Vacanza
 
 class GestoreTransazioni:
 

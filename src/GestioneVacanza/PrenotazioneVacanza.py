@@ -1,7 +1,12 @@
-from Utilities.PeriodoConData import PeriodoConData
-from Servizi.Camera import Camera
-from Attori.Persona import Persona
-from GestioneVacanza.Soggiorno import Soggiorno
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
+from src.Attori.Persona import Persona
+from src.GestioneVacanza.Soggiorno import Soggiorno
+from src.Utilities.PeriodoConData import PeriodoConData
+if TYPE_CHECKING:
+    from src.Servizi.Camera import Camera
+
 
 class PrenotazioneVacanza:
     def __init__(self, periodo : PeriodoConData, camera : Camera, tipoSoggiorno : Soggiorno, nominativo : Persona, numeroCarta : str):

@@ -1,7 +1,7 @@
-from Servizi.Prenotabile import Prenotabile
-from Servizi.Assegnabile import Assegnabile
-from GestioneVacanza.NoleggioBici import NoleggioBici
 from datetime import datetime
+from src.Servizi.Prenotabile import Prenotabile
+from src.Servizi.Assegnabile import Assegnabile
+from src.GestioneVacanza.NoleggioBici import NoleggioBici
 
 class Bici(Prenotabile, Assegnabile):
     

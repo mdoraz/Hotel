@@ -4,7 +4,7 @@ import unittest
 from src.Attori.Ruolo import Ruolo
 from src.Gestori.GestoreFile import GestoreFile
 from src.Gestori.GestorePersona import GestorePersona
-from src.Utilities.exeptions import DuplicateError
+from src.Utilities.exceptions import DuplicateError
 
 
 class TestGestorePersona(unittest.TestCase):
