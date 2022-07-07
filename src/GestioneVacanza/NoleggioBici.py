@@ -1,7 +1,11 @@
+from __future__ import annotations # per la post evaluation delle annotazioni
 from datetime import datetime
-from src.Servizi.Camera import Camera
-from src.GestioneVacanza.Stato import Stato
-from src.Servizi.Bici import Bici
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from src.GestioneVacanza.Stato import Stato
+    from src.Servizi.Camera import Camera
+    from src.Servizi.Bici import Bici
 
 class NoleggioBici:
 

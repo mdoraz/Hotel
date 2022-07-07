@@ -1,9 +1,12 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
 from datetime import date
-from src.Attori.Persona import Persona
-from src.Servizi.Ombrellone import Ombrellone
-from src.Servizi.Camera import Camera
-from src.GestioneVacanza.NoleggioBici import NoleggioBici
+
 from src.GestioneVacanza.PrenotazioneVacanza import PrenotazioneVacanza
+if TYPE_CHECKING: # true solo durante il tipe checking, legato ai type hints
+    from src.Attori.Persona import Persona
+    from src.Servizi.Ombrellone import Ombrellone
+    from src.GestioneVacanza.NoleggioBici import NoleggioBici
 
 class Vacanza(PrenotazioneVacanza):
 

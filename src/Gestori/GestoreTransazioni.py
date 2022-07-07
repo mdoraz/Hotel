@@ -1,6 +1,9 @@
-from src.Attori.Dipendente import Dipendente
-from src.GestioneVacanza.PrenotazioneVacanza import PrenotazioneVacanza
-from src.GestioneVacanza.Vacanza import Vacanza
+from __future__ import annotations
+from typing import TYPE_CHECKING
+if TYPE_CHECKING: # true solo durante il type checking
+    from src.Attori.Dipendente import Dipendente
+    from src.GestioneVacanza.PrenotazioneVacanza import PrenotazioneVacanza
+    from src.GestioneVacanza.Vacanza import Vacanza
 
 class GestoreTransazioni:
 

@@ -1,5 +1,11 @@
 {
-	"dipendenti": "files/pickles/dipendenti.pickle", 
-	"clienti": "files/pickles/clienti.pickle",
-	"titolare": "files/pickles/titolare.pickle"
+	"titolare" : "files/pickles/titolare.pickle",
+	"dipendenti" : "files/pickles/dipendenti.pickle", 
+	"clienti" : "files/pickles/clienti.pickle",
+	"camere" : "files/pickles/camere.pickle",
+	"ombrelloni" : "files/pickles/ombrelloni.pickle",
+	"bici" : "files/pickles/bici.pickle",
+	"vacanzeConcluse" : "files/pickles/vacanzeConcluse.pickle",
+	"menu" : "files/pickles/menu.pickle",
+	"menuColazione" : "files/pickles/menuColazione.pickle"
 }

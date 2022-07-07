@@ -1,10 +1,10 @@
-from __future__ import annotations
+from __future__ import annotations # permette la post evaluation delle annotazioni: evita errori dovuti a classi utilizzate per i type hints ancora irrisolte quando compaiono nel codice
 from typing import TYPE_CHECKING
 
 from src.Attori.Persona import Persona
 from src.GestioneVacanza.Soggiorno import Soggiorno
 from src.Utilities.PeriodoConData import PeriodoConData
-if TYPE_CHECKING:
+if TYPE_CHECKING: # true solo durante il type checking: evita import error dovuti a circular import di classi coinvolte solo nei type hints
     from src.Servizi.Camera import Camera
 
 
