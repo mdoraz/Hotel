@@ -45,3 +45,6 @@ class PrenotazioneVacanza:
 
     def setTipoSoggiorno(self, tipoSoggiorno : Soggiorno):
         self._tipoSoggiorno = tipoSoggiorno
+    
+    def __str__(self):
+        return f"camera {self._camera.getNumero()} dal {self._periodo.getInizio().strftime('%d/%m/%Y')} al {self._periodo.getFine().strftime('%d/%m/%Y')} - {self._nominativo.getCognome()}"

@@ -1,6 +1,7 @@
+import unittest
 from pathlib import Path
 from datetime import date
-import unittest
+
 from src.Attori.Ruolo import Ruolo
 from src.Gestori.GestoreFile import GestoreFile
 from src.Gestori.GestorePersona import GestorePersona
@@ -12,13 +13,13 @@ class TestGestorePersona(unittest.TestCase):
 	def setUp(self):
 		GestorePersona.aggiungiPersona(Path('files/clienti.pickle'), 'Rodrigo', 'Carlino', date(2001, 1, 1), 
 									   'Siviglia', 'rocarl@bu.com', '13342112')
-		self.clienti = GestoreFile.leggiPickle(Path('files/clienti.pickle'))
-		
-		datiAmilcare = {'IBAN' : '3203484020384020', 'turno' : True, 'ruolo' : Ruolo.CAMERIERE,
+		self.clienti = GestoreFile.leggiDictPickle(Path('files/clienti.pickle'))
+
+		datiDipendente = {'IBAN' : '3203484020384020', 'turno' : True, 'ruolo' : Ruolo.CAMERIERE,
 						'username' : 'amicarl', 'password' : '123456'}
 		GestorePersona.aggiungiPersona(Path('files/dipendenti.pickle'), 'Amilcare', 'Carlino', date(2000, 10, 10), 
-									   'Siviglia', 'amicarl@bu.com', '2444224150', **datiAmilcare)
-		self.dipendenti = GestoreFile.leggiPickle(Path('files/dipendenti.pickle'))
+									   'Siviglia', 'amicarl@bu.com', '2444224150', **datiDipendente)
+		self.dipendenti = GestoreFile.leggiDictPickle(Path('files/dipendenti.pickle'))
 
 
 	def tearDown(self):
@@ -75,7 +76,7 @@ class TestGestorePersona(unittest.TestCase):
 		GestorePersona.rimuoviPersona(Path('files/clienti.pickle'), cliente1) # elimino dal sistema il cliente inserito nel setUp
 
 		flag = False
-		clientiAggiornati = GestoreFile.leggiPickle(Path("files/clienti.pickle"))
+		clientiAggiornati = GestoreFile.leggiDictPickle(Path("files/clienti.pickle"))
 		for cliente in clientiAggiornati.values():
 			if cliente.getNome() == 'Rodrigo' and cliente.getCognome() == 'Carlino' and cliente.getDataNascita() == date(2001, 1, 1):
 				flag = True
@@ -92,11 +93,12 @@ class TestGestorePersona(unittest.TestCase):
 		GestorePersona.rimuoviPersona(Path('files/dipendenti.pickle'), dipendente1) # elimino dal sistema il dipendente inserito nel setUp
 
 		flag = False
-		dipendentiAggiornati = GestoreFile.leggiPickle(Path("files/dipendenti.pickle"))
-		for dipendente in dipendentiAggiornati.values():
+		dipendentiAggiornati = GestoreFile.leggiDictPickle(Path("files/dipendenti.pickle"))
+		for dipendente in dipendentiAggiornati.values():q
 			if dipendente.getNome() == 'Amilcare' and dipendente.getCognome() == 'Carlino' and dipendente.getDataNascita() == date(2000, 10, 10):
 				flag = True
 		self.assertEqual(flag, False) # non è stato trovato nel sistema il dipendente inserito nel setUp
+
 
 
 if __name__ == '__main__':

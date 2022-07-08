@@ -1,5 +1,5 @@
 from __future__ import annotations
-from datetime import datetime
+from datetime import date, datetime
 from src.Utilities.exceptions import ArgumentTypeError, InvalidPeriodError
 
 class PeriodoCompleto:
@@ -29,6 +29,18 @@ class PeriodoCompleto:
         elif fine < inizio:
             raise InvalidPeriodError("inizio deve precedere temporalmente la fine di PeriodoCompleto")
 
-    def isSovrapposto(self, other : PeriodoCompleto):
-        """Returns True if this period and other overlap, even by one day."""
-        return self._fine < other.getInizio() or self._inizio > other.getFine() 
+
+    def isSovrapposto(self, altroPeriodo : PeriodoCompleto):
+        """Returns True if this period and altroPeriodo overlap."""
+
+        sovrapposto = True
+        if altroPeriodo.getInizio() >= self._fine: # se l'altro periodo inizia dopo la fine di questo o lo stesso giorno in cui questo finisce
+            sovrapposto = False
+        if altroPeriodo.getFine() <= self._inizio: # se l'altro periodo finisce prima dell'inizio di questo o lo stesso giorno in cui questo iniza
+            sovrapposto = False
+        return sovrapposto
+    
+
+    def __str__(self):
+        return f"da {self._inizio.strftime('%d/%m/%Y')} alle {self._inizio.strftime('%H:%M')} a {self._fine.strftime('%d/%m/%Y')}  alle {self._fine.strftime('%H:%M')}"
+

@@ -4,10 +4,11 @@ from pathlib import Path
 from src.GestioneVacanza.NoleggioBici import NoleggioBici
 from src.GestioneVacanza.Stato import Stato
 from src.Gestori.GestoreFile import GestoreFile
+from src.Gestori.GestoreTransazioni import GestoreTransazioni
 from src.Servizi.Camera import Camera
 from src.Servizi.Prenotabile import Prenotabile
 from src.Servizi.Assegnabile import Assegnabile
-from src.Utilities.exceptions import ArgumentTypeError, CorruptedFileError
+from src.Utilities.exceptions import ArgumentTypeError, AssignmentError, CorruptedFileError, NotAvailableError
 
 class Bici(Prenotabile, Assegnabile):
     
@@ -30,16 +31,11 @@ class Bici(Prenotabile, Assegnabile):
 
     def setTipo(self, tipo : bool):
         self._tipo = tipo
-
-    def _aggiungiOrarioPrenotazione(self, orario : datetime): # inserimento ordinato di orario in self._orariPrenotati
-        i = 0
-        while i < len(self._orariPrenotati) and orario > self._orariPrenotati[i]:
-            i += 1
-        self._orariPrenotati.insert(i, orario)
     
     def rimuoviOrarioPrenotazione(self, orario : datetime):
         self._orariPrenotati.remove(orario)
     
+
     def prenota(self, datiPrenotazione : dict):
         """Creates a reservation for this bike. datiPrenotazione must have this keys: 'orario' and 'camera'.
         The type values are: datetime for 'orario' and Camera for 'camera'."""
@@ -49,6 +45,12 @@ class Bici(Prenotabile, Assegnabile):
 
         orario = datiPrenotazione['orario']
         camera = datiPrenotazione['camera']
+
+        if not camera.isAssegnato():
+            raise AssignmentError('The room associated to this reservation is not currently assigned, cannot reserve a bike for that room.')
+
+        if not self.isDisponibile(orario):
+            raise NotAvailableError('This bike is not available at the requested time.')
 
         # inserimento ordinato dell'orario nella lista di orari prenotati
         i = 0
@@ -68,6 +70,9 @@ class Bici(Prenotabile, Assegnabile):
     def assegna(self, datiAssegnamento : dict):
         """This method assigns this bike. datiAssegnamento must contain the following keys: 'camera', 'prenotazione', 'biciclette', 'camere'.
         The values types must be: Camera for 'camera', NoleggioBici (or None if there isn't a reservation) for 'prenotazione', dict for 'biciclette' and 'camere'."""
+        
+        if self._assegnato:
+            raise AssignmentError('This bike is already assigned.')
 
         if not isinstance(datiAssegnamento['biciclette'], dict) or not isinstance(datiAssegnamento['camere'], dict):
             raise ArgumentTypeError("Some arguments don't have the correct type.")
@@ -124,8 +129,13 @@ class Bici(Prenotabile, Assegnabile):
             raise CorruptedFileError(f"{Path(paths['camere']).name} has been corrupted. To fix the issue, delete it.")
         for camera in camere.values():
             for noleggio in camera.getVacanzaAttuale().getNoleggiBici():
+                
                 if noleggio.getStato() == Stato.IN_CORSO and noleggio.getBici().getNumero() == self._numero:
                     noleggio.setStato(Stato.CONCLUSO)
+                    maxDurataNoleggio = timedelta(hours = 2)
+                    if datetime.now() - noleggio.getOrario() > maxDurataNoleggio: # se è stata riconsegnata la bici in ritardo
+                        GestoreTransazioni.prelevaMultaBici(camera.getVacanzaAttuale().getNumeroCarta())
+        
         GestoreFile.salvaPickle(camere, Path(paths['camere']))
 
 
@@ -134,8 +144,10 @@ class Bici(Prenotabile, Assegnabile):
         i = 0
         maxDurataNoleggio = timedelta(hours = 2)
         while i < len(self._orariPrenotati) and disponibile:
-            if self._orariPrenotati[i] - orario < maxDurataNoleggio or orario - self._orariPrenotati[i] < maxDurataNoleggio: # se la distanza tra l'orario pernotato e l'orario richiesto
-                disponibile = False                                                                                          # è inferiore alla durata massima di un noleggio
+            if self._orariPrenotati[i] >= orario and self._orariPrenotati[i] - orario < maxDurataNoleggio: # se la distanza tra l'orario pernotato e l'orario richiesto
+                disponibile = False                                                                     # è inferiore alla durata massima di un noleggio
+            elif self._orariPrenotati[i] < orario and orario - self._orariPrenotati[i] < maxDurataNoleggio:
+                disponibile = False
             i += 1
         return disponibile
 

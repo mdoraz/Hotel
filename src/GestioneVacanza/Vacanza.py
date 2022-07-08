@@ -21,9 +21,9 @@ class Vacanza(PrenotazioneVacanza):
         self._sceltePasti = {}
         self._inCorso = True
 
-    def aggiungiPrenotazioneBici(self, prenotazioneNoleggio : NoleggioBici):
+    def aggiungiPrenotazioneBici(self, prenotazioneNoleggio : NoleggioBici):# inserimento ordinato ella prenotazione
         i = 0
-        while i < len(self._prenotazioniBici) and prenotazioneNoleggio.getOrario() > self._prenotazioniBici[i]:
+        while i < len(self._prenotazioniBici) and prenotazioneNoleggio.getOrario() > self._prenotazioniBici[i].getOrario():
             i += 1
         self._prenotazioniBici.insert(i, prenotazioneNoleggio)
 

@@ -11,9 +11,8 @@ from src.Servizi.Ombrellone import Ombrellone
 from src.Servizi.Prenotabile import Prenotabile
 from src.Servizi.Assegnabile import Assegnabile
 from src.Utilities.PeriodoConData import PeriodoConData
-from src.Utilities.exceptions import ArgumentTypeError, CorruptedFileError
-if TYPE_CHECKING:  # TYPE_CHECKING == True solo durante il type checking. Si evita un circular import error dovuto all'import di una classe utilizzata solo per un type hint
-    from src.GestioneVacanza.PrenotazioneVacanza import PrenotazioneVacanza
+from src.Utilities.exceptions import ArgumentTypeError, CorruptedFileError, AssignmentError, CreationError, NotAvailableError
+from src.GestioneVacanza.PrenotazioneVacanza import PrenotazioneVacanza
 
 
 class Camera(Prenotabile, Assegnabile):
@@ -46,7 +45,7 @@ class Camera(Prenotabile, Assegnabile):
     
     def eliminaPrenotazione(self, prenotazione : PrenotazioneVacanza):
         self._prenotazioni.remove(prenotazione)
-    
+
 
     def prenota(self, datiPrenotazione : dict):
         """Creates a new reservation. datiPrenotazione must have this keys: 'periodo', 'tiposSoggiorno', 'nominativo', 'numeroCarta'.
@@ -57,11 +56,14 @@ class Camera(Prenotabile, Assegnabile):
            not isinstance(datiPrenotazione['nominativo'], Persona) or not isinstance(datiPrenotazione['numeroCarta'], str)):
            raise ArgumentTypeError('Some argument has not the correct type.')
         
+        if not self.isDisponibile(datiPrenotazione['periodo']):
+            raise NotAvailableError('This room is not available in the reservation period')
+        
         prenotazione = PrenotazioneVacanza(datiPrenotazione['periodo'], self, datiPrenotazione['tipoSoggiorno'],
                                            datiPrenotazione['nominativo'], datiPrenotazione['numeroCarta'])
         # inserimento ordinato di prenotazione nella lista di prenotazioni di questa camera
         i = 0
-        while prenotazione.getPeriodo().getInizio() > self._prenotazioni[i].getPeriodo().getInizio():
+        while i < len(self._prenotazioni) and prenotazione.getPeriodo().getInizio() > self._prenotazioni[i].getPeriodo().getInizio():
             i += 1
         self._prenotazioni.insert(i, prenotazione)
 
@@ -74,14 +76,20 @@ class Camera(Prenotabile, Assegnabile):
         """Assigns this room, at check-in time. datiAssegnamenti must have this keys: 'prenotazione', 'clienti', 'ombrellone'.
         The values types must be: PrenotazioneVacanza for 'prenotazione', list[Persona] for 'clienti', Ombrellone for 'ombrellone'."""
 
+        if self._assegnato:
+            raise AssignmentError('This room is already assigned.')
+
         if (not isinstance(datiAssegnamento['prenotazione'], PrenotazioneVacanza) or not isinstance(datiAssegnamento['clienti'], list) or 
            not isinstance(datiAssegnamento['ombrellone'], Ombrellone)):
            raise ArgumentTypeError('Some argument has not the correct type.')
 
+        if len(datiAssegnamento['clienti']) > self._numeroPersone:
+            raise CreationError(f"Cannot assign this room to {len(datiAssegnamento['clienti'])} guests, its limit is {self._numeroPersone}.")
+
         vacanza = Vacanza(datiAssegnamento['prenotazione'], datiAssegnamento['clienti'], datiAssegnamento['ombrellone'])
         
         # questa camera diventa occupata
-        self._vacanzaAttuale = vacanza        
+        self._vacanzaAttuale = vacanza
         self._assegnato = True
 
         vacanza.getOmbrellone().assegna({}) # l'ombrellone diventa occupato
@@ -93,7 +101,7 @@ class Camera(Prenotabile, Assegnabile):
 
     def terminaAssegnamento(self):
         if not self._assegnato or not isinstance(self._vacanzaAttuale, Vacanza):
-            raise Exception("Cannot terminate this room's assignment: room not assigned")
+            raise AssignmentError("Cannot terminate this room's assignment: room not assigned")
         
         GestoreTransazioni.prelevaCostoVacanza(self._vacanzaAttuale)
         self._vacanzaAttuale.getOmbrellone().terminaAssegnamento() # ombrellone nuovamente disponibile

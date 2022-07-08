@@ -38,6 +38,16 @@ class PeriodoConData:
         elif fine < inizio:
             raise InvalidPeriodError("dataInizio deve precedere temporalmente dataFine di PeriodoConData") 
 
-    def isSovrapposto(self, other : PeriodoConData):
-        """Returns True if this period and other overlap, even by one day."""
-        return self._fine < other.getInizio() or self._inizio > other.getFine() 
+
+    def isSovrapposto(self, altroPeriodo : PeriodoConData):
+        """Returns True if this period and altroPeriodo overlap."""
+        sovrapposto = True
+        if altroPeriodo.getInizio() >= self._fine: # se l'altro periodo inizia dopo la fine di questo o lo stesso giorno in cui questo finisce
+            sovrapposto = False
+        if altroPeriodo.getFine() <= self._inizio: # se l'altro periodo finisce prima dell'inizio di questo o lo stesso giorno in cui questo iniza
+            sovrapposto = False
+        return sovrapposto
+    
+
+    def __str__(self):
+        return f"da {self._inizio.strftime('%d/%m/%Y')} a {self._fine.strftime('%d/%m/%Y')}"

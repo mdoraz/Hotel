@@ -21,4 +21,5 @@ class GestoreTransazioni:
     
     @staticmethod
     def prelevaMultaBici(numeroCarta : str):
+        # tramite numeroCarta vengono prelevati 2 euro
         pass

@@ -33,3 +33,18 @@ class CorruptedFileError(Exception):
 		else:
 			super().__init__()
 
+class NotAvailableError(Exception):
+	def __init__(self, message: str):
+		if isinstance(message, str):
+			super().__init__(message)
+		else:
+			super().__init__()
+
+class AssignmentError(Exception):
+	def __init__(self, message: str):
+		if isinstance(message, str):
+			super().__init__(message)
+		else:
+			super().__init__()
+
+
