@@ -11,18 +11,19 @@ from src.Gestori.GestoreFile import GestoreFile
 
 from src.GUI.HomeReceptionist.GestioneCucinaReceptionist.GestioneCucinaMenuReceptionistUI import \
     GestioneCucinaMenuReceptionistUI
-from src.GUI.HomeReceptionist.VisualizzaDatiPersonali.VisualizzaDatiPersonaliReceptionistUI import \
-    VisualizzaDatiPersonaliReceptionistUI
+from src.GUI.HomeReceptionist.VisualizzaDatiPersonaliDipendente.VisualizzaDatiPersonaliDipendenteUI import \
+     VisualizzaDatiPersonaliDipendenteUI
 
 
 class HomeReceptionistUI(QTabWidget):
-    def __init__(self, previous: QWidget):
+    def __init__(self, receptionist, previous: QWidget):
         super().__init__()
         loadUi(GestoreFile.absolutePath('HomeReceptionist.ui', Path.cwd()), self)
         self.setMinimumSize(600, 300)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
         self.previous = previous
+        self.receptionist = receptionist
 
     def _connectButtons(self):
         self.btnVisualizzaDatiPersonali.clicked.connect(self._btnVisualizzaDatiPersonaliClicked)
@@ -34,8 +35,8 @@ class HomeReceptionistUI(QTabWidget):
 
     def _btnVisualizzaDatiPersonaliClicked(self):
         self.close()
-        self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliReceptionistUI(self)
-        self.widgetVisualizzaDatiPersonali.show()
+        self.widgetVisualizzaDatiPersonaliDipendente = VisualizzaDatiPersonaliDipendenteUI(self.receptionist, self)
+        self.widgetVisualizzaDatiPersonaliDipendente.show()
 
     def _btnGestireClientiClicked(self):
         self.close()

@@ -14,11 +14,12 @@ from src.GUI.HomeTitolare.HomeTitolareUI import HomeTitolareUI
 
 
 class LoginProgrammaUI(QTabWidget):
-    def __init__(self, previous : QWidget , pathFile:Path):
+    def __init__(self, previous: QWidget, pathFile:Path):
         super().__init__()
         self.page1 = QWidget()
         loadUi(GestoreFile.absolutePath('login.ui',Path.cwd()), self.page1)
         self.addTab(self.page1, 'Login Programma')
+        self.setMinimumSize(500, 200)
         self.setFont(QtGui.QFont('Arial', 10))
 
         eyeBtn = QToolButton()  # creati i bottoni per mostrare/nascondere la password
@@ -35,7 +36,7 @@ class LoginProgrammaUI(QTabWidget):
         self.page1.btnIndietro.clicked.connect(self._btnIndietroClicked)
 
     def _btnAccediClicked(self):
-        self.close()
+
         if self.page1.lineeditUsername.text().strip() == '' or self.page1.lineeditPassword.text().strip == '': #Se lineeditUsername o lineeditPassword è vuota da errore e non conta gli spazi iniziali
             self._showMessage('Attenzione non hai riempito entrambi i campi richiesti!', QMessageBox.Icon.Warning)
             return
@@ -57,23 +58,27 @@ class LoginProgrammaUI(QTabWidget):
 
             if decrypt(dipendenteUsername.getPassword()) != password:
                 self._showMessage("La password non è corretta. Reinseriscila!", QMessageBox.Icon.Warning)
-            else:
-                ruolo = dipendenteUsername.getAutorizzazione()
-                if ruolo == Ruolo.RECEPTIONIST:
-                    self.widgetHomeReceptionist = HomeReceptionistUI(self)
-                    self.widgetHomeReceptionist.show()
-                else :
-                    self.widgetHomeCamerieri = HomeCamerieriUI(self)
-                    self.widgetHomeCamerieri.show()
+                return
+
+            ruolo = dipendenteUsername.getAutorizzazione()
+            if ruolo == Ruolo.RECEPTIONIST:
+                self.close()
+                self.widgetHomeReceptionist = HomeReceptionistUI(dipendenteUsername, self)
+                self.widgetHomeReceptionist.show()
+            else :
+                self.close()
+                self.widgetHomeCamerieri = HomeCamerieriUI(dipendenteUsername, self)
+                self.widgetHomeCamerieri.show()
 
         elif self.pathFile == Path(dictyonary['titolare']):
             titolare = self._readUtente('titolare')
 
-
-
-        #else:
-            #self.mainwidgetHomeTitolare = HomeTitolareUI(self)
-            #self.mainwidgetHomeTitolare.show()
+            if username != titolare.getUsername() or password != decrypt(titolare.getPassword()):
+                self._showMessage("Uno dei campi da te inseriti non è corretto. Riprova!", QMessageBox.Icon.Warning)
+            else:
+                self.close()
+                self.mainwidgetHomeTitolare = HomeTitolareUI(titolare, self)
+                self.mainwidgetHomeTitolare.show()
 
     def _btnIndietroClicked(self):
         self.close()

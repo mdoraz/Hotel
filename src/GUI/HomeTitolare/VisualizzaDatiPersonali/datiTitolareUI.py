@@ -13,7 +13,7 @@ from src.Utilities.GUIUtils import GUIUtils
 from src.Utilities.encrypter import encrypt, decrypt
 
 
-class DatiTitolareUI(QTabWidget, FormUI):
+class datiTitolareUI(QTabWidget, FormUI):
     def __init__(self, titolare : Amministratore, previous: QWidget):
         super().__init__()
         

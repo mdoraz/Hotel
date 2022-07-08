@@ -18,6 +18,8 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
         self._connectButtons()
         self.previous = previous
 
+
+
     def _connectButtons(self):
         self.btnModificaMenuColazioneInCamera.clicked.connect(self._btnModificaMenuColazioneInCameraClicked)
         self.btnModificaMenuPranzo.clicked.connect(self._btnModificaMenuPranzoClicked)

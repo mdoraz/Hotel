@@ -1,9 +1,11 @@
 import sys
 from PyQt5 import QtGui
+from matplotlib import pyplot as plt
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 from src.Gestori.GestoreFile import GestoreFile
+from src.GUI.HomeTitolare.VisualizzaStatistiche.graficoStatisticheUI import graficoStatisticheUI
 
 
 
@@ -16,7 +18,6 @@ class VisualizzaStatisticheUI(QTabWidget):
         self._connectButtons()
         self.previous = previous
 
-
     def _connectButtons(self):
         self.btnStatisticheColazioneInCamera.clicked.connect(self._btnStatisticheColazioneInCameraClicked)
         self.btnStatisticheNoleggioBici.clicked.connect(self._btnStatisticheNoleggioBiciClicked)
@@ -26,21 +27,34 @@ class VisualizzaStatisticheUI(QTabWidget):
 
 
     def _btnStatisticheColazioneInCameraClicked(self):
-        pass
+        self.close()
+        self.widgetgraficoStatistiche = graficoStatisticheUI(self, 'Colazione')
+        self.widgetgraficoStatistiche.show()
+
     def _btnStatisticheNoleggioBiciClicked(self):
-        pass
+        self.close()
+        self.widgetgraficoStatistiche = graficoStatisticheUI(self, 'Noleggio Bici')
+        self.widgetgraficoStatistiche.show()
+
     def _btnStatisticheAssenzeDipendentiClicked(self):
-        pass
+        self.close()
+        self.widgetgraficoStatistiche = graficoStatisticheUI(self, 'Assenze')
+        self.widgetgraficoStatistiche.show()
+
     def _btnStatisticheTipologiaSoggiornoClicked(self):
-        pass
+        self.close()
+        self.widgetgraficoStatistiche = graficoStatisticheUI(self, 'Tipo Soggiorno')
+        self.widgetgraficoStatistiche.show()
+
     def _btnTornareIndietroClicked(self):
         self.close()
         self.previous.show()
 
 
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWidget = VisualizzaStatisticheUI()
+    mainWidget = VisualizzaStatisticheUI(QWidget)
     mainWidget.show()
     sys.exit(app.exec_())
 
