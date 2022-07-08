@@ -4,16 +4,16 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 
-from src.GUI.HomeReceptionist.GestioneVacanze.AggiungereClientiCheckInUI import AggiungereClientiCheckInUI
-from src.GUI.HomeReceptionist.GestioneVacanze.EliminaPrenotazioneVacanzaUI import EliminaPrenotazioneVacanzaUI
-from src.GUI.HomeReceptionist.GestioneVacanze.ModificaPrenotazioneVacanzaUI import ModificaPrenotazioneVacanzaUI
-from src.GUI.HomeReceptionist.GestioneVacanze.ModificaTermineVacanzaOmbrelloneUI import \
+from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.AggiungereClientiCheckInUI import AggiungereClientiCheckInUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.EliminaPrenotazioneVacanzaUI import EliminaPrenotazioneVacanzaUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.ModificaPrenotazioneVacanzaUI import ModificaPrenotazioneVacanzaUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.ModificaTermineVacanzaOmbrelloneUI import \
     ModificaTermineVacanzaOmbrelloneUI
-from src.GUI.HomeReceptionist.GestioneVacanze.RicercaPrenotazioneVacanzaUI import RicercaPrenotazioneVacanzaUI
-from src.GUI.HomeReceptionist.GestioneVacanze.RicercaVacanzaUI import RicercaVacanzaUI
-from src.GUI.HomeReceptionist.GestioneVacanze.SelezionaCameraUI import SelezionaCameraUI
-from src.GUI.HomeReceptionist.GestireClienti.HomeGestireUnClienteUI import HomeGestireUnClienteUI
-from src.GUI.HomeReceptionist.GestireClienti.RicercaDelCliente1UI import RicercaDelCliente1UI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.RicercaPrenotazioneVacanzaUI import RicercaPrenotazioneVacanzaUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.RicercaVacanzaUI import RicercaVacanzaUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.SelezionaCameraUI import SelezionaCameraUI
+from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.HomeGestireUnClienteUI import HomeGestireUnClienteUI
+from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.RicercaDelCliente1UI import RicercaDelCliente1UI
 from src.Gestori.GestoreFile import GestoreFile
 
 class HomeGestioneVacanzeUI(QTabWidget):

@@ -5,21 +5,22 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
-from src.GUI.HomeCamerieri.GestioneCucinaCamerieri.GestioneCucinaMenuCamerieriUI import \
+from src.GUI.Dipendenti.HomeCamerieri.GestioneCucinaCamerieri.GestioneCucinaMenuCamerieriUI import \
     GestioneCucinaMenuCamerieriUI
-from src.GUI.HomeCamerieri.VisualizzaDatiPersonali.VisualizzaDatiPersonaliCamerieriUI import \
-    VisualizzaDatiPersonaliCamerieriUI
+from src.GUI.Dipendenti.VisualizzaDatiPersonaliDipendente.VisualizzaDatiPersonaliDipendenteUI import \
+    VisualizzaDatiPersonaliDipendenteUI
 from src.Gestori.GestoreFile import GestoreFile
 
 
 class HomeCamerieriUI(QTabWidget):
-    def __init__(self, previous: QWidget):
+    def __init__(self, cameriere, previous: QWidget):
         super().__init__()
         loadUi(GestoreFile.absolutePath('HomeCamerieri.ui', Path.cwd()), self)
         self.setMinimumSize(600, 300)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
         self.previous = previous
+        self.cameriere = cameriere
 
     def _connectButtons(self):
         self.btnVisualizzaDatiPersonaliCamerieri.clicked.connect(self._btnVisualizzaDatiPersonaliCamerieriClicked)
@@ -28,8 +29,8 @@ class HomeCamerieriUI(QTabWidget):
 
     def _btnVisualizzaDatiPersonaliCamerieriClicked(self):
         self.close()
-        self.widgetVisualizzaDatiPersonali = VisualizzaDatiPersonaliCamerieriUI(self)
-        self.widgetVisualizzaDatiPersonali.show()
+        self.widgetVisualizzaDatiPersonaliDipendente = VisualizzaDatiPersonaliDipendenteUI(self.cameriere, self)
+        self.widgetVisualizzaDatiPersonaliDipendente.show()
 
     def _btnGestisciCucinaCamerieriClicked(self):
         self.close()

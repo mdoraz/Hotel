@@ -9,7 +9,7 @@ from src.Gestori.GestoreFile import GestoreFile
 from src.GUI.HomeTitolare.GestioneCucina.GestioneCucinaInterfacciaUI import GestioneCucinaInterfacciaUI
 from src.GUI.HomeTitolare.GestioneDipendenti.GestioneDipendentiUI import GestioneDipendentiUI
 from src.GUI.HomeTitolare.RicercaEVisualizzaVacanze.VisualizzaRicercaVacanze import VisualizzaRicercaVacanzeUI
-from src.GUI.HomeTitolare.VisualizzaDatiPersonali.DatiTitolareUI import DatiTitolareUI
+from src.GUI.HomeTitolare.VisualizzaDatiPersonali.datiTitolareUI import datiTitolareUI
 from src.GUI.HomeTitolare.VisualizzaStatistiche.VisualizzaStatisticheUI import VisualizzaStatisticheUI
 
 
@@ -35,7 +35,7 @@ class HomeTitolareUI(QTabWidget):
 
     def _btnDatiPersonaliClicked(self):
         self.close()
-        self.widgetdatiTitolare = DatiTitolareUI(self.titolare, self)
+        self.widgetdatiTitolare = datiTitolareUI(self.titolare, self)
         self.widgetdatiTitolare.show()
 
     def _btnDipendentiClicked(self):

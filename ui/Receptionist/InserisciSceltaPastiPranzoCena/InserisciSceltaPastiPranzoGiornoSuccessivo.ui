@@ -18,14 +18,14 @@
     <string>Inserisci scelta pasti Pranzo per il giorno successivo</string>
    </attribute>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="labelInserisciCameraCliente">
+    <item row="3" column="2">
+     <widget class="QPushButton" name="btnAvanti">
       <property name="text">
-       <string>Inserire innanzitutto il numero di camera del cliente:</string>
+       <string>Avanti</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="3">
+    <item row="0" column="2">
      <widget class="QComboBox" name="comboboxInserisciCameraCliente">
       <item>
        <property name="text">
@@ -209,26 +209,6 @@
       </item>
      </widget>
     </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="btnTornarePaginaPrecedente">
-      <property name="text">
-       <string>Tornare alla pagina precedente</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
     <item row="1" column="0">
      <widget class="QLabel" name="labelDomanda">
       <property name="text">
@@ -236,7 +216,7 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0" colspan="4">
+    <item row="2" column="0" colspan="3">
      <widget class="QGroupBox" name="groupboxSchedaMenu">
       <property name="title">
        <string>Menù:</string>
@@ -263,20 +243,12 @@
               <string>Descrizione</string>
              </property>
             </column>
-            <column>
-             <property name="text">
-              <string>Prezzo</string>
-             </property>
-            </column>
             <item>
              <property name="text">
               <string>Nome</string>
              </property>
              <property name="text">
               <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>Prezzo</string>
              </property>
             </item>
             <item>
@@ -286,9 +258,6 @@
              <property name="text">
               <string>Ingredienti</string>
              </property>
-             <property name="text">
-              <string>Prezzo</string>
-             </property>
             </item>
             <item>
              <property name="text">
@@ -296,9 +265,6 @@
              </property>
              <property name="text">
               <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>Prezzo</string>
              </property>
             </item>
            </widget>
@@ -327,20 +293,12 @@
               <string>Descrizione</string>
              </property>
             </column>
-            <column>
-             <property name="text">
-              <string>Prezzo</string>
-             </property>
-            </column>
             <item>
              <property name="text">
               <string>Nome</string>
              </property>
              <property name="text">
               <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>Prezzo</string>
              </property>
             </item>
             <item>
@@ -350,9 +308,6 @@
              <property name="text">
               <string>Ingredienti</string>
              </property>
-             <property name="text">
-              <string>Prezzo</string>
-             </property>
             </item>
             <item>
              <property name="text">
@@ -360,9 +315,6 @@
              </property>
              <property name="text">
               <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>Prezzo</string>
              </property>
             </item>
            </widget>
@@ -391,20 +343,12 @@
               <string>Descrizione </string>
              </property>
             </column>
-            <column>
-             <property name="text">
-              <string>Prezzo</string>
-             </property>
-            </column>
             <item>
              <property name="text">
               <string>Nome</string>
              </property>
              <property name="text">
               <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>Prezzo</string>
              </property>
             </item>
             <item>
@@ -414,9 +358,6 @@
              <property name="text">
               <string>Ingredienti</string>
              </property>
-             <property name="text">
-              <string>Prezzo</string>
-             </property>
             </item>
             <item>
              <property name="text">
@@ -424,9 +365,6 @@
              </property>
              <property name="text">
               <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>Prezzo</string>
              </property>
             </item>
            </widget>
@@ -455,20 +393,12 @@
               <string>Descrizione</string>
              </property>
             </column>
-            <column>
-             <property name="text">
-              <string>Prezzo</string>
-             </property>
-            </column>
             <item>
              <property name="text">
               <string>Nome</string>
              </property>
              <property name="text">
               <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>prezzo</string>
              </property>
             </item>
             <item>
@@ -478,9 +408,6 @@
              <property name="text">
               <string>Ingredienti</string>
              </property>
-             <property name="text">
-              <string>Prezzo</string>
-             </property>
             </item>
             <item>
              <property name="text">
@@ -488,9 +415,6 @@
              </property>
              <property name="text">
               <string>Ingredienti</string>
-             </property>
-             <property name="text">
-              <string>Prezzo</string>
              </property>
             </item>
            </widget>
@@ -501,10 +425,23 @@
       </layout>
      </widget>
     </item>
-    <item row="3" column="3">
-     <widget class="QPushButton" name="btnAvanti">
+    <item row="0" column="0">
+     <widget class="QLabel" name="labelInserisciCameraCliente">
       <property name="text">
-       <string>Avanti</string>
+       <string>Inserire innanzitutto il numero di camera del cliente:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QPushButton" name="btnTornarePaginaPrecedente">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Tornare alla pagina precedente</string>
       </property>
      </widget>
     </item>

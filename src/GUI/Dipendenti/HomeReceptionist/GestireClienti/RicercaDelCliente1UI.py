@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 
-from src.GUI.HomeReceptionist.GestireClienti.RicercaDelCliente2UI import RicercaDelCliente2UI
+from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.RicercaDelCliente2UI import RicercaDelCliente2UI
 from src.Gestori.GestoreFile import GestoreFile
 
 class RicercaDelCliente1UI(QTabWidget):
