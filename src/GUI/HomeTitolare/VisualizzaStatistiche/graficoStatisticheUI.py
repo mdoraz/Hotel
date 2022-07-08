@@ -1,12 +1,7 @@
 import sys
-
-import self as self
+import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.figure import Figure
-import numpy as np
-from numpy import random
-
 from PyQt5 import QtGui, QtCore, QtWidgets
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
@@ -22,24 +17,13 @@ class graficoStatisticheUI(QMainWindow):
         self.previous = previous
         self._connectButtons()
 
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_4)#creato un horizontal Layout
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")#dato un nome all'Horizontal layout creato in precedenza
+        self.figure = plt.figure()##tramite metodo di matplotlib, Canvas inserito un widget all'interno del frame (all'interno del widget andra il grafico)
+        self.canvas = FigureCanvas(self.figure) # fine della greazione del canvas
+        self.horizontalLayout_4.addWidget(self.canvas) #aggiunta alla canvas l'horizontal layout creato in precedenza
 
-        #self.GraficoStatistiche1()
-        #self.GraficoStatistiche2()
-        #self.GraficoStatistiche3()
-        #self.GraficoStatistiche4()
-
-        #create a horizontal Layout
-        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.frame_4)
-        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
-        ##Canvas here
-        self.figure = plt.figure()
-        self.canvas = FigureCanvas(self.figure)
-        ##end of Canvas
-        ## add canvas
-        self.horizontalLayout_4.addWidget(self.canvas)
-        ##end of horizontal Layout
-
-        if nomeStatistica == 'Colazione':
+        if nomeStatistica == 'Colazione':    #A seconda della statistica ottengo un grafico diverso
             self.graficoStatistiche1()
         elif nomeStatistica == 'Noleggio Bici':
             self.graficoStatistiche2()
@@ -48,16 +32,8 @@ class graficoStatisticheUI(QMainWindow):
         elif nomeStatistica == 'Tipo Soggiorno':
             self.graficoStatistiche4()
 
-
-
-
-
     def _connectButtons(self):
         self.btnIndietro.clicked.connect(self._btnIndietroClicked)
-        #self.btnOttenereStatistica.clicked.connect(self._btnOttenereStatisticaClicked)
-
-    #def _btnOttenereStatisticaClicked(self):
-
 
     def _btnIndietroClicked(self):
         self.close()
