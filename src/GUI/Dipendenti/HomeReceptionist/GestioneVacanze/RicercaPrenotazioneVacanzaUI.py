@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 
-from src.GUI.HomeReceptionist.GestireClienti.RicercaDelCliente1UI import RicercaDelCliente1UI
+from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.RicercaDelCliente1UI import RicercaDelCliente1UI
 from src.Gestori.GestoreFile import GestoreFile
 
 class RicercaPrenotazioneVacanzaUI(QTabWidget):

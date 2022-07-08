@@ -5,12 +5,12 @@ from PyQt5.uic import loadUi
 from pathlib import Path
 from src.Gestori.GestoreFile import GestoreFile
 
-from src.GUI.HomeReceptionist.NoleggiareBici.AssegnaBiciPrenotateUI import AssegnaBiciPrenotateUI
-from src.GUI.HomeReceptionist.NoleggiareBici.AssegnaBiciSenzaPrenotazioneUI import AssegnaBiciSenzaPrenotazioneUI
-from src.GUI.HomeReceptionist.NoleggiareBici.ConfermaTerminareNoleggioUI import ConfermaTerminareNoleggioUI
-from src.GUI.HomeReceptionist.NoleggiareBici.EliminaPrenotazioneBiciUI import EliminaPrenotazioneBiciUI
-from src.GUI.HomeReceptionist.NoleggiareBici.ModificaPrenotazioneBiciUI import ModificaPrenotazioneBiciUI
-from src.GUI.HomeReceptionist.NoleggiareBici.RicercaPrenotazioneBiciUI import RicercaPrenotazioneBiciUI
+from src.GUI.Dipendenti.HomeReceptionist.NoleggiareBici.AssegnaBiciPrenotateUI import AssegnaBiciPrenotateUI
+from src.GUI.Dipendenti.HomeReceptionist.NoleggiareBici.AssegnaBiciSenzaPrenotazioneUI import AssegnaBiciSenzaPrenotazioneUI
+from src.GUI.Dipendenti.HomeReceptionist.NoleggiareBici.ConfermaTerminareNoleggioUI import ConfermaTerminareNoleggioUI
+from src.GUI.Dipendenti.HomeReceptionist.NoleggiareBici.EliminaPrenotazioneBiciUI import EliminaPrenotazioneBiciUI
+from src.GUI.Dipendenti.HomeReceptionist.NoleggiareBici.ModificaPrenotazioneBiciUI import ModificaPrenotazioneBiciUI
+from src.GUI.Dipendenti.HomeReceptionist.NoleggiareBici.RicercaPrenotazioneBiciUI import RicercaPrenotazioneBiciUI
 
 
 class HomeNoleggiareUnaBiciUI(QTabWidget):

@@ -5,7 +5,7 @@ from PyQt5.uic import loadUi
 from pathlib import Path
 from src.Gestori.GestoreFile import GestoreFile
 
-from src.GUI.HomeReceptionist.GestioneCucinaReceptionist.ConfermaSceltaPastiPranzoUI import ConfermaSceltaPastiPranzoUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.ConfermaSceltaPastiPranzoUI import ConfermaSceltaPastiPranzoUI
 
 
 class InserisciSceltaPastiPranzoGiornoSuccessivoUI(QTabWidget):

@@ -5,9 +5,9 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
-from src.GUI.HomeCamerieri.GestioneCucinaCamerieri.GestioneCucinaMenuCamerieriUI import \
+from src.GUI.Dipendenti.HomeCamerieri.GestioneCucinaCamerieri.GestioneCucinaMenuCamerieriUI import \
     GestioneCucinaMenuCamerieriUI
-from src.GUI.HomeReceptionist.VisualizzaDatiPersonaliDipendente.VisualizzaDatiPersonaliDipendenteUI import \
+from src.GUI.Dipendenti.VisualizzaDatiPersonaliDipendente.VisualizzaDatiPersonaliDipendenteUI import \
     VisualizzaDatiPersonaliDipendenteUI
 from src.Gestori.GestoreFile import GestoreFile
 

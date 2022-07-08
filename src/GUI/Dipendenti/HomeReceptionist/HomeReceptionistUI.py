@@ -4,14 +4,14 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 
-from src.GUI.HomeReceptionist.GestioneVacanze.HomeGestioneVacanzeUI import HomeGestioneVacanzeUI
-from src.GUI.HomeReceptionist.GestireClienti.HomeGestireUnClienteUI import HomeGestireUnClienteUI
-from src.GUI.HomeReceptionist.NoleggiareBici.HomeNoleggiareUnaBiciUI import HomeNoleggiareUnaBiciUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.HomeGestioneVacanzeUI import HomeGestioneVacanzeUI
+from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.HomeGestireUnClienteUI import HomeGestireUnClienteUI
+from src.GUI.Dipendenti.HomeReceptionist.NoleggiareBici.HomeNoleggiareUnaBiciUI import HomeNoleggiareUnaBiciUI
 from src.Gestori.GestoreFile import GestoreFile
 
-from src.GUI.HomeReceptionist.GestioneCucinaReceptionist.GestioneCucinaMenuReceptionistUI import \
+from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.GestioneCucinaMenuReceptionistUI import \
     GestioneCucinaMenuReceptionistUI
-from src.GUI.HomeReceptionist.VisualizzaDatiPersonaliDipendente.VisualizzaDatiPersonaliDipendenteUI import \
+from src.GUI.Dipendenti.VisualizzaDatiPersonaliDipendente.VisualizzaDatiPersonaliDipendenteUI import \
      VisualizzaDatiPersonaliDipendenteUI
 
 

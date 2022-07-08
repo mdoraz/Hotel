@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 
-from src.GUI.HomeReceptionist.GestioneVacanze.SelezionaCameraUI import SelezionaCameraUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.SelezionaCameraUI import SelezionaCameraUI
 from src.Gestori.GestoreFile import GestoreFile
 
 class ModificaPrenotazioneVacanzaUI(QTabWidget):

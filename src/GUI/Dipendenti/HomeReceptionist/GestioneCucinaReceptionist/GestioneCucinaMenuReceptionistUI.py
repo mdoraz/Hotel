@@ -5,9 +5,9 @@ from PyQt5.uic import loadUi
 from pathlib import Path
 from src.Gestori.GestoreFile import GestoreFile
 
-from src.GUI.HomeReceptionist.GestioneCucinaReceptionist.InserisciSceltaPastiCenaGiornoSuccessivoUI import \
+from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.InserisciSceltaPastiCenaGiornoSuccessivoUI import \
     InserisciSceltaPastiCenaGiornoSuccessivoUI
-from src.GUI.HomeReceptionist.GestioneCucinaReceptionist.InserisciSceltaPastiPranzoGiornoSuccessivoUI import \
+from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.InserisciSceltaPastiPranzoGiornoSuccessivoUI import \
     InserisciSceltaPastiPranzoGiornoSuccessivoUI
 
 

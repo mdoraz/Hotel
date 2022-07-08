@@ -3,12 +3,11 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
-from src.Gestori.GestoreFile import GestoreFile
 
 from src.Attori.Ruolo import Ruolo
 from src.Gestori.GestoreFile import GestoreFile
-from src.GUI.HomeCamerieri.HomeCamerieriUI import HomeCamerieriUI
-from src.GUI.HomeReceptionist.HomeReceptionistUI import HomeReceptionistUI
+from src.GUI.Dipendenti.HomeCamerieri.HomeCamerieriUI import HomeCamerieriUI
+from src.GUI.Dipendenti.HomeReceptionist.HomeReceptionistUI import HomeReceptionistUI
 from src.Utilities.encrypter import decrypt
 from src.GUI.HomeTitolare.HomeTitolareUI import HomeTitolareUI
 
