@@ -1,79 +1,170 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>tabSelezionaCamera</class>
- <widget class="QTabWidget" name="tabSelezionaCamera">
+ <class>tabWidget</class>
+ <widget class="QTabWidget" name="tabWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1161</width>
-    <height>300</height>
+    <width>550</width>
+    <height>500</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>550</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>Seleziona Camera</string>
+   <string>Struttura Alberghiera</string>
   </property>
   <widget class="QWidget" name="tabSelezionaCamera">
    <attribute name="title">
     <string>Seleziona Camera</string>
    </attribute>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="5">
-     <widget class="QPushButton" name="btnRicercaCamerePeriodoSelezionato">
-      <property name="text">
-       <string>Ricerca camere nel periodo selezionato</string>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QWidget" name="widgetUp" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
+       <item row="1" column="2">
+        <widget class="QPushButton" name="btnRicercaCamere">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Ricerca camere</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QWidget" name="widgetDaA" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <layout class="QFormLayout" name="formLayout">
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelDa">
+            <property name="text">
+             <string>da</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QDateEdit" name="dateeditDa">
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="displayFormat">
+             <string>dd/MM/yyyy</string>
+            </property>
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelA">
+            <property name="text">
+             <string>a</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDateEdit" name="dateeditA">
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="displayFormat">
+             <string>dd/MM/yyyy</string>
+            </property>
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeType">
+          <enum>QSizePolicy::Fixed</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="0" colspan="3">
+        <widget class="QLabel" name="labelInserirePeriodoSvolgereVacanza">
+         <property name="text">
+          <string>Inserire il periodo nel quale il cliente desidera effettuare la vacanza:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
-    <item row="0" column="4">
-     <widget class="QLabel" name="labelInserirePeriodoSvolgereVacanzaA">
-      <property name="text">
-       <string>                                   a:</string>
+    <item>
+     <widget class="QGroupBox" name="groupboxCamere">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-     </widget>
-    </item>
-    <item row="0" column="5">
-     <widget class="QDateEdit" name="dateeditInserirePeriodoSvolgereVacanzaA">
-      <property name="displayFormat">
-       <string>dd/MM/yyyy</string>
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>9</pointsize>
+       </font>
       </property>
-      <property name="calendarPopup">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="3">
-     <widget class="QDateEdit" name="dateeditInserirePeriodoSvolgereVacanzaDa">
-      <property name="displayFormat">
-       <string>dd/MM/yyyy</string>
-      </property>
-      <property name="calendarPopup">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="5">
-     <widget class="QPushButton" name="btnScegliereCameraSelezionata">
-      <property name="text">
-       <string>Scegliere camera selezionata</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QPushButton" name="btnTornareIndietro">
-      <property name="text">
-       <string>Tornare Indietro</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0" colspan="6">
-     <widget class="QGroupBox" name="groupboxSchedaVisualizzazioneCamereDisponibiliPeriodoSelezionato">
       <property name="title">
        <string>Scheda di visualizzazione delle camere disponibili in tale periodo:</string>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QTreeWidget" name="treewidgetSpecificheCamereDaSelezionare">
+        <widget class="QTreeWidget" name="treeWidgetCamere">
+         <property name="font">
+          <font>
+           <family>Arial</family>
+           <pointsize>10</pointsize>
+          </font>
+         </property>
          <column>
           <property name="text">
            <string>Numero</string>
@@ -84,59 +175,49 @@
            <string>Persone</string>
           </property>
          </column>
-         <column>
-          <property name="text">
-           <string>Vista Mare/No</string>
-          </property>
-         </column>
-         <item>
-          <property name="text">
-           <string>numero camera</string>
-          </property>
-          <property name="text">
-           <string>1/2/3/4</string>
-          </property>
-          <property name="text">
-           <string>Si/No</string>
-          </property>
-         </item>
         </widget>
        </item>
       </layout>
      </widget>
     </item>
-    <item row="0" column="0" colspan="3">
-     <widget class="QLabel" name="labelInserirePeriodoSvolgereVacanzaDa">
-      <property name="text">
-       <string>Inserire il periodo nel quale il cliente desidera effettuare la vacanza:                              Da:</string>
+    <item>
+     <widget class="QWidget" name="widgetDown" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="btnIndietro">
+         <property name="text">
+          <string>Tornare Indietro</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>135</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnConferma">
+         <property name="text">
+          <string>Scegliere camera selezionata</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
-    </item>
-    <item row="3" column="1" colspan="4">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="1" column="0" colspan="5">
-     <spacer name="horizontalSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
     </item>
    </layout>
   </widget>
