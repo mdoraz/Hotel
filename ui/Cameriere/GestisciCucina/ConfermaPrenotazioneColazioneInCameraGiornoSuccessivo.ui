@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Conferma Prenota Colazione In camera per giorno successivo</string>
+   <string>Struttura Alberghiera: Conferma Prenota Colazione In camera per giorno successivo</string>
   </property>
   <widget class="QWidget" name="tab">
    <attribute name="title">

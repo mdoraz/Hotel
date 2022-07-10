@@ -29,7 +29,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Inserisci Dipendente</string>
+   <string>Struttura Alberghiera: Inserisci Dipendente</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">

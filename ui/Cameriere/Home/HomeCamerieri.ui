@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Home Camerieri</string>
+   <string>Struttura Alberghiera</string>
   </property>
   <widget class="QWidget" name="tabHomeCamerieri">
    <attribute name="title">

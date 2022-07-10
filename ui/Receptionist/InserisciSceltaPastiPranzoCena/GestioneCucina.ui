@@ -20,10 +20,10 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>Gestione Cucina</string>
+   <string>Struttura Alberghiera: Gestione Cucina</string>
   </property>
   <property name="currentIndex">
-   <number>2</number>
+   <number>0</number>
   </property>
   <property name="movable">
    <bool>false</bool>
@@ -64,33 +64,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-             <property name="flags">
-              <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -114,36 +87,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-             <property name="flags">
-              <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-             <property name="flags">
-              <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -167,30 +110,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -257,30 +176,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -293,7 +188,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_5">
           <item row="0" column="0">
-           <widget class="QTreeWidget" name="treewidgetPrimiPranzo">
+           <widget class="QTreeWidget" name="treewidgetPrimoPranzo">
             <column>
              <property name="text">
               <string>Primo</string>
@@ -304,30 +199,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -340,7 +211,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
           <item row="0" column="0">
-           <widget class="QTreeWidget" name="treewidgetSecondiContorniPranzo">
+           <widget class="QTreeWidget" name="treewidgetSecondoContornoPranzo">
             <column>
              <property name="text">
               <string>Secondo/Contorno</string>
@@ -351,30 +222,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -398,30 +245,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -495,30 +318,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -542,30 +341,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -589,30 +364,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -636,30 +387,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>

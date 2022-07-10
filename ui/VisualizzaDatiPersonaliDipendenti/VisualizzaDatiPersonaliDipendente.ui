@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Visualizza dati personali</string>
+   <string>Struttura Alberghiera</string>
   </property>
   <widget class="QWidget" name="VisualizzaDatiPersonaliReceptionist">
    <attribute name="title">

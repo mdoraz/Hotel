@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Home Noleggiare una bici</string>
+   <string>Struttura Alberghiera</string>
   </property>
   <widget class="QWidget" name="tab">
    <attribute name="title">
@@ -113,7 +113,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1067</width>
+                <width>98</width>
                 <height>514</height>
                </rect>
               </property>

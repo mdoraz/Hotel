@@ -17,7 +17,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Login</string>
+   <string>Struttura Alberghiera: Login</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="1" column="1">

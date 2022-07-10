@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>647</width>
-    <height>776</height>
+    <height>746</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Inserisci scelta pasti Cena per il giorno successivo</string>
+   <string>Struttura Alberghiera</string>
   </property>
   <widget class="QWidget" name="tab">
    <attribute name="title">
@@ -59,7 +59,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QTreeWidget" name="treewidgetAntipasti">
+           <widget class="QTreeWidget" name="treewidgetAntipastiCena">
             <property name="selectionMode">
              <enum>QAbstractItemView::MultiSelection</enum>
             </property>
@@ -73,30 +73,6 @@
               <string>Descrizione</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -109,7 +85,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QTreeWidget" name="treewidgetPrimi">
+           <widget class="QTreeWidget" name="treewidgetPrimiCena">
             <property name="selectionMode">
              <enum>QAbstractItemView::MultiSelection</enum>
             </property>
@@ -123,30 +99,6 @@
               <string>Descrizione</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -159,7 +111,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QTreeWidget" name="treewidgetSecondiContorni">
+           <widget class="QTreeWidget" name="treewidgetSecondiContorniCena">
             <property name="selectionMode">
              <enum>QAbstractItemView::MultiSelection</enum>
             </property>
@@ -173,30 +125,6 @@
               <string>Descrizione </string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -209,7 +137,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <widget class="QTreeWidget" name="treewidgetDolciBevande">
+           <widget class="QTreeWidget" name="treewidgetDolciBevandeCena">
             <property name="selectionMode">
              <enum>QAbstractItemView::MultiSelection</enum>
             </property>
@@ -223,30 +151,6 @@
               <string>Descrizione</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>

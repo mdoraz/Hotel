@@ -17,7 +17,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Aggiungi assenza</string>
+   <string>Struttura Alberghiera: Aggiungi assenza</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

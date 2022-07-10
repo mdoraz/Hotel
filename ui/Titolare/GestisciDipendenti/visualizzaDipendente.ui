@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Visualizza Dipendente</string>
+   <string>Struttura Alberghiera: Visualizza Dipendente</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="topMargin">

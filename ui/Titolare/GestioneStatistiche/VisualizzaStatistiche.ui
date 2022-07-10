@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Visualizza Statistiche Struttura Alberghiera</string>
+   <string>Struttura Alberghiera</string>
   </property>
   <widget class="QWidget" name="tab">
    <attribute name="title">
