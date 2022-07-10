@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>247</height>
+    <width>448</width>
+    <height>314</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>250</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+    <pointsize>10</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Struttura Alberghiera</string>
@@ -58,7 +70,7 @@
      </widget>
     </item>
     <item row="2" column="0" colspan="3">
-     <widget class="QGroupBox" name="groupboxSchedaDatiCliente">
+     <widget class="QGroupBox" name="groupboxDati">
       <property name="title">
        <string>Dati:</string>
       </property>

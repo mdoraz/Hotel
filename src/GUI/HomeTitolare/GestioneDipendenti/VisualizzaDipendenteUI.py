@@ -6,7 +6,7 @@ from PyQt5.uic import loadUi
 
 from src.Attori.Dipendente import Dipendente
 from src.Attori.Ruolo import Ruolo
-from src.GUI.HomeTitolare.GestioneDipendenti.FormUI import FormUI
+from src.GUI.FormUI import FormUI
 from src.GUI.HomeTitolare.GestioneDipendenti.InserimentoCredenzialiUI import InserimentoCredenzialiUI
 from src.GUI.HomeTitolare.GestioneDipendenti.VisualizzaAssenzeUI import VisualizzaAssenzeUI
 from src.Gestori.GestoreFile import GestoreFile

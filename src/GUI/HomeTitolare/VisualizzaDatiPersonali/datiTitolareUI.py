@@ -8,12 +8,12 @@ from PyQt5.uic import loadUi
 from src.Attori.Amministratore import Amministratore
 from src.GUI.HomeTitolare.GestioneDipendenti.InserimentoCredenzialiUI import InserimentoCredenzialiUI
 from src.Gestori.GestoreFile import GestoreFile
-from src.GUI.HomeTitolare.GestioneDipendenti.FormUI import FormUI
+from src.GUI.FormUI import FormUI
 from src.Utilities.GUIUtils import GUIUtils
 from src.Utilities.encrypter import encrypt, decrypt
 
 
-class datiTitolareUI(QTabWidget, FormUI):
+class DatiTitolareUI(QTabWidget, FormUI):
     def __init__(self, titolare : Amministratore, previous: QWidget):
         super().__init__()
         

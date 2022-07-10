@@ -7,6 +7,7 @@ class GUIUtils:
 
 	validators = {
 		'soloLettere' : QtGui.QRegularExpressionValidator(QtCore.QRegularExpression("[a-zA-Z'àèòìù ]+")),
+		'soloNumeri' : QtGui.QRegularExpressionValidator(QtCore.QRegularExpression("[0-9]+")),
 		'IBAN' : QtGui.QRegularExpressionValidator(QtCore.QRegularExpression("[0-9]{27,27}")), # 27 numeri
 		'email' : QtGui.QRegularExpressionValidator(QtCore.QRegularExpression(_emailProvidersPattern)),
 		'cellulare' : QtGui.QRegularExpressionValidator(QtCore.QRegularExpression("[0-9]{10,10}")),

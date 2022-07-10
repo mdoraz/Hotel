@@ -6,7 +6,7 @@ from PyQt5.uic import loadUi
 
 from src.Utilities.GUIUtils import GUIUtils
 from src.Gestori.GestoreFile import GestoreFile
-from src.GUI.HomeTitolare.GestioneDipendenti.FormUI import FormUI
+from src.GUI.FormUI import FormUI
 
 
 class InserimentoCredenzialiUI(FormUI):
