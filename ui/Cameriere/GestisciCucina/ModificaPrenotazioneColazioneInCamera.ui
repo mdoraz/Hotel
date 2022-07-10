@@ -11,11 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Modifica Prenotazione Colazione In Camera</string>
+   <string>Struttura Alberghiera: Modifica Prenotazione Colazione In Camera</string>
   </property>
   <widget class="QWidget" name="tab">
    <attribute name="title">
-    <string>Modifica Menù</string>
+    <string>Modifica Prenotazione Menù</string>
    </attribute>
    <layout class="QGridLayout" name="gridLayout">
     <item row="5" column="2">

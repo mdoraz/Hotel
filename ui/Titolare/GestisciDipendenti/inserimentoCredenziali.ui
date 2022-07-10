@@ -23,7 +23,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Inserimento Credenziali</string>
+   <string>Struttura Alberghiera: Inserimento Credenziali</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

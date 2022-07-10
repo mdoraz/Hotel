@@ -23,7 +23,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Struttura Alberghiera</string>
+   <string>Struttura Alberghiera: Home Receptionist</string>
   </property>
   <widget class="QWidget" name="tab">
    <property name="minimumSize">

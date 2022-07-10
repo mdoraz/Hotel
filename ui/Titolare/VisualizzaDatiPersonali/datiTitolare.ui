@@ -23,7 +23,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>DatiPersonali</string>
+   <string>Struttura Alberghiera</string>
   </property>
   <widget class="QWidget" name="tabDatiPersonali">
    <attribute name="title">

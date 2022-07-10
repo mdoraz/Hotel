@@ -23,7 +23,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Gestione Dipendenti</string>
+   <string>Struttura Alberghiera: Gestione Dipendenti</string>
   </property>
   <property name="currentIndex">
    <number>0</number>

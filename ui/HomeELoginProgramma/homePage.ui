@@ -17,7 +17,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Home Page</string>
+   <string>Struttura Alberghiera: Home Page</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

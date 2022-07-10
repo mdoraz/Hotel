@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Prenota Colazione in camera per giorno successivo</string>
+   <string>Struttura Alberghiera: Prenota Colazione In camera Giorno Successivo</string>
   </property>
   <property name="tabPosition">
    <enum>QTabWidget::North</enum>
@@ -24,7 +24,7 @@
   </property>
   <widget class="QWidget" name="tab">
    <attribute name="title">
-    <string>Prenota colazione in camera per giorno successivo</string>
+    <string>Prenota Colazione In Camera Giorno Successivo</string>
    </attribute>
    <layout class="QGridLayout" name="gridLayout_3">
     <item row="5" column="2">
@@ -80,7 +80,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
-           <widget class="QTreeWidget" name="treewidgetBevande">
+           <widget class="QTreeWidget" name="treewidgetBevandeColazioneInCamera">
             <property name="selectionMode">
              <enum>QAbstractItemView::MultiSelection</enum>
             </property>
@@ -94,30 +94,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -130,7 +106,7 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QTreeWidget" name="treewidgetSalato">
+           <widget class="QTreeWidget" name="treewidgetSalatoColazioneInCamera">
             <property name="selectionMode">
              <enum>QAbstractItemView::MultiSelection</enum>
             </property>
@@ -144,30 +120,6 @@
               <string> Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
@@ -364,7 +316,7 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_4">
           <item row="0" column="0" rowspan="2">
-           <widget class="QTreeWidget" name="treewidgetDolce">
+           <widget class="QTreeWidget" name="treewidgetDolceColazioneInCamera">
             <property name="selectionMode">
              <enum>QAbstractItemView::MultiSelection</enum>
             </property>
@@ -378,30 +330,6 @@
               <string>Ingredienti</string>
              </property>
             </column>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Nome</string>
-             </property>
-             <property name="text">
-              <string>Ingredienti</string>
-             </property>
-            </item>
            </widget>
           </item>
          </layout>
