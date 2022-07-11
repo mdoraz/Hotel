@@ -26,38 +26,38 @@ class HomeReceptionistUI(QTabWidget):
         self.receptionist = receptionist
 
     def _connectButtons(self):
-        self.btnVisualizzaDatiPersonali.clicked.connect(self._btnVisualizzaDatiPersonaliClicked)
-        self.btnGestireClienti.clicked.connect(self._btnGestireClientiClicked)
-        self.btnGestireNoleggioBici.clicked.connect(self._btnGestireNoleggioBiciClicked)
-        self.btnGestireLaVacanza.clicked.connect(self._btnGestireLaVacanzaClicked)
-        self.btnInserisciSceltaPastiPranzoCena.clicked.connect(self._btnInserisciSceltaPastiPranzoCenaClicked)
-        self.btnTornareHomeHotel.clicked.connect(self._TornareHomeHotelClicked)
+        self.btnDatiPersonali.clicked.connect(self._btnDatiPersonaliClicked)
+        self.btnClienti.clicked.connect(self._btnClientiClicked)
+        self.btnNoleggiBici.clicked.connect(self._btnNoleggiBiciClicked)
+        self.btnVacanza.clicked.connect(self._btnVacanzaClicked)
+        self.btnInserisciSceltaPasti.clicked.connect(self._btnInserisciSceltaPastiClicked)
+        self.btnIndietro.clicked.connect(self._btnIndietroClicked)
 
-    def _btnVisualizzaDatiPersonaliClicked(self):
+    def _btnDatiPersonaliClicked(self):
         self.close()
         self.widgetVisualizzaDatiPersonaliDipendente = VisualizzaDatiPersonaliDipendenteUI(self.receptionist, self)
         self.widgetVisualizzaDatiPersonaliDipendente.show()
 
-    def _btnGestireClientiClicked(self):
+    def _btnClientiClicked(self):
         self.close()
         self.tabHomeGestireUnCliente = HomeGestireUnClienteUI(self)
         self.tabHomeGestireUnCliente.show()
 
-    def _btnGestireNoleggioBiciClicked(self):
+    def _btnNoleggiBiciClicked(self):
         self.close()
         self.widgetHomeNoleggiareUnaBici = HomeNoleggiareUnaBiciUI(self)
         self.widgetHomeNoleggiareUnaBici.show()
 
-    def _btnGestireLaVacanzaClicked(self):
+    def _btnVacanzaClicked(self):
         self.close()
         self.widgetHomegestioneVacanze = HomeGestioneVacanzeUI(self)
         self.widgetHomegestioneVacanze.show()
 
-    def _btnInserisciSceltaPastiPranzoCenaClicked(self):
+    def _btnInserisciSceltaPastiClicked(self):
         self.close()
         self.tabGestioneCucinaMenuReceptionist = GestioneCucinaMenuReceptionistUI(self)
         self.tabGestioneCucinaMenuReceptionist.show()
-    def _TornareHomeHotelClicked(self):
+    def _btnIndietroClicked(self):
         self.close()
         self.previous.show()
 if __name__ == "__main__":

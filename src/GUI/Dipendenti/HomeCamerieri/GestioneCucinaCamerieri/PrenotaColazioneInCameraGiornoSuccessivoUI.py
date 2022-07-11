@@ -18,6 +18,32 @@ class PrenotaColazioneInCameraGiornoSuccessivoUI(QTabWidget):
         self._connectButtons()
         self.previous = previous
 
+        self._fillTreeWidgetColazioneInCamera()
+
+    def _fillTreeWidgetColazioneInCamera(self):
+        paths = GestoreFile.leggiJson(Path('paths.json'))
+        menuColazione = GestoreFile.leggiDictPickle(Path(paths['menuColazione']))
+        self.treewidgetDolceColazioneInCamera.clear()  # Queste tre righe che richiamano il metodo clear del treeWidget
+        self.treewidgetSalatoColazioneInCamera.clear()  # ci permettono di partire sempre con il treeWidget vuoto in modo tale
+        self.treewidgetBevandeColazioneInCamera.clear()  # che se clicchiamo annulla il treeWidget torna come era prima
+        if menuColazione != {}:
+            dolci = menuColazione["dolce"]  # ottenere sottodizionario
+            for k, v in dolci.items():
+                self.treewidgetDolceColazioneInCamera.addTopLevelItem(QTreeWidgetItem([k, v], 0))
+            salato = menuColazione["salato"]  # ottenere sottodizionario
+            for k, v in salato.items():
+                self.treewidgetSalatoColazioneInCamera.addTopLevelItem(QTreeWidgetItem([k, v], 0))
+            bevande = menuColazione["bevande"]  # ottenere sottodizionario
+            for k, v in bevande.items():
+                self.treewidgetBevandeColazioneInCamera.addTopLevelItem(QTreeWidgetItem([k, v], 0))
+        else:
+            i = 0
+            while i < 3:
+                self.treewidgetDolceColazioneInCamera.addTopLevelItem(QTreeWidgetItem([f"Nome{i+1}", "Ingredienti"], 0))
+                self.treewidgetSalatoColazioneInCamera.addTopLevelItem(QTreeWidgetItem([f"Nome{i+1}", "Ingredienti"], 0))
+                self.treewidgetBevandeColazioneInCamera.addTopLevelItem(QTreeWidgetItem([f"Nome{i+1}", "Ingredienti"], 0))
+                i += 1
+
 
     def _connectButtons(self):
         self.btnAvanti.clicked.connect(self._btnAvantiClicked)
