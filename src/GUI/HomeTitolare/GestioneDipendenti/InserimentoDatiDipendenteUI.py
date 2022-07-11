@@ -29,7 +29,7 @@ class InserimentoDatiDipendenteUI(FormUI):
 		self.hideLabels(self.lineEditLabelPairs) # all'inizio tutte le label sono nascoste
 		self.connectLabelAndText(self.lineEditLabelPairs) # rende la label visibile solo se la corrispondente line edit non è vuota.
 		
-		self._uppercaseForNomeCognomeLuogoNascita() # rende maiuscola la prima lettera per nome, cognome e luogo di nascita inseriti.
+		self._setUpperCase() # rende maiuscola la prima lettera per nome, cognome e luogo di nascita inseriti.
 		self._setDataNascitaBoundaries() # imposta un limite superiore e inferiore per la data di nascita
 		self._setValidators() # imposta i validator restringere gli input accettati dalle lineEdit.
 		self._setColorHints() # i dati inseriti sono rossi se non accettabili, verdi se accettabili.
@@ -56,7 +56,7 @@ class InserimentoDatiDipendenteUI(FormUI):
 		self.dateEdit.setMinimumDate(QtCore.QDate(todayYear - 100, todayMonth, todayDay))
 
 
-	def _uppercaseForNomeCognomeLuogoNascita(self):
+	def _setUpperCase(self):
 		def textToUpper(oldPos, newPos):
 			if oldPos == 0 and newPos == 1:
 				lineEdit = self.sender()

@@ -45,7 +45,10 @@ class FormUI(QWidget):
 		return toReturn
 	
 
-	def _setColorHint(self, text): # text è il testo della line edit da controllare
+	def _setColorHint(self, text : str): # text è il testo della line edit da controllare
+		"""Slot to connect to a signal 'textChanged' of a line edit that has a validator.\n
+		This method makes the line edit text green
+		if and only if passing that text to the validate method of the line edit validator, the result is Acceptable."""
 		lineEdit = self.sender()
 		font = lineEdit.font() # salvo il file prima della modifica dello style sheet, poichè questa potrebbe azzerare il font della line edit
 		
