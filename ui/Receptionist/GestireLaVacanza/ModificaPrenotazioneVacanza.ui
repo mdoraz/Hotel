@@ -6,9 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>905</width>
-    <height>194</height>
+    <width>481</width>
+    <height>259</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>480</width>
+    <height>250</height>
+   </size>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+    <pointsize>10</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Struttura Alberghiera</string>
@@ -17,65 +29,108 @@
    <attribute name="title">
     <string>Modifica Prenotazione Vacanza</string>
    </attribute>
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="4" column="3">
-     <widget class="QPushButton" name="btnConfermaModifiche">
-      <property name="text">
-       <string>Conferma modifiche</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0" colspan="2">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
      <widget class="QLabel" name="labelCosaDesideraModificareDellaPrenotazione">
+      <property name="font">
+       <font>
+        <family>Arial</family>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Salve, che cosa desidera modificare di questa prenotazione?</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
-     <widget class="QPushButton" name="btnTornareIndietro">
-      <property name="text">
-       <string>Tornare indietro </string>
-      </property>
+    <item>
+     <widget class="QWidget" name="widgetModifiche" native="true">
+      <layout class="QGridLayout" name="gridLayout">
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelTipoSoggiorno">
+         <property name="text">
+          <string>Tipo di soggiorno:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" rowspan="2">
+        <widget class="QPushButton" name="btnCameraPeriodo">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Camera e/o periodo</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QComboBox" name="comboboxTipoSoggiorno">
+         <item>
+          <property name="text">
+           <string>B&amp;B</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Mezza pensione</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Pensione completa</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
-    <item row="4" column="1" colspan="2">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="3">
-     <widget class="QPushButton" name="btnModificaCameraPeriodoSoggiorno">
-      <property name="text">
-       <string>modificare la camera e/o periodo di soggiorno</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="2">
-     <widget class="QComboBox" name="comboboxCambioTipoSoggiorno">
-      <item>
-       <property name="text">
-        <string>B&amp;B</string>
+    <item>
+     <widget class="QWidget" name="widgetButtons" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="topMargin">
+        <number>0</number>
        </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Mezza Pensione</string>
+       <property name="bottomMargin">
+        <number>0</number>
        </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Pensione Completa</string>
-       </property>
-      </item>
+       <item>
+        <widget class="QPushButton" name="btnIndietro">
+         <property name="text">
+          <string>Tornare indietro </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>129</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnConferma">
+         <property name="text">
+          <string>Conferma modifiche</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>

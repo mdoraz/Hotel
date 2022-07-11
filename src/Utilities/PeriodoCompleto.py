@@ -44,3 +44,9 @@ class PeriodoCompleto:
     def __str__(self):
         return f"da {self._inizio.strftime('%d/%m/%Y')} alle {self._inizio.strftime('%H:%M')} a {self._fine.strftime('%d/%m/%Y')}  alle {self._fine.strftime('%H:%M')}"
 
+    def __eq__(self, other : PeriodoCompleto) -> bool:
+        if not isinstance(other, PeriodoCompleto):
+            return False
+        return self._inizio == other.getInizio() and self._fine == other.getFine()
+
+        

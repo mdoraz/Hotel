@@ -47,4 +47,14 @@ class PrenotazioneVacanza:
         self._tipoSoggiorno = tipoSoggiorno
     
     def __str__(self):
-        return f"camera {self._camera.getNumero()} dal {self._periodo.getInizio().strftime('%d/%m/%Y')} al {self._periodo.getFine().strftime('%d/%m/%Y')} - {self._nominativo.getCognome()}"
+        return (f"camera {self._camera.getNumero()} dal {self._periodo.getInizio().strftime('%d/%m/%Y')} al "
+                f"{self._periodo.getFine().strftime('%d/%m/%Y')} - {self._nominativo.getCognome()}"
+                f" - {str(self._tipoSoggiorno)}")
+                
+
+    def __eq__(self, other: PrenotazioneVacanza) -> bool:
+        if not isinstance(other, PrenotazioneVacanza):
+            return False
+        return (self._camera.getNumero() == other.getCamera().getNumero() and
+                self._nominativo.getId() == other.getNominativo().getId() and
+                self._periodo == other.getPeriodo())

@@ -13,13 +13,13 @@ class FormUI(QWidget):
 		self.msg = QMessageBox() # per futuri messaggi
 
 
-	def hideLabels(self, lineEditLabelPairs : dict):
+	def hideLabels(self, lineEditLabelPairs : dict[QLineEdit, QLabel]):
 		for label in lineEditLabelPairs.values():
 			label.hide()
 
 
 	def connectLabelAndText(self, lineEditLabelPairs : dict):
-		"""Rende la label visibile solo se la corrispondente line edit non è vuota."""
+		"""Makes the line edit visible only if the corresponding label is not empty."""
 		def conditionalShowLabel(oldPos, newPos):
 			lineEdit = self.sender()
 			if lineEditLabelPairs[lineEdit].isHidden() and newPos == 1: # mostro la label se questa è nascosta e il cursore 
@@ -30,15 +30,16 @@ class FormUI(QWidget):
 			lineEdit.textChanged.connect(lambda text: lineEditLabelPairs[self.sender()].hide() if text == '' else None) # quando la line edit torna vuota, la label scompare
 
 
-	def showLabels(self, lineEditLabelPairs : dict):
+	def showLabels(self, lineEditLabelPairs : dict[QLineEdit, QLabel]):
 		for label in lineEditLabelPairs.values():
 			label.show()
 
 	
-	def fieldsFilled(self, lineEditLabelPairs : dict) -> bool:
+	def fieldsFilled(self, lineEditLabelPairs : dict[QLineEdit, QLabel]) -> bool:
 		"""Returns true if all line edits are not empty."""
 		toReturn = True
 		for lineEdit in lineEditLabelPairs:
+			lineEditLabelPairs[lineEdit]
 			if lineEdit.text().strip() == '': # se la line edit è vuota o contiene solo spazi
 				self._showMessage('Inserisci tutti i campi, per favore.', QMessageBox.Icon.Warning, 'Errore')
 				toReturn = False
@@ -53,12 +54,12 @@ class FormUI(QWidget):
 		font = lineEdit.font() # salvo il file prima della modifica dello style sheet, poichè questa potrebbe azzerare il font della line edit
 		
 		if text != '' and lineEdit.validator().validate(text, 0)[0] == QtGui.QValidator.State.Acceptable: # se il testo è accettato dal validator
-			if lineEdit.styleSheet() != f"color: rgb(0, 170, 0);":
-				lineEdit.setStyleSheet(f"color: rgb(0, 170, 0);") # il testo diventa verde
+			if lineEdit.styleSheet() != "color: rgb(0, 170, 0);":
+				lineEdit.setStyleSheet("color: rgb(0, 170, 0);") # il testo diventa verde
 				lineEdit.setFont(font)
 		
-		elif lineEdit.styleSheet() != f"color: rgb(255, 0, 0);":
-			lineEdit.setStyleSheet(f"color: rgb(255, 0, 0);") # il testo diventa rosso
+		elif lineEdit.styleSheet() != "color: rgb(255, 0, 0);":
+			lineEdit.setStyleSheet("color: rgb(255, 0, 0);") # il testo diventa rosso
 			lineEdit.setFont(font)
 
 

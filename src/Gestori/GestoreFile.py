@@ -2,6 +2,8 @@ import json
 import pickle
 from pathlib import Path
 
+from src.Utilities.exceptions import CorruptedFileError
+
 class GestoreFile:
 
     @staticmethod
@@ -37,7 +39,7 @@ class GestoreFile:
         try:
             dictionary = GestoreFile.leggiPickle(pathFile)
             if not isinstance(dictionary, dict):
-                raise TypeError(f"{pathFile.name} has been corrupted and can't be restored.\nTo fix the issue, delete it.")
+                raise CorruptedFileError(f"{pathFile.name} has been corrupted and can't be restored.\nTo fix the issue, delete it.")
         except FileNotFoundError:
             dictionary = {}
         

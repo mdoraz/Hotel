@@ -45,6 +45,14 @@ class Camera(Prenotabile, Assegnabile):
     
     def eliminaPrenotazione(self, prenotazione : PrenotazioneVacanza):
         self._prenotazioni.remove(prenotazione)
+    
+    def modificaPrenotazione(self, prenotazioneDaModificare : PrenotazioneVacanza, prenotazioneModificata: PrenotazioneVacanza):
+        i = 0
+        while i < len(self._prenotazioni):
+            if self._prenotazioni[i] == prenotazioneDaModificare:
+                self._prenotazioni[i] = prenotazioneModificata
+            i += 1
+        self._salvaCameraSuFile()
 
 
     def prenota(self, datiPrenotazione : dict):
@@ -138,8 +146,6 @@ class Camera(Prenotabile, Assegnabile):
     def _salvaCameraSuFile(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
         camere = GestoreFile.leggiDictPickle(Path(paths['camere']))
-        if not isinstance(camere, dict): # se il file ha cambiato contenuto dal momento in cui è stato letto questo ombrellone ad ora
-            raise CorruptedFileError(f'{Path(paths["camere"]).name} has been corrupted. To fix the issue, delete it.')
         camere[self._numero] = self
         GestoreFile.salvaPickle(camere, Path(paths['camere']))
 

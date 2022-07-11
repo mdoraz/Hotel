@@ -12,6 +12,7 @@ from src.Gestori.GestoreFile import GestoreFile
 from src.GUI.FormUI import FormUI
 from src.Gestori.GestorePersona import GestorePersona
 from src.Utilities.GUIUtils import GUIUtils
+from src.Utilities.exceptions import CorruptedFileError
 
 
 class RegistraClienteUI(FormUI):
@@ -84,7 +85,7 @@ class RegistraClienteUI(FormUI):
 		paths = GestoreFile.leggiJson(Path('paths.json'))
 		try:
 			clienti = GestoreFile.leggiDictPickle(Path(paths['clienti']))
-		except TypeError:
+		except CorruptedFileError:
 			self._showMessage(f"{Path(paths['clienti']).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
 								 QMessageBox.Icon.Critical, 'Errore')
 			self.close()
@@ -120,7 +121,7 @@ class RegistraClienteUI(FormUI):
 			try:
 				GestorePersona.aggiungiPersona(Path(paths['clienti']), self.lineeditNome.text(), self.lineeditCognome.text(),
 						self.dateedit.date().toPyDate(), self.lineeditLuogoNascita.text(), self.lineeditEmail.text(), self.lineeditCellulare.text())
-			except TypeError:
+			except CorruptedFileError:
 				self._showMessage(f"{Path(paths['clienti'])} has been corrupted. To fix the issue, delete it.",
 								  QMessageBox.Icon.Warning, 'Errore')
 				self.close()

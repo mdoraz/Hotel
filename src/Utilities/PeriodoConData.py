@@ -51,3 +51,8 @@ class PeriodoConData:
 
     def __str__(self):
         return f"da {self._inizio.strftime('%d/%m/%Y')} a {self._fine.strftime('%d/%m/%Y')}"
+
+    def __eq__(self, other : PeriodoConData) -> bool:
+        if not isinstance(other, PeriodoConData):
+            return False
+        return self._inizio == other.getInizio() and self._fine == other.getFine()

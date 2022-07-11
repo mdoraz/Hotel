@@ -10,6 +10,7 @@ from src.GUI.SelezionaDaListaUI import SelezionaDaLista
 from src.Gestori.GestoreFile import GestoreFile
 from src.Utilities.GUIUtils import GUIUtils
 from src.Utilities.customQtClasses import MyTreeWidgetItem
+from src.Utilities.exceptions import CorruptedFileError
 
 
 class RicercaClienteUI(QTabWidget):
@@ -128,7 +129,7 @@ class RicercaClienteUI(QTabWidget):
 		paths = GestoreFile.leggiJson(Path('paths.json'))
 		try:
 			clienti = GestoreFile.leggiDictPickle(Path(paths['clienti']))
-		except TypeError:
+		except CorruptedFileError:
 			self._showMessage(f"{Path(paths['clienti']).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
 								 QMessageBox.Icon.Critical, 'Errore')
 			self.close()
