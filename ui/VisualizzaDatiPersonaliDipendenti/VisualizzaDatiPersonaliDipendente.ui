@@ -44,10 +44,89 @@
        <string>Scheda dati personali:</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="8" column="0">
-        <widget class="QLabel" name="labelRuolo">
+       <item row="2" column="0">
+        <widget class="QLabel" name="labelLuogoDiNascitaProvincia">
          <property name="text">
-          <string>Ruolo:</string>
+          <string>Luogo di nascita(provincia):</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="labelIndirizzoEmail">
+         <property name="text">
+          <string>Indirizzo Email:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="labelNome">
+         <property name="text">
+          <string>Nome:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="labelTelefono">
+         <property name="text">
+          <string>Telefono:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="labelDataDiNascita">
+         <property name="text">
+          <string>Data di nascita:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="2">
+        <widget class="QLineEdit" name="lineeditIBAN">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string>IBAN</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelCognome">
+         <property name="text">
+          <string>Cognome:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="labelTurnoDiLavoro">
+         <property name="text">
+          <string>Turno di lavoro:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="2">
+        <widget class="QLineEdit" name="lineeditIndirizzoEmail">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string>myEmail@domain.com</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLineEdit" name="lineeditCognome">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string>Cognome</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="labelIBAN">
+         <property name="text">
+          <string>IBAN:</string>
          </property>
         </widget>
        </item>
@@ -64,62 +143,13 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="labelNome">
-         <property name="text">
-          <string>Nome:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="0">
-        <widget class="QLabel" name="labelIBAN">
-         <property name="text">
-          <string>IBAN:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="2">
-        <widget class="QLineEdit" name="lineeditCognome">
+       <item row="4" column="2">
+        <widget class="QLineEdit" name="lineeditTelefono">
          <property name="readOnly">
           <bool>true</bool>
          </property>
          <property name="placeholderText">
-          <string>Cognome</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="QLabel" name="labelDataDiNascita">
-         <property name="text">
-          <string>Data di nascita:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="labelCognome">
-         <property name="text">
-          <string>Cognome:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="labelLuogoDiNascitaProvincia">
-         <property name="text">
-          <string>Luogo di nascita(provincia):</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
-        <widget class="QLabel" name="labelIndirizzoEmail">
-         <property name="text">
-          <string>Indirizzo Email:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="labelTelefono">
-         <property name="text">
-          <string>Telefono:</string>
+          <string>Telefono</string>
          </property>
         </widget>
        </item>
@@ -133,63 +163,6 @@
          </property>
         </widget>
        </item>
-       <item row="7" column="0">
-        <widget class="QLabel" name="labelTurnoDiLavoro">
-         <property name="text">
-          <string>Turno di lavoro:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="2">
-        <widget class="QLineEdit" name="lineeditTelefono">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="placeholderText">
-          <string>Telefono</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="2">
-        <widget class="QLineEdit" name="lineeditIndirizzoEmail">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="placeholderText">
-          <string>myEmail@domain.com</string>
-         </property>
-        </widget>
-       </item>
-       <item row="6" column="2">
-        <widget class="QLineEdit" name="lineeditIBAN">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="placeholderText">
-          <string>IBAN</string>
-         </property>
-        </widget>
-       </item>
-       <item row="8" column="2">
-        <widget class="QLineEdit" name="lineeditRuolo">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="placeholderText">
-          <string>Ruolo</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QDateEdit" name="dateeditDataDiNascita">
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="displayFormat">
-          <string>dd/MM/yyyy</string>
-         </property>
-        </widget>
-       </item>
        <item row="7" column="2">
         <widget class="QLineEdit" name="lineeditTurnoDiLavoro">
          <property name="text">
@@ -200,6 +173,16 @@
          </property>
          <property name="placeholderText">
           <string>Mattina/Pomeriggio</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QDateEdit" name="dateeditDataDiNascita">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="displayFormat">
+          <string>dd/MM/yyyy</string>
          </property>
         </widget>
        </item>
