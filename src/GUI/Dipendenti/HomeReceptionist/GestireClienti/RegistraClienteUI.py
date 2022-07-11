@@ -1,17 +1,22 @@
 from datetime import date
+from msilib.schema import Icon
 import sys
 from pathlib import Path
 
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
+from src.Attori.Persona import Persona
 
 from src.Gestori.GestoreFile import GestoreFile
 from src.GUI.FormUI import FormUI
+from src.Gestori.GestorePersona import GestorePersona
 from src.Utilities.GUIUtils import GUIUtils
 
 
 class RegistraClienteUI(FormUI):
+
+	clienteRegistrato = QtCore.pyqtSignal(Persona)
 
 	def __init__(self, previous : QWidget = None): # type: ignore
 		super().__init__()
@@ -19,6 +24,13 @@ class RegistraClienteUI(FormUI):
 		loadUi(GestoreFile.absolutePath('registraCliente.ui', Path.cwd()), self)
 
 		self.previous = previous
+		self.lineeditLabelPairs = {
+			self.lineeditNome : self.labelNome,
+			self.lineeditCognome : self.labelCognome,
+			self.lineeditLuogoNascita : self.labelLuogoNascita,
+			self.lineeditEmail : self.labelEmail,
+			self.lineeditCellulare : self.labelCellulare
+		}
 		self._setValidators() # impostati i vlìalidator per le line edit da controllare
 		self._setColorHints() # impostati i colori del testo
 		self._setUpperCase() # maiuscola automatica per nome, cognome e luogo di nascita
@@ -35,7 +47,7 @@ class RegistraClienteUI(FormUI):
 		self.lineeditEmail.setValidator(GUIUtils.validators['email'])
 		self.lineeditCellulare.setValidator(GUIUtils.validators['cellulare'])
 
-		
+
 	def _setColorHints(self):
 		self.lineeditLuogoNascita.textChanged.connect(self._setColorHint)
 		self.lineeditEmail.textChanged.connect(self._setColorHint)
@@ -55,12 +67,13 @@ class RegistraClienteUI(FormUI):
 
 
 	def _connectButtons(self):
-		self.btnNo.clicked.connect(self._btnNoClicked)
+		self.btnIndietro.clicked.connect(self._btnIndietroClicked)
 		self.btnHelpAsterisco.clicked.connect(self._btnHelpAsteriscoClicked)
 
     
-	def _btnNoClicked(self):
-		pass
+	def _btnIndietroClicked(self):
+		self.close()
+		self.previous.show()
 
 
 	def _btnHelpAsteriscoClicked(self):
@@ -80,7 +93,7 @@ class RegistraClienteUI(FormUI):
 		return clienti
 
 
-	def isUserInSystem(self) -> bool:
+	def isClienteInSystem(self) -> bool:
 		toReturn = False
 		clienti = self._readClienti()
 		for cliente in clienti.values():
@@ -98,8 +111,46 @@ class RegistraClienteUI(FormUI):
 			self._showMessage('I dati in rosso non sono accettabili.\nQuando lo saranno il loro colore diventerà verde.', QMessageBox.Icon.Warning, 'Errore')
 			toReturn = False
 		return toReturn
+	
 
+	def salvaCliente(self):
+		"""This method saves the customer in the file system, picking the data from this object fields."""
+		if self.fieldsFilled(self.lineeditLabelPairs) and not self.isClienteInSystem() and self.fieldsValid():
+			paths = GestoreFile.leggiJson(Path('paths.json'))
+			try:
+				GestorePersona.aggiungiPersona(Path(paths['clienti']), self.lineeditNome.text(), self.lineeditCognome.text(),
+						self.dateedit.date().toPyDate(), self.lineeditLuogoNascita.text(), self.lineeditEmail.text(), self.lineeditCellulare.text())
+			except TypeError:
+				self._showMessage(f"{Path(paths['clienti'])} has been corrupted. To fix the issue, delete it.",
+								  QMessageBox.Icon.Warning, 'Errore')
+				self.close()
+				raise
+			
+			clienti = GestoreFile.leggiDictPickle(Path(paths['clienti']))
+			for cliente in clienti.values():
+				if (cliente.getNome() == self.lineeditNome.text() and cliente.getCognome() == self.lineeditCognome.text() and 
+					cliente.getDataNascita() == self.dateedit.date().toPyDate() and cliente.getLuogoNascita() == self.lineeditLuogoNascita.text()):
+					self.clienteRegistrato.emit(cliente)
+					return
+	
+	
+	def clear(self):
+		self.lineeditNome.clear()
+		self.lineeditCognome.clear()
+		self.lineeditLuogoNascita.clear()
+		self.lineeditEmail.clear()
+		self.lineeditCellulare.clear()
+		self.dateedit.setDate(date(2000, 1, 1))
 
+		# rimuovo i colori del testo di email, cellulare e luogo di nascita
+		font = self.lineeditLuogoNascita.font()
+		self.lineeditLuogoNascita.setStyleSheet('') 
+		self.lineeditEmail.setStyleSheet('')
+		self.lineeditCellulare.setStyleSheet('')
+		# reimposto i font perchè con lo svuotamento dello style sheet si azzera anche il font
+		self.lineeditLuogoNascita.setFont(font)
+		self.lineeditEmail.setFont(font)
+		self.lineeditCellulare.setFont(font)
 
 
 

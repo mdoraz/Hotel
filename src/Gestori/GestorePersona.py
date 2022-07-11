@@ -5,7 +5,7 @@ from src.Attori.Dipendente import Dipendente
 from src.Attori.Persona import Persona
 from src.Attori.Ruolo import Ruolo
 from src.Gestori.GestoreFile import GestoreFile
-from src.Utilities.exceptions import CreationError, DuplicateError
+from src.Utilities.exceptions import ArgumentTypeError, CreationError, DuplicateError
 
 
 class GestorePersona():
@@ -46,7 +46,7 @@ class GestorePersona():
 					nuovaPersona = Dipendente.initConPersona(nuovaPersona, kwargs['IBAN'], kwargs['turno'], kwargs['ruolo'],
 													 		 kwargs['username'], kwargs['password'])
 				else:
-					raise TypeError("some argument hasn't the right type to create a Dipendente object")
+					raise ArgumentTypeError("some argument hasn't the right type to create a Dipendente object")
 			except KeyError: # se qualche chiave nell'if precedente non è contenuta in kwargs
 				raise CreationError('the arguments are not the right ones to create a Dipendente object')
 		try:

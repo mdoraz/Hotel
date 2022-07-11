@@ -70,7 +70,7 @@ class RicercaClienteUI(QTabWidget):
 				return
 			id = int(self.lineeditID.text())
 			clienti = self._readClienti()
-			for cliente in clienti:
+			for cliente in clienti.values():
 				if cliente.getId() == id:
 					onClienteTrovato(cliente, self)
 					return
@@ -84,7 +84,7 @@ class RicercaClienteUI(QTabWidget):
 			cognome = self.lineeditCognome.text()
 			clienti = self._readClienti()
 			riscontri = []
-			for cliente in clienti:
+			for cliente in clienti.values():
 				if cliente.getCognome() == cognome:
 					riscontri.append(cliente)
 			if len(riscontri) == 0:
@@ -109,10 +109,10 @@ class RicercaClienteUI(QTabWidget):
 				# mostro la lista di riscontri. l'utente selezionerà quello di interesse
 				self.widgetClienti = SelezionaDaLista()
 				self.widgetClienti.label.setText('Selezionare il cliente di interesse.')
-				self.widgetClienti.treewidget.setHeaderLabels(['ID', 'Cognome', 'Nome'])
+				self.widgetClienti.treeWidget.setHeaderLabels(['ID', 'Cognome', 'Nome'])
 				for cliente in riscontri:
 					self.widgetClienti.treeWidget.addTopLevelItem(MyTreeWidgetItem(self.widgetClienti.treeWidget,
-																			  [str(cliente.getId()), cliente.getCognomr(), cliente.getnome()],
+																			  [str(cliente.getId()), cliente.getCognome(), cliente.getNome()],
 																			  cliente))
 				self.widgetClienti.show()
 				self.close()

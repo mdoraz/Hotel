@@ -1,14 +1,15 @@
 import sys
-from PyQt5 import QtGui
-from PyQt5.QtWidgets import *
-from PyQt5.uic import loadUi
+from datetime import date
 from pathlib import Path
 
-from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.HomeGestioneVacanzeUI import HomeGestioneVacanzeUI
-from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.HomeGestireUnClienteUI import HomeGestireUnClienteUI
-from src.GUI.Dipendenti.HomeReceptionist.NoleggiareBici.HomeNoleggiareUnaBiciUI import HomeNoleggiareUnaBiciUI
-from src.Gestori.GestoreFile import GestoreFile
+from PyQt5.QtWidgets import *
+from PyQt5.uic import loadUi
 
+from src.Attori.Persona import Persona
+from src.Gestori.GestoreFile import GestoreFile
+from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.HomeGestioneVacanzeUI import HomeGestioneVacanzeUI
+from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.HomeGestioneClientiUI import HomeGestioneClientiUI
+from src.GUI.Dipendenti.HomeReceptionist.NoleggiareBici.HomeNoleggiareUnaBiciUI import HomeNoleggiareUnaBiciUI
 from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.GestioneCucinaMenuReceptionistUI import \
     GestioneCucinaMenuReceptionistUI
 from src.GUI.Dipendenti.VisualizzaDatiPersonaliDipendente.VisualizzaDatiPersonaliDipendenteUI import \
@@ -18,50 +19,54 @@ from src.GUI.Dipendenti.VisualizzaDatiPersonaliDipendente.VisualizzaDatiPersonal
 class HomeReceptionistUI(QTabWidget):
     def __init__(self, receptionist, previous: QWidget):
         super().__init__()
+        
         loadUi(GestoreFile.absolutePath('HomeReceptionist.ui', Path.cwd()), self)
-        self.setMinimumSize(600, 300)
-        self.setFont(QtGui.QFont('Arial', 10))
-        self._connectButtons()
+
         self.previous = previous
         self.receptionist = receptionist
+        self._connectButtons()
 
     def _connectButtons(self):
-        self.btnVisualizzaDatiPersonali.clicked.connect(self._btnVisualizzaDatiPersonaliClicked)
-        self.btnGestireClienti.clicked.connect(self._btnGestireClientiClicked)
-        self.btnGestireNoleggioBici.clicked.connect(self._btnGestireNoleggioBiciClicked)
-        self.btnGestireLaVacanza.clicked.connect(self._btnGestireLaVacanzaClicked)
-        self.btnInserisciSceltaPastiPranzoCena.clicked.connect(self._btnInserisciSceltaPastiPranzoCenaClicked)
-        self.btnTornareHomeHotel.clicked.connect(self._TornareHomeHotelClicked)
+        self.btnDatiPersonali.clicked.connect(self._btnDatiPersonaliClicked)
+        self.btnClienti.clicked.connect(self._btnClientiClicked)
+        self.btnNoleggiBici.clicked.connect(self._btnNoleggiBiciClicked)
+        self.btnVacanza.clicked.connect(self._btnVacanzaClicked)
+        self.btnInserisciSceltaPasti.clicked.connect(self._btnInserisciSceltaPastiClicked)
+        self.btnIndietro.clicked.connect(self._btnIndietroClicked)
 
-    def _btnVisualizzaDatiPersonaliClicked(self):
+    def _btnDatiPersonaliClicked(self):
         self.close()
         self.widgetVisualizzaDatiPersonaliDipendente = VisualizzaDatiPersonaliDipendenteUI(self.receptionist, self)
         self.widgetVisualizzaDatiPersonaliDipendente.show()
 
-    def _btnGestireClientiClicked(self):
+    def _btnClientiClicked(self):
         self.close()
-        self.tabHomeGestireUnCliente = HomeGestireUnClienteUI(self)
+        self.tabHomeGestireUnCliente = HomeGestioneClientiUI(self)
         self.tabHomeGestireUnCliente.show()
 
-    def _btnGestireNoleggioBiciClicked(self):
+    def _btnNoleggiBiciClicked(self):
         self.close()
         self.widgetHomeNoleggiareUnaBici = HomeNoleggiareUnaBiciUI(self)
         self.widgetHomeNoleggiareUnaBici.show()
 
-    def _btnGestireLaVacanzaClicked(self):
+    def _btnVacanzaClicked(self):
         self.close()
         self.widgetHomegestioneVacanze = HomeGestioneVacanzeUI(self)
         self.widgetHomegestioneVacanze.show()
 
-    def _btnInserisciSceltaPastiPranzoCenaClicked(self):
+    def _btnInserisciSceltaPastiClicked(self):
         self.close()
         self.tabGestioneCucinaMenuReceptionist = GestioneCucinaMenuReceptionistUI(self)
         self.tabGestioneCucinaMenuReceptionist.show()
-    def _TornareHomeHotelClicked(self):
+    
+    def _btnIndietroClicked(self):
         self.close()
         self.previous.show()
+
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWidget = HomeReceptionistUI()
+    mainWidget = HomeReceptionistUI(Persona('Eustachio', 'Liguori', date(1980, 7, 6), 'Pistoia', 'eustoia@hotmail.com', '393204820'), QWidget())
     mainWidget.show()
     sys.exit(app.exec_())
