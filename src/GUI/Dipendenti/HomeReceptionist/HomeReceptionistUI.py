@@ -58,6 +58,7 @@ class HomeReceptionistUI(QTabWidget):
         self.close()
         self.tabGestioneCucinaMenuReceptionist = GestioneCucinaMenuReceptionistUI(self)
         self.tabGestioneCucinaMenuReceptionist.show()
+    
     def _btnIndietroClicked(self):
         self.close()
         self.previous.show()

@@ -44,21 +44,19 @@ class Camera(Prenotabile, Assegnabile):
         self._numeroPersone = numeroPersone
     
     def eliminaPrenotazione(self, prenotazione : PrenotazioneVacanza):
-        self._prenotazioni.remove(prenotazione)
-    
-    def modificaPrenotazione(self, prenotazioneDaModificare : PrenotazioneVacanza, prenotazioneModificata: PrenotazioneVacanza):
-        i = 0
-        while i < len(self._prenotazioni):
-            if self._prenotazioni[i] == prenotazioneDaModificare:
-                self._prenotazioni[i] = prenotazioneModificata
-            i += 1
-        self._salvaCameraSuFile()
+        for p in self._prenotazioni:
+            if p == prenotazione:
+                self._prenotazioni.remove(p)
+                return
 
 
     def prenota(self, datiPrenotazione : dict):
-        """Creates a new reservation. datiPrenotazione must have this keys: 'periodo', 'tiposSoggiorno', 'nominativo', 'numeroCarta'.
+        """Creates a new reservation. datiPrenotazione must have this keys: 'periodo', 'tipoSoggiorno', 'nominativo', 'numeroCarta'.
         The values types must be: PeriodoConData for 'periodo', Soggiorno for 'tipoSoggiorno, Persona for 'nominativo', 
-        str for numeroCarta"""
+        str for 'numeroCarta'.\n
+        This dictionary can also have a key 'prelevareCaparra' with a bool value. If there isn't, it is considered True.\n
+        prelevareCaparra should be True if you ar booking for the first time, Flse if you are booking after deleting another
+        reservation in order to modify it."""
         
         if (not isinstance(datiPrenotazione['periodo'], PeriodoConData) or not isinstance(datiPrenotazione['tipoSoggiorno'], Soggiorno) or
            not isinstance(datiPrenotazione['nominativo'], Persona) or not isinstance(datiPrenotazione['numeroCarta'], str)):
@@ -66,6 +64,11 @@ class Camera(Prenotabile, Assegnabile):
         
         if not self.isDisponibile(datiPrenotazione['periodo']):
             raise NotAvailableError('This room is not available in the reservation period')
+        prelevareCaparra = True
+        try:
+            prelevareCaparra = datiPrenotazione['prelevareCaparra']
+        except KeyError:
+            pass # se non c'è la chiave 'prelevareCaparra' non succede nulla
         
         prenotazione = PrenotazioneVacanza(datiPrenotazione['periodo'], self, datiPrenotazione['tipoSoggiorno'],
                                            datiPrenotazione['nominativo'], datiPrenotazione['numeroCarta'])
@@ -74,8 +77,9 @@ class Camera(Prenotabile, Assegnabile):
         while i < len(self._prenotazioni) and prenotazione.getPeriodo().getInizio() > self._prenotazioni[i].getPeriodo().getInizio():
             i += 1
         self._prenotazioni.insert(i, prenotazione)
-
-        GestoreTransazioni.prelevaCaparra(prenotazione)
+        
+        if prelevareCaparra:
+            GestoreTransazioni.prelevaCaparra(prenotazione)
 
         self._salvaCameraSuFile()
 

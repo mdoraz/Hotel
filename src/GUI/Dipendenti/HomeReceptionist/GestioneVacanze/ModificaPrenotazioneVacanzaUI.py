@@ -39,11 +39,21 @@ class ModificaPrenotazioneVacanzaUI(QTabWidget):
 		self.close()
 		if Soggiorno.enumFromStr(self.comboboxTipoSoggiorno.currentText()) != self.prenotazioneModificata.getTipoSoggiorno(): # se il tipo di soggiorno è stato modificato
 			# aggiorno la visualizzazione della prenotazione
+			camere = self._readCamere()
 			self.previous.lineeditTipoSoggiornoPrenotazione.setText(self.comboboxTipoSoggiorno.currentText())
-			# modifico la prenotazione
-			prenotazioneDaModificare = copy.deepcopy(self.prenotazioneModificata)
-			self.prenotazioneModificata.setTipoSoggiorno(Soggiorno.enumFromStr(self.comboboxTipoSoggiorno.currentText()))
-			self._modificaESalvaCamera(prenotazioneDaModificare) # salvo la mosifica su file
+			camere[self.prenotazioneModificata.getCamera().getNumero()].eliminaPrenotazione(self.prenotazioneModificata) # elimino la prenotazione senza modifiche
+			self.prenotazioneModificata.setTipoSoggiorno(Soggiorno.enumFromStr(self.comboboxTipoSoggiorno.currentText())) # modifico la prenotazione
+			datiPrenotazione = {
+				'prelevareCaparra' : False, # non bisogna prelevare di nuovo la caparra
+				'nominativo' : self.prenotazioneModificata.getNominativo(),
+				'tipoSoggiorno' : self.prenotazioneModificata.getTipoSoggiorno(),
+				'numeroCarta' : self.prenotazioneModificata.getNumeroCarta(),
+				'periodo' : self.prenotazioneModificata.getPeriodo()
+			}
+			camere[self.prenotazioneModificata.getCamera().getNumero()].prenota(datiPrenotazione) # riprenoto con i dati modificati
+			GestoreFile.salvaPickle(camere, Path(paths['camere']))
+			self.previous.prenotazioneVisualizzata = self.prenotazioneModificata # aggiorno l'istanza della prenotazione visualizzata della classe HomeGestioneVacanzeUI
+
 
 
 	def _btnCameraPeriodoClicked(self):
@@ -54,23 +64,34 @@ class ModificaPrenotazioneVacanzaUI(QTabWidget):
 			self.previous.dateeditPrenotazioneFine.setDate(periodo.getFine())
 			self.close()
 			# modifico la prenotazione
-			prenotazioneDaModificare = copy.deepcopy(self.prenotazioneModificata)
+			
+			camere = self._readCamere()
+			camere[self.prenotazioneModificata.getCamera().getNumero()].eliminaPrenotazione(self.prenotazioneModificata) # elimino la prenotazione senza modifiche
+			datiPrenotazione = {
+				'prelevareCaparra' : False, # non bisogna prelevare di nuovo la caparra
+				'nominativo' : self.prenotazioneModificata.getNominativo(),
+				'tipoSoggiorno' : self.prenotazioneModificata.getTipoSoggiorno(),
+				'numeroCarta' : self.prenotazioneModificata.getNumeroCarta(),
+				'periodo' : periodo
+			}
+			camera.prenota(datiPrenotazione) # riprenoto con i dati modificati
+			camere[camera.getNumero()] = camera
+			#♠global paths
+			GestoreFile.salvaPickle(camere, Path(paths['camere']))
+
+			# aggiorno l'istanza della prenotazione visualizzata della classe HomeGestioneVacanzeUI
 			self.prenotazioneModificata.setCamera(camera)
 			self.prenotazioneModificata.setPeriodo(periodo)
-			self._modificaESalvaCamera(prenotazioneDaModificare) # salvo la modifica su file
+			self.previous.prenotazioneVisualizzata = self.prenotazioneModificata
 
 		self.close()
 		self.widgetSelezionaCamera = SelezionaCameraUI(self, self.prenotazioneModificata)
 		self.widgetSelezionaCamera.cameraSelezionata.connect(onCameraSelezionata)
 		self.widgetSelezionaCamera.show()
 
-
-	def _btnIndietroClicked(self):
-		self.close()
-		self.previous.show()
-
-
-	def _modificaESalvaCamera(self, prenotazioneDaModificare):
+	
+	def _readCamere(self):
+		global paths
 		paths = GestoreFile.leggiJson(Path('paths.json'))
 		try:
 			camere : dict[int, Camera] = GestoreFile.leggiDictPickle(Path(paths['camere']))
@@ -79,8 +100,13 @@ class ModificaPrenotazioneVacanzaUI(QTabWidget):
 			self.close()
 			self.previous.close()
 			raise
-		camere[self.prenotazioneModificata.getCamera().getNumero()].modificaPrenotazione(prenotazioneDaModificare, self.prenotazioneModificata)
-		GestoreFile.salvaPickle(camere, Path(paths['camere']))
+		return camere
+		
+
+
+	def _btnIndietroClicked(self):
+		self.close()
+		self.previous.show()
 
 
 
