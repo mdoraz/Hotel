@@ -4,8 +4,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 
-from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.HomeGestireUnClienteUI import HomeGestireUnClienteUI
-from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.RicercaDelCliente1UI import RicercaDelCliente1UI
+from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.HomeGestioneClientiUI import HomeGestioneClientiUI
+from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.RicercaClienteUI import RicercaClienteUI
 from src.Gestori.GestoreFile import GestoreFile
 
 class AggiungereClientiCheckInUI(QTabWidget):
@@ -24,12 +24,12 @@ class AggiungereClientiCheckInUI(QTabWidget):
         self.btnIndietro.clicked.connect(self._btnIndietroClicked)
 
     def _btnRicercaClienteClicked(self):
-        self.widgetRicercaDelCliente1 = RicercaDelCliente1UI(self)
-        self.widgetRicercaDelCliente1.show()
+        self.widgetRicercaCliente = RicercaClienteUI(self)
+        self.widgetRicercaCliente.show()
 
     def _btnRegistraClienteClicked(self):
-        self.tabwidgetHomeGestireUnCliente = HomeGestireUnClienteUI(self)
-        self.tabwidgetHomeGestireUnCliente.show()
+        self.tabwidgetHomeGestioneClienti = HomeGestioneClientiUI(self)
+        self.tabwidgetHomeGestioneClienti.show()
 
     def _btnConfermaAggiungereClientiClicked(self):
         pass
