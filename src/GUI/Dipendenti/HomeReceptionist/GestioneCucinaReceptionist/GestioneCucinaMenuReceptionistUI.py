@@ -3,12 +3,14 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
-from src.Gestori.GestoreFile import GestoreFile
 
-from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.InserisciSceltaPastiCenaGiornoSuccessivoUI import \
-    InserisciSceltaPastiCenaGiornoSuccessivoUI
-from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.InserisciSceltaPastiPranzoGiornoSuccessivoUI import \
-    InserisciSceltaPastiPranzoGiornoSuccessivoUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.ConfermaSceltaPastiCenaUI import \
+    ConfermaSceltaPastiCenaUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.ConfermaSceltaPastiPranzoUI import \
+    ConfermaSceltaPastiPranzoUI
+from src.Gestori.GestoreFile import GestoreFile
+from src.Servizi.Camera import Camera
+from src.Utilities.exceptions import CorruptedFileError
 
 
 class GestioneCucinaMenuReceptionistUI(QTabWidget):
@@ -20,9 +22,20 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
         self.previous = previous
         self._connectButtons()
 
+        self._hideWidget()
+
         self._fillTreeWidgetColazioneInCamera()
         self._fillTreeWidgetPranzo()
         self._fillTreeWidgetCena()
+
+        self.msg = QMessageBox()
+
+    def _hideWidget(self):
+        self.widgetSceltaPastiPranzo.hide()
+        self.widgetSceltaPastiCena.hide()
+        self.comboboxPranzo.hide()
+        self.comboboxCena.hide()
+
 
     def _fillTreeWidgetColazioneInCamera(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
@@ -109,17 +122,126 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
     def _connectButtons(self):
         self.btnInserisciSceltaPastiPranzo.clicked.connect(self._btnInserisciSceltaPastiPranzoClicked)
         self.btnInserisciSceltaPastiCena.clicked.connect(self._btnInserisciSceltaPastiCenaClicked)
+        self.btnAvanti.clicked.connect(self._btnAvantiClicked)
+        self.btnAnnulla.clicked.connect(self._btnAnnullaClicked)
+        self.btnAvanti_2.clicked.connect(self._btnAvanti_2Clicked)
+        self.btnAnnulla_2.clicked.connect(self._btnAnnulla_2Clicked)
         self.btnTornarePaginaPrecedente.clicked.connect(self._btnTornarePaginaPrecedenteClicked)
         self.btnTornarePaginaPrecedente_2.clicked.connect(self._btnTornarePaginaPrecedente_2Clicked)
         self.btnTornarePaginaPrecedente_3.clicked.connect(self._btnTornarePaginaPrecedente_3Clicked)
 
-
     def _btnInserisciSceltaPastiPranzoClicked(self):
-        self.widgetInserisciSceltaPastiPranzoGiornoSuccessivo = InserisciSceltaPastiPranzoGiornoSuccessivoUI(self)
-        self.widgetInserisciSceltaPastiPranzoGiornoSuccessivo.show()
+        self.btnInserisciSceltaPastiPranzo.hide()
+        self.widgetSceltaPastiPranzo.show()
+        self.labelIntroduzione_2.setText('Inserire il numero di camera e scegliere quali piatti desidera prenotare il cliente per il pranzo di domani.')
+        self.comboboxPranzo.show()
+        self.treewidgetAntipastiPranzo.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.treewidgetPrimoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.treewidgetSecondoContornoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.treewidgetDolciBevandePranzo.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+
+
     def _btnInserisciSceltaPastiCenaClicked(self):
-        self.widgetInserisciSceltaPastiCenaGiornoSuccessivo = InserisciSceltaPastiCenaGiornoSuccessivoUI(self)
-        self.widgetInserisciSceltaPastiCenaGiornoSuccessivo.show()
+        self.btnInserisciSceltaPastiCena.hide()
+        self.widgetSceltaPastiCena.show()
+        self.labelIntroduzione_3.setText('Inserire il numero di camera e scegliere quali piatti desidera prenotare il cliente per la cena di domani.')
+        self.comboboxCena.show()
+        self.treewidgetAntipastiCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.treewidgetPrimiCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.treewidgetSecondiContorniCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.treewidgetDolciBevandeCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+
+    def _btnAvantiClicked(self):
+        numeroCamera = int(self.comboboxPranzo.currentText())
+
+        paths = GestoreFile.leggiJson(Path('paths.json'))
+        try:
+            camere: dict[int, Camera] = GestoreFile.leggiDictPickle(Path(paths['camere']))
+        except CorruptedFileError:
+            self.previous._showMessage(f"{Path(paths['camere'])} has been corrupted. To fix the issue, delete it.",
+                                       QMessageBox.Icon.Warning, 'Errore')
+            self.close()
+            self.previous.close()
+            raise
+
+        camera = camere[numeroCamera]
+
+        if not camera.isAssegnato():
+            self._showMessage('Non esiste nessuna vacanza in corso nella camera selezionata.', QMessageBox.Icon.Warning)
+            return
+
+        sceltePasti = {
+            "antipasti": [item.text(0) for item in self.treewidgetAntipastiPranzo.selectedItems()],
+            "primi" : [item.text(0) for item in self.treewidgetPrimoPranzo.selectedItems()],
+            "secondiContorni": [item.text(0) for item in self.treewidgetSecondoContornoPranzo.selectedItems()],
+            "dolciBevande": [item.text(0) for item in self.treewidgetDolciBevandePranzo.selectedItems()]
+        }
+
+        self.widgetConfermaSceltaPastiPranzo = ConfermaSceltaPastiPranzoUI(sceltePasti, numeroCamera, self)
+        self.widgetConfermaSceltaPastiPranzo.show()
+
+    def _btnAnnullaClicked(self):
+        self.btnInserisciSceltaPastiPranzo.show()
+        self.widgetSceltaPastiPranzo.hide()
+        self.treewidgetAntipastiPranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.treewidgetPrimoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.treewidgetSecondoContornoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.treewidgetDolciBevandePranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+
+        for item in self.treewidgetAntipastiPranzo.selectedItems():
+            item.setSelected(False)
+        for item in self.treewidgetPrimoPranzo.selectedItems():
+            item.setSelected(False)
+        for item in self.treewidgetSecondoContornoPranzo.selectedItems():
+            item.setSelected(False)
+        for item in self.treewidgetDolciBevandePranzo.selectedItems():
+            item.setSelected(False)
+
+    def _btnAvanti_2Clicked(self):
+        numeroCamera = int(self.comboboxCena.currentText())
+
+        paths = GestoreFile.leggiJson(Path('paths.json'))
+        try:
+            camere: dict[int, Camera] = GestoreFile.leggiDictPickle(Path(paths['camere']))
+        except CorruptedFileError:
+            self.previous._showMessage(f"{Path(paths['camere'])} has been corrupted. To fix the issue, delete it.",
+                                       QMessageBox.Icon.Warning, 'Errore')
+            self.close()
+            self.previous.close()
+            raise
+
+        camera = camere[numeroCamera]
+
+        if not camera.isAssegnato():
+            self._showMessage('Non esiste nessuna vacanza in corso nella camera selezionata.', QMessageBox.Icon.Warning)
+            return
+
+        sceltePasti = {
+            "antipasti": [item.text(0) for item in self.treewidgetAntipastiCena.selectedItems()],
+            "primi": [item.text(0) for item in self.treewidgetPrimoCena.selectedItems()],
+            "secondiContorni": [item.text(0) for item in self.treewidgetSecondoContornoCena.selectedItems()],
+            "dolciBevande": [item.text(0) for item in self.treewidgetDolciBevandeCena.selectedItems()]
+        }
+
+        self.widgetConfermaSceltaPastiCena = ConfermaSceltaPastiCenaUI(sceltePasti, numeroCamera, self)
+        self.widgetConfermaSceltaPastiCena.show()
+
+    def _btnAnnulla_2Clicked(self):
+        self.btnInserisciSceltaPastiCena.show()
+        self.widgetSceltaPastiCena.hide()
+        self.treewidgetAntipastiCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.treewidgetPrimiCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.treewidgetSecondiContorniCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.treewidgetDolciBevandeCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+
+        for item in self.treewidgetAntipastiCena.selectedItems():
+            item.setSelected(False)
+        for item in self.treewidgetPrimiCena.selectedItems():
+            item.setSelected(False)
+        for item in self.treewidgetSecondiContorniCena.selectedItems():
+            item.setSelected(False)
+        for item in self.treewidgetDolciBevandeCena.selectedItems():
+            item.setSelected(False)
 
     def _btnTornarePaginaPrecedenteClicked(self):
         self.close()
@@ -131,9 +253,14 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
         self.close()
         self.previous.show()
 
+    def _showMessage(self, text: str, icon: QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle: str = 'Messaggio'):
+        self.msg.setWindowTitle(windowTitle)
+        self.msg.setIcon(icon)
+        self.msg.setText(text)
+        self.msg.show()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWidget = GestioneCucinaMenuReceptionistUI()
+    mainWidget = GestioneCucinaMenuReceptionistUI(QWidget)
     mainWidget.show()
     sys.exit(app.exec_())
