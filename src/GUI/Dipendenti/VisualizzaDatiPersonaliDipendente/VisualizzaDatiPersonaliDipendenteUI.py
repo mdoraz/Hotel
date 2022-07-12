@@ -14,7 +14,21 @@ class VisualizzaDatiPersonaliDipendenteUI(QTabWidget):
         self._connectButtons()
         self.previous = previous
         self.dipendente = dipendente
+        self._fillFieldsDipendente()
 
+    def _fillFieldsDipendente(self):
+        self.lineeditNome.setText(self.dipendente.getNome())
+        self.lineeditCognome.setText(self.dipendente.getCognome())
+        self.lineeditLuogoDiNascitaProvincia.setText(self.dipendente.getLuogoNascita())
+        self.dateeditDataDiNascita.setDate(self.dipendente.getDataNascita())
+        self.lineeditTelefono.setText(self.dipendente.getCellulare())
+        self.lineeditIndirizzoEmail.setText(self.dipendente.getEmail())
+        self.lineeditIBAN.setText(self.dipendente.getIBAN())
+        self.lineeditTurnoDiLavoro.setText(str(self.dipendente.getTurno()))
+        if self.dipendente.getTurno() == True:
+            self.lineeditTurnoDiLavoro.setText('Mattina')
+        else:
+            self.lineeditTurnoDiLavoro.setText('Pomeriggio')
 
     def _connectButtons(self):
         self.btnOk.clicked.connect(self._btnOkClicked)

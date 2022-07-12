@@ -24,6 +24,6 @@ class AvvisoPiattiModificatiUI(QTabWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWidget = AvvisoPiattiModificatiUI()
+    mainWidget = AvvisoPiattiModificatiUI(QWidget)
     mainWidget.show()
     sys.exit(app.exec_())
