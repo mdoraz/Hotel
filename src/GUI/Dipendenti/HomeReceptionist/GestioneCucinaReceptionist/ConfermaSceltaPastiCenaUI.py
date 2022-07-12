@@ -18,7 +18,7 @@ class ConfermaSceltaPastiCenaUI(QTabWidget):
 
         self._addRowsComboBox(sceltePasti, numeroCamera)
 
-    def _addRowsComboBox(self, sceltaPasti: dict, numeroCamera: int): # aggiunge a runtime i piatti selezionati e le combo box per scegliere le quantita di tale piatto
+    def _addRowsComboBox(self, sceltePasti: dict, numeroCamera: int): # aggiunge a runtime i piatti selezionati e le combo box per scegliere le quantita di tale piatto
         comboBox = QComboBox()
 
         paths = GestoreFile.leggiJson(Path('paths.json'))
@@ -36,13 +36,13 @@ class ConfermaSceltaPastiCenaUI(QTabWidget):
 
         for i in range(1, numeroClienti + 1):
             comboBox.addItem()
-        for nomeAntipasto in sceltaPasti["antipasti"]:
+        for nomeAntipasto in sceltePasti["antipasti"]:
             self.formLayoutAntipasti.addRow(nomeAntipasto, comboBox)
-        for nomePrimo in sceltaPasti["primi"]:
+        for nomePrimo in sceltePasti["primi"]:
             self.formLayoutPrimi.addRow(nomePrimo, comboBox)
-        for nomeSecondoContorno in sceltaPasti["secondiContorni"]:
+        for nomeSecondoContorno in sceltePasti["secondiContorni"]:
             self.formLayoutSecondiContorni.addRow(nomeSecondoContorno, comboBox)
-        for nomeDolciBevande in sceltaPasti["dolciBevande"]:
+        for nomeDolciBevande in sceltePasti["dolciBevande"]:
             self.formLayoutDolciBevande.addRow(nomeDolciBevande, comboBox)
 
     def _connectButtons(self):

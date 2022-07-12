@@ -3,12 +3,13 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
+from src.GUI.Dipendenti.HomeCamerieri.GestioneCucinaCamerieri.ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI import \
+    ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI
 from src.Gestori.GestoreFile import GestoreFile
-
 from src.GUI.Dipendenti.HomeCamerieri.GestioneCucinaCamerieri.ModificaPrenotazioneColazioneInCameraUI import \
     ModificaPrenotazioneColazioneInCameraUI
-from src.GUI.Dipendenti.HomeCamerieri.GestioneCucinaCamerieri.PrenotaColazioneInCameraGiornoSuccessivoUI import \
-    PrenotaColazioneInCameraGiornoSuccessivoUI
+from src.Servizi.Camera import Camera
+from src.Utilities.exceptions import CorruptedFileError
 
 
 class GestioneCucinaMenuCamerieriUI(QTabWidget):
@@ -20,9 +21,18 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
         self._connectButtons()
         self.previous = previous
 
+        self._hideWidget()
+
         self._fillTreeWidgetColazioneInCamera()
         self._fillTreeWidgetPranzo()
         self._fillTreeWidgetCena()
+
+        self.msg = QMessageBox()
+
+    def _hideWidget(self):
+        self.widgetColazioneInCamera.hide()
+        self.widgetAnnullaAvanti.hide()
+        self.comboboxColazioneInCamera.hide()
 
     def _fillTreeWidgetColazioneInCamera(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
@@ -109,15 +119,65 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
     def _connectButtons(self):
         self.btnPrenotaColazioneInCameraGiornoSuccessivo.clicked.connect(self._btnPrenotaColazioneInCameraGiornoSuccessivoClicked)
         self.btnModificaPrenotazioneColazioneInCamera.clicked.connect(self._btnModificaPrenotazioneColazioneInCameraClicked)
+        self.btnAvanti.clicked.connect(self._btnAvantiClicked)
+        self.btnAnnulla.clicked.connect(self._btnAnnullaClicked)
         self.btnTornarePaginaPrecedente.clicked.connect(self._btnTornarePaginaPrecedenteClicked)
         self.btnTornarePaginaPrecedente_2.clicked.connect(self._btnTornarePaginaPrecedente_2Clicked)
         self.btnTornarePaginaPrecedente_3.clicked.connect(self._btnTornarePaginaPrecedente_3Clicked)
 
 
     def _btnPrenotaColazioneInCameraGiornoSuccessivoClicked(self):
-        self.close()
-        self.widgetPrenotaColazioneInCameraGiornoSuccessivo= PrenotaColazioneInCameraGiornoSuccessivoUI(self)
-        self.widgetPrenotaColazioneInCameraGiornoSuccessivo.show()
+        self.btnPrenotaColazioneInCameraGiornoSuccessivo.hide()
+        self.widgetColazioneInCamera.show()
+        self.widgetAnnullaAvanti.show()
+        self.labelIntroduzionePagina.setText("Inserire la scelta del menu del cliente per la colazione in camera e inserire la camera del cliente.")
+        self.comboboxColazioneInCamera.show()
+        self.treewidgetDolceColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.treewidgetSalatoColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.treewidgetBevandeColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+
+    def _btnAvantiClicked(self):
+        numeroCamera = int(self.comboboxColazioneInCamera.currentText())
+
+        paths = GestoreFile.leggiJson(Path('paths.json'))
+        try:
+            camere: dict[int, Camera] = GestoreFile.leggiDictPickle(Path(paths['camere']))
+        except CorruptedFileError:
+            self.previous._showMessage(f"{Path(paths['camere'])} has been corrupted. To fix the issue, delete it.",
+                                       QMessageBox.Icon.Warning, 'Errore')
+            self.close()
+            self.previous.close()
+            raise
+
+        camera = camere[numeroCamera]
+
+        if not camera.isAssegnato():
+            self._showMessage('Non esiste nessuna vacanza in corso nella camera selezionata.', QMessageBox.Icon.Warning)
+            return
+
+        sceltePasti = {
+            "dolce": [item.text(0) for item in self.treewidgetDolceColazioneInCamera.selectedItems()],
+            "salato": [item.text(0) for item in self.treewidgetSalatoColazioneInCamera.selectedItems()],
+            "bevande": [item.text(0) for item in self.treewidgetBevandeColazioneInCamera.selectedItems()]
+        }
+
+        self.widgetConfermaPrenotazioneColazioneInCameraGiornoSuccessivo = ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI(sceltePasti, numeroCamera, self)
+        self.widgetConfermaPrenotazioneColazioneInCameraGiornoSuccessivo.show()
+
+    def _btnAnnullaClicked(self):
+        self.btnPrenotaColazioneInCameraGiornoSuccessivo.show()
+        self._hideWidget()
+        self.treewidgetDolceColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.treewidgetSalatoColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.treewidgetBevandeColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+
+        for item in self.treewidgetDolceColazioneInCamera.selectedItems():
+            item.setSelected(False)
+        for item in self.treewidgetSalatoColazioneInCamera.selectedItems():
+            item.setSelected(False)
+        for item in self.treewidgetBevandeColazioneInCamera.selectedItems():
+            item.setSelected(False)
+
     def _btnModificaPrenotazioneColazioneInCameraClicked(self):
         self.close()
         self.widgetModificaPrenotazioneColazioneInCamera = ModificaPrenotazioneColazioneInCameraUI(self)
@@ -135,8 +195,13 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
         self.close()
         self.previous.show()
 
+    def _showMessage(self, text: str, icon: QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle: str = 'Messaggio'):
+        self.msg.setWindowTitle(windowTitle)
+        self.msg.setIcon(icon)
+        self.msg.setText(text)
+        self.msg.show()
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWidget = GestioneCucinaMenuCamerieriUI()
+    mainWidget = GestioneCucinaMenuCamerieriUI(QWidget)
     mainWidget.show()
     sys.exit(app.exec_())

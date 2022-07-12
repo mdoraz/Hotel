@@ -182,7 +182,7 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
 
     def _btnAnnullaClicked(self):
         self.btnInserisciSceltaPastiPranzo.show()
-        self.widgetSceltaPastiPranzo.hide()
+        self._hideWidget()
         self.treewidgetAntipastiPranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetPrimoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetSecondoContornoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
@@ -228,7 +228,7 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
 
     def _btnAnnulla_2Clicked(self):
         self.btnInserisciSceltaPastiCena.show()
-        self.widgetSceltaPastiCena.hide()
+        self._hideWidget()
         self.treewidgetAntipastiCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetPrimiCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetSecondiContorniCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)

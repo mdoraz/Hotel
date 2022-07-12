@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>883</width>
+    <width>477</width>
     <height>623</height>
    </rect>
   </property>
@@ -22,6 +22,9 @@
      <widget class="QLabel" name="labelIntroduzione">
       <property name="text">
        <string>Prima di confermare può far decidere al cliente quante volte prenotare il piatto scelto in precedenza per gli altri clienti della camera:</string>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
     </item>
@@ -63,7 +66,7 @@
          <property name="title">
           <string>Salato:</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_3">
+         <layout class="QFormLayout" name="formLayoutSalato">
           <item row="0" column="0">
            <widget class="QLabel" name="labelPiattoSalatoColazioneInCamera">
             <property name="text">
@@ -71,11 +74,28 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="labelPiattoSalatoColazioneInCamera_3">
-            <property name="text">
-             <string>Nome piatto:</string>
-            </property>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboboxQuantitaPiattoSalato">
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+            </item>
            </widget>
           </item>
           <item row="1" column="0">
@@ -85,8 +105,8 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="comboboxQuantitaPiattoSalatoColazioneInCamera">
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboboxQuantitaPiattoSalato_2">
             <item>
              <property name="text">
               <string>1</string>
@@ -109,32 +129,15 @@
             </item>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QComboBox" name="comboboxQuantitaPiattoSalatoColazioneInCamera_2">
-            <item>
-             <property name="text">
-              <string>1</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>2</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>3</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>4</string>
-             </property>
-            </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelPiattoSalatoColazioneInCamera_3">
+            <property name="text">
+             <string>Nome piatto:</string>
+            </property>
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QComboBox" name="comboboxQuantitaPiattoSalatoColazioneInCamera_3">
+           <widget class="QComboBox" name="comboboxQuantitaPiattoSalato_3">
             <item>
              <property name="text">
               <string>1</string>
@@ -165,64 +168,16 @@
          <property name="title">
           <string>Dolce:</string>
          </property>
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="2" column="1">
-           <widget class="QComboBox" name="comboboxQuantitaPiattoDolceColazioneInCamera_3">
-            <item>
-             <property name="text">
-              <string>1</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>2</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>3</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>4</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="labelPiattoDolceColazioneInCamera_3">
+         <layout class="QFormLayout" name="formLayoutDolce">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelPiattoDolceColazioneInCamera">
             <property name="text">
              <string>Nome piatto:</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QComboBox" name="comboboxQuantitaPiattoDolceColazioneInCamera">
-            <item>
-             <property name="text">
-              <string>1</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>2</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>3</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>4</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QComboBox" name="comboboxQuantitaPiattoDolceColazioneInCamera_2">
+           <widget class="QComboBox" name="comboboxQuantitaPiattoDolce_1">
             <item>
              <property name="text">
               <string>1</string>
@@ -252,55 +207,8 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="labelPiattoDolceColazioneInCamera">
-            <property name="text">
-             <string>Nome piatto:</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="QGroupBox" name="groupboxBevandeConfermaPrenotazioneColazioneInCamera">
-         <property name="title">
-          <string>Bevande:</string>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_4">
-          <item row="3" column="0">
-           <widget class="QLabel" name="labelBevandeColazioneInCamera_2">
-            <property name="text">
-             <string>Nome piatto:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <widget class="QComboBox" name="comboboxQuantitaBevandaColazioneInCamera_2">
-            <item>
-             <property name="text">
-              <string>1</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>2</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>3</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>4</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QComboBox" name="comboboxQuantitaBevandaColazioneInCamera_1">
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboboxQuantitaPiattoDolce_2">
             <item>
              <property name="text">
               <string>1</string>
@@ -324,14 +232,14 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QLabel" name="labelBevandeColazioneInCamera">
+           <widget class="QLabel" name="labelPiattoDolceColazioneInCamera_3">
             <property name="text">
              <string>Nome piatto:</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
-           <widget class="QComboBox" name="comboboxQuantitaBevandaColazioneInCamera_3">
+          <item row="2" column="1">
+           <widget class="QComboBox" name="comboboxQuantitaPiattoDolce_3">
             <item>
              <property name="text">
               <string>1</string>
@@ -354,11 +262,106 @@
             </item>
            </widget>
           </item>
-          <item row="4" column="0">
+         </layout>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QGroupBox" name="groupboxBevandeConfermaPrenotazioneColazioneInCamera">
+         <property name="title">
+          <string>Bevande:</string>
+         </property>
+         <layout class="QFormLayout" name="formLayoutBevande">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelBevandeColazioneInCamera">
+            <property name="text">
+             <string>Nome piatto:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="comboboxQuantitaBevanda">
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelBevandeColazioneInCamera_2">
+            <property name="text">
+             <string>Nome piatto:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboboxQuantitaBevanda_2">
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="0">
            <widget class="QLabel" name="labelBevandeColazioneInCamera_3">
             <property name="text">
              <string>Nome piatto:</string>
             </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QComboBox" name="comboboxQuantitaBevanda_3">
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>

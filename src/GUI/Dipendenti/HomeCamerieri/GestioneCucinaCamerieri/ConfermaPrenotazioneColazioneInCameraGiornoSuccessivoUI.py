@@ -4,15 +4,46 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 from src.Gestori.GestoreFile import GestoreFile
+from src.Servizi.Camera import Camera
+from src.Utilities.exceptions import CorruptedFileError
+
 
 class ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI(QTabWidget):
-    def __init__(self, previous: QWidget):
+    def __init__(self, sceltePasti: dict, numeroCamera: int, previous: QWidget):
         super().__init__()
         loadUi(GestoreFile.absolutePath('ConfermaPrenotazioneColazioneInCameraGiornoSuccessivo.ui', Path.cwd()), self)
         self.setMinimumSize(600, 600)
         self.setFont(QtGui.QFont('Arial', 10))
         self._connectButtons()
         self.previous = previous
+
+        self._addRowsComboBox(sceltePasti, numeroCamera)
+
+    def _addRowsComboBox(self, sceltePasti: dict, numeroCamera: int): # aggiunge a runtime i piatti selezionati e le combo box per scegliere le quantita di tale piatto
+        comboBox = QComboBox()
+
+        paths = GestoreFile.leggiJson(Path('paths.json'))
+        try:
+            camere: dict[int, Camera] = GestoreFile.leggiDictPickle(Path(paths['camere']))
+        except CorruptedFileError:
+            self.previous._showMessage(f"{Path(paths['camere'])} has been corrupted. To fix the issue, delete it.",
+                                       QMessageBox.Icon.Warning, 'Errore')
+            self.close()
+            self.previous.close()
+            raise
+
+        camera = camere[numeroCamera]
+        numeroClienti = len(camera.getVacanzaAttuale().getClienti())
+
+        for i in range(1, numeroClienti + 1):
+            comboBox.addItem()
+        for nomeDolce in sceltePasti["dolce"]:
+            self.formLayoutDolce.addRow(nomeDolce, comboBox)
+        for nomeSalato in sceltePasti["salato"]:
+            self.formLayoutSalato.addRow(nomeSalato, comboBox)
+        for nomeBevande in sceltePasti["bevande"]:
+            self.formLayoutBevande.addRow(nomeBevande, comboBox)
+
 
     def _connectButtons(self):
         self.btnConfermaPrenotazione.clicked.connect(self._btnConfermaPrenotazioneClicked)
