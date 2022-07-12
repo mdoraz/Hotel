@@ -1,5 +1,4 @@
 from datetime import date
-from msilib.schema import Icon
 import sys
 from pathlib import Path
 

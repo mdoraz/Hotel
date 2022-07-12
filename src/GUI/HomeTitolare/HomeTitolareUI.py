@@ -35,8 +35,8 @@ class HomeTitolareUI(QTabWidget):
 
     def _btnDatiPersonaliClicked(self):
         self.close()
-        self.widgetdatiTitolare = DatiTitolareUI(self.titolare, self)
-        self.widgetdatiTitolare.show()
+        self.widgetDatiTitolare = DatiTitolareUI(self.titolare, self)
+        self.widgetDatiTitolare.show()
 
     def _btnDipendentiClicked(self):
         self.close()
