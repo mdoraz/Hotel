@@ -140,17 +140,6 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
         self.treewidgetSecondoContornoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
         self.treewidgetDolciBevandePranzo.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
 
-
-    def _btnInserisciSceltaPastiCenaClicked(self):
-        self.btnInserisciSceltaPastiCena.hide()
-        self.widgetSceltaPastiCena.show()
-        self.labelIntroduzione_3.setText('Inserire il numero di camera e scegliere quali piatti desidera prenotare il cliente per la cena di domani.')
-        self.comboboxCena.show()
-        self.treewidgetAntipastiCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
-        self.treewidgetPrimiCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
-        self.treewidgetSecondiContorniCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
-        self.treewidgetDolciBevandeCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
-
     def _btnAvantiClicked(self):
         numeroCamera = int(self.comboboxPranzo.currentText())
 
@@ -182,6 +171,7 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
 
     def _btnAnnullaClicked(self):
         self.btnInserisciSceltaPastiPranzo.show()
+        self.labelIntroduzione_2.setText(" Benvenuto, di seguito il menù dell'hotel per il pranzo:")
         self._hideWidget()
         self.treewidgetAntipastiPranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetPrimoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
@@ -196,6 +186,16 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
             item.setSelected(False)
         for item in self.treewidgetDolciBevandePranzo.selectedItems():
             item.setSelected(False)
+
+    def _btnInserisciSceltaPastiCenaClicked(self):
+        self.btnInserisciSceltaPastiCena.hide()
+        self.widgetSceltaPastiCena.show()
+        self.labelIntroduzione_3.setText('Inserire il numero di camera e scegliere quali piatti desidera prenotare il cliente per la cena di domani.')
+        self.comboboxCena.show()
+        self.treewidgetAntipastiCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.treewidgetPrimiCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.treewidgetSecondiContorniCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
+        self.treewidgetDolciBevandeCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
 
     def _btnAvanti_2Clicked(self):
         numeroCamera = int(self.comboboxCena.currentText())
@@ -228,6 +228,7 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
 
     def _btnAnnulla_2Clicked(self):
         self.btnInserisciSceltaPastiCena.show()
+        self.labelIntroduzione_3.setText("Benvenuto, di seguito il menù dell'hotel per la cena:")
         self._hideWidget()
         self.treewidgetAntipastiCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetPrimiCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)

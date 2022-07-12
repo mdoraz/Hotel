@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>685</width>
-    <height>798</height>
+    <height>796</height>
    </rect>
   </property>
   <property name="tabletTracking">
@@ -23,7 +23,7 @@
    <string>Struttura Alberghiera: Gestione Cucina</string>
   </property>
   <property name="currentIndex">
-   <number>1</number>
+   <number>0</number>
   </property>
   <property name="movable">
    <bool>false</bool>

@@ -166,6 +166,7 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
 
     def _btnAnnullaClicked(self):
         self.btnPrenotaColazioneInCameraGiornoSuccessivo.show()
+        self.labelIntroduzionePagina.setText("Benvenuto, di seguito il menù dell'hotel per la colazione in camera:")
         self._hideWidget()
         self.treewidgetDolceColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetSalatoColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
