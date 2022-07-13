@@ -341,7 +341,7 @@ class VisualizzaDipendenteUI(FormUI):
 		richiestaConferma = QMessageBox()
 		richiestaConferma.setIcon(QMessageBox.Icon.Warning)
 		richiestaConferma.setWindowTitle('ConfermaEliminazione')
-		richiestaConferma.setText("Sei sicuro di voler eliminare dal sistema questo dipendente?")
+		richiestaConferma.setText("Confermi l'eliminazione di questo dipendente?")
 		richiestaConferma.addButton('Si', QMessageBox.ButtonRole.YesRole)
 		noButton = richiestaConferma.addButton(QMessageBox.StandardButton.No)
 		richiestaConferma.exec()

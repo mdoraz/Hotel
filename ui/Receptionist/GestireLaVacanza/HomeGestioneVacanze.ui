@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1114</width>
-    <height>646</height>
+    <width>1120</width>
+    <height>656</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1050</width>
-    <height>600</height>
+    <width>1120</width>
+    <height>590</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -77,11 +77,11 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tabInserisciPrenotazione">
        <attribute name="title">
-        <string>Inserisci Prenotazione Vacanza</string>
+        <string>Inserisci Prenotazione</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <property name="leftMargin">
@@ -410,7 +410,7 @@
             <widget class="QComboBox" name="comboboxTipoSoggiorno">
              <property name="minimumSize">
               <size>
-               <width>160</width>
+               <width>170</width>
                <height>0</height>
               </size>
              </property>
@@ -685,7 +685,7 @@
       </widget>
       <widget class="QWidget" name="tabVisualizzaPrenotazione">
        <attribute name="title">
-        <string>Visualizza Prenotazione Vacanza</string>
+        <string>Visualizza Prenotazione</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
@@ -723,7 +723,7 @@
            <item>
             <widget class="QPushButton" name="btnRicercaPrenotazione">
              <property name="text">
-              <string>Ricerca Prenotazione Vacanza</string>
+              <string>Ricerca Prenotazione</string>
              </property>
             </widget>
            </item>
@@ -755,6 +755,15 @@
            <string>Scheda visualizzazione prenotazione della vacanza ricercata:</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
+           <property name="leftMargin">
+            <number>11</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>11</number>
+           </property>
            <item row="0" column="0">
             <widget class="QWidget" name="widgetVisualizzaPrenotazioneSx" native="true">
              <property name="sizePolicy">
@@ -770,7 +779,13 @@
               </font>
              </property>
              <layout class="QFormLayout" name="formLayout">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
               <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
                <number>0</number>
               </property>
               <property name="bottomMargin">
@@ -900,6 +915,9 @@
               <property name="topMargin">
                <number>0</number>
               </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
               <property name="bottomMargin">
                <number>0</number>
               </property>
@@ -924,13 +942,16 @@
                  <property name="topMargin">
                   <number>0</number>
                  </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
                  <property name="bottomMargin">
                   <number>0</number>
                  </property>
                  <item>
                   <widget class="QLabel" name="labelClienteSoggiorneraStrutturaDa">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
@@ -1070,6 +1091,9 @@
                  <property name="topMargin">
                   <number>0</number>
                  </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
                  <property name="bottomMargin">
                   <number>0</number>
                  </property>
@@ -1121,7 +1145,7 @@
              </property>
              <property name="sizeHint" stdset="0">
               <size>
-               <width>40</width>
+               <width>20</width>
                <height>20</height>
               </size>
              </property>
@@ -1132,22 +1156,14 @@
         </item>
         <item>
          <widget class="QWidget" name="widgetButtonsVisualizzaPrenotazione" native="true">
-          <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="1">
-            <widget class="QPushButton" name="btnModificaPrenotazione">
-             <property name="text">
-              <string>Modifica Prenotazione Vacanza</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="1">
-            <widget class="QPushButton" name="btnEliminaPrenotazione">
-             <property name="text">
-              <string>Elimina Prenotazione Vacanza</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0" rowspan="2">
+          <layout class="QHBoxLayout" name="horizontalLayout_14">
+           <property name="topMargin">
+            <number>5</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
             <spacer name="horizontalSpacer_4">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -1155,10 +1171,24 @@
              <property name="sizeHint" stdset="0">
               <size>
                <width>798</width>
-               <height>60</height>
+               <height>40</height>
               </size>
              </property>
             </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnModificaPrenotazione">
+             <property name="text">
+              <string>Modifica Prenotazione</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnEliminaPrenotazione">
+             <property name="text">
+              <string>Elimina Prenotazione</string>
+             </property>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -1170,6 +1200,12 @@
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
           </property>
           <property name="font">
            <font>
@@ -1188,13 +1224,7 @@
             <number>11</number>
            </property>
            <item>
-            <widget class="QWidget" name="widgetClientiCheckIn" native="true">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
+            <widget class="QWidget" name="widgetCheckIn" native="true">
              <layout class="QHBoxLayout" name="horizontalLayout_8">
               <property name="leftMargin">
                <number>0</number>
@@ -1206,88 +1236,190 @@
                <number>0</number>
               </property>
               <property name="bottomMargin">
-               <number>5</number>
+               <number>0</number>
               </property>
               <item>
-               <widget class="QLabel" name="labelQuantiClientiInserireNelCheckIn">
-                <property name="font">
-                 <font>
-                  <family>Arial</family>
-                  <pointsize>10</pointsize>
-                 </font>
-                </property>
-                <property name="text">
-                 <string>Vuoi inserire altri clienti che fanno parte di questa vacanza?</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_6">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
+               <widget class="QGroupBox" name="groupboxOmbrelloniCheckIn">
+                <property name="minimumSize">
                  <size>
-                  <width>471</width>
-                  <height>20</height>
+                  <width>0</width>
+                  <height>0</height>
                  </size>
                 </property>
-               </spacer>
-              </item>
-              <item>
-               <widget class="QPushButton" name="btnAggiungiClienti">
                 <property name="font">
                  <font>
                   <family>Arial</family>
-                  <pointsize>10</pointsize>
+                  <pointsize>9</pointsize>
                  </font>
                 </property>
-                <property name="text">
-                 <string>Aggiungi Clienti</string>
+                <property name="title">
+                 <string>Scheda ombrelloni disponibili nel periodo di soggiorno selezionato:</string>
                 </property>
+                <layout class="QGridLayout" name="gridLayout_6">
+                 <property name="leftMargin">
+                  <number>8</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>11</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>8</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>8</number>
+                 </property>
+                 <item row="0" column="1">
+                  <widget class="QListWidget" name="listwidgetOmbrelloni">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>90</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Arial</family>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::Panel</enum>
+                   </property>
+                   <property name="selectionMode">
+                    <enum>QAbstractItemView::SingleSelection</enum>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
-             </layout>
-            </widget>
-           </item>
-           <item>
-            <widget class="QGroupBox" name="groupboxOmbrelloniCheckIn">
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>9</pointsize>
-              </font>
-             </property>
-             <property name="title">
-              <string>Scheda ombrelloni disponibili nel periodo di soggiorno selezionato:</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_6">
-              <property name="leftMargin">
-               <number>8</number>
-              </property>
-              <property name="topMargin">
-               <number>11</number>
-              </property>
-              <property name="rightMargin">
-               <number>8</number>
-              </property>
-              <property name="bottomMargin">
-               <number>8</number>
-              </property>
-              <item row="0" column="1">
-               <widget class="QListWidget" name="listwidgetOmbrelloni">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
+              <item>
+               <widget class="QGroupBox" name="groupBoxClientiCkeckIn">
+                <property name="font">
+                 <font>
+                  <family>Arial</family>
+                  <pointsize>9</pointsize>
+                 </font>
                 </property>
-                <property name="frameShape">
-                 <enum>QFrame::Panel</enum>
+                <property name="title">
+                 <string>Clienti che soggiorneranno</string>
                 </property>
-                <property name="selectionMode">
-                 <enum>QAbstractItemView::SingleSelection</enum>
+                <property name="alignment">
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                 </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_15">
+                 <property name="leftMargin">
+                  <number>8</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>8</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>8</number>
+                 </property>
+                 <item>
+                  <widget class="QTreeWidget" name="treewidgetClientiCheckIn">
+                   <property name="font">
+                    <font>
+                     <family>Arial</family>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::Panel</enum>
+                   </property>
+                   <property name="indentation">
+                    <number>1</number>
+                   </property>
+                   <column>
+                    <property name="text">
+                     <string>ID</string>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Cognome</string>
+                    </property>
+                   </column>
+                   <column>
+                    <property name="text">
+                     <string>Nome</string>
+                    </property>
+                   </column>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QWidget" name="widgetButtonsCheckIn" native="true">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <family>Arial</family>
+                     <pointsize>10</pointsize>
+                    </font>
+                   </property>
+                   <layout class="QVBoxLayout" name="verticalLayout_6">
+                    <item>
+                     <widget class="QLabel" name="labelContatoreClienti">
+                      <property name="text">
+                       <string>0/n</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="verticalSpacer">
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>20</width>
+                        <height>19</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QToolButton" name="btnPiu">
+                      <property name="text">
+                       <string>+</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QToolButton" name="btnMeno">
+                      <property name="text">
+                       <string>-</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <spacer name="verticalSpacer_2">
+                      <property name="orientation">
+                       <enum>Qt::Vertical</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>20</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                   </layout>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>
@@ -1471,7 +1603,7 @@
          </widget>
         </item>
         <item row="1" column="0" colspan="2">
-         <widget class="QGroupBox" name="groupboxSchedaVisualizzazioneVacanzaRicercata">
+         <widget class="QGroupBox" name="groupboxVacanza">
           <property name="title">
            <string>Scheda visualizzazione vacanza ricercata:</string>
           </property>
@@ -1636,6 +1768,18 @@
                  </property>
                  <item>
                   <widget class="QLabel" name="labelClientiSoggiornerannDa">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
                    <property name="text">
                     <string>I clienti soggiornernno nella struttura dal</string>
                    </property>
@@ -1862,7 +2006,7 @@
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>300</width>
+                  <width>330</width>
                   <height>0</height>
                  </size>
                 </property>
@@ -1876,19 +2020,24 @@
                  <enum>QFrame::Panel</enum>
                 </property>
                 <property name="selectionMode">
-                 <enum>QAbstractItemView::NoSelection</enum>
+                 <enum>QAbstractItemView::SingleSelection</enum>
                 </property>
                 <property name="indentation">
                  <number>1</number>
                 </property>
                 <column>
                  <property name="text">
-                  <string>Nome</string>
+                  <string>ID</string>
                  </property>
                 </column>
                 <column>
                  <property name="text">
                   <string>Cognome</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Nome</string>
                  </property>
                 </column>
                </widget>

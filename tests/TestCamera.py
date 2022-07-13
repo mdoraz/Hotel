@@ -36,7 +36,7 @@ class TestCamera(unittest.TestCase):
 		camera1.prenota(datiPrenotazione1)
 		
 		self.assertEqual(nPrenotazioniIniziali + 1, len(camera1.getPrenotazioni())) # verifica dell'avvenuta aggiunta della prenotazione
-		self.assertEqual(str(camera1.getPrenotazioni()[0]), 'camera 1 dal 01/07/2000 al 07/07/2000 - Liguori')
+		self.assertEqual(str(camera1.getPrenotazioni()[0]), 'camera 1 dal 01/07/2000 al 07/07/2000 - Liguori - Mezza pensione')
 
 		datiPrenotazione1['nominativo'] = 'Eustachio' # nominativo str invece di Persona
 		self.assertRaises(ArgumentTypeError, camera1.prenota, datiPrenotazione1) # verifica eccezione in caso di tipo sbagliato
@@ -44,7 +44,7 @@ class TestCamera(unittest.TestCase):
 		# ricarico le camere dal file pickle per vedere se la prenotazione è stata salvata correttamente
 		camere = GestoreFile.leggiDictPickle(Path(self.paths['camere']))
 		self.assertEqual(nPrenotazioniIniziali + 1, len(camere[1].getPrenotazioni()))
-		self.assertEqual(str(camere[1].getPrenotazioni()[0]), 'camera 1 dal 01/07/2000 al 07/07/2000 - Liguori')
+		self.assertEqual(str(camere[1].getPrenotazioni()[0]), 'camera 1 dal 01/07/2000 al 07/07/2000 - Liguori - Mezza pensione')
 
 		# rimuovo la prenotazione e salvo su file
 		prenotazionie1 = camera1.getPrenotazioni()[0] # la prenotazione aggiunta all'inizio del test è la prima della lista, poichè questa

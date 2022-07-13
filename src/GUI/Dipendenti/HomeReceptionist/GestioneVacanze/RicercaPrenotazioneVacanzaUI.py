@@ -25,7 +25,8 @@ class RicercaPrenotazioneVacanzaUI(QTabWidget):
 
         self.previous = previous
         self.groupbox.hide()
-        self.treewidget.header().setSectionResizeMode(QHeaderView.ResizeMode.ResizeToContents)
+        self.treewidget.header().resizeSection(0, 70)
+        self.treewidget.header().resizeSection(1, 150)
         self._connectButtons()
 
 
@@ -67,7 +68,8 @@ class RicercaPrenotazioneVacanzaUI(QTabWidget):
                 tipoSoggiorno = str(prenotazione.getTipoSoggiorno())
                 periodo = prenotazione.getPeriodo()
                 self.treewidget.addTopLevelItem(MyTreeWidgetItem(self.treewidget,
-                                                [tipoSoggiorno, periodo.getInizio().strftime('%d/%m/%Y'), periodo.getFine().strftime('%d/%m/%Y')],
+                                                [str(prenotazione.getCamera().getNumero()), tipoSoggiorno, 
+                                                periodo.getInizio().strftime('%d/%m/%Y'), periodo.getFine().strftime('%d/%m/%Y')],
                                                 prenotazione))
             self.treewidget.itemDoubleClicked.connect(self._onPrenotazioneSelected) # col doppio cick viene selezionata la prenotazione
             if self.groupbox.isHidden():

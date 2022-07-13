@@ -1,6 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-from typing import TYPE_CHECKING, Union
+from typing import Union
 
 from src.Attori.Persona import Persona
 from src.GestioneVacanza.Soggiorno import Soggiorno

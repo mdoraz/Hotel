@@ -1,7 +1,6 @@
 import sys
 from pathlib import Path
 
-from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
@@ -14,14 +13,18 @@ from src.Gestori.GestoreFile import GestoreFile
 
 class VisualizzaClienteUI(QWidget):
 
-	def __init__(self, previous : QWidget = None): # type: ignore
+	def __init__(self, cliente : Persona = None, previous : QWidget = None): # type: ignore
 		super().__init__()
 
 		loadUi(GestoreFile.absolutePath('visualizzaCliente.ui', Path.cwd()), self)
 
 		self.previous = previous
-		self._hideElements()
-		self.groupboxSchedaCliente.hide()
+		self.cliente = cliente
+		
+		if cliente != None:
+			self._fillFields(self.cliente)
+		else:
+			self._hideElements()
 
 		self._connectButtons()
 
@@ -69,7 +72,6 @@ class VisualizzaClienteUI(QWidget):
 		self.widgetEliminaCliente = EliminaClienteUI(self)
 		self.widgetEliminaCliente.show()
     
-
 
 
 if __name__ == "__main__":

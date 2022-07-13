@@ -1,6 +1,5 @@
 import sys
 from pathlib import Path
-import copy
 
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
@@ -52,8 +51,6 @@ class ModificaPrenotazioneVacanzaUI(QTabWidget):
 			}
 			camere[self.prenotazioneModificata.getCamera().getNumero()].prenota(datiPrenotazione) # riprenoto con i dati modificati
 			GestoreFile.salvaPickle(camere, Path(paths['camere']))
-			self.previous.prenotazioneVisualizzata = self.prenotazioneModificata # aggiorno l'istanza della prenotazione visualizzata della classe HomeGestioneVacanzeUI
-
 
 
 	def _btnCameraPeriodoClicked(self):
@@ -63,10 +60,17 @@ class ModificaPrenotazioneVacanzaUI(QTabWidget):
 			self.previous.dateeditPrenotazioneInizio.setDate(periodo.getInizio())
 			self.previous.dateeditPrenotazioneFine.setDate(periodo.getFine())
 			self.close()
-			# modifico la prenotazione
 			
+			# elimino la vecchia prenotazione dalla camera ad essa associata
 			camere = self._readCamere()
-			camere[self.prenotazioneModificata.getCamera().getNumero()].eliminaPrenotazione(self.prenotazioneModificata) # elimino la prenotazione senza modifiche
+			camere[self.prenotazioneModificata.getCamera().getNumero()].eliminaPrenotazione(self.prenotazioneModificata)
+			GestoreFile.salvaPickle(camere, Path(paths['camere'])) #♥ salvo l'eliminazione
+			
+			# modifico la prenotazione per aggiornare l'attributo prenotazioneVisualizzata della classe HomeGestioneVacanzeUI
+			self.prenotazioneModificata.setCamera(camera)
+			self.prenotazioneModificata.setPeriodo(periodo)
+
+			# aggiungo la prenotazione modificata alla camera ad essa associata
 			datiPrenotazione = {
 				'prelevareCaparra' : False, # non bisogna prelevare di nuovo la caparra
 				'nominativo' : self.prenotazioneModificata.getNominativo(),
@@ -74,15 +78,8 @@ class ModificaPrenotazioneVacanzaUI(QTabWidget):
 				'numeroCarta' : self.prenotazioneModificata.getNumeroCarta(),
 				'periodo' : periodo
 			}
-			camera.prenota(datiPrenotazione) # riprenoto con i dati modificati
-			camere[camera.getNumero()] = camera
-			#♠global paths
-			GestoreFile.salvaPickle(camere, Path(paths['camere']))
+			camera.prenota(datiPrenotazione)
 
-			# aggiorno l'istanza della prenotazione visualizzata della classe HomeGestioneVacanzeUI
-			self.prenotazioneModificata.setCamera(camera)
-			self.prenotazioneModificata.setPeriodo(periodo)
-			self.previous.prenotazioneVisualizzata = self.prenotazioneModificata
 
 		self.close()
 		self.widgetSelezionaCamera = SelezionaCameraUI(self, self.prenotazioneModificata)
@@ -101,8 +98,7 @@ class ModificaPrenotazioneVacanzaUI(QTabWidget):
 			self.previous.close()
 			raise
 		return camere
-		
-
+	
 
 	def _btnIndietroClicked(self):
 		self.close()

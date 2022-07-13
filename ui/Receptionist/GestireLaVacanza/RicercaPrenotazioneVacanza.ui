@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>638</width>
+    <width>636</width>
     <height>403</height>
    </rect>
   </property>
@@ -171,12 +171,17 @@
          </property>
          <column>
           <property name="text">
-           <string>TipoSoggiorno</string>
+           <string>Camera</string>
           </property>
           <property name="font">
            <font>
             <family>Arial</family>
            </font>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Tipo Soggiorno</string>
           </property>
          </column>
          <column>
