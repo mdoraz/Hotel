@@ -18,6 +18,7 @@ class ModificaPrenotazioneColazioneInCameraUI(QTabWidget):
 
     def _hideWidget(self):
         self.widgetMenuModificare.hide()
+        self.widgetConfermaModifiche.hide()
         self.btnAnnulla.hide()
 
     def _connectButtons(self):
@@ -28,6 +29,7 @@ class ModificaPrenotazioneColazioneInCameraUI(QTabWidget):
 
     def _btnCercaClicked(self):
         self.widgetMenuModificare.show()
+        self.widgetConfermaModifiche.show()
         self.btnAnnulla.show()
         self.setMinimumSize(600, 600)
 

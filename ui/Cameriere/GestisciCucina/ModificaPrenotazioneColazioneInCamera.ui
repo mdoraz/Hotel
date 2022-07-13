@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>806</width>
-    <height>722</height>
+    <width>1038</width>
+    <height>748</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,6 +18,40 @@
     <string>Modifica Prenotazione Menù</string>
    </attribute>
    <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="labelIntroduzionePagina">
+      <property name="text">
+       <string>Qual'è il numero di camera della prenotazione da modificare?</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QPushButton" name="btnCerca">
+      <property name="text">
+       <string>Cerca</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QPushButton" name="btnTornarePaginaPrecedente">
+      <property name="text">
+       <string>Tornare alla pagina precedente</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1" colspan="2">
+     <spacer name="horizontalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
     <item row="0" column="2">
      <widget class="QComboBox" name="comboboxInserimentoCamera">
       <item>
@@ -202,40 +236,6 @@
       </item>
      </widget>
     </item>
-    <item row="1" column="2">
-     <widget class="QPushButton" name="btnCerca">
-      <property name="text">
-       <string>Cerca</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
-     <widget class="QPushButton" name="btnTornarePaginaPrecedente">
-      <property name="text">
-       <string>Tornare alla pagina precedente</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1" colspan="2">
-     <spacer name="horizontalSpacer_2">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="labelIntroduzionePagina">
-      <property name="text">
-       <string>Qual'è il numero di camera della prenotazione da modificare?</string>
-      </property>
-     </widget>
-    </item>
     <item row="2" column="0" colspan="3">
      <widget class="QWidget" name="widgetMenuModificare" native="true">
       <layout class="QFormLayout" name="formLayout_2">
@@ -249,19 +249,6 @@
          </property>
          <property name="text">
           <string>Quali piatti desideri modificare e/o cambiare?</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0">
-        <widget class="QLabel" name="labelDomanda_2">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Salvare le modifiche effettuate?</string>
          </property>
         </widget>
        </item>
@@ -475,13 +462,6 @@
          </layout>
         </widget>
        </item>
-       <item row="4" column="1">
-        <widget class="QPushButton" name="btnConfermaModifiche">
-         <property name="text">
-          <string>Si</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
     </item>
@@ -490,6 +470,32 @@
       <property name="text">
        <string>Annulla</string>
       </property>
+     </widget>
+    </item>
+    <item row="3" column="0" colspan="3">
+     <widget class="QWidget" name="widgetConfermaModifiche" native="true">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="labelDomanda_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Salvare le modifiche effettuate?</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnConfermaModifiche">
+         <property name="text">
+          <string>Si</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
    </layout>
