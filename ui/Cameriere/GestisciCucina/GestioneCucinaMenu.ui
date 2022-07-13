@@ -152,6 +152,9 @@
        </item>
        <item>
         <widget class="QComboBox" name="comboboxColazioneInCamera">
+         <property name="maxVisibleItems">
+          <number>20</number>
+         </property>
          <item>
           <property name="text">
            <string>1</string>
