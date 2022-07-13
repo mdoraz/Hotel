@@ -224,6 +224,8 @@ class HomeGestioneVacanzeUI(QTabWidget):
 		self.dateeditPrenotazioneFine.setDate(prenotazione.getPeriodo().getFine())
 		self.labelContatoreClienti.setText(self.labelContatoreClienti.text()[:-1] + str(prenotazione.getCamera().getNumeroPersone()))
 		
+		# svuoto il tree widget con la lista di clienti del check in
+		self.treewidgetClientiCheckIn.clear()
 		self._addClienteCheckIn(prenotazione.getNominativo())
 		self._fillListwidgetOmbrelloni()
 		if self.groupboxPrenotazione.isHidden():
@@ -250,11 +252,18 @@ class HomeGestioneVacanzeUI(QTabWidget):
 		if richiestaConferma.clickedButton() == noButton:
 			pass # non accade nulla, eliminazione annullata
 		else:
+			# elimino la prenotazione dalla camera e salvo su file
 			camere : dict[int, Camera] = self._readDict('camere')
 			camere[self.prenotazioneVisualizzata.getCamera().getNumero()].eliminaPrenotazione(self.prenotazioneVisualizzata)
 			GestoreFile.salvaPickle(camere, Path(paths['camere']))
+			# se sto visualizzando una vacanza associata alla camera modificata, gli aggiorno l'attributo camera
+			if self.vacanzaVisualizzata.getCamera().getNumero() == self.prenotazioneVisualizzata.getCamera().getNumero():
+				self.vacanzaVisualizzata.setCamera(camere[self.prenotazioneVisualizzata.getCamera().getNumero()])
+			
 			self._showMessage('Prenotazione eliminata dal sistema.', QMessageBox.Icon.Information)
 			self._hideElementsVisualizzaPrenotazione()
+			# riazzero il contatore di clienti
+			self.labelContatoreClienti.setText('0' + self.labelContatoreClienti.text()[1:])
 	
 
 	def _btnPiuClicked(self):
@@ -268,10 +277,10 @@ class HomeGestioneVacanzeUI(QTabWidget):
 		layout.addWidget(btnRegistra)
 
 		def onRicercaClicked():
-			self.widgetRicercaClienteCheckIn = RicercaClienteUI(self)
+			self.widgetCercaClienteCheckIn = RicercaClienteUI(self)
 			self.widgetScelta.close()
-			self.widgetRicercaClienteCheckIn.clienteTrovato.connect(self._addClienteCheckIn)
-			self.widgetRicercaClienteCheckIn.show()
+			self.widgetCercaClienteCheckIn.clienteTrovato.connect(self._addClienteCheckIn)
+			self.widgetCercaClienteCheckIn.show()
 		
 		def onRegistraClicked():
 			self.widgetRegistraClienteCheckIn = RegistraClienteUI(self)
@@ -334,6 +343,10 @@ class HomeGestioneVacanzeUI(QTabWidget):
 
 
 	def _btnCheckInClicked(self):
+		if self.prenotazioneVisualizzata.getCamera().isAssegnato():
+			self._showMessage(f"La camera {self.prenotazioneVisualizzata.getCamera().getNumero()} è al momento occupata, impossibile effettuare il check-in.",
+							  QMessageBox.Icon.Warning, 'Errore')
+			return
 		if self.listwidgetOmbrelloni.currentItem() == None:
 			self._showMessage("Selezionare l'ombrellone da assegnare alla camera durante la vacanza.", QMessageBox.Icon.Warning, 'Errore')
 			return
@@ -385,8 +398,12 @@ class HomeGestioneVacanzeUI(QTabWidget):
 
 
 	def _btnModificaTermineVacanzaClicked(self):
-		self.close()
-		self.widgetModificaTermineVacanzaOmbrellone = ModificaTermineVacanzaOmbrelloneUI(self)
+		def onVacanzaModificata():
+			self.dateeditFineVacanza.setDate(self.vacanzaVisualizzata.getPeriodo().getFine())
+			self.lineeditNumeroOmbrelloneVisualizzaVacanza.setText(str(self.vacanzaVisualizzata.getOmbrellone().getNumero()))
+		
+		self.widgetModificaTermineVacanzaOmbrellone = ModificaTermineVacanzaOmbrelloneUI(self, self.vacanzaVisualizzata)
+		self.widgetModificaTermineVacanzaOmbrellone.vacanzaModificata.connect(onVacanzaModificata)
 		self.widgetModificaTermineVacanzaOmbrellone.show()
 
 

@@ -42,6 +42,9 @@ class Camera(Prenotabile, Assegnabile):
 
     def setNumeroPersone(self, numeroPersone : int):
         self._numeroPersone = numeroPersone
+
+    def setVacanzaAttuale(self, vacanza : Vacanza):
+        self._vacanzaAttuale = vacanza
     
     def eliminaPrenotazione(self, prenotazione : PrenotazioneVacanza):
         for p in self._prenotazioni:
@@ -140,7 +143,10 @@ class Camera(Prenotabile, Assegnabile):
     def isDisponibile(self, periodo : PeriodoConData) -> bool:
         disponibile = True
         i = 0
-        while i < len(self._prenotazioni) and disponibile:
+        if self._assegnato == True and periodo.isSovrapposto(self._vacanzaAttuale.getPeriodo()): # type: ignore
+            disponibile = False
+        
+        while disponibile and i < len(self._prenotazioni):
             if periodo.isSovrapposto(self._prenotazioni[i].getPeriodo()):
                 disponibile = False
             i += 1

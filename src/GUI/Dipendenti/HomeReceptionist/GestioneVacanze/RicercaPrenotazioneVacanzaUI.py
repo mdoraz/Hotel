@@ -71,7 +71,7 @@ class RicercaPrenotazioneVacanzaUI(QTabWidget):
                                                 [str(prenotazione.getCamera().getNumero()), tipoSoggiorno, 
                                                 periodo.getInizio().strftime('%d/%m/%Y'), periodo.getFine().strftime('%d/%m/%Y')],
                                                 prenotazione))
-            self.treewidget.itemDoubleClicked.connect(self._onPrenotazioneSelected) # col doppio cick viene selezionata la prenotazione
+            self.treewidget.itemDoubleClicked.connect(lambda item: self._onPrenotazioneSelected(item.connectedObject)) # col doppio cick viene selezionata la prenotazione
             if self.groupbox.isHidden():
                 self.groupbox.show()
 
