@@ -46,7 +46,7 @@
     <item row="0" column="0" colspan="3">
      <widget class="QTabWidget" name="tabwidgetScelteHomeNoleggioBici">
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabPrenotaBici">
        <attribute name="title">
@@ -113,7 +113,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>98</width>
+                <width>1067</width>
                 <height>514</height>
                </rect>
               </property>
@@ -420,6 +420,9 @@
            </item>
            <item row="0" column="1">
             <widget class="QComboBox" name="comboboxInserisciCameraCliente">
+             <property name="maxVisibleItems">
+              <number>20</number>
+             </property>
              <item>
               <property name="text">
                <string>1</string>
@@ -910,6 +913,9 @@
         </item>
         <item row="0" column="1">
          <widget class="QComboBox" name="comboboxInserireNumeroCameraAssociataNoleggio">
+          <property name="maxVisibleItems">
+           <number>20</number>
+          </property>
           <item>
            <property name="text">
             <string>1</string>
