@@ -123,6 +123,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
     def _btnModificaMenuColazioneInCameraClicked(self):
         self.btnModificaMenuColazioneInCamera.hide()
         self.widgetModificaMenu.show()
+        self.labelIntroduzione.setText("Quali piatti desidera modificare?")
         i = 0
         self.proprietaItemDolci = []
         while i < self.treewidgetDolceColazioneInCamera.topLevelItemCount():
@@ -182,6 +183,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
 
 
     def _btnAnnullaModificheClicked(self):
+        self.labelIntroduzione.setText("Benvenuto, di seguito il menù dell'hotel per la colazione in camera:")
         i = 0
         while i < self.treewidgetDolceColazioneInCamera.topLevelItemCount():
             item = self.treewidgetDolceColazioneInCamera.topLevelItem(i)
@@ -208,6 +210,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
     def _btnModificaMenuPranzoClicked(self):
         self.btnModificaMenuPranzo.hide()
         self.widgetModificaMenu_2.show()
+        self.labelIntroduzione_2.setText("Quali piatti desidera modificare?")
         i = 0
         self.proprietaItemAntipasti = []
         while i < self.treewidgetAntipastiPranzo.topLevelItemCount():
@@ -284,6 +287,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
         self.widgetModificaMenu_2.hide()
 
     def _btnAnnullaModifiche_2Clicked(self):
+        self.labelIntroduzione_2.setText("Benvenuto, di seguito il menù dell'hotel per il pranzo:")
         i = 0
         while i < self.treewidgetAntipastiPranzo.topLevelItemCount():
             item = self.treewidgetAntipastiPranzo.topLevelItem(i)
@@ -315,6 +319,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
     def _btnModificaMenuCenaClicked(self):
         self.btnModificaMenuCena.hide()
         self.widgetModificaMenu_3.show()
+        self.labelIntroduzione_3.setText("Quali piatti desidera modificare?")
         i = 0
         self.proprietaItemAntipasti = []
         while i < self.treewidgetAntipastiCena.topLevelItemCount():
@@ -391,6 +396,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
         self.widgetModificaMenu_3.hide()
 
     def _btnAnnullaModifiche_3Clicked(self):
+        self.labelIntroduzione_3.setText("Benvenuto, di seguito il menù dell'hotel per la cena:")
         i = 0
         while i < self.treewidgetAntipastiCena.topLevelItemCount():
             item = self.treewidgetAntipastiCena.topLevelItem(i)
