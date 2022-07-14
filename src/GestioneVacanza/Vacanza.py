@@ -18,7 +18,8 @@ class Vacanza(PrenotazioneVacanza):
         self._prenotazioniBici = []
         self._noleggiBici = []
         self._colazioniInCamera = {}
-        self._sceltePasti = {}
+        self._sceltePastiPranzo = {}
+        self._sceltePastiCena = {}
         self._inCorso = True
 
     def aggiungiPrenotazioneBici(self, prenotazioneNoleggio : NoleggioBici):# inserimento ordinato ella prenotazione
@@ -33,11 +34,14 @@ class Vacanza(PrenotazioneVacanza):
     def aggiungiNoleggioBici(self, noleggio : NoleggioBici):
         self._noleggiBici.append(noleggio)
 
-    def impostaColazioneInCamera(self, data: date, preferenzeDelCliente : dict):
-        self._colazioniInCamera[data] = preferenzeDelCliente
+    def setColazioniInCamera(self,preferenzeDelCliente : dict):
+        self._colazioniInCamera = preferenzeDelCliente
 
-    def impostaSceltaPasti(self, data : date, sceltaPasti : dict): # impostaSceltaPasti
-        self._sceltePasti[data] = sceltaPasti
+    def setSceltePastiPranzo(self, sceltePasti : dict):
+        self._sceltePasti = sceltePasti
+
+    def setSceltePastiCena(self, sceltePasti: dict):
+        self._sceltePasti = sceltePasti
 
     def getClienti(self) -> list:
         return self._clienti
@@ -54,8 +58,11 @@ class Vacanza(PrenotazioneVacanza):
     def getColazioniInCamera(self) -> dict:
         return self._colazioniInCamera
 
-    def getSceltePasti(self) -> dict:
-        return self._sceltePasti
+    def getSceltePastiPranzo(self) -> dict:
+        return self._sceltePastiPranzo
+
+    def getSceltePastiCena(self) -> dict:
+        return self._sceltePastiCena
 
     def isInCorso(self) -> bool:
         return self._inCorso

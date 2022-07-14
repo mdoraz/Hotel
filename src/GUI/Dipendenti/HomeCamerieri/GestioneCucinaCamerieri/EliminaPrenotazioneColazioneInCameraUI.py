@@ -5,7 +5,7 @@ from PyQt5.uic import loadUi
 from pathlib import Path
 from src.Gestori.GestoreFile import GestoreFile
 
-class ModificaPrenotazioneColazioneInCameraUI(QTabWidget):
+class EliminaPrenotazioneColazioneInCameraUI(QTabWidget):
     def __init__(self, previous: QWidget):
         super().__init__()
         loadUi(GestoreFile.absolutePath('ModificaPrenotazioneColazioneInCamera.ui',Path.cwd()), self)
@@ -22,7 +22,7 @@ class ModificaPrenotazioneColazioneInCameraUI(QTabWidget):
         self.btnAnnulla.hide()
 
     def _connectButtons(self):
-        self.btnConfermaModifiche.clicked.connect(self._btnConfermaModificheClicked)
+        self.btnConferma.clicked.connect(self._btnConfermaClicked)
         self.btnCerca.clicked.connect(self._btnCercaClicked)
         self.btnAnnulla.clicked.connect(self._btnAnnullaClicked)
         self.btnTornarePaginaPrecedente.clicked.connect(self._btnTornarePaginaPrecedenteClicked)
@@ -37,7 +37,7 @@ class ModificaPrenotazioneColazioneInCameraUI(QTabWidget):
         self._hideWidget()
         self.setMinimumSize(400, 200)
 
-    def _btnConfermaModificheClicked(self):
+    def _btnConfermaClicked(self):
         pass
 
 
@@ -47,6 +47,6 @@ class ModificaPrenotazioneColazioneInCameraUI(QTabWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWidget = ModificaPrenotazioneColazioneInCameraUI()
+    mainWidget = EliminaPrenotazioneColazioneInCameraUI()
     mainWidget.show()
     sys.exit(app.exec_())
