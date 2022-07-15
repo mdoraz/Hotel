@@ -25,7 +25,7 @@ class Ombrellone(Assegnabile):
 
     def terminaAssegnamento(self):
         self._assegnato = False
-         # salvo la variazione
+        # salvo la variazione
         paths = GestoreFile.leggiJson(Path('paths.json'))
         ombrelloni = GestoreFile.leggiDictPickle(Path(paths['ombrelloni']))
         

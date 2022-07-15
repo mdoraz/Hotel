@@ -1,5 +1,7 @@
 import sys
+from datetime import date, timedelta
 from pathlib import Path
+from copy import copy
 
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
@@ -11,7 +13,6 @@ from src.GestioneVacanza.PrenotazioneVacanza import PrenotazioneVacanza
 from src.GestioneVacanza.Soggiorno import Soggiorno
 from src.GestioneVacanza.Vacanza import Vacanza
 from src.Gestori.GestoreFile import GestoreFile
-from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.AggiungereClientiCheckInUI import AggiungereClientiCheckInUI
 from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.ModificaPrenotazioneVacanzaUI import ModificaPrenotazioneVacanzaUI
 from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.ModificaTermineVacanzaOmbrelloneUI import ModificaTermineVacanzaOmbrelloneUI
 from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.RicercaPrenotazioneVacanzaUI import RicercaPrenotazioneVacanzaUI
@@ -39,6 +40,7 @@ class HomeGestioneVacanzeUI(QTabWidget):
 		self._setupInserisciPrenotazione()
 		self._setupVisualizzaPrenotazione()
 		self._setupVisualizzaVacanza()
+		self._setupVisualizzaArriviPartenze()
 		
 		self.btnIndietro.clicked.connect(self._btnIndietroClicked)
 
@@ -61,7 +63,71 @@ class HomeGestioneVacanzeUI(QTabWidget):
 		self._connectButtonsVisualizzaVacanza()
 		self.treewidgetAltriClienti.header().resizeSection(0, 50) # restringo la prima colonna che contiene l'id
 		self.treewidgetAltriClienti.itemDoubleClicked.connect(lambda item: self._visualizzaCliente(item.connectedObject))
+
 	
+	def _setupVisualizzaArriviPartenze(self):
+		dataDomani = date.today() + timedelta(days = 1)
+		camere : dict[int, Camera] = self._readDict('camere')
+		
+		# riempimento dei due tree widget
+		for camera in camere.values():
+			if camera.isAssegnato() and camera.getVacanzaAttuale().getPeriodo().getFine() == dataDomani:	# type: ignore
+					self._aggiungiPartenza(camera.getVacanzaAttuale())										# type: ignore
+		
+		for camera in camere.values():
+			for prenotazione in camera.getPrenotazioni():
+				if prenotazione.getPeriodo().getInizio() == dataDomani:
+					self._aggiungiArrivo(prenotazione)
+					break
+		
+		# ridimensionameno delle colonne dei due tree widget
+		self.treewidgetArrivi.header().resizeSection(0, 75)
+		self.treewidgetArrivi.header().resizeSection(1, 155)
+		self.treewidgetArrivi.header().resizeSection(2, 100)
+		self.treewidgetArrivi.header().resizeSection(3, 100)
+		self.treewidgetArrivi.header().resizeSection(4, 160)
+		
+		self.treewidgetPartenze.header().resizeSection(0, 70)
+		self.treewidgetPartenze.header().resizeSection(1, 95)
+		self.treewidgetPartenze.header().resizeSection(2, 150)
+		self.treewidgetPartenze.header().resizeSection(3, 95)
+		self.treewidgetPartenze.header().resizeSection(4, 95)
+		self.treewidgetPartenze.header().resizeSection(5, 155)
+
+		def showPrenotazione(item : MyTreeWidgetItem):
+			self._onPrenotazioneSelezionata(item.connectedObject) # type: ignore
+			self.innerTabWidget.setCurrentIndex(1)
+
+		def showVacanza(item : MyTreeWidgetItem):
+			self._onVacanzaTrovata(item.connectedObject) # type: ignore
+			self.innerTabWidget.setCurrentIndex(2)
+
+		# collegamenro del doppio click con la visualizzazione dell'elemento clickato
+		self.treewidgetArrivi.itemDoubleClicked.connect(showPrenotazione)
+		self.treewidgetPartenze.itemDoubleClicked.connect(showVacanza)
+
+
+	def _aggiungiArrivo(self, prenotazione : PrenotazioneVacanza):
+		self.treewidgetArrivi.addTopLevelItem(
+			MyTreeWidgetItem(self.treewidgetArrivi,
+							 [str(prenotazione.getCamera().getNumero()), 
+							 str(prenotazione.getTipoSoggiorno()), prenotazione.getPeriodo().getInizio().strftime('%d/%m/%Y'),
+							 prenotazione.getPeriodo().getFine().strftime('%d/%m/%Y'), prenotazione.getNumeroCarta(), 
+							 f"{prenotazione.getNominativo().getCognome()} {prenotazione.getNominativo().getNome()} - ID: {prenotazione.getNominativo().getId()}"], 
+							 prenotazione)
+		)
+	
+
+	def _aggiungiPartenza(self, vacanza : Vacanza):
+		self.treewidgetPartenze.addTopLevelItem(
+			MyTreeWidgetItem(self.treewidgetPartenze, 
+							 [str(vacanza.getCamera().getNumero()), str(vacanza.getOmbrellone().getNumero()),															# type: ignore
+							 str(vacanza.getTipoSoggiorno()), vacanza.getPeriodo().getInizio().strftime('%d/%m/%Y'),										# type: ignore
+							 vacanza.getPeriodo().getFine().strftime('%d/%m/%Y'), vacanza.getNumeroCarta(), 												# type:ignore
+							 f"{vacanza.getNominativo().getCognome()} {vacanza.getNominativo().getNome()} - ID: {vacanza.getNominativo().getId()}"], 	# type: ignore
+							 vacanza)
+		)
+
 	
 	def _setNumeroCartaHints(self, text : str):
 		label = self.labelTipoCartaInserimentoPrenotazione
@@ -201,10 +267,15 @@ class HomeGestioneVacanzeUI(QTabWidget):
 		}
 		camera.prenota(datiPrenotazione)
 		
-		self._showMessage('Caparra prelevata e prenotazione inserita correttamente.')
+		self._showMessage('Caparra prelevata e prenotazione inserita correttamente.', QMessageBox.Icon.Information)
 		self._hideElementsInserisciPrenotazione()
 		self.lineeditNumeroCartaInserisciPrenotazione.clear()
 		self.comboboxTipoSoggiorno.setCurrentIndex(0)
+
+		if self.dateeditInizioPrenotazione.date().toPyDate() == date.today() + timedelta(days = 1): # se la prenotazione inizia domani
+			prenotazione = PrenotazioneVacanza(datiPrenotazione['periodo'], camera, datiPrenotazione['tipoSoggiorno'],
+                                           	   datiPrenotazione['nominativo'], datiPrenotazione['numeroCarta'])
+			self._aggiungiArrivo(prenotazione)
 		
 
 	def _btnRicercaPrenotazioneClicked(self):
@@ -222,11 +293,12 @@ class HomeGestioneVacanzeUI(QTabWidget):
 		)
 		self.dateeditPrenotazioneInizio.setDate(prenotazione.getPeriodo().getInizio())
 		self.dateeditPrenotazioneFine.setDate(prenotazione.getPeriodo().getFine())
-		self.labelContatoreClienti.setText(self.labelContatoreClienti.text()[:-1] + str(prenotazione.getCamera().getNumeroPersone()))
-		
-		# svuoto il tree widget con la lista di clienti del check in
-		self.treewidgetClientiCheckIn.clear()
+		self.labelContatoreClienti.setText('0/' + str(prenotazione.getCamera().getNumeroPersone()))
+
+		self.treewidgetClientiCheckIn.clear() # svuoto il tree widget con la lista di clienti del check in
 		self._addClienteCheckIn(prenotazione.getNominativo())
+		self.btnPiu.setEnabled(True)
+		self.btnMeno.setEnabled(False)
 		self._fillListwidgetOmbrelloni()
 		if self.groupboxPrenotazione.isHidden():
 			self.groupboxPrenotazione.show()
@@ -236,7 +308,54 @@ class HomeGestioneVacanzeUI(QTabWidget):
 
 
 	def _btnModificaPrenotazioneClicked(self):
+		def onTipoSoggiornoModificato():
+			self.lineeditTipoSoggiornoPrenotazione.setText(self.comboboxTipoSoggiorno.currentText())
+			if self.prenotazioneVisualizzata.getPeriodo().getInizio() == date.today() + timedelta(days = 1): # se la prenotazione è visualizzata nella lista di arrivi
+				i = 0
+				while i < self.treewidgetArrivi.topLevelItemCount():
+					if self.treewidgetArrivi.topLevelItem(i).connectedObject == self.prenotazioneVisualizzata:
+						self.treewidgetArrivi.topLevelItem(i).connectedObject = self.prenotazioneVisualizzata # il confronto non coinvolge il tipo di soggiorno, che è diverso
+						self.treewidgetArrivi.topLevelItem(i).setText(1, str(self.prenotazioneVisualizzata.getTipoSoggiorno())) # aggiornato il tipo di soggiorno mostrato
+					i += 1
+		
+		def onCameraPeriodoModificati(vecchiaPrenotazione : PrenotazioneVacanza):
+			nuovaCamera  = self.prenotazioneVisualizzata.getCamera()
+			nuovoPeriodo = self.prenotazioneVisualizzata.getPeriodo()
+			dataDomani = date.today() + timedelta(days = 1)
+			
+			# aggiornamento tab visualizza prenotazione
+			self.lineeditNumeroCameraVisualizzaPrenotazione.setText(str(nuovaCamera.getNumero()))
+			self.dateeditPrenotazioneInizio.setDate(nuovoPeriodo.getInizio())
+			self.dateeditPrenotazioneFine.setDate(nuovoPeriodo.getFine())
+			self.labelContatoreClienti.setText(self.labelContatoreClienti.text()[:-1] + str(nuovaCamera.getNumeroPersone()))
+			if nuovaCamera.getNumeroPersone() <= self.treewidgetClientiCheckIn.topLevelItemCount() and self.btnPiu.isEnabled():
+				self.btnPiu.setEnabled(False)
+			if nuovaCamera.getNumeroPersone() > self.treewidgetClientiCheckIn.topLevelItemCount() and not self.btnPiu.isEnabled():
+				self.btnPiu.setEnabled(True)
+			
+			# aggiornamento tab visualizza arrivi e partenze
+			if vecchiaPrenotazione.getPeriodo().getInizio() == dataDomani: # se la vecchia prenotazione era tra gli arrivi
+				# trovo la riga in cui si trova la vecchia prenotazione nel tree widget
+				indiceRiga = 0
+				while indiceRiga < self.treewidgetArrivi.topLevelItemCount():
+					if self.treewidgetArrivi.topLevelItem(indiceRiga).connectedObject == vecchiaPrenotazione:
+						break
+					indiceRiga += 1
+				
+				if nuovoPeriodo.getInizio() != dataDomani: # se la prenotazione non inizia più domani
+					self.treewidgetArrivi.takeTopLevelItem(indiceRiga) # prenotazione rimossa
+				else: # se la data di inizio non è cambiata
+					self.treewidgetArrivi.topLevelItem(indiceRiga).connectedObject = copy(self.prenotazioneVisualizzata)
+					self.treewidgetArrivi.topLevelItem(indiceRiga).setText(0, str(nuovaCamera.getNumero())) # aggiorno il numero di camera mostrato
+					self.treewidgetArrivi.topLevelItem(indiceRiga).setText(3, nuovoPeriodo.getFine().strftime('%d/%m/%Y')) # aggiorno la data di fine mostrata
+			
+			elif nuovoPeriodo.getInizio() == dataDomani:
+				self._aggiungiArrivo(copy(self.prenotazioneVisualizzata))
+
+
 		self.widgetModificaPrenotazione = ModificaPrenotazioneVacanzaUI(self, self.prenotazioneVisualizzata)
+		self.widgetModificaPrenotazione.tiposSoggiornoModificato.connect(onTipoSoggiornoModificato)
+		self.widgetModificaPrenotazione.cameraPeriodoModificati.connect(onCameraPeriodoModificati)
 		self.widgetModificaPrenotazione.show()
 
 
@@ -257,14 +376,20 @@ class HomeGestioneVacanzeUI(QTabWidget):
 			camere[self.prenotazioneVisualizzata.getCamera().getNumero()].eliminaPrenotazione(self.prenotazioneVisualizzata)
 			GestoreFile.salvaPickle(camere, Path(paths['camere']))
 			# se sto visualizzando una vacanza associata alla camera modificata, gli aggiorno l'attributo camera
-			if self.vacanzaVisualizzata.getCamera().getNumero() == self.prenotazioneVisualizzata.getCamera().getNumero():
+			if not self.groupboxVacanza.isHidden() and self.vacanzaVisualizzata.getCamera().getNumero() == self.prenotazioneVisualizzata.getCamera().getNumero():
 				self.vacanzaVisualizzata.setCamera(camere[self.prenotazioneVisualizzata.getCamera().getNumero()])
 			
 			self._showMessage('Prenotazione eliminata dal sistema.', QMessageBox.Icon.Information)
 			self._hideElementsVisualizzaPrenotazione()
-			# riazzero il contatore di clienti
-			self.labelContatoreClienti.setText('0' + self.labelContatoreClienti.text()[1:])
-	
+
+			if self.prenotazioneVisualizzata.getPeriodo().getInizio() == date.today() + timedelta(days = 1): # se la prenotazione iniziava domani
+				i = 0
+				while i < self.treewidgetArrivi.topLevelItemCount():
+					if self.treewidgetArrivi.topLevelItem(i).connectedObject == self.prenotazioneVisualizzata:
+						self.treewidgetArrivi.takeTopLevelItem(i)
+						break
+					i += 1
+
 
 	def _btnPiuClicked(self):
 		self.widgetScelta = QWidget(); self.widgetScelta.setWindowTitle('Struttura Alberghiera')
@@ -314,9 +439,9 @@ class HomeGestioneVacanzeUI(QTabWidget):
 													  cliente))
 		self.labelContatoreClienti.setText(str(int(self.labelContatoreClienti.text()[0]) + 1) + self.labelContatoreClienti.text()[1:])
 		# controllo se riattivare il bottone meno o disattivare il bottone piu
-		if not self.btnMeno.isEnabled():
+		if self.treewidgetClientiCheckIn.topLevelItemCount() > 1:
 			self.btnMeno.setEnabled(True)
-		if self.treewidgetClientiCheckIn.topLevelItemCount() == self.prenotazioneVisualizzata.getCamera().getNumeroPersone():
+		if self.treewidgetClientiCheckIn.topLevelItemCount() >= self.prenotazioneVisualizzata.getCamera().getNumeroPersone():
 			self.btnPiu.setEnabled(False)
 
 
@@ -331,11 +456,12 @@ class HomeGestioneVacanzeUI(QTabWidget):
 			# controllo se riattivare il bottone piu o disattivare il bottone meno
 			if self.treewidgetClientiCheckIn.topLevelItemCount() == 1:
 				self.btnMeno.setEnabled(False)
-			if not self.btnPiu.isEnabled():
+			if self.treewidgetClientiCheckIn.topLevelItemCount() < self.prenotazioneVisualizzata.getCamera().getNumeroPersone():
 				self.btnPiu.setEnabled(True)
 
 
 	def _fillListwidgetOmbrelloni(self):
+		self.listwidgetOmbrelloni.clear()
 		ombrelloni : dict[int, Ombrellone] = self._readDict('ombrelloni')
 		for ombrellone in ombrelloni.values():
 			if not ombrellone.isAssegnato():
@@ -343,8 +469,16 @@ class HomeGestioneVacanzeUI(QTabWidget):
 
 
 	def _btnCheckInClicked(self):
+		if self.prenotazioneVisualizzata.getPeriodo().getInizio() > date.today(): # se la prenotazione inizia nei giorni a venire
+			self._showMessage(f"Impossibile effettuare il check-in: la prenotazione inizia il {self.prenotazioneVisualizzata.getPeriodo().getInizio().strftime('%d/%m/%Y')}.",
+							  QMessageBox.Icon.Warning, 'Errore')
+			return
 		if self.prenotazioneVisualizzata.getCamera().isAssegnato():
 			self._showMessage(f"La camera {self.prenotazioneVisualizzata.getCamera().getNumero()} è al momento occupata, impossibile effettuare il check-in.",
+							  QMessageBox.Icon.Warning, 'Errore')
+			return
+		if self.treewidgetClientiCheckIn.topLevelItemCount() > self.prenotazioneVisualizzata.getCamera().getNumeroPersone():
+			self._showMessage(f"Inseriti troppi clienti per la camera {self.prenotazioneVisualizzata.getCamera().getNumero()}.",
 							  QMessageBox.Icon.Warning, 'Errore')
 			return
 		if self.listwidgetOmbrelloni.currentItem() == None:
@@ -367,7 +501,10 @@ class HomeGestioneVacanzeUI(QTabWidget):
 		self._showMessage('Check-in effettuato con successo!', QMessageBox.Icon.Information)
 		self._hideElementsVisualizzaPrenotazione()
 
-
+		if self.prenotazioneVisualizzata.getPeriodo().getFine() == date.today() + timedelta(days = 1): # se la vacanza appena creata col check-in termina domani
+			vacanza = Vacanza(datiAssegnamento['prenotazione'], datiAssegnamento['clienti'], datiAssegnamento['ombrellone'])
+			self._aggiungiPartenza(vacanza)
+	
 
 	def _btnRicercaVacanzaClicked(self):
 		self.widgetRicercaVacanza = RicercaVacanzaUI(self)
@@ -386,6 +523,11 @@ class HomeGestioneVacanzeUI(QTabWidget):
 		self.lineeditNominativoVisualizzaVacanza.setText(
 			f'{vacanza.getNominativo().getCognome()} {vacanza.getNominativo().getNome()} (ID: {vacanza.getNominativo().getId()})'
 		)
+		if not vacanza.getNominativo() in vacanza.getClienti():
+			self.lineeditNominativoVisualizzaVacanza.setText(self.lineeditNominativoVisualizzaVacanza.text() + ' - NON PRESENTE')
+
+		self.treewidgetAltriClienti.clear() # svuoto il tree widget contenente gli altri clienti della vacanza
+		# riempio il tree widget appena svuotato
 		for cliente in vacanza.getClienti():
 			if cliente.getId() != vacanza.getNominativo().getId(): # se il cliente non è colui che ha fatto la prenotazione
 				self.treewidgetAltriClienti.addTopLevelItem(MyTreeWidgetItem(self.treewidgetAltriClienti,
@@ -394,21 +536,74 @@ class HomeGestioneVacanzeUI(QTabWidget):
 		if self.groupboxVacanza.isHidden():
 			self.groupboxVacanza.show()
 			self.widgetButtonsVisualizzaVacanza.show()
-				
 
 
 	def _btnModificaTermineVacanzaClicked(self):
-		def onVacanzaModificata():
-			self.dateeditFineVacanza.setDate(self.vacanzaVisualizzata.getPeriodo().getFine())
+		def onOmbrelloneModificato(vecchioOmbrellone : Ombrellone):
 			self.lineeditNumeroOmbrelloneVisualizzaVacanza.setText(str(self.vacanzaVisualizzata.getOmbrellone().getNumero()))
+			self._insertOmbrelloneDisponibile(vecchioOmbrellone) # l'ombrellone associato precedentemente alla vacanza compare nella lista di ombrelloni diaponibili nel check-in
+			self._removeOmbrelloneNonDisponibile(self.vacanzaVisualizzata.getOmbrellone()) # l'ombrellone ora associato alla vacanza scompare dalla quella lista
+
+
+		def onTermineModificato(vecchiaVacanza : Vacanza):
+			# aggiornamento tab visualizza vacanza
+			self.dateeditFineVacanza.setDate(self.vacanzaVisualizzata.getPeriodo().getFine())
+			
+			# aggiornamento tree widget partenze
+			dataDomani = date.today() + timedelta(days = 1)
+			if vecchiaVacanza.getPeriodo().getFine() == dataDomani: # se la vacanza era tra le partenze, ora non lo è più quindi la elimino dal tree widget
+				indiceRiga = 0
+				while indiceRiga < self.treewidgetPartenze.topLevelItemCount():
+					if self.treewidgetPartenze.topLevelItem(indiceRiga).connectedObject == vecchiaVacanza:
+						break
+					indiceRiga += 1
+				self.treewidgetPartenze.takeTopLevelItem(indiceRiga)
+			
+			elif self.vacanzaVisualizzata.getPeriodo().getFine() == dataDomani: # se il nuovo termine è domani
+				self._aggiungiPartenza(copy(self.vacanzaVisualizzata))
+		
 		
 		self.widgetModificaTermineVacanzaOmbrellone = ModificaTermineVacanzaOmbrelloneUI(self, self.vacanzaVisualizzata)
-		self.widgetModificaTermineVacanzaOmbrellone.vacanzaModificata.connect(onVacanzaModificata)
+		self.widgetModificaTermineVacanzaOmbrellone.ombrelloneModificato.connect(onOmbrelloneModificato)
+		self.widgetModificaTermineVacanzaOmbrellone.termineModificato.connect(onTermineModificato)
 		self.widgetModificaTermineVacanzaOmbrellone.show()
 
 
 	def _btnCheckOutClicked(self):
-		pass
+		self.vacanzaVisualizzata.getCamera().terminaAssegnamento()
+		self._showMessage('Costo della vacanza rimanente dal pagamento della caparra prelevato.\nCheck-out effettuato con successo!',
+						  QMessageBox.Icon.Information)
+		self._hideElementsVisualizzaVacanza()
+
+		if not self.groupboxPrenotazione.isHidden(): # se si sta visualizzando una prenotazione
+			# l'ombrellone associato alla vacanza da concludere torna nella lista degli ombrelloni selezionabili al check-in
+			self._insertOmbrelloneDisponibile(self.vacanzaVisualizzata.getOmbrellone())
+		
+		if self.vacanzaVisualizzata.getPeriodo().getFine() == date.today() + timedelta(days = 1): # se doveva terminare domani ma è terminata in anticipo di 1 giorno
+			i = 0
+			while i < self.treewidgetPartenze.topLevelItemCount():
+				if self.vacanzaVisualizzata == self.treewidgetPartenze.topLevelItem(i).connectedObject:
+					self.treewidgetPartenze.takeTopLevelItem(i) # vacanza rimossa dalle partenze
+					break
+				i += 1 
+
+	
+	def _insertOmbrelloneDisponibile(self, ombrellone : Ombrellone):
+		i = 0
+		while (i < self.listwidgetOmbrelloni.count() and 
+			   self.listwidgetOmbrelloni.item(i).connectedObject.getNumero() < ombrellone.getNumero()):
+			i += 1
+		self.listwidgetOmbrelloni.insertItem(i, MyListWidgetItem(f'Ombrellone {ombrellone.getNumero()}', ombrellone))
+	
+
+	def _removeOmbrelloneNonDisponibile(self, ombrellone : Ombrellone):
+		i = 0
+		while i < self.listwidgetOmbrelloni.count():
+			item = self.listwidgetOmbrelloni.item(i)
+			if item.connectedObject.getNumero() == ombrellone.getNumero():
+				self.listwidgetOmbrelloni.takeItem(i)
+				return
+			i +=1
 
 
 	def _btnIndietroClicked(self):
@@ -417,7 +612,12 @@ class HomeGestioneVacanzeUI(QTabWidget):
 
 	
 	def _visualizzaCliente(self, cliente : Persona):
+		def onClienteEliminato(self):
+			# rimuovo il cliente eliminato dalla lista di altri clienti facenti parte della vacanza
+			self.treewidgetAltriClienti.takeTopLevelItem(self.treewidgetAltriClienti.indexOfTopLevelItem(self.treewidgetAltriClienti.currentItem()))
+			self.widgetVisualizzaCliente.close()
 		self.widgetVisualizzaCliente = VisualizzaClienteUI(cliente)
+		self.widgetVisualizzaCliente.clienteEliminato.connect(onClienteEliminato)
 		self.widgetVisualizzaCliente.show()
 		self.treewidgetAltriClienti.setCurrentItem(None)
 

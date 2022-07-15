@@ -1,3 +1,4 @@
+from copy import copy
 from datetime import date
 from pathlib import Path
 
@@ -9,12 +10,12 @@ from src.GestioneVacanza.Vacanza import Vacanza
 from src.Gestori.GestoreFile import GestoreFile
 from src.Servizi.Ombrellone import Ombrellone
 from src.Utilities.PeriodoConData import PeriodoConData
-from src.Utilities.customQtClasses import MyListWidgetItem
 from src.Utilities.exceptions import CorruptedFileError
 
 class ModificaTermineVacanzaOmbrelloneUI(QTabWidget):
 	
-	vacanzaModificata = QtCore.pyqtSignal()
+	ombrelloneModificato = QtCore.pyqtSignal(Ombrellone)
+	termineModificato = QtCore.pyqtSignal(Vacanza)
 
 	def __init__(self, previous: QWidget, vacanza : Vacanza):
 		super().__init__()
@@ -25,6 +26,7 @@ class ModificaTermineVacanzaOmbrelloneUI(QTabWidget):
 		self.vacanza = vacanza
 
 		self._fillComboboxOmbrelloniDisponibili()
+		self.dateedit.setDate(self.vacanza.getPeriodo().getFine())
 		self._setDateeditBoundaries()
 		self._connectButtons()
 
@@ -43,8 +45,8 @@ class ModificaTermineVacanzaOmbrelloneUI(QTabWidget):
 
 
 	def _setDateeditBoundaries(self):
-		# la data di fine della vacanza attuale non può essere precedente alla data odierna
-		self.dateedit.setMinimumDate(date.today())
+		# la data di fine della vacanza attuale non può essere precedente alla data maggiore tra quella odierna e quella di inizio vacanza
+		self.dateedit.setMinimumDate(date.today() if date.today() > self.vacanza.getPeriodo().getInizio() else self.vacanza.getPeriodo().getInizio())
 		# la data di fine della vacanza attuale non può andare oltre la data di inizio della prossima prenotazione
 		# che ha la camera associata a questa vacanza
 		if len(self.vacanza.getCamera().getPrenotazioni()) > 0:
@@ -60,18 +62,21 @@ class ModificaTermineVacanzaOmbrelloneUI(QTabWidget):
 		if self.dateedit.date().toPyDate() != self.vacanza.getPeriodo().getFine() or self.combobox.currentText() != str(self.vacanza.getOmbrellone().getNumero()):
 			
 			if self.dateedit.date().toPyDate() != self.vacanza.getPeriodo().getFine(): # se è stata modificata il termina della vacanza
+				vecchiaVacanza = copy(self.vacanza)
 				nuovoPeriodo = PeriodoConData(self.vacanza.getPeriodo().getInizio(), self.dateedit.date().toPyDate())
 				self.vacanza.setPeriodo(nuovoPeriodo)
 				self._salvaModifiche()
+				self.termineModificato.emit(vecchiaVacanza)
 			
 			if self.combobox.currentText() != str(self.vacanza.getOmbrellone().getNumero()): # se è stato modificato il numero di ombrellone
-				self.vacanza.getOmbrellone().terminaAssegnamento() # vecchio ombrellone non piu assegnato
+				vecchioOmbrellone = self.vacanza.getOmbrellone()
+				vecchioOmbrellone.terminaAssegnamento() # vecchio ombrellone non piu assegnato
 				self.vacanza.setOmbrellone(ombrelloni[int(self.combobox.currentText())])
-				self.vacanza.getOmbrellone() # assegno il nuovo ombrellone
+				self.vacanza.getOmbrellone().assegna({}) # assegno il nuovo ombrellone
 				self._salvaModifiche()
+				self.ombrelloneModificato.emit(vecchioOmbrellone)
 		
 			self.previous._showMessage('Vacanza modificata con successo!', QMessageBox.Icon.Information)
-			self.vacanzaModificata.emit()
 		
 		self.close()
 

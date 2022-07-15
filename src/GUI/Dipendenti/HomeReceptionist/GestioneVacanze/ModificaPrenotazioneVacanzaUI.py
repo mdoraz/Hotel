@@ -1,5 +1,6 @@
 import sys
 from pathlib import Path
+import copy
 
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
@@ -15,6 +16,9 @@ from src.Utilities.exceptions import CorruptedFileError
 
 
 class ModificaPrenotazioneVacanzaUI(QTabWidget):
+
+	cameraPeriodoModificati = QtCore.pyqtSignal(PrenotazioneVacanza)
+	tiposSoggiornoModificato = QtCore.pyqtSignal()
 
 	def __init__(self, previous: QWidget, prenotazioneModificata : PrenotazioneVacanza):
 		super().__init__()
@@ -39,7 +43,7 @@ class ModificaPrenotazioneVacanzaUI(QTabWidget):
 		if Soggiorno.enumFromStr(self.comboboxTipoSoggiorno.currentText()) != self.prenotazioneModificata.getTipoSoggiorno(): # se il tipo di soggiorno è stato modificato
 			# aggiorno la visualizzazione della prenotazione
 			camere = self._readCamere()
-			self.previous.lineeditTipoSoggiornoPrenotazione.setText(self.comboboxTipoSoggiorno.currentText())
+			#self.previous.lineeditTipoSoggiornoPrenotazione.setText(self.comboboxTipoSoggiorno.currentText())
 			camere[self.prenotazioneModificata.getCamera().getNumero()].eliminaPrenotazione(self.prenotazioneModificata) # elimino la prenotazione senza modifiche
 			self.prenotazioneModificata.setTipoSoggiorno(Soggiorno.enumFromStr(self.comboboxTipoSoggiorno.currentText())) # modifico la prenotazione
 			datiPrenotazione = {
@@ -52,23 +56,31 @@ class ModificaPrenotazioneVacanzaUI(QTabWidget):
 			camere[self.prenotazioneModificata.getCamera().getNumero()].prenota(datiPrenotazione) # riprenoto con i dati modificati
 			GestoreFile.salvaPickle(camere, Path(paths['camere']))
 
+			self.tiposSoggiornoModificato.emit()
+
 
 	def _btnCameraPeriodoClicked(self):
 		def onCameraSelezionata(camera : Camera, periodo : PeriodoConData):
+			vecchiaPrenotazione = copy.deepcopy(self.prenotazioneModificata)
+			
 			# aggiorno la visualizzazione della prenotazione
 			self.previous.lineeditNumeroCameraVisualizzaPrenotazione.setText(str(camera.getNumero()))
 			self.previous.dateeditPrenotazioneInizio.setDate(periodo.getInizio())
 			self.previous.dateeditPrenotazioneFine.setDate(periodo.getFine())
+			self.previous.labelContatoreClienti.setText(self.previous.labelContatoreClienti.text()[:-1] + str(camera.getNumeroPersone()))
 			self.close()
 			
 			# elimino la vecchia prenotazione dalla camera ad essa associata
 			camere = self._readCamere()
 			camere[self.prenotazioneModificata.getCamera().getNumero()].eliminaPrenotazione(self.prenotazioneModificata)
-			GestoreFile.salvaPickle(camere, Path(paths['camere'])) #♥ salvo l'eliminazione
+			GestoreFile.salvaPickle(camere, Path(paths['camere'])) # salvo l'eliminazione
 			
 			# modifico la prenotazione per aggiornare l'attributo prenotazioneVisualizzata della classe HomeGestioneVacanzeUI
-			self.prenotazioneModificata.setCamera(camera)
 			self.prenotazioneModificata.setPeriodo(periodo)
+			self.prenotazioneModificata.setCamera(camera)
+			if not self.previous.groupboxVacanza.isHidden(): # se nella HomeGestioneVacanzaUI c'è una vacanza visualizzata
+				if self.previous.vacanzaVisualizzata.getCamera().getNumero() == camera.getNumero(): # se la vacanza è in corso nella camera la cui lista di prenotazioni è stata modificata
+					self.previous.vacanzaVisualizzata.setCamera(camera) # per tenere sempre aggiornato la data massima in cui può terminare la vacanza
 
 			# aggiungo la prenotazione modificata alla camera ad essa associata
 			datiPrenotazione = {
@@ -79,6 +91,9 @@ class ModificaPrenotazioneVacanzaUI(QTabWidget):
 				'periodo' : periodo
 			}
 			camera.prenota(datiPrenotazione)
+
+			self.cameraPeriodoModificati.emit(vecchiaPrenotazione) # quando lancio questo segnale, self.prenotazioneModificata (che è un riferimento della prenotazione passata al costruttore di questa classe)
+																   # è stata modificata. Serve quindi passare la vecchia prenotazione per poterla eliminare ovunque serva sostituirla con quella nuova.
 
 
 		self.close()

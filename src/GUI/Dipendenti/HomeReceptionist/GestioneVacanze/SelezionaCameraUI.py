@@ -38,6 +38,9 @@ class SelezionaCameraUI(QTabWidget):
         self.dateeditDa.setMinimumDate(date.today())
         self.dateeditA.setMinimumDate(date.today())
         self.dateeditDa.dateChanged.connect(self.dateeditA.setMinimumDate) # il limite inferiore della data di partenza è sempre aggiornato alla data di arrivo
+        if self.prenotazioneDaModificare != None:
+            self.dateeditDa.setDate(self.prenotazioneDaModificare.getPeriodo().getInizio())
+            self.dateeditA.setDate(self.prenotazioneDaModificare.getPeriodo().getFine())
 
 
     def _connectButtons(self):
