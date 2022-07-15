@@ -9,8 +9,6 @@ from src.GUI.Dipendenti.HomeCamerieri.GestioneCucinaCamerieri.ConfermaPrenotazio
     ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI
 from src.GUI.VisualizzaPrenotazioneColazioneUI import VisualizzaPrenotazioneColazioneUI
 from src.Gestori.GestoreFile import GestoreFile
-from src.GUI.Dipendenti.HomeCamerieri.GestioneCucinaCamerieri.EliminaPrenotazioneColazioneInCameraUI import \
-    EliminaPrenotazioneColazioneInCameraUI
 from src.Servizi.Camera import Camera
 from src.Utilities.exceptions import CorruptedFileError
 
@@ -167,16 +165,16 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
 
         itemDolci = self.treewidgetDolceColazioneInCamera.selectedItems()
         itemSalati = self.treewidgetSalatoColazioneInCamera.selectedItems()
-        itembevande = self.treewidgetBevandeColazioneInCamera.selectedItems()
+        itemBevande = self.treewidgetBevandeColazioneInCamera.selectedItems()
 
-        if itemDolci == [] and itemSalati == [] and itembevande == []:
+        if itemDolci == [] and itemSalati == [] and itemBevande == []:
             self._showMessage("Seleziona almeno un piatto per continuare", QMessageBox.Icon.Warning)
             return
 
         sceltePasti = {
             "dolce": [item.text(0) for item in itemDolci],
             "salato": [item.text(0) for item in itemSalati],
-            "bevande": [item.text(0) for item in itembevande]
+            "bevande": [item.text(0) for item in itemBevande]
         }
 
         self.widgetConfermaPrenotazioneColazioneInCameraGiornoSuccessivo = ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI(sceltePasti, numeroCamera, self)

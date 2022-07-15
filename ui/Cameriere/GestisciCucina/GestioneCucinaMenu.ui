@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>736</width>
-    <height>706</height>
+    <height>740</height>
    </rect>
   </property>
   <property name="tabletTracking">
@@ -381,9 +381,9 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="btnModificaPrenotazioneColazioneInCamera">
+     <widget class="QPushButton" name="btnVisualizzaPrenotazioni">
       <property name="text">
-       <string>Modifica Prenotazione colazione in camera</string>
+       <string>Visualizza Prenotazioni</string>
       </property>
      </widget>
     </item>

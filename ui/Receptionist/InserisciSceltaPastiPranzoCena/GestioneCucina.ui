@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>685</width>
-    <height>796</height>
+    <height>801</height>
    </rect>
   </property>
   <property name="tabletTracking">
@@ -488,6 +488,13 @@
      </widget>
     </item>
     <item>
+     <widget class="QPushButton" name="btnVisualizzaSceltaPastiPranzo">
+      <property name="text">
+       <string>Visualizza Scelta Pasti</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QWidget" name="widgetSceltaPastiPranzo" native="true">
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
@@ -864,6 +871,13 @@
      <widget class="QPushButton" name="btnInserisciSceltaPastiCena">
       <property name="text">
        <string>Inserisci scelta pasti per il giorno successivo</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="btnVisualizzaSceltaPastiCena">
+      <property name="text">
+       <string>Visualizza Scelta Pasti</string>
       </property>
      </widget>
     </item>

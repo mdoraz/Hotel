@@ -1,13 +1,10 @@
 import sys
 from datetime import date, timedelta
-
-from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 
 from src.Gestori.GestoreFile import GestoreFile
-from src.Servizi.Camera import Camera
 from src.Utilities.exceptions import CorruptedFileError
 
 
@@ -91,6 +88,7 @@ class VisualizzaPrenotazioneColazioneUI(QWidget):
         self.msg.setIcon(icon)
         self.msg.setText(text)
         self.msg.show()
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     mainWidget = VisualizzaPrenotazioneColazioneUI(QWidget)

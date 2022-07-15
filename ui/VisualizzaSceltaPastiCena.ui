@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>820</width>
+    <height>745</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Struttura Alberghiera</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="labelIntroduzionePagina">
+     <property name="text">
+      <string>Benvenuto, di seguito il menù dell'hotel:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupboxMenuColazioneInCameraCamerieri">
+     <property name="title">
+      <string>Menù:</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_14">
+      <item>
+       <widget class="QWidget" name="widgetColazioneInCamera" native="true">
+        <layout class="QGridLayout" name="gridLayout_4">
+         <item row="0" column="3">
+          <widget class="QComboBox" name="comboboxCena">
+           <property name="maxVisibleItems">
+            <number>20</number>
+           </property>
+           <item>
+            <property name="text">
+             <string>1</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>2</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>3</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>4</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>5</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>6</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>7</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>8</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>9</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>10</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>11</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>12</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>13</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>14</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>15</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>16</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>17</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>18</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>19</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>20</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>21</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>22</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>23</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>24</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>25</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>26</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>27</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>28</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>29</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>30</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>31</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>32</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>33</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>34</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>35</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>36</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="labelInserimentoCamera">
+           <property name="text">
+            <string>Inserire la camera del cliente per visualizzare la prenotazione della colazione in camera:</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QPushButton" name="btnCerca">
+           <property name="text">
+            <string>Cerca</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="1">
+          <widget class="QDateEdit" name="dateEditCena">
+           <property name="displayFormat">
+            <string>dd/MM/yyyy</string>
+           </property>
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label">
+           <property name="text">
+            <string>Seleziona la data della prenotazione:</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupboxGestioneCucinaDolceCamerieri">
+        <property name="title">
+         <string>Antipasti</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QTreeWidget" name="treewidgetAntipasti">
+           <property name="selectionMode">
+            <enum>QAbstractItemView::NoSelection</enum>
+           </property>
+           <column>
+            <property name="text">
+             <string>Piatto</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Quantità</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupboxGestioneCucinaSalatoCamerieri">
+        <property name="title">
+         <string>Primi:</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QTreeWidget" name="treewidgetPrimi">
+           <property name="selectionMode">
+            <enum>QAbstractItemView::NoSelection</enum>
+           </property>
+           <column>
+            <property name="text">
+             <string>Piatto</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Quantità</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupboxGestioneCucinaBevandeCamerieri">
+        <property name="title">
+         <string>Secondi eContorni:</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="0" column="0">
+          <widget class="QTreeWidget" name="treewidgetSecondiContorni">
+           <property name="selectionMode">
+            <enum>QAbstractItemView::NoSelection</enum>
+           </property>
+           <column>
+            <property name="text">
+             <string>Bevande</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Quantità</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="title">
+         <string>Dolci e Bevande:</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="0" column="0">
+          <widget class="QTreeWidget" name="treewidgetDolciBevande">
+           <property name="selectionMode">
+            <enum>QAbstractItemView::NoSelection</enum>
+           </property>
+           <column>
+            <property name="text">
+             <string>Piatto</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Quantità</string>
+            </property>
+           </column>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnElimina">
+     <property name="text">
+      <string>Elimina Prenotazione</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="btnTornarePaginaPrecedente">
+     <property name="text">
+      <string>Tornare indietro alla pagina precedente</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
