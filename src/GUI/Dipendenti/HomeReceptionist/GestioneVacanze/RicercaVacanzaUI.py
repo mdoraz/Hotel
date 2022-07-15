@@ -16,9 +16,20 @@ class RicercaVacanzaUI(QTabWidget):
 	
 	def __init__(self, previous: QWidget):
 		super().__init__()
+		
 		loadUi(GestoreFile.absolutePath('RicercaVacanza.ui', Path.cwd()), self)
+		
 		self.previous = previous
+		self._fillCombobox()
 		self._connectButtons()
+
+
+	def _fillCombobox(self):
+		global camere
+		camere = self._readCamere()
+		for camera in camere.values():
+			if camera.isAssegnato():
+				self.combobox.addItem(str(camera.getNumero()))
 
 
 	def _connectButtons(self):
@@ -27,13 +38,9 @@ class RicercaVacanzaUI(QTabWidget):
 
 
 	def _btnCercaClicked(self):
-		camere = self._readCamere()
-		numeroCamera = int(self.comboboxNumeroCamera.currentText())
-		if not camere[numeroCamera].isAssegnato():
-			self.previous._showMessage(f'La camera numero {numeroCamera} non è attualmente assegnata.', QMessageBox.Icon.Warning, 'Errore')
-		else:
-			self.vacanzaTrovata.emit(camere[numeroCamera].getVacanzaAttuale())
-			self.close()
+		numeroCamera = int(self.combobox.currentText())
+		self.vacanzaTrovata.emit(camere[numeroCamera].getVacanzaAttuale())
+		self.close()
   
 
 	def _readCamere(self) -> dict[int, Camera]:

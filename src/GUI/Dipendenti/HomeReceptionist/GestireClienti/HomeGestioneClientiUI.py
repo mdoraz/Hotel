@@ -37,7 +37,7 @@ class HomeGestioneClientiUI(QTabWidget):
     def _btnIndietroClicked(self):
         self.close()
         self.previous.show()
-
+    
     
     def _btnRegistraClienteClicked(self):
         if self.tab1.fieldsFilled(self.tab1.lineeditLabelPairs) and not self.tab1.isClienteInSystem() and self.tab1.fieldsValid():

@@ -30,19 +30,6 @@ class VisualizzaDipendenteUI(FormUI):
 		self._createComboBoxes() # creo le combo box di ruilo e turno da mostrare in caso di modifica
 		self._setValidators() # imposto validator e colori per il testo per IBAN, stipendio, email e cellulare
 		self._connectButtons()
-
-
-	def _readDipendenti(self):
-		paths = GestoreFile.leggiJson(Path('paths.json'))
-		try:
-			dipendenti = GestoreFile.leggiDictPickle(Path(paths['dipendenti']))
-		except TypeError:
-			self._showMessage(f"{Path(paths['dipendenti']).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
-								 QMessageBox.Icon.Critical, 'Errore')
-			self.close()
-			raise
-		
-		return dipendenti
 	
 
 	def _fillFields(self):
@@ -169,10 +156,14 @@ class VisualizzaDipendenteUI(FormUI):
 		self.lineEditIBAN.setReadOnly(True)
 		self.lineEditStipendio.setReadOnly(True)
 		# rimossi i colori del testo
-		self.lineEditIBAN.setStyleSheet("font-family: Arial; font-size: 11pt")
-		self.lineEditStipendio.setStyleSheet("font-family: Arial; font-size: 11pt")
 		self.lineEditIBAN.textChanged.disconnect(self._setColorHint)
 		self.lineEditStipendio.textChanged.disconnect(self._setColorHint)
+		font = self.lineEditIBAN.font()
+		self.lineEditIBAN.setStyleSheet("")
+		self.lineEditStipendio.setStyleSheet("")
+		# uno style sheet vuoto resetta anche il font della line edit, quindi va reimpostato
+		self.lineEditIBAN.setFont(font)
+		self.lineEditStipendio.setFont(font)
 
 
 	def _btnModificaContattiClicked(self):
@@ -180,7 +171,7 @@ class VisualizzaDipendenteUI(FormUI):
 		self.btnModificaContatti.clicked.disconnect(self._btnModificaContattiClicked)
 		self.btnModificaContatti.clicked.connect(self._salvaContattiClicked)
 		
-		# imposto le line edit di IBAN e stipendio come modificabili
+		# imposto le line edit di email e cellulare come modificabili
 		self.lineEditEmail.setReadOnly(False)
 		self.lineEditCellulare.setReadOnly(False)
 		# imposto i colori del testo
@@ -211,10 +202,14 @@ class VisualizzaDipendenteUI(FormUI):
 		self.lineEditEmail.setReadOnly(True)
 		self.lineEditCellulare.setReadOnly(True)
 		# rimossi i colori del testo
-		self.lineEditEmail.setStyleSheet("font-family: Arial; font-size: 11pt")
-		self.lineEditCellulare.setStyleSheet("font-family: Arial; font-size: 11pt")
 		self.lineEditEmail.textChanged.disconnect(self._setColorHint)
 		self.lineEditCellulare.textChanged.disconnect(self._setColorHint)
+		font = self.lineEditEmail.font()
+		self.lineEditEmail.setStyleSheet("")
+		self.lineEditCellulare.setStyleSheet("")
+		# uno style sheet vuoto resetta anche il font della line edit, quindi va reimpostato
+		self.lineEditEmail.setFont(font)
+		self.lineEditCellulare.setFont(font)
 
 
 	def _mostraCredenziali(self):
@@ -356,10 +351,22 @@ class VisualizzaDipendenteUI(FormUI):
 			self.dipendenteEliminato.emit()
 			self._showMessage('Dipendente eliminato dal sistema!', QMessageBox.Icon.Information)
 			self.close()
+	
+
+	def _readDipendenti(self):
+		paths = GestoreFile.leggiJson(Path('paths.json'))
+		try:
+			dipendenti = GestoreFile.leggiDictPickle(Path(paths['dipendenti']))
+		except TypeError:
+			self._showMessage(f"{Path(paths['dipendenti']).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
+								 QMessageBox.Icon.Critical, 'Errore')
+			self.close()
+			raise
+		
+		return dipendenti
 
 
 	def _salvaDipendente(self):
-		# salvo le modifihe su file
 		dipendenti = self._readDipendenti()
 		dipendenti[self.dipendente.getId()] = self.dipendente
 		paths = GestoreFile.leggiJson(Path('paths.json'))

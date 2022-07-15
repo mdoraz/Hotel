@@ -612,10 +612,29 @@ class HomeGestioneVacanzeUI(QTabWidget):
 
 	
 	def _visualizzaCliente(self, cliente : Persona):
-		def onClienteEliminato(self):
-			# rimuovo il cliente eliminato dalla lista di altri clienti facenti parte della vacanza
-			self.treewidgetAltriClienti.takeTopLevelItem(self.treewidgetAltriClienti.indexOfTopLevelItem(self.treewidgetAltriClienti.currentItem()))
+		def onClienteEliminato():
+			# imposto a 0 l'id dell'istanza del cliente eliminato presente nella lista di clienti della vacanza visualizzata:
+			# in questo modo, eliminare di nuovo questo cliente non comporterebbe l'eliminazione nel file clienti.pickle di un eventuale
+			# altro cliente registrato successivamente all'eliminazione di questo e con lo stesso id.
+			i = 0
+			while i < self.treewidgetAltriClienti.topLevelItemCount():
+				if self.treewidgetAltriClienti.topLevelItem(i).connectedObject == cliente:
+					break
+				i += 1
+			self.treewidgetAltriClienti.topLevelItem(i).setText(0, '0') # aggiorno l'id viualizzato
+			clienti = self.vacanzaVisualizzata.getClienti()
+			for _cliente in clienti:
+				if _cliente.getId() == self.treewidgetAltriClienti.topLevelItem(i).connectedObject.getId():
+					_cliente.setId(0)
+					self.treewidgetAltriClienti.topLevelItem(i).connectedObject = _cliente
+					break
+			self.vacanzaVisualizzata.setClienti(clienti)
+			# salvo su file
+			camere = self._readDict('camere')
+			camere[self.vacanzaVisualizzata.getCamera().getNumero()].setVacanzaAttuale(self.vacanzaVisualizzata)
+			GestoreFile.salvaPickle(camere, Path(paths['camere']))
 			self.widgetVisualizzaCliente.close()
+		
 		self.widgetVisualizzaCliente = VisualizzaClienteUI(cliente)
 		self.widgetVisualizzaCliente.clienteEliminato.connect(onClienteEliminato)
 		self.widgetVisualizzaCliente.show()

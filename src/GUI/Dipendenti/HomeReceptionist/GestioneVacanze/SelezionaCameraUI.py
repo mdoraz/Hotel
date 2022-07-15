@@ -1,5 +1,5 @@
 import sys
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 from PyQt5 import QtCore
@@ -36,8 +36,8 @@ class SelezionaCameraUI(QTabWidget):
 
     def _setupDateEdits(self):
         self.dateeditDa.setMinimumDate(date.today())
-        self.dateeditA.setMinimumDate(date.today())
-        self.dateeditDa.dateChanged.connect(self.dateeditA.setMinimumDate) # il limite inferiore della data di partenza è sempre aggiornato alla data di arrivo
+        self.dateeditA.setMinimumDate(date.today() + timedelta(days = 1))
+        self.dateeditDa.dateChanged.connect(lambda data: self.dateeditA.setMinimumDate(data.toPyDate() + timedelta(days = 1))) # il limite inferiore della data di partenza è sempre il giorno dopo di quello di arrivo
         if self.prenotazioneDaModificare != None:
             self.dateeditDa.setDate(self.prenotazioneDaModificare.getPeriodo().getInizio())
             self.dateeditA.setDate(self.prenotazioneDaModificare.getPeriodo().getFine())

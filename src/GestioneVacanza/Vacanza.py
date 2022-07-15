@@ -72,3 +72,7 @@ class Vacanza(PrenotazioneVacanza):
 
     def setOmbrellone(self, ombrellone : Ombrellone):
         self._ombrellone = ombrellone
+    
+
+    def setClienti(self, clienti : list[Persona]):
+        self._clienti = clienti

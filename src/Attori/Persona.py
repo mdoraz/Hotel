@@ -46,6 +46,10 @@ class Persona(Contattabile):
 
     def setLuogoNascita(self, luogoNascita : str):
         self._luogoNascita = luogoNascita
+    
+
+    def setId(self, id : int):
+        self._id = id
 
 
     @staticmethod
