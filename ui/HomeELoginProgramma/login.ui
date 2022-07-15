@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>521</width>
-    <height>165</height>
+    <width>472</width>
+    <height>136</height>
    </rect>
   </property>
   <property name="font">
@@ -20,18 +20,8 @@
    <string>Struttura Alberghiera: Login</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="1" column="1">
-    <widget class="QLineEdit" name="lineeditUsername">
-     <property name="placeholderText">
-      <string>username</string>
-     </property>
-     <property name="clearButtonEnabled">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="labelPassword">
+   <item row="4" column="2">
+    <widget class="QPushButton" name="btnAccedi">
      <property name="font">
       <font>
        <family>Arial</family>
@@ -39,7 +29,17 @@
       </font>
      </property>
      <property name="text">
-      <string>Password:</string>
+      <string>Accedi</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QLineEdit" name="lineeditUsername">
+     <property name="placeholderText">
+      <string>username</string>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
@@ -75,8 +75,15 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="2">
-    <widget class="QPushButton" name="btnAccedi">
+   <item row="4" column="0">
+    <widget class="QPushButton" name="btnIndietro">
+     <property name="text">
+      <string>Tornare Home Page</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="labelPassword">
      <property name="font">
       <font>
        <family>Arial</family>
@@ -84,14 +91,7 @@
       </font>
      </property>
      <property name="text">
-      <string>Accedi</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="0">
-    <widget class="QPushButton" name="btnIndietro">
-     <property name="text">
-      <string>Tornare Home Page</string>
+      <string>Password:</string>
      </property>
     </widget>
    </item>
@@ -113,32 +113,6 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="2">
-    <widget class="QPushButton" name="btnCompletaPassword">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>completa password</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QCheckBox" name="checkboxSalvaPassword">
-     <property name="font">
-      <font>
-       <family>Arial</family>
-       <pointsize>8</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>salva password per questo username</string>
      </property>
     </widget>
    </item>
