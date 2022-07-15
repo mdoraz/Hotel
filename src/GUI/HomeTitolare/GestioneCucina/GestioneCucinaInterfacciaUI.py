@@ -1,27 +1,49 @@
 import sys
+from pathlib import Path
+
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
-from pathlib import Path
+
 from src.Gestori.GestoreFile import GestoreFile
 
 
 class GestioneCucinaInterfacciaUI(QTabWidget):
+    
     def __init__(self, previous: QWidget):
         super().__init__()
+        
         loadUi(GestoreFile.absolutePath('GestioneCucinaInterfaccia.ui', Path.cwd()), self)
-        self.setMinimumSize(600, 600)
-        self.setFont(QtGui.QFont('Arial', 10))
-        self._connectButtons()
+
         self.previous = previous
+        self._connectButtons()
 
         self.widgetModificaMenu.hide()
         self.widgetModificaMenu_2.hide()
         self.widgetModificaMenu_3.hide()
 
+        self._resizeColumns()
         self._fillTreeWidgetColazioneInCamera()
         self._fillTreeWidgetPranzo()
         self._fillTreeWidgetCena()
+
+    
+    def _resizeColumns(self):
+        # colazione
+        self.treewidgetDolceColazioneInCamera.header().resizeSection(0, 200)
+        self.treewidgetSalatoColazioneInCamera.header().resizeSection(0, 200)
+        self.treewidgetBevandeColazioneInCamera.header().resizeSection(0, 200)
+        # primi
+        self.treewidgetAntipastiPranzo.header().resizeSection(0, 200)
+        self.treewidgetPrimoPranzo.header().resizeSection(0, 200)
+        self.treewidgetSecondoContornoPranzo.header().resizeSection(0, 200)
+        self.treewidgetDolciBevandePranzo.header().resizeSection(0, 200)
+        # secondi
+        self.treewidgetAntipastiCena.header().resizeSection(0, 200)
+        self.treewidgetPrimiCena.header().resizeSection(0, 200)
+        self.treewidgetSecondiContorniCena.header().resizeSection(0, 200)
+        self.treewidgetDolciBevandeCena.header().resizeSection(0, 200)
+
 
     def _fillTreeWidgetColazioneInCamera(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
@@ -46,6 +68,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
                 self.treewidgetSalatoColazioneInCamera.addTopLevelItem(QTreeWidgetItem([f"Nome{i+1}", "Ingredienti"], 0))
                 self.treewidgetBevandeColazioneInCamera.addTopLevelItem(QTreeWidgetItem([f"Nome{i+1}", "Ingredienti"], 0))
                 i += 1
+
 
     def _fillTreeWidgetPranzo(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
@@ -120,6 +143,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
         self.btnTornarePaginaPrecedente_2.clicked.connect(self._btnTornarePaginaPrecedente_2Clicked)
         self.btnTornarePaginaPrecedente_3.clicked.connect(self._btnTornarePaginaPrecedente_3Clicked)
 
+
     def _btnModificaMenuColazioneInCameraClicked(self):
         self.btnModificaMenuColazioneInCamera.hide()
         self.widgetModificaMenu.show()
@@ -147,6 +171,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
             i3 += 1
             self.proprietaItemBevande.append(item.flags())
             item.setFlags(QtCore.Qt.ItemFlag.ItemIsEditable | item.flags())
+
 
     def _btnConfermaModificheClicked(self):
         i = 0
@@ -242,6 +267,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
             i4 += 1
             self.proprietaItemDolciBevande.append(item.flags())
             item.setFlags(QtCore.Qt.ItemFlag.ItemIsEditable | item.flags())
+    
 
     def _btnConfermaModifiche_2Clicked(self):
         i = 0
@@ -285,6 +311,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
         GestoreFile.salvaPickle(menuPranzo, Path(paths['menuPranzo']))
         self.btnModificaMenuPranzo.show()
         self.widgetModificaMenu_2.hide()
+    
 
     def _btnAnnullaModifiche_2Clicked(self):
         self.labelIntroduzione_2.setText("Benvenuto, di seguito il menù dell'hotel per il pranzo:")
@@ -315,6 +342,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
         self._fillTreeWidgetPranzo()
         self.btnModificaMenuPranzo.show()
         self.widgetModificaMenu_2.hide()
+
 
     def _btnModificaMenuCenaClicked(self):
         self.btnModificaMenuCena.hide()
@@ -351,6 +379,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
             i4 += 1
             self.proprietaItemDolciBevande.append(item.flags())
             item.setFlags(QtCore.Qt.ItemFlag.ItemIsEditable | item.flags())
+
 
     def _btnConfermaModifiche_3Clicked(self):
         i = 0
@@ -394,6 +423,7 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
         GestoreFile.salvaPickle(menuCena, Path(paths['menuCena']))
         self.btnModificaMenuCena.show()
         self.widgetModificaMenu_3.hide()
+    
 
     def _btnAnnullaModifiche_3Clicked(self):
         self.labelIntroduzione_3.setText("Benvenuto, di seguito il menù dell'hotel per la cena:")
@@ -425,20 +455,25 @@ class GestioneCucinaInterfacciaUI(QTabWidget):
         self.btnModificaMenuCena.show()
         self.widgetModificaMenu_3.hide()
 
+
     def _btnTornarePaginaPrecedenteClicked(self):
         self.close()
         self.previous.show()
+
 
     def _btnTornarePaginaPrecedente_2Clicked(self):
         self.close()
         self.previous.show()
 
+
     def _btnTornarePaginaPrecedente_3Clicked(self):
         self.close()
         self.previous.show()
 
+
+
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    mainWidget = GestioneCucinaInterfacciaUI()
+    mainWidget = GestioneCucinaInterfacciaUI(QWidget())
     mainWidget.show()
     sys.exit(app.exec_())

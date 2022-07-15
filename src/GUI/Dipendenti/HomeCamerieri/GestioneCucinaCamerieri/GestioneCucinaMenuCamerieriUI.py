@@ -1,7 +1,5 @@
-import sys
 from datetime import date, timedelta
 
-from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
@@ -14,26 +12,46 @@ from src.Utilities.exceptions import CorruptedFileError
 
 
 class GestioneCucinaMenuCamerieriUI(QTabWidget):
+    
     def __init__(self, previous: QWidget):
         super().__init__()
+        
         loadUi(GestoreFile.absolutePath('GestioneCucinaMenu.ui', Path.cwd()), self)
-        self.setMinimumSize(600, 600)
-        self.setFont(QtGui.QFont('Arial', 10))
-        self._connectButtons()
+
         self.previous = previous
 
+        self._connectButtons()
         self._hideWidget()
-
+        self._resizeColumns()
         self._fillTreeWidgetColazioneInCamera()
         self._fillTreeWidgetPranzo()
         self._fillTreeWidgetCena()
 
         self.msg = QMessageBox()
 
+
     def _hideWidget(self):
         self.widgetColazioneInCamera.hide()
         self.widgetAnnullaAvanti.hide()
         self.comboboxColazioneInCamera.hide()
+    
+
+    def _resizeColumns(self):
+        # colazione
+        self.treewidgetDolceColazioneInCamera.header().resizeSection(0, 200)
+        self.treewidgetSalatoColazioneInCamera.header().resizeSection(0, 200)
+        self.treewidgetBevandeColazioneInCamera.header().resizeSection(0, 200)
+        # pranzo
+        self.treewidgetAntipastiPranzo.header().resizeSection(0, 200)
+        self.treewidgetPrimiPranzo.header().resizeSection(0, 200)
+        self.treewidgetSecondiContorniPranzo.header().resizeSection(0, 200)
+        self.treewidgetDolciBevandePranzo.header().resizeSection(0, 200)
+        # cena
+        self.treewidgetAntipastiCena.header().resizeSection(0, 200)
+        self.treewidgetPrimiCena.header().resizeSection(0, 200)
+        self.treewidgetSecondiContorniCena.header().resizeSection(0, 200)
+        self.treewidgetDolciBevandeCena.header().resizeSection(0, 200)
+
 
     def _fillTreeWidgetColazioneInCamera(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
@@ -58,6 +76,7 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
                 self.treewidgetSalatoColazioneInCamera.addTopLevelItem(QTreeWidgetItem([f"Nome{i+1}", "Ingredienti"], 0))
                 self.treewidgetBevandeColazioneInCamera.addTopLevelItem(QTreeWidgetItem([f"Nome{i+1}", "Ingredienti"], 0))
                 i += 1
+
 
     def _fillTreeWidgetPranzo(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
@@ -88,6 +107,7 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
                 self.treewidgetDolciBevandePranzo.addTopLevelItem(QTreeWidgetItem([f"Nome{i+1}", "Ingredienti"], 0))
                 i += 1
 
+   
     def _fillTreeWidgetCena(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
         menuCena = GestoreFile.leggiDictPickle(Path(paths['menuCena']))
@@ -117,6 +137,7 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
                 self.treewidgetDolciBevandeCena.addTopLevelItem(QTreeWidgetItem([f"Nome{i+1}", "Ingredienti"], 0))
                 i += 1
 
+    
     def _connectButtons(self):
         self.btnPrenotaColazioneInCameraGiornoSuccessivo.clicked.connect(self._btnPrenotaColazioneInCameraGiornoSuccessivoClicked)
         self.btnVisualizzaPrenotazioni.clicked.connect(self._btnVisualizzaPrenotazioniClicked)
@@ -137,6 +158,7 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
         self.treewidgetSalatoColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
         self.treewidgetBevandeColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
 
+   
     def _btnAvantiClicked(self):
 
         numeroCamera = int(self.comboboxColazioneInCamera.currentText())
@@ -158,7 +180,7 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
             return
 
         dataDomani = date.today() + timedelta(days=1)
-        if dataDomani in camera.getVacanzaAttuale().getColazioniInCamera():
+        if dataDomani in camera.getVacanzaAttuale().getColazioniInCamera(): # type: ignore
             self._showMessage(f"La prenotazione per la camera {numeroCamera} è stata gia effettuata per domani! ",
                               QMessageBox.Icon.Warning)
             return
@@ -181,6 +203,7 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
         self.widgetConfermaPrenotazioneColazioneInCameraGiornoSuccessivo.show()
         self._btnAnnullaClicked()
 
+   
     def _btnAnnullaClicked(self):
         self.btnPrenotaColazioneInCameraGiornoSuccessivo.show()
         self.labelIntroduzionePagina.setText("Benvenuto, di seguito il menù dell'hotel per la colazione in camera:")
@@ -197,30 +220,30 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
         for item in self.treewidgetBevandeColazioneInCamera.selectedItems():
             item.setSelected(False)
 
+   
     def _btnVisualizzaPrenotazioniClicked(self):
         self.close()
         self.widgetVisualizzaPrenotazioneColazione = VisualizzaPrenotazioneColazioneUI(self)
         self.widgetVisualizzaPrenotazioneColazione.show()
 
+    
     def _btnTornarePaginaPrecedenteClicked(self):
         self.close()
         self.previous.show()
 
+   
     def _btnTornarePaginaPrecedente_2Clicked(self):
         self.close()
         self.previous.show()
 
+    
     def _btnTornarePaginaPrecedente_3Clicked(self):
         self.close()
         self.previous.show()
 
+   
     def _showMessage(self, text: str, icon: QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle: str = 'Messaggio'):
         self.msg.setWindowTitle(windowTitle)
         self.msg.setIcon(icon)
         self.msg.setText(text)
         self.msg.show()
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = GestioneCucinaMenuCamerieriUI(QWidget)
-    mainWidget.show()
-    sys.exit(app.exec_())

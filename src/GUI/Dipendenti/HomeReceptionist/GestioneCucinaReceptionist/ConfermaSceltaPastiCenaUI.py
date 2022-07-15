@@ -1,25 +1,28 @@
-import sys
+from pathlib import Path
 from datetime import date, timedelta
 
-from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
-from pathlib import Path
+
 from src.Gestori.GestoreFile import GestoreFile
 from src.Utilities.exceptions import CorruptedFileError
 
+
 class ConfermaSceltaPastiCenaUI(QTabWidget):
+    
     def __init__(self, sceltePasti: dict, numeroCamera: int, previous: QWidget):
         super().__init__()
+
         loadUi(GestoreFile.absolutePath('ConfermaSceltaPastiCena.ui', Path.cwd()), self)
-        self.setMinimumSize(600, 600)
-        self.setFont(QtGui.QFont('Arial', 10))
-        self._connectButtons()
+
         self.previous = previous
         self.numeroCamera = numeroCamera
 
+        self._connectButtons()
         self._addRowsComboBox(sceltePasti)
+        
         self.msg = QMessageBox()
+
 
     def _createComboBox(self, numeroClienti: int):  # Funzione che crea una combo box da affiancare al nome del piatto per sceglierne la quantità
         comboBox = QComboBox()
@@ -29,6 +32,7 @@ class ConfermaSceltaPastiCenaUI(QTabWidget):
             i += 1
         return comboBox
 
+  
     def _addRowsComboBox(self, sceltePasti: dict):  # aggiunge a runtime i piatti selezionati e le combo box per scegliere le quantita di tale piatto
         global paths
         paths = GestoreFile.leggiJson(Path('paths.json'))
@@ -59,6 +63,7 @@ class ConfermaSceltaPastiCenaUI(QTabWidget):
         self.btnConfermaPrenotazione.clicked.connect(self._btnConfermaPrenotazioneClicked)
         self.btnIndietro.clicked.connect(self._btnIndietroClicked)
 
+ 
     def _btnConfermaPrenotazioneClicked(self):
         i = 0
         antipasti = {}
@@ -105,18 +110,14 @@ class ConfermaSceltaPastiCenaUI(QTabWidget):
             f"La scelta dei pasti per la cena di domani è stata inserita correttamente per la camera {self.numeroCamera}",
             QMessageBox.Icon.Information)
 
+
     def _btnIndietroClicked(self):
         self.close()
         self.previous.show()
+
 
     def _showMessage(self, text: str, icon: QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle: str = 'Messaggio'):
         self.msg.setWindowTitle(windowTitle)
         self.msg.setIcon(icon)
         self.msg.setText(text)
         self.msg.show()
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = ConfermaSceltaPastiCenaUI()
-    mainWidget.show()
-    sys.exit(app.exec_())

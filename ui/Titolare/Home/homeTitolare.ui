@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>555</width>
-    <height>492</height>
+    <width>519</width>
+    <height>350</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>350</height>
+   </size>
   </property>
   <property name="font">
    <font>
@@ -91,7 +97,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Gestisci  Cucina</string>
+         <string>Gestisci Cucina</string>
         </property>
        </widget>
       </item>
@@ -134,7 +140,7 @@
      <property name="font">
       <font>
        <family>Arial</family>
-       <pointsize>16</pointsize>
+       <pointsize>13</pointsize>
       </font>
      </property>
      <property name="text">

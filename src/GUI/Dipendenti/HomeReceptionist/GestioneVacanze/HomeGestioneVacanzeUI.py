@@ -81,18 +81,18 @@ class HomeGestioneVacanzeUI(QTabWidget):
 					break
 		
 		# ridimensionameno delle colonne dei due tree widget
-		self.treewidgetArrivi.header().resizeSection(0, 75)
-		self.treewidgetArrivi.header().resizeSection(1, 155)
-		self.treewidgetArrivi.header().resizeSection(2, 100)
-		self.treewidgetArrivi.header().resizeSection(3, 100)
-		self.treewidgetArrivi.header().resizeSection(4, 160)
+		self.treewidgetArrivi.header().resizeSection(0, 90)
+		self.treewidgetArrivi.header().resizeSection(1, 170)
+		self.treewidgetArrivi.header().resizeSection(2, 110)
+		self.treewidgetArrivi.header().resizeSection(3, 110)
+		self.treewidgetArrivi.header().resizeSection(4, 170)
 		
-		self.treewidgetPartenze.header().resizeSection(0, 70)
-		self.treewidgetPartenze.header().resizeSection(1, 95)
-		self.treewidgetPartenze.header().resizeSection(2, 150)
-		self.treewidgetPartenze.header().resizeSection(3, 95)
-		self.treewidgetPartenze.header().resizeSection(4, 95)
-		self.treewidgetPartenze.header().resizeSection(5, 155)
+		self.treewidgetPartenze.header().resizeSection(0, 80)
+		self.treewidgetPartenze.header().resizeSection(1, 100)
+		self.treewidgetPartenze.header().resizeSection(2, 160)
+		self.treewidgetPartenze.header().resizeSection(3, 100)
+		self.treewidgetPartenze.header().resizeSection(4, 100)
+		self.treewidgetPartenze.header().resizeSection(5, 160)
 
 		def showPrenotazione(item : MyTreeWidgetItem):
 			self._onPrenotazioneSelezionata(item.connectedObject) # type: ignore

@@ -77,7 +77,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabInserisciPrenotazione">
        <attribute name="title">
@@ -853,7 +853,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>La cemera del cliente è la</string>
+                 <string>La camera del cliente è la</string>
                 </property>
                </widget>
               </item>
@@ -1974,13 +1974,13 @@
                <widget class="QLineEdit" name="lineeditNominativoVisualizzaVacanza">
                 <property name="minimumSize">
                  <size>
-                  <width>300</width>
+                  <width>400</width>
                   <height>0</height>
                  </size>
                 </property>
                 <property name="maximumSize">
                  <size>
-                  <width>350</width>
+                  <width>450</width>
                   <height>16777215</height>
                  </size>
                 </property>
@@ -2030,7 +2030,7 @@
                 </property>
                 <property name="minimumSize">
                  <size>
-                  <width>330</width>
+                  <width>350</width>
                   <height>0</height>
                  </size>
                 </property>
@@ -2085,90 +2085,56 @@
            <string>Scheda Arrivi:</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_11">
+           <property name="topMargin">
+            <number>10</number>
+           </property>
+           <property name="bottomMargin">
+            <number>8</number>
+           </property>
            <item row="0" column="0">
             <widget class="QTreeWidget" name="treewidgetArrivi">
              <property name="frameShape">
               <enum>QFrame::Panel</enum>
              </property>
              <property name="selectionMode">
-              <enum>QAbstractItemView::NoSelection</enum>
+              <enum>QAbstractItemView::SingleSelection</enum>
              </property>
              <property name="selectionBehavior">
-              <enum>QAbstractItemView::SelectItems</enum>
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
+             <property name="indentation">
+              <number>1</number>
              </property>
              <column>
               <property name="text">
-               <string>Camera n:</string>
+               <string>Camera</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Tipo soggiorno</string>
+               <string>Tipo Soggiorno</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Data Inzio Soggiorno</string>
+               <string>Data Inzio</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Data Fine Soggiorno</string>
+               <string>Data Fine</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Cliente</string>
+               <string>Carta Credito n.</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Numero carta credito</string>
+               <string>Nominativo</string>
               </property>
              </column>
-             <item>
-              <property name="text">
-               <string>1</string>
-              </property>
-              <property name="text">
-               <string>B&amp;B/..</string>
-              </property>
-              <property name="text">
-               <string>gg/mm/aa</string>
-              </property>
-              <property name="text">
-               <string>gg/mm/aa</string>
-              </property>
-              <property name="text">
-               <string>Mario rossi</string>
-              </property>
-              <property name="text">
-               <string>22639816</string>
-              </property>
-              <property name="flags">
-               <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </item>
             </widget>
            </item>
           </layout>
@@ -2180,45 +2146,29 @@
            <string>Scheda Partenze:</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_12">
+           <property name="topMargin">
+            <number>10</number>
+           </property>
+           <property name="bottomMargin">
+            <number>8</number>
+           </property>
            <item row="0" column="0">
             <widget class="QTreeWidget" name="treewidgetPartenze">
              <property name="frameShape">
               <enum>QFrame::Panel</enum>
              </property>
              <property name="selectionMode">
-              <enum>QAbstractItemView::NoSelection</enum>
+              <enum>QAbstractItemView::SingleSelection</enum>
              </property>
              <property name="selectionBehavior">
-              <enum>QAbstractItemView::SelectItems</enum>
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
+             <property name="indentation">
+              <number>1</number>
              </property>
              <column>
               <property name="text">
-               <string>Camera n:</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Tipo soggiorno</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Data Inzio Soggiorno</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Data Fine Soggiorno</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Cliente</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Numero carta credito</string>
+               <string>Camera</string>
               </property>
              </column>
              <column>
@@ -2226,55 +2176,31 @@
                <string>Ombrellone</string>
               </property>
              </column>
-             <item>
+             <column>
               <property name="text">
-               <string>1</string>
+               <string>Tipo Soggiorno</string>
               </property>
+             </column>
+             <column>
               <property name="text">
-               <string>B&amp;B/..</string>
+               <string>Data Inzio</string>
               </property>
+             </column>
+             <column>
               <property name="text">
-               <string>gg/mm/aa</string>
+               <string>Data Fine</string>
               </property>
+             </column>
+             <column>
               <property name="text">
-               <string>gg/mm/aa</string>
+               <string>Carta Credito n.</string>
               </property>
+             </column>
+             <column>
               <property name="text">
-               <string>Mario rossi</string>
+               <string>Nominativo</string>
               </property>
-              <property name="text">
-               <string>22639816</string>
-              </property>
-              <property name="text">
-               <string>1</string>
-              </property>
-              <property name="flags">
-               <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </item>
+             </column>
             </widget>
            </item>
           </layout>

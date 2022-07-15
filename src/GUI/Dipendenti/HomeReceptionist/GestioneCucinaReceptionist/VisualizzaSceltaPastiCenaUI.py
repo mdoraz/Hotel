@@ -1,31 +1,41 @@
-import sys
+from pathlib import Path
 from datetime import date, timedelta
 
-from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
-from pathlib import Path
+
 from src.Gestori.GestoreFile import GestoreFile
 from src.Utilities.exceptions import CorruptedFileError
 
 class VisualizzaSceltaPastiCenaUI(QWidget):
+    
     def __init__(self, previous: QWidget):
         super().__init__()
+        
         loadUi(GestoreFile.absolutePath('VisualizzaSceltaPastiCena.ui', Path.cwd()), self)
-        self.setMinimumSize(600, 600)
-        self.setFont(QtGui.QFont('Arial', 10))
-        self._connectButtons()
+        
         self.previous = previous
+        self._resizeColumns()
+        self._connectButtons()
 
-        self.msg = QMessageBox
+        self.msg = QMessageBox()
 
         self.dateEditCena.setMinimumDate(date.today())
         self.dateEditCena.setMaximumDate(date.today() + timedelta(days=1))
+    
+
+    def _resizeColumns(self):
+        self.treewidgetAntipasti.header().resizeSection(0, 250)
+        self.treewidgetPrimi.header().resizeSection(0, 250)
+        self.treewidgetSecondiContorni.header().resizeSection(0, 250)
+        self.treewidgetDolciBevande.header().resizeSection(0, 250)
+
 
     def _connectButtons(self):
         self.btnCerca.clicked.connect(self._btnCercaClicked)
         self.btnElimina.clicked.connect(self._btnEliminaClicked)
         self.btnTornarePaginaPrecedente.clicked.connect(self._btnTornarePaginaPrecedenteClicked)
+
 
     def _btnCercaClicked(self):
         camere = self._readCamere()
@@ -64,6 +74,7 @@ class VisualizzaSceltaPastiCenaUI(QWidget):
         for k, v in dolciBevande.items():
             self.treewidgetDolciBevande.addTopLevelItem(QTreeWidgetItem([k, v]))
 
+
     def _btnEliminaClicked(self):
         data = self.dateEditCena.date().toPyDate()
         numeroCamera = int(self.comboboxCena.currentText())
@@ -76,9 +87,11 @@ class VisualizzaSceltaPastiCenaUI(QWidget):
         self.close()
         self.previous.show()
 
+
     def _btnTornarePaginaPrecedenteClicked(self):
         self.close()
         self.previous.show()
+
 
     def _readCamere(self):
         global paths
@@ -94,14 +107,9 @@ class VisualizzaSceltaPastiCenaUI(QWidget):
             raise
         return camere
 
+
     def _showMessage(self, text: str, icon: QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle: str = 'Messaggio'):
         self.msg.setWindowTitle(windowTitle)
         self.msg.setIcon(icon)
         self.msg.setText(text)
         self.msg.show()
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = VisualizzaSceltaPastiCenaUI(QWidget)
-    mainWidget.show()
-    sys.exit(app.exec_())

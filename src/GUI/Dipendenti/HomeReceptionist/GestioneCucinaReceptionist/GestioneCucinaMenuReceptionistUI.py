@@ -1,4 +1,3 @@
-import sys
 from datetime import date, timedelta
 
 from PyQt5 import QtGui
@@ -20,15 +19,17 @@ from src.Utilities.exceptions import CorruptedFileError
 
 
 class GestioneCucinaMenuReceptionistUI(QTabWidget):
+   
     def __init__(self, previous: QWidget ):
         super().__init__()
+        
         loadUi(GestoreFile.absolutePath('GestioneCucina.ui', Path.cwd()), self)
-        self.setMinimumSize(600, 700)
-        self.setFont(QtGui.QFont('Arial', 10))
+        
         self.previous = previous
         self._connectButtons()
 
         self._hideWidget()
+        self._resizeColumns()
 
         self._fillTreeWidgetColazioneInCamera()
         self._fillTreeWidgetPranzo()
@@ -36,11 +37,29 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
 
         self.msg = QMessageBox()
 
+
     def _hideWidget(self):
         self.widgetSceltaPastiPranzo.hide()
         self.widgetSceltaPastiCena.hide()
         self.comboboxPranzo.hide()
         self.comboboxCena.hide()
+
+    
+    def _resizeColumns(self):
+        # colazione
+        self.treewidgetDolceColazioneInCamera.header().resizeSection(0, 200)
+        self.treewidgetSalatoColazioneInCamera.header().resizeSection(0, 200)
+        self.treewidgetBevandeColazioneInCamera.header().resizeSection(0, 200)
+        # pranzo
+        self.treewidgetAntipastiPranzo.header().resizeSection(0, 200)
+        self.treewidgetPrimoPranzo.header().resizeSection(0, 200)
+        self.treewidgetSecondoContornoPranzo.header().resizeSection(0, 200)
+        self.treewidgetDolciBevandePranzo.header().resizeSection(0, 200)
+        # cena
+        self.treewidgetAntipastiCena.header().resizeSection(0, 200)
+        self.treewidgetPrimiCena.header().resizeSection(0, 200)
+        self.treewidgetSecondiContorniCena.header().resizeSection(0, 200)
+        self.treewidgetDolciBevandeCena.header().resizeSection(0, 200)
 
 
     def _fillTreeWidgetColazioneInCamera(self):
@@ -169,7 +188,7 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
             return
 
         dataDomani = date.today() + timedelta(days=1)
-        if dataDomani in camera.getVacanzaAttuale().getSceltePastiPranzo():
+        if dataDomani in camera.getVacanzaAttuale().getSceltePastiPranzo(): # type: ignore
             self._showMessage(f"La prenotazione per la camera {numeroCamera} è stata gia effettuata per domani! ",
                               QMessageBox.Icon.Warning)
             return
@@ -251,7 +270,7 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
             return
 
         dataDomani = date.today() + timedelta(days=1)
-        if dataDomani in camera.getVacanzaAttuale().getSceltePastiCena():
+        if dataDomani in camera.getVacanzaAttuale().getSceltePastiCena(): # type: ignore
             self._showMessage(f"La prenotazione per la camera {numeroCamera} è stata gia effettuata per domani! ",
                               QMessageBox.Icon.Warning)
             return
@@ -315,9 +334,3 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
         self.msg.setIcon(icon)
         self.msg.setText(text)
         self.msg.show()
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = GestioneCucinaMenuReceptionistUI(QWidget)
-    mainWidget.show()
-    sys.exit(app.exec_())

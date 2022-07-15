@@ -1,28 +1,42 @@
-import sys
+from pathlib import Path
 from datetime import date, timedelta
+
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
-from pathlib import Path
 
 from src.Gestori.GestoreFile import GestoreFile
 from src.Utilities.exceptions import CorruptedFileError
 
 
 class VisualizzaPrenotazioneColazioneUI(QWidget):
+    
     def __init__(self, previous: QWidget):
         super().__init__()
+        
         loadUi(GestoreFile.absolutePath('VisualizzaPrenotazioneColazione.ui', Path.cwd()), self)
-        self._connectButtons()
+        
         self.previous = previous
-        self.msg = QMessageBox
+
+        self._resizeColumns()
+        self._connectButtons()
+        
+        self.msg = QMessageBox()
 
         self.dateEditColazione.setMinimumDate(date.today())
         self.dateEditColazione.setMaximumDate(date.today() + timedelta(days=1))
+    
+
+    def _resizeColumns(self):
+        self.treewidgetDolce.header().resizeSection(0, 200)
+        self.treewidgetSalato.header().resizeSection(0, 200)
+        self.treewidgetBevande.header().resizeSection(0, 200)
+
 
     def _connectButtons(self):
         self.btnCerca.clicked.connect(self._btnCercaClicked)
         self.btnEliminaPrenotazione.clicked.connect(self._btnEliminaPrenotazioneClicked)
         self.btnTornarePaginaPrecedente.clicked.connect(self._btnTornarePaginaPrecedenteClicked)
+
 
     def _btnCercaClicked(self):
         camere = self._readCamere()
@@ -54,6 +68,7 @@ class VisualizzaPrenotazioneColazioneUI(QWidget):
         for k, v in bevande.items():
             self.treewidgetBevande.addTopLevelItem(QTreeWidgetItem([k, v]))
 
+    
     def _btnEliminaPrenotazioneClicked(self):
         data = self.dateEditColazione.date().toPyDate()
         numeroCamera = int(self.comboboxColazioneInCamera.currentText())
@@ -61,14 +76,17 @@ class VisualizzaPrenotazioneColazioneUI(QWidget):
         camere[numeroCamera].getVacanzaAttuale().setColazioniInCamera(colazioneInCamera)
         GestoreFile.salvaPickle(camere, Path(paths['camere']))
         self.previous._showMessage(
-            f"La prenotazione della camera {self.comboboxColazioneInCamera.currentText()} per la data {data.strftime('%d/%m/%Y')} è stata eliminata correttamente", QMessageBox.Icon.Information)
+            f"La prenotazione della camera {self.comboboxColazioneInCamera.currentText()} per la data {data.strftime('%d/%m/%Y')} è stata eliminata correttamente", 
+            QMessageBox.Icon.Information)
         self.close()
         self.previous.show()
 
+   
     def _btnTornarePaginaPrecedenteClicked(self):
         self.close()
         self.previous.show()
 
+  
     def _readCamere(self):
         global paths
         paths = GestoreFile.leggiJson(Path('paths.json'))
@@ -83,14 +101,9 @@ class VisualizzaPrenotazioneColazioneUI(QWidget):
             raise
         return camere
 
+   
     def _showMessage(self, text: str, icon: QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle: str = 'Messaggio'):
         self.msg.setWindowTitle(windowTitle)
         self.msg.setIcon(icon)
         self.msg.setText(text)
         self.msg.show()
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = VisualizzaPrenotazioneColazioneUI(QWidget)
-    mainWidget.show()
-    sys.exit(app.exec_())

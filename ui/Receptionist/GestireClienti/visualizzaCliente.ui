@@ -61,25 +61,9 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>Scheda Cliente Ricercato:</string>
+      <string>Scheda Cliente:</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="7" column="1" colspan="2">
-       <widget class="QLineEdit" name="lineeditLuogoNascita">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="frame">
-         <bool>false</bool>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-        <property name="placeholderText">
-         <string>Luogo di nascita(Provincia)</string>
-        </property>
-       </widget>
-      </item>
       <item row="8" column="1" colspan="2">
        <widget class="QDateEdit" name="dateedit">
         <property name="readOnly">
@@ -112,7 +96,7 @@
          <bool>true</bool>
         </property>
         <property name="placeholderText">
-         <string>Cellulare</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -128,7 +112,7 @@
          <bool>true</bool>
         </property>
         <property name="placeholderText">
-         <string>myEmail@domain.com</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -172,7 +156,7 @@
          <bool>true</bool>
         </property>
         <property name="placeholderText">
-         <string>Cognome</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -188,7 +172,7 @@
          <bool>true</bool>
         </property>
         <property name="placeholderText">
-         <string>Nome</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -215,7 +199,23 @@
          <bool>true</bool>
         </property>
         <property name="placeholderText">
-         <string>ID</string>
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1" colspan="2">
+       <widget class="QLineEdit" name="lineeditLuogoNascita">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="frame">
+         <bool>false</bool>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+        <property name="placeholderText">
+         <string/>
         </property>
        </widget>
       </item>
@@ -242,16 +242,16 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="btnModifica">
+       <widget class="QPushButton" name="btnModificaContatti">
         <property name="text">
-         <string>Modifica cliente ricercato</string>
+         <string>Modifica contatti</string>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="btnElimina">
         <property name="text">
-         <string>Elimina cliente ricercato</string>
+         <string>Elimina cliente</string>
         </property>
        </widget>
       </item>

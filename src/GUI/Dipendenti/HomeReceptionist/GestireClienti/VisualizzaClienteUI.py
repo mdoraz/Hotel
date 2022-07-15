@@ -5,7 +5,6 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
 from src.Attori.Persona import Persona
-from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.ModificaClienteUI import ModificaClienteUI
 from src.GUI.Dipendenti.HomeReceptionist.GestireClienti.RicercaClienteUI import RicercaClienteUI
 from src.GUI.FormUI import FormUI
 from src.Gestori.GestoreFile import GestoreFile

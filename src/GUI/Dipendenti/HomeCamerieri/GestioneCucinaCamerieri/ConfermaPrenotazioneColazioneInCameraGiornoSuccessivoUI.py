@@ -1,34 +1,35 @@
-import sys
 from datetime import date, timedelta
 
-from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 from src.Gestori.GestoreFile import GestoreFile
-from src.Servizi.Camera import Camera
 from src.Utilities.exceptions import CorruptedFileError
 
 
 class ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI(QTabWidget):
+
     def __init__(self, sceltePasti: dict, numeroCamera: int, previous: QWidget):
         super().__init__()
+
         loadUi(GestoreFile.absolutePath('ConfermaPrenotazioneColazioneInCameraGiornoSuccessivo.ui', Path.cwd()), self)
-        self.setMinimumSize(600, 600)
-        self.setFont(QtGui.QFont('Arial', 10))
-        self._connectButtons()
+
         self.previous = previous
         self.numeroCamera = numeroCamera
+        
+        self._connectButtons()
         self._addRowsComboBox(sceltePasti)
         self.msg = QMessageBox()
 
-    def _createComboBox(self, numeroClienti: int):#Funzione che crea una combo box da affiancare al nome del piatto per sceglierne la quantità
+
+    def _createComboBox(self, numeroClienti: int): # funzione che crea una combo box da affiancare al nome del piatto per sceglierne la quantità
         comboBox = QComboBox()
         i = 1
         while i <= numeroClienti:
             comboBox.addItem(str(i))
             i += 1
         return comboBox
+
 
     def _addRowsComboBox(self, sceltePasti: dict): # aggiunge a runtime i piatti selezionati e le combo box per scegliere le quantita di tale piatto
         global paths
@@ -57,6 +58,7 @@ class ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI(QTabWidget):
     def _connectButtons(self):
         self.btnConfermaPrenotazione.clicked.connect(self._btnConfermaPrenotazioneClicked)
         self.btnIndietro.clicked.connect(self._btnIndietroClicked)
+
 
     def _btnConfermaPrenotazioneClicked(self):
         camera = camere[self.numeroCamera]
@@ -94,9 +96,11 @@ class ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI(QTabWidget):
         self.close()
         self._showMessage(f"La prenotazione della colazione di domani è stata effettuatata correttamente per la camera {self.numeroCamera}", QMessageBox.Icon.Information)
 
+
     def _btnIndietroClicked(self):
         self.close()
         self.previous.show()
+
 
     def _showMessage(self, text: str, icon: QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle: str = 'Messaggio'):
         self.msg.setWindowTitle(windowTitle)
@@ -104,11 +108,6 @@ class ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI(QTabWidget):
         self.msg.setText(text)
         self.msg.show()
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI()
-    mainWidget.show()
-    sys.exit(app.exec_())
 
 
 
