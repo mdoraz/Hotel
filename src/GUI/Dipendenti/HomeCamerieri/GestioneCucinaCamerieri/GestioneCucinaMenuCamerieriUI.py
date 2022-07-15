@@ -1,13 +1,14 @@
 import sys
+from datetime import date, timedelta
+
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 from pathlib import Path
 from src.GUI.Dipendenti.HomeCamerieri.GestioneCucinaCamerieri.ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI import \
     ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI
+from src.GUI.VisualizzaPrenotazioneColazioneUI import VisualizzaPrenotazioneColazioneUI
 from src.Gestori.GestoreFile import GestoreFile
-from src.GUI.Dipendenti.HomeCamerieri.GestioneCucinaCamerieri.ModificaPrenotazioneColazioneInCameraUI import \
-    ModificaPrenotazioneColazioneInCameraUI
 from src.Servizi.Camera import Camera
 from src.Utilities.exceptions import CorruptedFileError
 
@@ -118,7 +119,7 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
 
     def _connectButtons(self):
         self.btnPrenotaColazioneInCameraGiornoSuccessivo.clicked.connect(self._btnPrenotaColazioneInCameraGiornoSuccessivoClicked)
-        self.btnModificaPrenotazioneColazioneInCamera.clicked.connect(self._btnModificaPrenotazioneColazioneInCameraClicked)
+        self.btnVisualizzaPrenotazioni.clicked.connect(self._btnVisualizzaPrenotazioniClicked)
         self.btnAvanti.clicked.connect(self._btnAvantiClicked)
         self.btnAnnulla.clicked.connect(self._btnAnnullaClicked)
         self.btnTornarePaginaPrecedente.clicked.connect(self._btnTornarePaginaPrecedenteClicked)
@@ -137,6 +138,7 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
         self.treewidgetBevandeColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
 
     def _btnAvantiClicked(self):
+
         numeroCamera = int(self.comboboxColazioneInCamera.currentText())
 
         paths = GestoreFile.leggiJson(Path('paths.json'))
@@ -155,14 +157,29 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
             self._showMessage('Non esiste nessuna vacanza in corso nella camera selezionata.', QMessageBox.Icon.Warning)
             return
 
+        dataDomani = date.today() + timedelta(days=1)
+        if dataDomani in camera.getVacanzaAttuale().getColazioniInCamera():
+            self._showMessage(f"La prenotazione per la camera {numeroCamera} è stata gia effettuata per domani! ",
+                              QMessageBox.Icon.Warning)
+            return
+
+        itemDolci = self.treewidgetDolceColazioneInCamera.selectedItems()
+        itemSalati = self.treewidgetSalatoColazioneInCamera.selectedItems()
+        itemBevande = self.treewidgetBevandeColazioneInCamera.selectedItems()
+
+        if itemDolci == [] and itemSalati == [] and itemBevande == []:
+            self._showMessage("Seleziona almeno un piatto per continuare", QMessageBox.Icon.Warning)
+            return
+
         sceltePasti = {
-            "dolce": [item.text(0) for item in self.treewidgetDolceColazioneInCamera.selectedItems()],
-            "salato": [item.text(0) for item in self.treewidgetSalatoColazioneInCamera.selectedItems()],
-            "bevande": [item.text(0) for item in self.treewidgetBevandeColazioneInCamera.selectedItems()]
+            "dolce": [item.text(0) for item in itemDolci],
+            "salato": [item.text(0) for item in itemSalati],
+            "bevande": [item.text(0) for item in itemBevande]
         }
 
         self.widgetConfermaPrenotazioneColazioneInCameraGiornoSuccessivo = ConfermaPrenotazioneColazioneInCameraGiornoSuccessivoUI(sceltePasti, numeroCamera, self)
         self.widgetConfermaPrenotazioneColazioneInCameraGiornoSuccessivo.show()
+        self._btnAnnullaClicked()
 
     def _btnAnnullaClicked(self):
         self.btnPrenotaColazioneInCameraGiornoSuccessivo.show()
@@ -171,6 +188,7 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
         self.treewidgetDolceColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetSalatoColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetBevandeColazioneInCamera.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.comboboxColazioneInCamera.setCurrentText("1")
 
         for item in self.treewidgetDolceColazioneInCamera.selectedItems():
             item.setSelected(False)
@@ -179,10 +197,10 @@ class GestioneCucinaMenuCamerieriUI(QTabWidget):
         for item in self.treewidgetBevandeColazioneInCamera.selectedItems():
             item.setSelected(False)
 
-    def _btnModificaPrenotazioneColazioneInCameraClicked(self):
+    def _btnVisualizzaPrenotazioniClicked(self):
         self.close()
-        self.widgetModificaPrenotazioneColazioneInCamera = ModificaPrenotazioneColazioneInCameraUI(self)
-        self.widgetModificaPrenotazioneColazioneInCamera.show()
+        self.widgetVisualizzaPrenotazioneColazione = VisualizzaPrenotazioneColazioneUI(self)
+        self.widgetVisualizzaPrenotazioneColazione.show()
 
     def _btnTornarePaginaPrecedenteClicked(self):
         self.close()

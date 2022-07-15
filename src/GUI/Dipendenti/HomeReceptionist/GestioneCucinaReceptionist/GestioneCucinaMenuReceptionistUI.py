@@ -1,4 +1,6 @@
 import sys
+from datetime import date, timedelta
+
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
@@ -8,6 +10,10 @@ from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.ConfermaScel
     ConfermaSceltaPastiCenaUI
 from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.ConfermaSceltaPastiPranzoUI import \
     ConfermaSceltaPastiPranzoUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.VisualizzaSceltaPastiCenaUI import \
+    VisualizzaSceltaPastiCenaUI
+from src.GUI.Dipendenti.HomeReceptionist.GestioneCucinaReceptionist.VisualizzaSceltaPastiPranzoUI import \
+    VisualizzaSceltaPastiPranzoUI
 from src.Gestori.GestoreFile import GestoreFile
 from src.Servizi.Camera import Camera
 from src.Utilities.exceptions import CorruptedFileError
@@ -40,9 +46,9 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
     def _fillTreeWidgetColazioneInCamera(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
         menuColazione = GestoreFile.leggiDictPickle(Path(paths['menuColazione']))
-        self.treewidgetDolceColazioneInCamera.clear()  # Queste tre righe che richiamano il metodo clear del treeWidget
+        self.treewidgetDolceColazioneInCamera.clear()  #Queste tre righe che richiamano il metodo clear del treeWidget
         self.treewidgetSalatoColazioneInCamera.clear()  # ci permettono di partire sempre con il treeWidget vuoto in modo tale
-        self.treewidgetBevandeColazioneInCamera.clear()  # che se clicchiamo annulla il treeWidget torna come era prima
+        self.treewidgetBevandeColazioneInCamera.clear()  #che se clicchiamo annulla il treeWidget torna come era prima
         if menuColazione != {}:
             dolci = menuColazione["dolce"] #ottenere sottodizionario
             for k, v in dolci.items():
@@ -64,21 +70,21 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
     def _fillTreeWidgetPranzo(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
         menuPranzo = GestoreFile.leggiDictPickle(Path(paths['menuPranzo']))
-        self.treewidgetAntipastiPranzo.clear()  # Queste quattro righe che richiamano il metodo clear del treeWidget
-        self.treewidgetPrimoPranzo.clear()  # ci permettono di partire sempre con il treeWidget vuoto in modo tale
-        self.treewidgetSecondoContornoPranzo.clear()  # che se clicchiamo annulla il treeWidget torna
-        self.treewidgetDolciBevandePranzo.clear()  # uguale a come era prima
+        self.treewidgetAntipastiPranzo.clear() #Queste quattro righe che richiamano il metodo clear del treeWidget
+        self.treewidgetPrimoPranzo.clear() #ci permettono di partire sempre con il treeWidget vuoto in modo tale
+        self.treewidgetSecondoContornoPranzo.clear() #che se clicchiamo annulla il treeWidget torna
+        self.treewidgetDolciBevandePranzo.clear() #uguale a come era prima
         if menuPranzo != {}:
             antipasti = menuPranzo["antipasto"] #ottenere sottodizionario
             for k,v in antipasti.items():
                 self.treewidgetAntipastiPranzo.addTopLevelItem(QTreeWidgetItem([k,v], 0))
-            primo = menuPranzo["primo"]  # ottenere sottodizionario
+            primo = menuPranzo["primo"]  #ottenere sottodizionario
             for k, v in primo.items():
                 self.treewidgetPrimoPranzo.addTopLevelItem(QTreeWidgetItem([k, v], 0))
-            secondoContorno = menuPranzo["secondoContorno"]  # ottenere sottodizionario
+            secondoContorno = menuPranzo["secondoContorno"]  #ottenere sottodizionario
             for k, v in secondoContorno.items():
                 self.treewidgetSecondoContornoPranzo.addTopLevelItem(QTreeWidgetItem([k, v], 0))
-            dolciBevande = menuPranzo["dolciBevande"]  # ottenere sottodizionario
+            dolciBevande = menuPranzo["dolciBevande"]  #ottenere sottodizionario
             for k, v in dolciBevande.items():
                 self.treewidgetDolciBevandePranzo.addTopLevelItem(QTreeWidgetItem([k, v], 0))
         else:
@@ -93,21 +99,21 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
     def _fillTreeWidgetCena(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
         menuCena = GestoreFile.leggiDictPickle(Path(paths['menuCena']))
-        self.treewidgetAntipastiCena.clear()  # Queste quattro righe che richiamano il metodo clear del treeWidget
-        self.treewidgetPrimiCena.clear()  # ci permettono di partire sempre con il treeWidget vuoto in modo tale
-        self.treewidgetSecondiContorniCena.clear()  # che se clicchiamo annulla il treeWidget torna
-        self.treewidgetDolciBevandeCena.clear()  # uguale a come era prima
+        self.treewidgetAntipastiCena.clear() #Queste quattro righe che richiamano il metodo clear del treeWidget
+        self.treewidgetPrimiCena.clear() #ci permettono di partire sempre con il treeWidget vuoto in modo tale
+        self.treewidgetSecondiContorniCena.clear() #che se clicchiamo annulla il treeWidget torna
+        self.treewidgetDolciBevandeCena.clear() #uguale a come era prima
         if menuCena != {}:
-            antipasti = menuCena["antipasto"]  # ottenere sottodizionario
+            antipasti = menuCena["antipasto"]  #ottenere sottodizionario
             for k, v in antipasti.items():
                 self.treewidgetAntipastiCena.addTopLevelItem(QTreeWidgetItem([k, v], 0))
-            primo = menuCena["primo"]  # ottenere sottodizionario
+            primo = menuCena["primo"]  #ottenere sottodizionario
             for k, v in primo.items():
                 self.treewidgetPrimiCena.addTopLevelItem(QTreeWidgetItem([k, v], 0))
-            secondoContorno = menuCena["secondoContorno"]  # ottenere sottodizionario
+            secondoContorno = menuCena["secondoContorno"] #ottenere sottodizionario
             for k, v in secondoContorno.items():
                 self.treewidgetSecondiContorniCena.addTopLevelItem(QTreeWidgetItem([k, v], 0))
-            dolciBevande = menuCena["dolciBevande"]  # ottenere sottodizionario
+            dolciBevande = menuCena["dolciBevande"] #ottenere sottodizionario
             for k, v in dolciBevande.items():
                 self.treewidgetDolciBevandeCena.addTopLevelItem(QTreeWidgetItem([k, v], 0))
         else:
@@ -122,6 +128,8 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
     def _connectButtons(self):
         self.btnInserisciSceltaPastiPranzo.clicked.connect(self._btnInserisciSceltaPastiPranzoClicked)
         self.btnInserisciSceltaPastiCena.clicked.connect(self._btnInserisciSceltaPastiCenaClicked)
+        self.btnVisualizzaSceltaPastiPranzo.clicked.connect(self._btnVisualizzaSceltaPastiPranzoClicked)
+        self.btnVisualizzaSceltaPastiCena.clicked.connect(self._btnVisualizzaSceltaPastiCenaClicked)
         self.btnAvanti.clicked.connect(self._btnAvantiClicked)
         self.btnAnnulla.clicked.connect(self._btnAnnullaClicked)
         self.btnAvanti_2.clicked.connect(self._btnAvanti_2Clicked)
@@ -135,6 +143,7 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
         self.widgetSceltaPastiPranzo.show()
         self.labelIntroduzione_2.setText('Inserire il numero di camera e scegliere quali piatti desidera prenotare il cliente per il pranzo di domani.')
         self.comboboxPranzo.show()
+        self.btnVisualizzaSceltaPastiPranzo.hide()
         self.treewidgetAntipastiPranzo.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
         self.treewidgetPrimoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
         self.treewidgetSecondoContornoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
@@ -159,24 +168,42 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
             self._showMessage('Non esiste nessuna vacanza in corso nella camera selezionata.', QMessageBox.Icon.Warning)
             return
 
-        sceltePasti = {
-            "antipasti": [item.text(0) for item in self.treewidgetAntipastiPranzo.selectedItems()],
-            "primi" : [item.text(0) for item in self.treewidgetPrimoPranzo.selectedItems()],
-            "secondiContorni": [item.text(0) for item in self.treewidgetSecondoContornoPranzo.selectedItems()],
-            "dolciBevande": [item.text(0) for item in self.treewidgetDolciBevandePranzo.selectedItems()]
+        dataDomani = date.today() + timedelta(days=1)
+        if dataDomani in camera.getVacanzaAttuale().getSceltePastiPranzo():
+            self._showMessage(f"La prenotazione per la camera {numeroCamera} è stata gia effettuata per domani! ",
+                              QMessageBox.Icon.Warning)
+            return
+
+        itemAntipasti = self.treewidgetAntipastiPranzo.selectedItems()
+        itemPrimi = self.treewidgetPrimoPranzo.selectedItems()
+        itemSecondiContorni = self.treewidgetSecondoContornoPranzo.selectedItems()
+        itemDolciBevande = self.treewidgetDolciBevandePranzo.selectedItems()
+
+        if itemAntipasti == [] and itemPrimi == [] and itemSecondiContorni == [] and itemDolciBevande == []:
+            self._showMessage("Seleziona almeno un piatto per continuare", QMessageBox.Icon.Warning)
+            return
+
+        sceltePastiPranzo = {
+            "antipasti": [item.text(0) for item in itemAntipasti],
+            "primi" : [item.text(0) for item in itemPrimi],
+            "secondiContorni": [item.text(0) for item in itemSecondiContorni],
+            "dolciBevande": [item.text(0) for item in itemDolciBevande]
         }
 
-        self.widgetConfermaSceltaPastiPranzo = ConfermaSceltaPastiPranzoUI(sceltePasti, numeroCamera, self)
+        self.widgetConfermaSceltaPastiPranzo = ConfermaSceltaPastiPranzoUI(sceltePastiPranzo, numeroCamera, self)
         self.widgetConfermaSceltaPastiPranzo.show()
+        self._btnAnnullaClicked()
 
     def _btnAnnullaClicked(self):
         self.btnInserisciSceltaPastiPranzo.show()
         self.labelIntroduzione_2.setText(" Benvenuto, di seguito il menù dell'hotel per il pranzo:")
         self._hideWidget()
+        self.btnVisualizzaSceltaPastiPranzo.show()
         self.treewidgetAntipastiPranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetPrimoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetSecondoContornoPranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetDolciBevandePranzo.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
+        self.comboboxPranzo.setCurrentText("1")
 
         for item in self.treewidgetAntipastiPranzo.selectedItems():
             item.setSelected(False)
@@ -187,11 +214,18 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
         for item in self.treewidgetDolciBevandePranzo.selectedItems():
             item.setSelected(False)
 
+    def _btnVisualizzaSceltaPastiPranzoClicked(self):
+        self.close()
+        self.widgetVisualizzaSceltaPasti = VisualizzaSceltaPastiPranzoUI(self)
+        self.widgetVisualizzaSceltaPasti.show()
+
+
     def _btnInserisciSceltaPastiCenaClicked(self):
         self.btnInserisciSceltaPastiCena.hide()
         self.widgetSceltaPastiCena.show()
         self.labelIntroduzione_3.setText('Inserire il numero di camera e scegliere quali piatti desidera prenotare il cliente per la cena di domani.')
         self.comboboxCena.show()
+        self.btnVisualizzaSceltaPastiCena.hide()
         self.treewidgetAntipastiCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
         self.treewidgetPrimiCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
         self.treewidgetSecondiContorniCena.setSelectionMode(QAbstractItemView.SelectionMode.MultiSelection)
@@ -216,20 +250,37 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
             self._showMessage('Non esiste nessuna vacanza in corso nella camera selezionata.', QMessageBox.Icon.Warning)
             return
 
-        sceltePasti = {
-            "antipasti": [item.text(0) for item in self.treewidgetAntipastiCena.selectedItems()],
-            "primi": [item.text(0) for item in self.treewidgetPrimoCena.selectedItems()],
-            "secondiContorni": [item.text(0) for item in self.treewidgetSecondoContornoCena.selectedItems()],
-            "dolciBevande": [item.text(0) for item in self.treewidgetDolciBevandeCena.selectedItems()]
+        dataDomani = date.today() + timedelta(days=1)
+        if dataDomani in camera.getVacanzaAttuale().getSceltePastiCena():
+            self._showMessage(f"La prenotazione per la camera {numeroCamera} è stata gia effettuata per domani! ",
+                              QMessageBox.Icon.Warning)
+            return
+
+        itemAntipasti = self.treewidgetAntipastiCena.selectedItems()
+        itemPrimi = self.treewidgetPrimiCena.selectedItems()
+        itemSecondiContorni = self.treewidgetSecondiContorniCena.selectedItems()
+        itemDolciBevande = self.treewidgetDolciBevandeCena.selectedItems()
+
+        if itemAntipasti == [] and itemPrimi == [] and itemSecondiContorni == [] and itemDolciBevande == []:
+            self._showMessage("Seleziona almeno un piatto per continuare", QMessageBox.Icon.Warning)
+            return
+
+        sceltePastiCena = {
+            "antipasti": [item.text(0) for item in itemAntipasti],
+            "primi": [item.text(0) for item in itemPrimi],
+            "secondiContorni": [item.text(0) for item in itemSecondiContorni],
+            "dolciBevande": [item.text(0) for item in itemDolciBevande]
         }
 
-        self.widgetConfermaSceltaPastiCena = ConfermaSceltaPastiCenaUI(sceltePasti, numeroCamera, self)
+        self.widgetConfermaSceltaPastiCena = ConfermaSceltaPastiCenaUI(sceltePastiCena, numeroCamera, self)
         self.widgetConfermaSceltaPastiCena.show()
+        self._btnAnnulla_2Clicked()
 
     def _btnAnnulla_2Clicked(self):
         self.btnInserisciSceltaPastiCena.show()
         self.labelIntroduzione_3.setText("Benvenuto, di seguito il menù dell'hotel per la cena:")
         self._hideWidget()
+        self.btnVisualizzaSceltaPastiCena.show()
         self.treewidgetAntipastiCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetPrimiCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
         self.treewidgetSecondiContorniCena.setSelectionMode(QAbstractItemView.SelectionMode.NoSelection)
@@ -243,6 +294,11 @@ class GestioneCucinaMenuReceptionistUI(QTabWidget):
             item.setSelected(False)
         for item in self.treewidgetDolciBevandeCena.selectedItems():
             item.setSelected(False)
+
+    def _btnVisualizzaSceltaPastiCenaClicked(self):
+        self.close()
+        self.widgetVisualizzaSceltaPasti = VisualizzaSceltaPastiCenaUI(self)
+        self.widgetVisualizzaSceltaPasti.show()
 
     def _btnTornarePaginaPrecedenteClicked(self):
         self.close()
