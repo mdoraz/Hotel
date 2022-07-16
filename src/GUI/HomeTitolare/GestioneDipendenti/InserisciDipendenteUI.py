@@ -41,19 +41,6 @@ class InserisciDipendenteUI(QTabWidget):
 		self.msg = QMessageBox() # per futuri messaggi
 	
 
-	def _readDipendenti(self) -> dict:
-		paths = GestoreFile.leggiJson(Path('paths.json'))
-		try:
-			dipendenti = GestoreFile.leggiDictPickle(Path(paths['dipendenti']))
-		except TypeError:
-			self._showMessage(f"{Path(paths['dipendenti']).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
-								 QMessageBox.Icon.Critical, 'Errore')
-			self.close()
-			raise
-		
-		return dipendenti
-
-
 	def _btnAvantiClicked(self):
 		if (self.page1.fieldsFilled(self.page1.lineEditLabelPairs) and self.page1.fieldsValid()
 		   and not self.page1.isUserInSystem()):
@@ -91,11 +78,29 @@ class InserisciDipendenteUI(QTabWidget):
 			except DuplicateError:
 				pass # è stato già verificato che il dipendente non è già presente nel sistema
 			
-			self.dipendenteAggiunto.emit(Dipendente(nome, cognome, dataNascita, luogoNascita, email, cellulare, datiAggiuntivi['IBAN'],
-										datiAggiuntivi['turno'], datiAggiuntivi['ruolo'], datiAggiuntivi['username'], datiAggiuntivi['password']))
+			# cerco il dipendente appena creato per passarlo come parametro al segnale dipendenteAggiunto da emettere
+			dipendenti = self._readDipendenti()
+			for dipendente in dipendenti.values():
+				if (dipendente.getNome() == nome and dipendente.getCognome() == cognome and dipendente.getDataNascita() == dataNascita and
+					dipendente.getLuogoNascita() == luogoNascita):
+					self.dipendenteAggiunto.emit(dipendente)
+					break
 			
 			self._showMessage('Il dipendente è stato inserito con successo!', QMessageBox.Icon.Information)
 			self.close()
+	
+
+	def _readDipendenti(self) -> dict:
+		paths = GestoreFile.leggiJson(Path('paths.json'))
+		try:
+			dipendenti = GestoreFile.leggiDictPickle(Path(paths['dipendenti']))
+		except TypeError:
+			self._showMessage(f"{Path(paths['dipendenti']).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
+								 QMessageBox.Icon.Critical, 'Errore')
+			self.close()
+			raise
+		
+		return dipendenti
 	
 	
 	def _showMessage(self, text : str, icon : QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle : str = 'Messaggio'):

@@ -17,8 +17,9 @@ from src.Utilities.encrypter import encrypt, decrypt
 class VisualizzaDipendenteUI(FormUI):
 
 	showComboBox = False
-	dipendenteEliminato = QtCore.pyqtSignal()
-	turnoModificato = QtCore.pyqtSignal(Dipendente, bool)
+	dipendenteEliminato = QtCore.pyqtSignal(Dipendente)
+	turnoModificato = QtCore.pyqtSignal(Dipendente)
+	ruoloModificato = QtCore.pyqtSignal(Dipendente)
 
 	def __init__(self, dipendente : Dipendente, parent : QWidget = None):  # type: ignore
 		super().__init__(parent)
@@ -115,11 +116,15 @@ class VisualizzaDipendenteUI(FormUI):
 			return
 		# se tutto è corretto, modifico il dipendente visualizzato
 		self.dipendente.setIBAN(IBAN)
-		self.dipendente.setAutorizzazione(Ruolo.RECEPTIONIST if self.comboBoxRuolo.currentText() == 'Receptionist' else Ruolo.CAMERIERE)
+		
+		if self.dipendente.getAutorizzazione() != Ruolo.enumFromStr(self.comboBoxRuolo.currentText()): # se è cambiato il ruolo
+			self.dipendente.setAutorizzazione(Ruolo.enumFromStr(self.comboBoxRuolo.currentText()))
+			self.ruoloModificato.emit(self.dipendente)
+
 		turno = 'Mattina' if self.dipendente.getTurno() == True else 'Pomeriggio'
 		if turno != self.comboBoxTurno.currentText():
 			self.dipendente.setTurno(True if self.comboBoxTurno.currentText() == 'Mattina' else False)
-			self.turnoModificato.emit(self.dipendente, self.dipendente.getTurno()) # emetto il segnale passando il nuovo turno del dipendente
+			self.turnoModificato.emit(self.dipendente) # emetto il segnale passando il nuovo turno del dipendente
 
 		if stipendio != str(self.dipendente.getStipendio()): # se lo stipendio è stato cambiato manualmente
 			self.dipendente.setStipendio(stipendio)
@@ -348,7 +353,7 @@ class VisualizzaDipendenteUI(FormUI):
 			del dipendenti[self.dipendente.getId()]
 			paths = GestoreFile.leggiJson(Path('paths.json'))
 			GestoreFile.salvaPickle(dipendenti, Path(paths['dipendenti']))
-			self.dipendenteEliminato.emit()
+			self.dipendenteEliminato.emit(self.dipendente)
 			self._showMessage('Dipendente eliminato dal sistema!', QMessageBox.Icon.Information)
 			self.close()
 	

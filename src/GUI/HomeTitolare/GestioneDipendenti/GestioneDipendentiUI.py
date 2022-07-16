@@ -11,7 +11,7 @@ from src.Attori.Ruolo import Ruolo
 from src.GUI.HomeTitolare.GestioneDipendenti.InserisciDipendenteUI import InserisciDipendenteUI
 from src.GUI.HomeTitolare.GestioneDipendenti.VisualizzaDipendenteUI import VisualizzaDipendenteUI
 from src.Gestori.GestoreFile import GestoreFile
-from src.Utilities.customQtClasses import MyTableWidget, MyTableWidgetItem
+from src.Utilities.customQtClasses import MyTableWidget, MyTableWidgetItem, MyTreeWidgetItem
 
 
 class GestioneDipendentiUI(QTabWidget):
@@ -44,18 +44,6 @@ class GestioneDipendentiUI(QTabWidget):
 		self.msg = QMessageBox() # per futuri messaggi
 
 
-	def _readDipendenti(self) -> dict:
-		paths = GestoreFile.leggiJson(Path('paths.json'))
-		try:
-			dipendenti = GestoreFile.leggiDictPickle(Path(paths['dipendenti']))
-		except TypeError:
-			self._showMessage(f"{Path(paths['dipendenti']).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
-								QMessageBox.Icon.Critical, 'Errore critico')
-			self.close()
-			raise
-		
-		return dipendenti
-
 	def _setUpTabDipendenti(self):
 		self._fillTreeWidgetDipendenti() # riempita la tree widget con i dipendenti in memoria
 		self.treeWidgetDipendenti.itemDoubleClicked.connect(self._visualizzaDipendente) # al doppio click di un item della tree widget, viene mostrato l'account del dipendente corrispondente
@@ -74,13 +62,18 @@ class GestioneDipendentiUI(QTabWidget):
 		self.tableReceptionist.lastRowNotEmpty.connect(lambda: self.btnPlusReceptionist.setEnabled(True))
 		self.tableCamerieri.lastRowNotEmpty.connect(lambda: self.btnPlusCamerieri.setEnabled(True))
 
+		# col doppio click su un item, si visualizza il dipendente corrispondente
+		self.tableReceptionist.itemDoubleClicked.connect(self._visualizzaDipendente)
+		self.tableCamerieri.itemDoubleClicked.connect(self._visualizzaDipendente)
+
 	
 	def _fillTreeWidgetDipendenti(self):
 		dipendenti = self._readDipendenti()
 
 		for dipendente in dipendenti.values():
-			self.treeWidgetDipendenti.addTopLevelItem(QTreeWidgetItem([f"{dipendente.getId()}" , dipendente.getCognome(), 
-													  dipendente.getNome()], 0))
+			self.treeWidgetDipendenti.addTopLevelItem(MyTreeWidgetItem(self.treeWidgetDipendenti,
+													  				   [str(dipendente.getId()) , dipendente.getCognome(), dipendente.getNome()],
+																	   dipendente))
 
 		self.treeWidgetDipendenti.sortItems(1, QtCore.Qt.SortOrder.AscendingOrder) # cognomi in ordine alfabetico
 
@@ -167,69 +160,87 @@ class GestioneDipendentiUI(QTabWidget):
 				button.setEnabled(True)
 
 	
-	def _visualizzaDipendente(self, itemClicked : QTreeWidgetItem):
+	def _visualizzaDipendente(self, itemClicked : MyTreeWidgetItem):
 		
-		id = itemClicked.text(0) # prendo l'id del dipendente slezionato
-		dipendenti = self._readDipendenti()
-		self.widgetVisualizzaDipendente = VisualizzaDipendenteUI(dipendenti[int(id)], self)
-		self.addTab(self.widgetVisualizzaDipendente, f"Visualizza ID {dipendenti[int(id)].getId()}")
-		index = self.count() - 1
-		self.setCurrentIndex(index)
+		dipendente = itemClicked.connectedObject
+		if not isinstance(dipendente, Dipendente):
+			raise Exception # dipendente è sicuramente della classe Dipendente
 		
-		def func():
-			self.treeWidgetDipendenti.takeTopLevelItem(
-				self.treeWidgetDipendenti.indexOfTopLevelItem(self.treeWidgetDipendenti.currentItem())
-			) # rimuove dal tree widget dei dipendenti la riga del dipendente eliminato
-			self.removeTab(index) # chiude la tab che visualizzava il dipendente eliminato
+		# se già esiste aperta una tab con la visualizzazione di quel dipendente, mi ci sposto senza crearne una nuova
+		for i in range(2, self.count()):
+			widget = self.widget(i)
+			if isinstance(widget, VisualizzaDipendenteUI) and widget.dipendente == dipendente:
+				self.setCurrentIndex(i)
+				return
+
+		self.widgetVisualizzaDipendente = VisualizzaDipendenteUI(dipendente, self)
+		self.addTab(self.widgetVisualizzaDipendente, f"Visualizza ID {dipendente.getId()}")
+		self.setCurrentIndex(self.count() - 1) # mi sposto sulla tab appena creata
 		
-		self.widgetVisualizzaDipendente.dipendenteEliminato.connect(func)
-		self.widgetVisualizzaDipendente.turnoModificato.connect(self._aggiornaTableTurni)
-		
-		def aggiornaTurno(mainWidget : VisualizzaDipendenteUI, dipendente : Dipendente):
-				mainWidget.dipendente.setTurno(dipendente.getTurno())
-				mainWidget.lineEditTurno.setText('Mattina' if dipendente.getTurno() == True else 'Pomeriggio')
-				mainWidget.comboBoxTurno.setCurrentText('Mattina' if dipendente.getTurno() == True else 'Pomeriggio')
-		
-		self.turnoModificato.connect(lambda dipendente: 
-											aggiornaTurno(self.widgetVisualizzaDipendente, dipendente) 
-											if dipendente.isTheSame(self.widgetVisualizzaDipendente.dipendente)
-											else None)
+		self.widgetVisualizzaDipendente.dipendenteEliminato.connect(self._onDipendenteEliminato)
+		self.widgetVisualizzaDipendente.ruoloModificato.connect(self._onRuoloModificato)
+		self.widgetVisualizzaDipendente.turnoModificato.connect(self._onTurnoModificato)
+	
+
+	def _onDipendenteEliminato(self, dipendente : Dipendente):
+		self.treeWidgetDipendenti.takeTopLevelItem(
+			self.treeWidgetDipendenti.indexOfTopLevelItem(self.treeWidgetDipendenti.currentItem())
+		) # rimuove dal tree widget dei dipendenti la riga del dipendente eliminato
+		# rimuovo il dipendente dal tab widget dei turni in cui si trova
+		if dipendente.getAutorizzazione() == Ruolo.RECEPTIONIST:
+			self.tableReceptionist.removeItem(self.tableReceptionist.findItem(dipendente)) # type: ignore
+		elif dipendente.getAutorizzazione() == Ruolo.CAMERIERE:
+			self.tableCamerieri.removeItem(self.tableCamerieri.findItem(dipendente)) # type: ignore
+		self.removeTab(self.currentIndex()) # chiude la tab che visualizzava il dipendente eliminato
 
 
-	def _aggiornaTableTurni(self, dipendente : Dipendente, nuovoTurno : bool):
+	def _onRuoloModificato(self, dipendente : Dipendente):
+		oldTable = self.tableCamerieri if dipendente.getAutorizzazione() == Ruolo.RECEPTIONIST else self.tableReceptionist
+		newTable = self.tableReceptionist if dipendente.getAutorizzazione() == Ruolo.RECEPTIONIST else self.tableCamerieri
+
+		oldTable.removeItem(oldTable.findItem(dipendente)) # type: ignore
+		
+		column = 0 if dipendente.getTurno() == True else 1
 		text = f'{dipendente.getCognome()}({dipendente.getId()})'
-		table = QTableWidget()
+		newTable.addItem(column, MyTableWidgetItem(text, dipendente))
+
+
+	def _onTurnoModificato(self, dipendente : Dipendente):
+		table = MyTableWidget()
 		if dipendente.getAutorizzazione() == Ruolo.RECEPTIONIST:
 			table = self.tableReceptionist
 		elif dipendente.getAutorizzazione() == Ruolo.CAMERIERE:
 			table = self.tableCamerieri
 		
-		item = table.findItems(text, QtCore.Qt.MatchFlag.MatchExactly)[0]
-		oldItemRow = item.row()
-		column = 1 - item.column() # salvo l'indice della colonna in cui inserire item, cioè quella in cui non si trova attualmente
-		row = table.firstEmptyRow(column) # cerco l'indice della riga in cui inserire item
-		if row == table.rowCount():
-			table.insertRow(table.rowCount())
-			table.setVerticalHeaderLabels([''] * table.rowCount())
+		item = table.findItem(dipendente)
+		if not isinstance(item, MyTableWidgetItem):
+			raise Exception(f'item found of type {type(item)} instead of MyTableWidgetItem')
 		
-		table.takeItem(item.row(), item.column())
-		table.setItem(row, column, item)
-
-		table.shiftColumnUp(oldItemRow + 1, 1 - item.column())
-		# se l'ultima riga rimane completamente vuota viene eliminata
-		while table.item(table.rowCount() - 1, 0) == None and table.item(table.rowCount() - 1, 1) == None:
-			table.removeRow(table.rowCount() - 1)
+		oldItemColumn = item.column()
+		table.removeItem(item)
+		table.addItem(1 - oldItemColumn, item) # type: ignore
 
 	
 	def _btnNuovoDipendenteClicked(self):
-		def addSortedItem(dipendente : Dipendente):				# diminuisco l'id di 1 perche il dipendente passato a questa funzione è stato creato subito dopo la creazione della sua 'copia' 
-			self.treeWidgetDipendenti.addTopLevelItem(QTreeWidgetItem([f"{dipendente.getId() - 1}", dipendente.getCognome(), # che è stata salvata sul file dipendenti.pickle
-													  dipendente.getNome()], 0))
+		def onDipendenteAggiunto(dipendente : Dipendente):
+			# aggiungo il dipendente al tree widget con la lista di dipendenti
+			self.treeWidgetDipendenti.addTopLevelItem(MyTreeWidgetItem(self.treeWidgetDipendenti,
+																		[f"{dipendente.getId()}", dipendente.getCognome(), dipendente.getNome()],
+																		dipendente))
 			self.treeWidgetDipendenti.sortItems(1, QtCore.Qt.SortOrder.AscendingOrder) # cognomi in ordine alfabetico
+			
+			# aggiungo il dipendente alla tabella dei turni
+			column = 0 if dipendente.getTurno() == True else 1 # indice di colonna 0 se turno di mattina, altrimenti indice 1
+			text = f'{dipendente.getCognome()}({dipendente.getId()})'
+			
+			if dipendente.getAutorizzazione() == Ruolo.RECEPTIONIST:
+				self.tableReceptionist.addItem(column, MyTableWidgetItem(text, dipendente))
+			elif dipendente.getAutorizzazione() == Ruolo.CAMERIERE:
+				self.tableCamerieri.addItem(column, MyTableWidgetItem(text, dipendente))
 		
 		self.widgetInserisciDipendente = InserisciDipendenteUI(self)
 		self.widgetInserisciDipendente.show()
-		self.widgetInserisciDipendente.dipendenteAggiunto.connect(addSortedItem)
+		self.widgetInserisciDipendente.dipendenteAggiunto.connect(onDipendenteAggiunto)
 
 	
 	def _scambiaTurni(self):
@@ -302,12 +313,23 @@ class GestioneDipendentiUI(QTabWidget):
 		self.close()
 	
 	
+	def _readDipendenti(self) -> dict:
+		paths = GestoreFile.leggiJson(Path('paths.json'))
+		try:
+			dipendenti = GestoreFile.leggiDictPickle(Path(paths['dipendenti']))
+		except TypeError:
+			self._showMessage(f"{Path(paths['dipendenti']).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
+								QMessageBox.Icon.Critical, 'Errore critico')
+			self.close()
+			raise
+		return dipendenti
+	
+	
 	def _showMessage(self, text : str, icon : QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle : str = 'Messaggio'):
 		self.msg.setWindowTitle(windowTitle)
 		self.msg.setIcon(icon)
 		self.msg.setText(text)
 		self.msg.show()
-
 
 
 

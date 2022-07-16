@@ -30,6 +30,7 @@ class MyTableWidget(QTableWidget):
 	def __init__(self, parent : QWidget = None): # type: ignore
 		super().__init__(parent)
 		self.itemChanged.connect(self._analyzeItemChangment)
+		self.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
 
 
 	def firstEmptyRow(self, column : int) -> int:
@@ -43,13 +44,14 @@ class MyTableWidget(QTableWidget):
 
 
 	def _analyzeItemChangment(self, item : QTableWidgetItem):
+		"""Slot to connect to the signal itemChanged of this table widget."""
 		if item.row() == self.rowCount() - 1: # se l'item modificato si trova all'ultima riga
 			lastRowEmpty = True
 			for i in range(0, self.columnCount()):
 				if self.item(item.row(), i) != None:
 					lastRowEmpty = False
 			
-			if not lastRowEmpty: # se c'e almeno 1 cella noon vuota nell'ultima riga
+			if not lastRowEmpty: # se c'e almeno 1 cella non vuota nell'ultima riga
 				self.lastRowNotEmpty.emit()
 	
 
@@ -88,6 +90,40 @@ class MyTableWidget(QTableWidget):
 			itemA.setSelected(False) # deseleziono le celle scambiate
 			itemB.setSelected(False)
 		
+		self.clearEmptyBottom()
+	
+
+	def findItem(self, connectedObject : object) -> Union[MyTableWidgetItem, None]:
+		i = 0
+		while i < self.columnCount():
+			j = 0
+			while j < self.rowCount():
+				item = self.item(j, i)
+				if isinstance(item, MyTableWidgetItem):
+					if connectedObject == item.connectedObject:
+						return item
+				j += 1
+			i += 1
+		return None
+	
+
+	def addItem(self, column : int, item : MyTableWidgetItem):
+		"""Adds item at the bottom of the specified column of this table widget"""
+		row = self.firstEmptyRow(column) # cerco l'indice della riga in cui inserire item
+		if row == self.rowCount():
+			self.insertRow(self.rowCount())
+			self.setVerticalHeaderLabels([''] * self.rowCount())
+
+		self.setItem(row, column, item)
+
+	
+	def removeItem(self, item : MyTableWidgetItem):
+		"""Removes the item from this table widget"""
+		oldItemRow = item.row() # fisso riga e colonna dell'item perchè dopo la sua rimozione dal table widgeti metodi row() e column()
+		oldItemColumn = item.column() # restituiranno -1
+		
+		self.takeItem(item.row(), item.column())
+		self.shiftColumnUp(oldItemRow + 1, oldItemColumn)
 		self.clearEmptyBottom()
 
 

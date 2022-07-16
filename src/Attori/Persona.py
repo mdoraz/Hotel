@@ -72,10 +72,10 @@ class Persona(Contattabile):
         return ultimoId + 1
 
     
-    def isTheSame(self, other : Persona):
-        return (self._nome == other.getNome() and self._cognome == other.getCognome() and 
-                self._dataNascita == other.getDataNascita() and self._luogoNascita == other.getLuogoNascita())
-
-
     def __str__(self):
         return f"ID: {self._id} - {self._nome} {self._cognome}, nato il {self._dataNascita} a {self._luogoNascita}"
+    
+    
+    def __eq__(self, other : Persona):
+        return (self._nome == other.getNome() and self._cognome == other.getCognome() and 
+                self._dataNascita == other.getDataNascita() and self._luogoNascita == other.getLuogoNascita())
