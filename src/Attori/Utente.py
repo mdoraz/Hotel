@@ -1,9 +1,9 @@
 class Utente:
     
     def __init__(self, username : str, password : str, **kwargs):
+        super().__init__(**kwargs)
         self._username = username
         self._password = password
-        super().__init__(**kwargs)
 
     def getPassword(self) -> str:
         return self._password

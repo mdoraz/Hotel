@@ -51,7 +51,7 @@ class GestoreFile:
         try:
             mylist = GestoreFile.leggiPickle(pathFile)
         except FileNotFoundError:
-            mylist = {}
+            mylist = []
         
         if not isinstance(mylist, list):
             raise TypeError(f"{pathFile.name} has been corrupted and can't be restored.\nTo fix the issue, delete it.")

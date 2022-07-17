@@ -13,6 +13,7 @@ from src.Utilities.exceptions import ArgumentTypeError, AssignmentError, Corrupt
 class Bici(Prenotabile, Assegnabile):
     
     def __init__(self, numero : int, tipo : bool):
+        super().__init__()
         self._numero = numero
         self._tipo = tipo
         self._orariPrenotati = []
@@ -57,38 +58,45 @@ class Bici(Prenotabile, Assegnabile):
         while i < len(self._orariPrenotati) and orario > self._orariPrenotati[i]:
             i += 1
         self._orariPrenotati.insert(i, orario)
-        
-        self._salvaSuFile(chiaveFileInPathsJson = 'bici', oggettoConNumero = self) # salvo le modifiche apportate a questa bici
 
+        # salvo le modifiche apportate a questa bici
+        biciclette = self._readDict('bici')
+        biciclette[self._numero] = self
+        GestoreFile.salvaPickle(biciclette, Path(paths['bici']))
+        
         # creo la prenotazione della bici e la aggiungo a quelle associate alla vacanza
         prenotazione = NoleggioBici(self, camera, orario, Stato.PRENOTATO)
         camera.getVacanzaAttuale().aggiungiPrenotazioneBici(prenotazione) # type: ignore
 
-        self._salvaSuFile(chiaveFileInPathsJson = 'camere', oggettoConNumero = camera) # salvo le modifiche apportate alla vacanza
-
+        # salvo le modifiche apportate alla vacanza
+        camere = self._readDict('camere')
+        camere[camera.getNumero()] = camera
+        GestoreFile.salvaPickle(camere, Path(paths['camere']))
     
+
     def assegna(self, datiAssegnamento : dict):
-        """This method assigns this bike. datiAssegnamento must contain the following keys: 'camera', 'prenotazione', 'biciclette', 'camere'.
-        The values types must be: Camera for 'camera', NoleggioBici (or None if there isn't a reservation) for 'prenotazione', dict for 'biciclette' and 'camere'."""
+        """This method assigns this bike. datiAssegnamento must contain the following keys: 'camera', 'prenotazione'.
+        The values types must be: Camera for 'camera', NoleggioBici (or None if there isn't a reservation) for 'prenotazione'."""
         
         if self._assegnato:
             raise AssignmentError('This bike is already assigned.')
 
-        if not isinstance(datiAssegnamento['biciclette'], dict) or not isinstance(datiAssegnamento['camere'], dict):
-            raise ArgumentTypeError("Some arguments don't have the correct type.")
+        camere = self._readDict('camere')
+        biciclette = self._readDict('bici')
 
         if datiAssegnamento['prenotazione'] == None:
             if not isinstance(datiAssegnamento['camera'], Camera):
                 raise ArgumentTypeError("The value of 'camera' key of datiAssegnamento is not of the Camera class.")
-            self._assegnaSenzaPrenotazione(datiAssegnamento['camera'], datiAssegnamento['camere'], datiAssegnamento['biciclette'])
+            self._assegnaSenzaPrenotazione(datiAssegnamento['camera'], camere, biciclette)
         
         elif isinstance(datiAssegnamento['prenotazione'], NoleggioBici):
-            self._assegnaConPrenotazione(datiAssegnamento['prenotazione'], datiAssegnamento['camere'], datiAssegnamento['biciclette'])
+            self._assegnaConPrenotazione(datiAssegnamento['prenotazione'], camere, biciclette)
         else:
             raise ArgumentTypeError("The value of 'prenotazione' key of datiAssegnamento is not of the NoleggioBici class.")
 
     
     def _assegnaConPrenotazione(self, prenotazione : NoleggioBici, camere : dict, biciclette : dict):
+        
         self._assegnato = True # questa bici diventa assegnata
         biciclette[self._numero] = self
         GestoreFile.salvaPickle(biciclette, Path(GestoreFile.leggiJson(Path('paths.json'))['bici'])) # salvo le modifiche apportate a questa bici
@@ -103,11 +111,12 @@ class Bici(Prenotabile, Assegnabile):
 
 
     def _assegnaSenzaPrenotazione(self, camera : Camera, camere : dict, biciclette : dict):
+        
         self._assegnato = True # questa bici diventa assegnata
         biciclette[self._numero] = self
         GestoreFile.salvaPickle(biciclette, Path(GestoreFile.leggiJson(Path('paths.json'))['bici'])) # salvo le modifiche apportate a questa bici
 
-        orario = datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour, datetime.now().minute + 1, 0) # orario arrotondato al minuto successivo
+        orario = datetime.now() + timedelta(minutes = 1)
         noleggio = NoleggioBici(self, camera, orario, Stato.IN_CORSO)
         camera.getVacanzaAttuale().aggiungiNoleggioBici(noleggio) # type: ignore
 
@@ -117,24 +126,25 @@ class Bici(Prenotabile, Assegnabile):
 
     def terminaAssegnamento(self):
         self._assegnato = False
-        self._salvaSuFile(chiaveFileInPathsJson = 'bici', oggettoConNumero = self) #salvo le modifiche apportate a questa bici
-
+        # salvo le modifiche apportate a questa bici
+        biciclette = self._readDict('bici')
+        biciclette[self._numero] = self
+        GestoreFile.salvaPickle(biciclette, Path(paths['bici']))
+        
         self._terminaNoleggioInCorso() # cerco il noleggio in corso associato a questa bici e lo imposto come concluso
 
     
     def _terminaNoleggioInCorso(self):
-        paths = GestoreFile.leggiJson(Path('paths.json'))
-        camere = GestoreFile.leggiDictPickle(Path(paths['camere']))
-        if not isinstance(camere, dict):
-            raise CorruptedFileError(f"{Path(paths['camere']).name} has been corrupted. To fix the issue, delete it.")
+        camere = self._readDict('camere')
+
         for camera in camere.values():
-            for noleggio in camera.getVacanzaAttuale().getNoleggiBici():
-                
-                if noleggio.getStato() == Stato.IN_CORSO and noleggio.getBici().getNumero() == self._numero:
-                    noleggio.setStato(Stato.CONCLUSO)
-                    maxDurataNoleggio = timedelta(hours = 2)
-                    if datetime.now() - noleggio.getOrario() > maxDurataNoleggio: # se è stata riconsegnata la bici in ritardo
-                        GestoreTransazioni.prelevaMultaBici(camera.getVacanzaAttuale().getNumeroCarta())
+            if camera.isAssegnato():
+                for noleggio in camera.getVacanzaAttuale().getNoleggiBici():
+                    if noleggio.isInCorso() and noleggio.getBici().getNumero() == self._numero:
+                        noleggio.setStato(Stato.CONCLUSO)
+                        maxDurataNoleggio = timedelta(hours = 2)
+                        if datetime.now() - noleggio.getOrario() > maxDurataNoleggio: # se è stata riconsegnata la bici in ritardo
+                            GestoreTransazioni.prelevaMultaBici(camera.getVacanzaAttuale().getNumeroCarta())
         
         GestoreFile.salvaPickle(camere, Path(paths['camere']))
 
@@ -152,13 +162,14 @@ class Bici(Prenotabile, Assegnabile):
         return disponibile
 
 
-    def _salvaSuFile(self, chiaveFileInPathsJson, oggettoConNumero):
+    def _readDict(self, pathsKey : str) -> dict:
+        global paths
         paths = GestoreFile.leggiJson(Path('paths.json'))
-        biciclette = GestoreFile.leggiDictPickle(Path(paths[chiaveFileInPathsJson]))
-        if not isinstance(biciclette, dict):
-            raise CorruptedFileError(f'{Path(paths["bici"]).name} has been corrupted. To fix the issue, delete it.')
-        biciclette[oggettoConNumero._numero] = oggettoConNumero
-        GestoreFile.salvaPickle(biciclette, Path(paths[chiaveFileInPathsJson]))
+        try:
+            dictionary = GestoreFile.leggiDictPickle(Path(paths[pathsKey]))
+        except CorruptedFileError:
+            raise
+        return dictionary
 
 
     def __str__(self):

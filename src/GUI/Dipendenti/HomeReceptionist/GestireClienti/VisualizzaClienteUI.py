@@ -166,7 +166,7 @@ class VisualizzaClienteUI(FormUI):
 		try:
 			dictionary = GestoreFile.leggiDictPickle(Path(paths[pathsKey]))
 		except TypeError:
-			self._showMessage(f"{Path(paths[pathsKey]).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
+			self._showMessage(f"{Path(paths[pathsKey]).name} è stato corrotto irreversibilmente. Per risolvere il problema, eliminalo.",
 								 QMessageBox.Icon.Critical, 'Errore')
 			self.close()
 			raise

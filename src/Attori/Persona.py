@@ -77,5 +77,8 @@ class Persona(Contattabile):
     
     
     def __eq__(self, other : Persona):
+        if not isinstance(other, Persona):
+            return False
+        
         return (self._nome == other.getNome() and self._cognome == other.getCognome() and 
                 self._dataNascita == other.getDataNascita() and self._luogoNascita == other.getLuogoNascita())

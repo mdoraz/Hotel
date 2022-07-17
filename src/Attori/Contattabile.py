@@ -1,9 +1,9 @@
 class Contattabile:
     
     def __init__(self, email : str, cellulare : str, **kwargs):
+        super().__init__(**kwargs)
         self._email = email
         self._cellulare = cellulare
-        super().__init__(**kwargs)
 
     def getCellulare(self) -> str:
         return self._cellulare

@@ -647,7 +647,7 @@ class HomeGestioneVacanzeUI(QTabWidget):
 		try:
 			dictionary = GestoreFile.leggiDictPickle(Path(paths[pathsKey]))
 		except CorruptedFileError: # se camere non e' un dizionario
-			self._showMessage(f"{Path(paths[pathsKey])} has been corrupted. To fix the issue, delete it.", QMessageBox.Icon.Warning, 'Errore')
+			self._showMessage(f"{Path(paths[pathsKey]).name} è stato corrotto irreversibilmente. Per risolvere il problema, eliminalo.", QMessageBox.Icon.Critical, 'Errore')
 			self.close()
 			raise
 		return dictionary

@@ -3,6 +3,7 @@ from abc import ABCMeta, abstractmethod
 class Assegnabile(metaclass = ABCMeta):
 
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self._assegnato = False
 
     @abstractmethod

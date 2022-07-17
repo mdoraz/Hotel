@@ -6,13 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1191</width>
-    <height>622</height>
+    <width>906</width>
+    <height>646</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>880</width>
+    <height>600</height>
+   </size>
   </property>
   <property name="font">
    <font>
     <family>Arial</family>
+    <pointsize>10</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -23,8 +36,20 @@
     <string>Home Noleggio Bici</string>
    </attribute>
    <layout class="QGridLayout" name="gridLayout">
+    <property name="leftMargin">
+     <number>11</number>
+    </property>
+    <property name="topMargin">
+     <number>11</number>
+    </property>
+    <property name="rightMargin">
+     <number>11</number>
+    </property>
+    <property name="bottomMargin">
+     <number>11</number>
+    </property>
     <item row="1" column="0">
-     <widget class="QPushButton" name="btnTornareHomeReceptionist">
+     <widget class="QPushButton" name="btnIndietro">
       <property name="text">
        <string>Tornare alla home Receptionist</string>
       </property>
@@ -45,8 +70,14 @@
     </item>
     <item row="0" column="0" colspan="3">
      <widget class="QTabWidget" name="tabwidgetScelteHomeNoleggioBici">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tabPrenotaBici">
        <attribute name="title">
@@ -113,8 +144,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>1067</width>
-                <height>514</height>
+                <width>803</width>
+                <height>535</height>
                </rect>
               </property>
               <layout class="QGridLayout" name="gridLayout_3">
@@ -768,38 +799,26 @@
        <attribute name="title">
         <string>Assegna Bici</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_9">
-        <item row="3" column="0">
-         <widget class="QPushButton" name="btnNo">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-          <property name="minimumSize">
+          <property name="sizeHint" stdset="0">
            <size>
-            <width>0</width>
-            <height>150</height>
+            <width>20</width>
+            <height>40</height>
            </size>
           </property>
-          <property name="font">
-           <font>
-            <family>Arial</family>
-            <pointsize>18</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>No , assegna senza precedente prenotazione </string>
-          </property>
-         </widget>
+         </spacer>
         </item>
-        <item row="1" column="0" colspan="2">
+        <item>
          <widget class="QLabel" name="labelDomandaAssegnaBiciPrenotataONo">
           <property name="font">
            <font>
             <family>Arial</family>
-            <pointsize>18</pointsize>
+            <pointsize>12</pointsize>
            </font>
           </property>
           <property name="text">
@@ -810,34 +829,122 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
-         <widget class="QPushButton" name="btnSi">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>150</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <family>Arial</family>
-            <pointsize>18</pointsize>
-           </font>
-          </property>
-          <property name="text">
-           <string>Si ,  assegna bici già prenotate</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0" colspan="2">
-         <spacer name="horizontalSpacer_6">
+        <item>
+         <spacer name="verticalSpacer_3">
           <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>40</width>
-            <height>20</height>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QWidget" name="widget" native="true">
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <spacer name="horizontalSpacer_9">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnNo">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>No,
+assegna senza precedente prenotazione </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>93</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnSi">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>10</pointsize>
+              </font>
+             </property>
+             <property name="text">
+              <string>Si,
+assegna bici già prenotate</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_10">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
            </size>
           </property>
          </spacer>
@@ -848,22 +955,86 @@
        <attribute name="title">
         <string>Riconsegna Bici</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_7">
-        <item row="0" column="0">
-         <widget class="QLabel" name="labelcameraAssociataNoleggio">
-          <property name="text">
-           <string>Innanzitutto inseriamo la camera del cliente  associata al noleggio della bici:</string>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QWidget" name="widgetCameraRiconsegnaBici" native="true">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <property name="topMargin">
+            <number>3</number>
+           </property>
+           <property name="bottomMargin">
+            <number>3</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="labelcameraAssociataNoleggio">
+             <property name="text">
+              <string>Innanzitutto inseriamo il numero di camera associata ai noleggi de concludere:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Fixed</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>10</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QComboBox" name="comboboxCamereRiconsegnaBici">
+             <property name="maxVisibleItems">
+              <number>20</number>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>270</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnRicercaNoleggi">
+             <property name="text">
+              <string>Ricerca noleggi</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
-        <item row="2" column="0" colspan="2">
-         <widget class="QGroupBox" name="groupboxSchedaNoleggioInCorsoCameraRicercata">
+        <item>
+         <widget class="QGroupBox" name="groupboxNoleggiInCorso">
           <property name="title">
            <string>Scheda noleggi in corso della camera ricercata:</string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_2">
            <item>
-            <widget class="QTreeWidget" name="treewidgetBiciNoleggiateInCorso">
+            <widget class="QTreeWidget" name="treewidgetRiconsegnaBici">
+             <property name="frameShape">
+              <enum>QFrame::Panel</enum>
+             </property>
              <property name="selectionMode">
               <enum>QAbstractItemView::MultiSelection</enum>
              </property>
@@ -877,239 +1048,41 @@
                <string>Tipo</string>
               </property>
              </column>
-             <item>
-              <property name="text">
-               <string>Bici</string>
-              </property>
-              <property name="text">
-               <string>UomoSenzaSeggiolino/DonnaConSeggiolino</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Bici</string>
-              </property>
-              <property name="text">
-               <string>UomoSenzaSeggiolino/DonnaConSeggiolino</string>
-              </property>
-             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QWidget" name="widget_2" native="true">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <spacer name="horizontalSpacer_12">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>671</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnTerminaNoleggi">
+                <property name="text">
+                 <string>Termina noleggi</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <spacer name="horizontalSpacer_8">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="1">
-         <widget class="QComboBox" name="comboboxInserireNumeroCameraAssociataNoleggio">
-          <property name="maxVisibleItems">
-           <number>20</number>
-          </property>
-          <item>
-           <property name="text">
-            <string>1</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>2</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>3</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>4</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>5</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>6</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>7</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>8</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>9</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>10</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>11</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>12</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>13</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>14</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>15</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>16</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>17</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>18</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>19</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>20</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>21</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>22</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>23</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>24</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>25</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>26</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>27</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>28</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>29</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>30</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>31</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>32</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>33</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>34</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>35</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>36</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="btnRicercaNoleggiAssociati">
-          <property name="text">
-           <string>Ricerca Noleggi associati</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <widget class="QPushButton" name="btnConfermaTerminareNoleggio">
-          <property name="text">
-           <string>Conferma terminare Noleggio</string>
-          </property>
          </widget>
         </item>
        </layout>

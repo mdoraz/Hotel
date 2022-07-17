@@ -4,78 +4,91 @@ from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
-from src.Servizi.Bici import Bici
+from src.GestioneVacanza.Stato import Stato
 from src.Gestori.GestoreFile import GestoreFile
+from src.Servizi.Bici import Bici
+from src.Servizi.Camera import Camera
 from src.Utilities.customQtClasses import MyTreeWidgetItem
 from src.Utilities.exceptions import CorruptedFileError
 
 
-class AssegnaBiciSenzaPrenotazioneUI(QWidget):
+class RiconsegnaBiciUI(QWidget):
 
 	btnIndietroClicked = QtCore.pyqtSignal()
-	
-	def __init__(self, previous: QWidget):
+	biciRiconsegnate = QtCore.pyqtSignal(list)
+
+	def __init__(self, previous : QWidget):
 		super().__init__()
-		
-		loadUi(GestoreFile.absolutePath('AssegnaBiciSenzaPrenotazione.ui', Path.cwd()), self)
+
+		loadUi(GestoreFile.absolutePath('RiconsegnaBici.ui', Path.cwd()), self)
 
 		self.previous = previous
 
-		self._fillTreewidgetBici()
+		self.groupbox.hide()
 		self._fillComboboxCamere()
 		self._connectButtons()
 
 		self.msg = QMessageBox()
 
 
-	def _fillTreewidgetBici(self):
-		#global biciclette
-		biciclette = self._readDict('bici')
-		
-		for bicicletta in biciclette.values():
-			if not bicicletta.isAssegnato(): # aggiungo al tree widget solo le biciclette attualmente non assegnate
-				self.treewidget.addTopLevelItem(MyTreeWidgetItem(self.treewidget,
-																 [str(bicicletta.getNumero()), 'Donna' if bicicletta.getTipo() == True else 'Uomo'],
-																 bicicletta))
-
-	
 	def _fillComboboxCamere(self):
-		#global camere
 		camere = self._readDict('camere')
 
 		for camera in camere.values():
 			if camera.isAssegnato(): # aggiungo alla combo box solo i numeri delle camere assegnate
 				self.combobox.addItem(str(camera.getNumero()))
-
+	
 
 	def _connectButtons(self):
-		self.btnAssegna.clicked.connect(self._btnAssegnaClicked)
+		self.btnRicercaNoleggi.clicked.connect(self._btnRicercaNoleggiClicked)
+		self.btnTerminaNoleggi.clicked.connect(self._btnTerminaNoleggiClicked)
 		self.btnIndietro.clicked.connect(self._btnIndietroClicked)
-
-
-	def _btnAssegnaClicked(self):
-		if len(self.treewidget.selectedItems()) == 0:
-			self._showMessage('Selezionare almeno una bici da assegnare.', QMessageBox.Icon.Warning, 'Errore')
-			return
-
-		camere = self._readDict('camere')
-		biciclette = self._readDict('bici')
+	
+	
+	def _btnRicercaNoleggiClicked(self):
 		numeroCamera = int(self.combobox.currentText())
-		datiAssegnamento = {
-			'camera' : camere[numeroCamera],
-			'prenotazione' : None,
-			'biciclette' : biciclette,
-			'camere' : camere
-		}
-		for item in self.treewidget.selectedItems():
-			bici = item.connectedObject
-			bici.assegna(datiAssegnamento)
-			self._rimuoviBici(bici) # rimuovo la bici dal tree widget poichè non è più assegnabile
+		camere = self._readDict('camere')
+		camera : Camera = camere[numeroCamera]
+
+		self.treewidget.clear()
+		for noleggio in camera.getVacanzaAttuale().getNoleggiBici(): # type: ignore
+			if noleggio.isInCorso():
+				bici = noleggio.getBici()
+				self.treewidget.addTopLevelItem(MyTreeWidgetItem(self.treewidget,
+																 [str(bici.getNumero()), 'Donna' if bici.getTipo() == True else 'Uomo'],
+																 bici))
 		
-		self._showMessage('Biciclette assegnate con successo!', QMessageBox.Icon.Information)
+		if self.treewidget.topLevelItemCount() == 0: # se non ci sono noleggi in corso per la camera inserita
+			self._showMessage(f'Non ci sono noleggi in corso per la camera {camera.getNumero()}.', QMessageBox.Icon.Warning, 'Errore')
+			return
+		
+		if self.groupbox.isHidden():
+			self.groupbox.show()
 
 	
-	def aggiungiBici(self, bici : list[Bici]): # inserimento ordinato di una bici nel tree widget
+	def _btnTerminaNoleggiClicked(self):
+		if len(self.treewidget.selectedItems()) == 0:
+			self._showMessage('Selezionare almeno una bici da riconsegnare', QMessageBox.Icon.Warning, 'Errore')
+			return
+
+		biciRiconsegnate = []
+		for item in self.treewidget.selectedItems():
+			bici : Bici = item.connectedObject
+			try:
+				bici.terminaAssegnamento()
+			except CorruptedFileError:
+				self._showMessage(f"{Path(paths['camere']).name} è stato corrotto irreversibilmente. Per risolvere il problema, eliminalo.", QMessageBox.Icon.Critical, 'Errore')
+				return
+			self._rimuoviBici(bici) # rimuovo la bici dal tree widget poichè è stata riconsegnata
+			biciRiconsegnate.append(bici)
+
+		self._showMessage('Biciclette riconsegnate nuovamente disponibili!', QMessageBox.Icon.Information)
+		self.groupbox.hide()
+		self.biciRiconsegnate.emit(biciRiconsegnate)
+
+
+	
+	def aggiungiBici(self, bici : list[Bici]):
 		# rimuovo dal tree widget gli item e metto le ripsettive bici nella lista 'bici'
 		while self.treewidget.topLevelItemCount() > 0:
 			bici.append(self.treewidget.takeTopLevelItem(0).connectedObject)
@@ -87,7 +100,7 @@ class AssegnaBiciSenzaPrenotazioneUI(QWidget):
 			self.treewidget.addTopLevelItem(MyTreeWidgetItem(self.treewidget,
 													   		   [str(bicicletta.getNumero()), 'Donna' if bicicletta.getTipo() == True else 'Uomo'], 
 													   		   bicicletta))
-	
+
 	def _rimuoviBici(self, bici : Bici):
 		i = 0
 		while i < self.treewidget.topLevelItemCount():
@@ -96,13 +109,13 @@ class AssegnaBiciSenzaPrenotazioneUI(QWidget):
 				self.treewidget.takeTopLevelItem(i)
 				return
 			i += 1
-
+	
 
 	def _btnIndietroClicked(self):
 		self.btnIndietroClicked.emit()
 		self.close()
 		self.previous.show()
-	
+
 	
 	def _readDict(self, pathsKey : str) -> dict:
 		global paths
@@ -114,7 +127,7 @@ class AssegnaBiciSenzaPrenotazioneUI(QWidget):
 			self.close()
 			raise
 		return dictionary
-
+	
 
 	def _showMessage(self, text: str, icon: QMessageBox.Icon = QMessageBox.Icon.NoIcon, windowTitle: str = 'Messaggio'):
 		self.msg.setWindowTitle(windowTitle)

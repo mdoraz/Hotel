@@ -76,3 +76,4 @@ class Vacanza(PrenotazioneVacanza):
 
     def setClienti(self, clienti : list[Persona]):
         self._clienti = clienti
+    

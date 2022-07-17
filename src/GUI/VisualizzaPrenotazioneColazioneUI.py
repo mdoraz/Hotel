@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
 from src.Gestori.GestoreFile import GestoreFile
+from src.Servizi.Camera import Camera
 from src.Utilities.exceptions import CorruptedFileError
 
 
@@ -87,7 +88,7 @@ class VisualizzaPrenotazioneColazioneUI(QWidget):
         self.previous.show()
 
   
-    def _readCamere(self):
+    def _readCamere(self) -> dict:
         global paths
         paths = GestoreFile.leggiJson(Path('paths.json'))
         try:
