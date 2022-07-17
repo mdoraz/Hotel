@@ -1,6 +1,8 @@
 import unittest
 from pathlib import Path
 from datetime import date
+from src.Attori.Dipendente import Dipendente
+from src.Attori.Persona import Persona
 
 from src.Attori.Ruolo import Ruolo
 from src.Gestori.GestoreFile import GestoreFile
@@ -11,15 +13,23 @@ from src.Utilities.exceptions import DuplicateError
 class TestGestorePersona(unittest.TestCase):
 
 	def setUp(self):
-		GestorePersona.aggiungiPersona(Path('files/clienti.pickle'), 'Rodrigo', 'Carlino', date(2001, 1, 1), 
-									   'Siviglia', 'rocarl@bu.com', '13342112')
-		self.clienti = GestoreFile.leggiDictPickle(Path('files/clienti.pickle'))
+		global paths
+		paths = GestoreFile.leggiJson(Path('paths.json'))
 
-		datiDipendente = {'IBAN' : '3203484020384020', 'turno' : True, 'ruolo' : Ruolo.CAMERIERE,
-						'username' : 'amicarl', 'password' : '123456'}
-		GestorePersona.aggiungiPersona(Path('files/dipendenti.pickle'), 'Amilcare', 'Carlino', date(2000, 10, 10), 
-									   'Siviglia', 'amicarl@bu.com', '2444224150', **datiDipendente)
-		self.dipendenti = GestoreFile.leggiDictPickle(Path('files/dipendenti.pickle'))
+		GestorePersona.aggiungiPersona(Path(paths['clienti']),   # aggiunto un cliente nel file di clienti
+									   'Rodrigo', 'Carlino', date(2001, 1, 1), 'Siviglia', 'rocarl@bu.com', '13342112')
+		self.clienti : dict[int, Persona] = GestoreFile.leggiDictPickle(Path(paths['clienti']))
+
+		datiDipendente = {
+			'IBAN' : '3203484020384020',
+			'turno' : True,
+			'ruolo' : Ruolo.CAMERIERE,
+			'username' : 'amicarl',
+			'password' : '123456'
+		}
+		GestorePersona.aggiungiPersona(Path(paths['dipendenti']),   # aggiunto un dipendente nel file di dipendenti
+									   'Amilcare', 'Carlino', date(2000, 10, 10), 'Siviglia', 'amicarl@bu.com', '2444224150', **datiDipendente)
+		self.dipendenti : dict[int, Dipendente] = GestoreFile.leggiDictPickle(Path(paths['dipendenti']))
 
 
 	def tearDown(self):
@@ -28,7 +38,7 @@ class TestGestorePersona(unittest.TestCase):
 			if cliente.getNome() == 'Rodrigo' and cliente.getCognome() == 'Carlino' and cliente.getDataNascita() == date(2001, 1, 1):
 				cliente1 = cliente
 		try:
-			GestorePersona.rimuoviPersona(Path('files/clienti.pickle'), cliente1) # type: ignore
+			GestorePersona.rimuoviPersona(Path(paths['clienti']), cliente1) # type: ignore
 		except KeyError: # per i tearDown effettuati dopo testRimozioneCliente
 			pass
 		
@@ -37,33 +47,17 @@ class TestGestorePersona(unittest.TestCase):
 			if dipendente.getNome() == 'Amilcare' and dipendente.getCognome() == 'Carlino' and dipendente.getDataNascita() == date(2000, 10, 10):
 				dipendente1 = dipendente
 		try:
-			GestorePersona.rimuoviPersona(Path('files/dipendenti.pickle'), dipendente1) # type: ignore
+			GestorePersona.rimuoviPersona(Path(paths['dipendenti']), dipendente1) # type: ignore
 		except KeyError: # per i tearDown effettuati dopo testRimozioneDipendente
 			pass
 
 
-	def testCliente1(self):
-		cliente1 = None
-		for cliente in self.clienti.values():
-			if cliente.getNome() == 'Rodrigo' and cliente.getCognome() == 'Carlino' and cliente.getDataNascita() == date(2001, 1, 1):
-				cliente1 = cliente
-		self.assertEqual(str(cliente1), f"ID: {cliente1.getId()} - Rodrigo Carlino, nato il 2001-01-01 a Siviglia") # type: ignore
-
-
-	def testDipendente1(self):
-		dipendente1 = None
-		for dipendente in self.dipendenti.values():
-			if dipendente.getNome() == 'Amilcare' and dipendente.getCognome() == 'Carlino' and dipendente.getDataNascita() == date(2000, 10, 10):
-				dipendente1 = dipendente
-		self.assertEqual(str(dipendente1), f"ID: {dipendente1.getId()} - Amilcare Carlino, nato il 2000-10-10 a Siviglia --> CAMERIERE") # type: ignore
-
-
 	def testDuplicati(self):
-		self.assertRaises(DuplicateError, GestorePersona.aggiungiPersona, Path('files/clienti.pickle'),
-										  'Rodrigo', 'Carlino', date(2001, 1, 1), 'Siviglia', 'rocarl@bu.com', '13342112')
+		self.assertRaises(DuplicateError, GestorePersona.aggiungiPersona, 
+										Path(paths['clienti']), 'Rodrigo', 'Carlino', date(2001, 1, 1), 'Siviglia', 'rocarl@bu.com', '13342112')
 		
-		self.assertRaises(DuplicateError, GestorePersona.aggiungiPersona, Path('files/dipendenti.pickle'),
-										  'Amilcare', 'Carlino', date(2000, 10, 10), 'Siviglia', 'amicarl@bu.com', '2444224150')
+		self.assertRaises(DuplicateError, GestorePersona.aggiungiPersona, 
+										Path(paths['dipendenti']), 'Amilcare', 'Carlino', date(2000, 10, 10), 'Siviglia', 'amicarl@bu.com', '2444224150')
 
 
 	def testRimozioneCliente(self):
@@ -74,10 +68,10 @@ class TestGestorePersona(unittest.TestCase):
 		self.assertIsNotNone(cliente1) # è stato trovato nel sistema il cliente inserito nel setUp
 		
 		# elimino dal sistema il cliente inserito nel setUp
-		GestorePersona.rimuoviPersona(Path('files/clienti.pickle'), cliente1) # type: ignore
+		GestorePersona.rimuoviPersona(Path(paths['clienti']), cliente1) # type: ignore
 
 		trovato = False
-		clientiAggiornati = GestoreFile.leggiDictPickle(Path("files/clienti.pickle"))
+		clientiAggiornati = GestoreFile.leggiDictPickle(Path(paths['clienti']))
 		for cliente in clientiAggiornati.values():
 			if cliente.getNome() == 'Rodrigo' and cliente.getCognome() == 'Carlino' and cliente.getDataNascita() == date(2001, 1, 1):
 				trovato = True
@@ -89,13 +83,13 @@ class TestGestorePersona(unittest.TestCase):
 		for dipendente in self.dipendenti.values():
 			if dipendente.getNome() == 'Amilcare' and dipendente.getCognome() == 'Carlino' and dipendente.getDataNascita() == date(2000, 10, 10):
 				dipendente1 = dipendente
-		self.assertNotEqual(dipendente1, None) # è stato trovato nel sistema il dipendente inserito nel setUp
+		self.assertIsNotNone(dipendente1) # è stato trovato nel sistema il dipendente inserito nel setUp
 		
 		# elimino dal sistema il dipendente inserito nel setUp
-		GestorePersona.rimuoviPersona(Path('files/dipendenti.pickle'), dipendente1) # type: ignore
+		GestorePersona.rimuoviPersona(Path(paths['dipendenti']), dipendente1) # type: ignore
 
 		trovato = False
-		dipendentiAggiornati = GestoreFile.leggiDictPickle(Path("files/dipendenti.pickle"))
+		dipendentiAggiornati = GestoreFile.leggiDictPickle(Path(paths['dipendenti']))
 		for dipendente in dipendentiAggiornati.values():
 			if dipendente.getNome() == 'Amilcare' and dipendente.getCognome() == 'Carlino' and dipendente.getDataNascita() == date(2000, 10, 10):
 				trovato = True

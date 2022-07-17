@@ -212,7 +212,7 @@
       </property>
      </spacer>
     </item>
-    <item>
+    <item alignment="Qt::AlignLeft">
      <widget class="QPushButton" name="btnIndietro">
       <property name="text">
        <string>Tornare Indietro</string>

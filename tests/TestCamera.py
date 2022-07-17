@@ -92,7 +92,7 @@ class TestCamera(unittest.TestCase):
 		if not isinstance(camera, Camera):
 			raise Exception
 		
-		if camera.isAssegnato():
+		if camera.isAssegnato(): # se usando il programma capita che la camera 1 ha già una vacanza in corso al momento del test
 			print('!!!!!!!!!!!!!!!!!!!!!!!'
 				  'testAssegnamento non eseguito: la camera 1 è al momento assegnata.\n'
 				  'Terminare la vacanza in corso e runnare di nuovo il test.'
