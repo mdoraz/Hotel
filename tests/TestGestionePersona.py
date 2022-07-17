@@ -94,7 +94,7 @@ class TestGestorePersona(unittest.TestCase):
 
 		flag = False
 		dipendentiAggiornati = GestoreFile.leggiDictPickle(Path("files/dipendenti.pickle"))
-		for dipendente in dipendentiAggiornati.values():q
+		for dipendente in dipendentiAggiornati.values():
 			if dipendente.getNome() == 'Amilcare' and dipendente.getCognome() == 'Carlino' and dipendente.getDataNascita() == date(2000, 10, 10):
 				flag = True
 		self.assertEqual(flag, False) # non è stato trovato nel sistema il dipendente inserito nel setUp

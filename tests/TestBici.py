@@ -41,7 +41,8 @@ class TestBici(unittest.TestCase):
 
 
 	def tearDown(self):
-		pass
+		if self.camere[1].isAssegnato():
+			self.camere[1].terminaAssegnamento()
 
 
 	def testAggiungiRimuoviPrenotazione(self):
@@ -126,6 +127,68 @@ class TestBici(unittest.TestCase):
 
 		# termino la vacanza per la camera
 		camera.terminaAssegnamento()
+	
+
+	def testAssegnamentoSenzaPrenotazione(self):
+		camera : Camera = self.camere[1]
+
+		bici : list[Bici] = [self.biciclette[2], self.biciclette[5], self.biciclette[11]]
+
+		for bicicletta in bici:
+			if bicicletta.isAssegnato():
+				print('!!!!!!!!!!!!!!!!!!!!!!!'
+					  'testAssegnamentoSenzaPrenotazione non eseguito: '
+					  'almeno una tra le bici numero 2, 5 e 11 è assegnata al momento.\n'
+					  'Terminare il loro assegnamento e runnare di nuovo il test.'
+					  '!!!!!!!!!!!!!!!!!!!!!!!')
+				return
+			
+		self.assertEqual(0, len(camera.getVacanzaAttuale().getNoleggiBici())) # type: ignore
+		
+		datiAssegnamento = {
+			'camera' : camera,
+			'prenotazione' : None,
+			'biciclette' : self.biciclette,
+			'camere' : self.camere
+		}
+		for bicicletta in bici:
+			bicicletta.assegna(datiAssegnamento)
+
+		# dopo l'assegnamento le bici sono assegnate
+		for bicicletta in bici:
+			self.assertEqual(True, bicicletta.isAssegnato())
+
+		# verificare che la modifica sia stata salvata su file
+		bicicletteBis = GestoreFile.leggiDictPickle(Path(self.paths['bici']))
+		self.assertEqual(True, bicicletteBis[2].isAssegnato())
+		self.assertEqual(True, bicicletteBis[5].isAssegnato())
+		self.assertEqual(True, bicicletteBis[11].isAssegnato())
+
+		# verificare che nel file i noleggi siano stati aggiunti alla vacanza e che siano in corso
+		camereBis = GestoreFile.leggiDictPickle(Path(self.paths['camere']))
+		self.assertEqual(3, len(camereBis[1].getVacanzaAttuale().getNoleggiBici()))
+		for noleggio in camereBis[1].getVacanzaAttuale().getNoleggiBici(): # type: ignore
+			self.assertEqual(True, noleggio.isInCorso())
+
+
+		for bicicletta in bici:
+			bicicletta.terminaAssegnamento()
+		
+		# dopo il termine dell'assegnamento le bici sono nuovamente disponibili
+		for bicicletta in bici:
+			self.assertEqual(False, bicicletta.isAssegnato())
+
+		# verificare che la modifica sia stata salvata su file
+		bicicletteBis = GestoreFile.leggiDictPickle(Path(self.paths['bici']))
+		self.assertEqual(False, bicicletteBis[2].isAssegnato())
+		self.assertEqual(False, bicicletteBis[5].isAssegnato())
+		self.assertEqual(False, bicicletteBis[11].isAssegnato())
+
+		# verificare che nel file i noleggi siano conclusi
+		camereBis = GestoreFile.leggiDictPickle(Path(self.paths['camere']))
+		self.assertEqual(3, len(camereBis[1].getVacanzaAttuale().getNoleggiBici()))	
+		for noleggio in camereBis[1].getVacanzaAttuale().getNoleggiBici(): # type: ignore
+			self.assertEqual(True, noleggio.isConcluso())
 
 
 

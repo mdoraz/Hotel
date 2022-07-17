@@ -18,7 +18,8 @@ class TestCamera(unittest.TestCase):
 
 
 	def tearDown(self):
-		pass
+		if self.camere[1].isAssegnato():
+			self.camere[1].terminaAssegnamento()
 
 
 	def testAggiungiRimuoviPrenotazione(self):
@@ -90,6 +91,13 @@ class TestCamera(unittest.TestCase):
 		camera = self.camere[1]
 		if not isinstance(camera, Camera):
 			raise Exception
+		
+		if camera.isAssegnato():
+			print('!!!!!!!!!!!!!!!!!!!!!!!'
+				  'testAssegnamento non eseguito: la camera 1 è al momento assegnata.\n'
+				  'Terminare la vacanza in corso e runnare di nuovo il test.'
+				  '!!!!!!!!!!!!!!!!!!!!!!!')
+			return
 
 		datiPrenotazione = {
 			'periodo' : PeriodoConData(date(2000, 7, 1), date(2000, 7, 7)),
