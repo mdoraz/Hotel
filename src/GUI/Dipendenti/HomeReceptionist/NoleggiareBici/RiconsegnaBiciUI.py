@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 

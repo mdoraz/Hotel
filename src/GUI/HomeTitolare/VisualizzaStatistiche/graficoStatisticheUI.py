@@ -1,4 +1,3 @@
-import sys
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
@@ -95,9 +94,3 @@ class graficoStatisticheUI(QMainWindow):
         plt.pie(slices, labels=labels, explode=explode, colors=colors, startangle=180, autopct='%1.1f%%')
         plt.title('Statistiche Tipologia Soggiorno')
         self.canvas.draw()
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = graficoStatisticheUI()
-    mainWidget.show()
-    sys.exit(app.exec_())

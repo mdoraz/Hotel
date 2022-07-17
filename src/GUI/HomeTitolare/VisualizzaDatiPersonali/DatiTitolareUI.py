@@ -1,7 +1,6 @@
-import sys
 from pathlib import Path
 
-from PyQt5 import QtCore, QtGui
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
@@ -167,14 +166,3 @@ class DatiTitolareUI(QTabWidget, FormUI):
     def _salvaTitolare(self):
         paths = GestoreFile.leggiJson(Path('paths.json'))
         GestoreFile.salvaPickle(self.titolare, Path(paths['titolare']))
-
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    paths = GestoreFile.leggiJson(Path('paths.json'))
-    titolare = GestoreFile.leggiPickle(Path(paths['titolare']))
-    if isinstance(titolare, Amministratore):
-        mainWidget = DatiTitolareUI(titolare, QWidget())  # type: ignore
-        mainWidget.show()
-        sys.exit(app.exec_())

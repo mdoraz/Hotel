@@ -1,4 +1,3 @@
-import sys
 import platform
 from pathlib import Path
 
@@ -330,11 +329,3 @@ class GestioneDipendentiUI(QTabWidget):
 		self.msg.setIcon(icon)
 		self.msg.setText(text)
 		self.msg.show()
-
-
-
-if __name__ == "__main__":
-	app = QApplication(sys.argv)
-	mainWidget = GestioneDipendentiUI(QWidget())
-	mainWidget.show()
-	sys.exit(app.exec_())

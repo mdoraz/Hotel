@@ -116,16 +116,16 @@ class TestCamera(unittest.TestCase):
 		camera.assegna(datiAssegnamento)
 
 		# verifica l'assegnamento di camera e ombrellone
-		self.assertEqual(True, ombrelloni[10].isAssegnato())
-		self.assertEqual(True, camera.isAssegnato())
-		self.assertNotEqual(None, camera.getVacanzaAttuale())
-		self.assertEqual(False, datiAssegnamento['prenotazione'] in camera.getPrenotazioni()) # verifica la rimozione della prenotazione da quelle che ha la camera
+		self.assertTrue(ombrelloni[10].isAssegnato())
+		self.assertTrue(camera.isAssegnato())
+		self.assertIsNotNone(camera.getVacanzaAttuale())
+		self.assertFalse(datiAssegnamento['prenotazione'] in camera.getPrenotazioni()) # verifica la rimozione della prenotazione da quelle che ha la camera
 
 		# verifica che ombrellone e camera non sono più assegnati 
 		camera.terminaAssegnamento()
-		self.assertEqual(False, ombrelloni[10].isAssegnato())
-		self.assertEqual(False, camera.isAssegnato())
-		self.assertEqual(None, camera.getVacanzaAttuale())
+		self.assertFalse(ombrelloni[10].isAssegnato())
+		self.assertFalse(camera.isAssegnato())
+		self.assertIsNone(camera.getVacanzaAttuale())
 
 		# viene aggiunto un terzo elemento alla lista dei clienti
 		datiAssegnamento['clienti'].append(Persona('Antonino', 'Liguori', date(1999, 8, 7), 'Pistoia', 'antonino@hotmail.com', '324598284'))

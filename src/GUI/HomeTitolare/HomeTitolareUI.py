@@ -1,7 +1,6 @@
 import sys
 from pathlib import Path
 
-from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
 
@@ -9,7 +8,6 @@ from src.Attori.Amministratore import Amministratore
 from src.Gestori.GestoreFile import GestoreFile
 from src.GUI.HomeTitolare.GestioneCucina.GestioneCucinaInterfacciaUI import GestioneCucinaInterfacciaUI
 from src.GUI.HomeTitolare.GestioneDipendenti.GestioneDipendentiUI import GestioneDipendentiUI
-from src.GUI.HomeTitolare.RicercaEVisualizzaVacanze.VisualizzaRicercaVacanze import VisualizzaRicercaVacanzeUI
 from src.GUI.HomeTitolare.VisualizzaDatiPersonali.DatiTitolareUI import DatiTitolareUI
 from src.GUI.HomeTitolare.VisualizzaStatistiche.VisualizzaStatisticheUI import VisualizzaStatisticheUI
 from src.GUI.Dipendenti.HomeReceptionist.GestioneVacanze.HomeGestioneVacanzeUI import HomeGestioneVacanzeUI

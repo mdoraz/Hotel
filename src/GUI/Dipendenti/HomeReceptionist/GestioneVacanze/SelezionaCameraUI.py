@@ -1,6 +1,5 @@
-import sys
-from datetime import date, timedelta
 from pathlib import Path
+from datetime import date, timedelta
 
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
@@ -94,11 +93,3 @@ class SelezionaCameraUI(QTabWidget):
         self.msg.setIcon(icon)
         self.msg.setText(text)
         self.msg.show()
-
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = SelezionaCameraUI(QWidget())
-    mainWidget.show()
-    sys.exit(app.exec_())

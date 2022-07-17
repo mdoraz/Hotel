@@ -156,19 +156,19 @@ class TestBici(unittest.TestCase):
 
 		# dopo l'assegnamento le bici sono assegnate
 		for bicicletta in bici:
-			self.assertEqual(True, bicicletta.isAssegnato())
+			self.assertTrue(bicicletta.isAssegnato())
 
 		# verificare che la modifica sia stata salvata su file
 		bicicletteBis = GestoreFile.leggiDictPickle(Path(self.paths['bici']))
-		self.assertEqual(True, bicicletteBis[2].isAssegnato())
-		self.assertEqual(True, bicicletteBis[5].isAssegnato())
-		self.assertEqual(True, bicicletteBis[11].isAssegnato())
+		self.assertTrue(bicicletteBis[2].isAssegnato())
+		self.assertTrue(bicicletteBis[5].isAssegnato())
+		self.assertTrue(bicicletteBis[11].isAssegnato())
 
 		# verificare che nel file i noleggi siano stati aggiunti alla vacanza e che siano in corso
 		camereBis = GestoreFile.leggiDictPickle(Path(self.paths['camere']))
 		self.assertEqual(3, len(camereBis[1].getVacanzaAttuale().getNoleggiBici()))
 		for noleggio in camereBis[1].getVacanzaAttuale().getNoleggiBici(): # type: ignore
-			self.assertEqual(True, noleggio.isInCorso())
+			self.assertTrue(noleggio.isInCorso())
 
 
 		for bicicletta in bici:
@@ -176,19 +176,19 @@ class TestBici(unittest.TestCase):
 		
 		# dopo il termine dell'assegnamento le bici sono nuovamente disponibili
 		for bicicletta in bici:
-			self.assertEqual(False, bicicletta.isAssegnato())
+			self.assertFalse(bicicletta.isAssegnato())
 
 		# verificare che la modifica sia stata salvata su file
 		bicicletteBis = GestoreFile.leggiDictPickle(Path(self.paths['bici']))
-		self.assertEqual(False, bicicletteBis[2].isAssegnato())
-		self.assertEqual(False, bicicletteBis[5].isAssegnato())
-		self.assertEqual(False, bicicletteBis[11].isAssegnato())
+		self.assertFalse(bicicletteBis[2].isAssegnato())
+		self.assertFalse(bicicletteBis[5].isAssegnato())
+		self.assertFalse(bicicletteBis[11].isAssegnato())
 
 		# verificare che nel file i noleggi siano conclusi
 		camereBis = GestoreFile.leggiDictPickle(Path(self.paths['camere']))
 		self.assertEqual(3, len(camereBis[1].getVacanzaAttuale().getNoleggiBici()))	
 		for noleggio in camereBis[1].getVacanzaAttuale().getNoleggiBici(): # type: ignore
-			self.assertEqual(True, noleggio.isConcluso())
+			self.assertTrue(noleggio.isConcluso())
 
 
 

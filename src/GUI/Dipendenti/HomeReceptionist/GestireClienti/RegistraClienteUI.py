@@ -1,5 +1,4 @@
 from datetime import date
-import sys
 from pathlib import Path
 
 from PyQt5 import QtCore, QtGui
@@ -151,11 +150,3 @@ class RegistraClienteUI(FormUI):
 		self.lineeditLuogoNascita.setFont(font)
 		self.lineeditEmail.setFont(font)
 		self.lineeditCellulare.setFont(font)
-
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = RegistraClienteUI(QWidget())
-    mainWidget.show()
-    sys.exit(app.exec_())

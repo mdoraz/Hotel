@@ -1,4 +1,3 @@
-import sys
 from pathlib import Path
 
 from PyQt5 import QtCore
@@ -92,11 +91,3 @@ class RicercaPrenotazioneVacanzaUI(QTabWidget):
     def _btnIndietroClicked(self):
         self.close()
         self.previous.show()
-
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = RicercaPrenotazioneVacanzaUI(QWidget())
-    mainWidget.show()
-    sys.exit(app.exec_())

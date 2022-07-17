@@ -28,7 +28,7 @@ class TestGestorePersona(unittest.TestCase):
 			if cliente.getNome() == 'Rodrigo' and cliente.getCognome() == 'Carlino' and cliente.getDataNascita() == date(2001, 1, 1):
 				cliente1 = cliente
 		try:
-			GestorePersona.rimuoviPersona(Path('files/clienti.pickle'), cliente1)
+			GestorePersona.rimuoviPersona(Path('files/clienti.pickle'), cliente1) # type: ignore
 		except KeyError: # per i tearDown effettuati dopo testRimozioneCliente
 			pass
 		
@@ -37,7 +37,7 @@ class TestGestorePersona(unittest.TestCase):
 			if dipendente.getNome() == 'Amilcare' and dipendente.getCognome() == 'Carlino' and dipendente.getDataNascita() == date(2000, 10, 10):
 				dipendente1 = dipendente
 		try:
-			GestorePersona.rimuoviPersona(Path('files/dipendenti.pickle'), dipendente1)
+			GestorePersona.rimuoviPersona(Path('files/dipendenti.pickle'), dipendente1) # type: ignore
 		except KeyError: # per i tearDown effettuati dopo testRimozioneDipendente
 			pass
 
@@ -47,7 +47,7 @@ class TestGestorePersona(unittest.TestCase):
 		for cliente in self.clienti.values():
 			if cliente.getNome() == 'Rodrigo' and cliente.getCognome() == 'Carlino' and cliente.getDataNascita() == date(2001, 1, 1):
 				cliente1 = cliente
-		self.assertEqual(str(cliente1), f"ID: {cliente1.getId()} - Rodrigo Carlino, nato il 2001-01-01 a Siviglia")
+		self.assertEqual(str(cliente1), f"ID: {cliente1.getId()} - Rodrigo Carlino, nato il 2001-01-01 a Siviglia") # type: ignore
 
 
 	def testDipendente1(self):
@@ -55,7 +55,7 @@ class TestGestorePersona(unittest.TestCase):
 		for dipendente in self.dipendenti.values():
 			if dipendente.getNome() == 'Amilcare' and dipendente.getCognome() == 'Carlino' and dipendente.getDataNascita() == date(2000, 10, 10):
 				dipendente1 = dipendente
-		self.assertEqual(str(dipendente1), f"ID: {dipendente1.getId()} - Amilcare Carlino, nato il 2000-10-10 a Siviglia --> CAMERIERE")
+		self.assertEqual(str(dipendente1), f"ID: {dipendente1.getId()} - Amilcare Carlino, nato il 2000-10-10 a Siviglia --> CAMERIERE") # type: ignore
 
 
 	def testDuplicati(self):
@@ -71,16 +71,17 @@ class TestGestorePersona(unittest.TestCase):
 		for cliente in self.clienti.values():
 			if cliente.getNome() == 'Rodrigo' and cliente.getCognome() == 'Carlino' and cliente.getDataNascita() == date(2001, 1, 1):
 				cliente1 = cliente
-		self.assertNotEqual(cliente1, None) # è stato trovato nel sistema il cliente inserito nel setUp
+		self.assertIsNotNone(cliente1) # è stato trovato nel sistema il cliente inserito nel setUp
 		
-		GestorePersona.rimuoviPersona(Path('files/clienti.pickle'), cliente1) # elimino dal sistema il cliente inserito nel setUp
+		# elimino dal sistema il cliente inserito nel setUp
+		GestorePersona.rimuoviPersona(Path('files/clienti.pickle'), cliente1) # type: ignore
 
-		flag = False
+		trovato = False
 		clientiAggiornati = GestoreFile.leggiDictPickle(Path("files/clienti.pickle"))
 		for cliente in clientiAggiornati.values():
 			if cliente.getNome() == 'Rodrigo' and cliente.getCognome() == 'Carlino' and cliente.getDataNascita() == date(2001, 1, 1):
-				flag = True
-		self.assertEqual(flag, False) # non è stato trovato nel sistema il cliente inserito nel setUp
+				trovato = True
+		self.assertFalse(trovato) # non è stato trovato nel sistema il cliente inserito nel setUp
 	
 
 	def testRimozioneDipendente(self):
@@ -90,14 +91,15 @@ class TestGestorePersona(unittest.TestCase):
 				dipendente1 = dipendente
 		self.assertNotEqual(dipendente1, None) # è stato trovato nel sistema il dipendente inserito nel setUp
 		
-		GestorePersona.rimuoviPersona(Path('files/dipendenti.pickle'), dipendente1) # elimino dal sistema il dipendente inserito nel setUp
+		# elimino dal sistema il dipendente inserito nel setUp
+		GestorePersona.rimuoviPersona(Path('files/dipendenti.pickle'), dipendente1) # type: ignore
 
-		flag = False
+		trovato = False
 		dipendentiAggiornati = GestoreFile.leggiDictPickle(Path("files/dipendenti.pickle"))
 		for dipendente in dipendentiAggiornati.values():
 			if dipendente.getNome() == 'Amilcare' and dipendente.getCognome() == 'Carlino' and dipendente.getDataNascita() == date(2000, 10, 10):
-				flag = True
-		self.assertEqual(flag, False) # non è stato trovato nel sistema il dipendente inserito nel setUp
+				trovato = True
+		self.assertFalse(trovato) # non è stato trovato nel sistema il dipendente inserito nel setUp
 
 
 

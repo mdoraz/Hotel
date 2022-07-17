@@ -1,4 +1,3 @@
-import sys
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
@@ -8,8 +7,8 @@ from src.Attori.Ruolo import Ruolo
 from src.Gestori.GestoreFile import GestoreFile
 from src.GUI.Dipendenti.HomeCamerieri.HomeCamerieriUI import HomeCamerieriUI
 from src.GUI.Dipendenti.HomeReceptionist.HomeReceptionistUI import HomeReceptionistUI
-from src.Utilities.encrypter import decrypt
 from src.GUI.HomeTitolare.HomeTitolareUI import HomeTitolareUI
+from src.Utilities.encrypter import decrypt
 
 
 class LoginProgrammaUI(QTabWidget):
@@ -41,9 +40,9 @@ class LoginProgrammaUI(QTabWidget):
             return
         username = self.page1.lineeditUsername.text()
         password = self.page1.lineeditPassword.text()
-        dictyonary = GestoreFile.leggiJson(Path('paths.json'))
+        dictionary = GestoreFile.leggiJson(Path('paths.json'))
 
-        if self.pathFile == Path(dictyonary['dipendenti']):
+        if self.pathFile == Path(dictionary['dipendenti']):
             dipendenti = self._readUtente('dipendenti')
             dipendenteUsername = None
 
@@ -69,7 +68,7 @@ class LoginProgrammaUI(QTabWidget):
                 self.widgetHomeCamerieri = HomeCamerieriUI(dipendenteUsername, self)
                 self.widgetHomeCamerieri.show()
 
-        elif self.pathFile == Path(dictyonary['titolare']):
+        elif self.pathFile == Path(dictionary['titolare']):
             titolare = self._readUtente('titolare')
 
             if username != titolare.getUsername() or password != decrypt(titolare.getPassword()):
@@ -120,6 +119,8 @@ class LoginProgrammaUI(QTabWidget):
                     self._showMessage(f"{Path(paths[chiave]).name} non esiste, crearne uno.", QMessageBox.Icon.Critical, 'Errore')
                     self.close()
                     raise
+            else:
+                raise Exception("parametro 'chiave' non valido: deve essere o 'dipendenti' o 'titolare'")
         except TypeError:
             self._showMessage(
                 f"{Path(paths[chiave]).name} è stato corrotto. Per far tornare il programma a funzionare correttamente, eliminare il file.",
@@ -128,13 +129,3 @@ class LoginProgrammaUI(QTabWidget):
             raise
 
         return utenti
-
-
-
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = LoginProgrammaUI(QWidget(), pathFile='src/GUI/HomePageProgramma')
-    mainWidget.show()
-    sys.exit(app.exec_())

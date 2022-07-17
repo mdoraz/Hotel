@@ -1,4 +1,3 @@
-import sys
 from pathlib import Path
 import copy
 
@@ -118,11 +117,3 @@ class ModificaPrenotazioneVacanzaUI(QTabWidget):
 	def _btnIndietroClicked(self):
 		self.close()
 		self.previous.show()
-
-
-
-if __name__ == "__main__":
-	app = QApplication(sys.argv)
-	mainWidget = ModificaPrenotazioneVacanzaUI(QWidget(), None) # type: ignore
-	mainWidget.show()
-	sys.exit(app.exec_())

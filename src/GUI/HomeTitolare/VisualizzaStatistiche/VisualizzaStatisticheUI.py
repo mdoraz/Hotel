@@ -1,4 +1,3 @@
-import sys
 from PyQt5 import QtGui
 from matplotlib import pyplot as plt
 from PyQt5.QtWidgets import *
@@ -49,15 +48,3 @@ class VisualizzaStatisticheUI(QTabWidget):
     def _btnTornareIndietroClicked(self):
         self.close()
         self.previous.show()
-
-
-
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    mainWidget = VisualizzaStatisticheUI(QWidget)
-    mainWidget.show()
-    sys.exit(app.exec_())
-
-
-
-

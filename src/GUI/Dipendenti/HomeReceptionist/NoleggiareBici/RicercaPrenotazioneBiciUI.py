@@ -1,4 +1,4 @@
-import sys
+"""import sys
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import *
 from PyQt5.uic import loadUi
@@ -32,4 +32,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     mainWidget = RicercaPrenotazioneBiciUI()
     mainWidget.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec_())"""

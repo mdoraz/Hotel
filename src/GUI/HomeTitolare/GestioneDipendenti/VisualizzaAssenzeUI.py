@@ -1,6 +1,5 @@
 from datetime import date
 from pathlib import Path
-import sys
 
 from PyQt5.QtWidgets import *
 from PyQt5 import QtCore, QtGui
@@ -113,12 +112,3 @@ class VisualizzaAssenzeUI(QWidget):
 		self.msg.setIcon(icon)
 		self.msg.setText(text)
 		self.msg.show()
-
-
-
-
-if __name__ == "__main__":
-	app = QApplication(sys.argv)
-	mainWidget = VisualizzaAssenzeUI(QWidget())
-	mainWidget.show()
-	sys.exit(app.exec_())
