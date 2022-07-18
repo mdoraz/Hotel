@@ -16,6 +16,7 @@ class HomePageUI(QTabWidget):
         self.addTab(self.page1, 'Home Programma')
         self.setMinimumSize(500,300)
         self.setFont(QtGui.QFont('Arial', 10))
+        self.setWindowTitle('Struttura Alberghiera')
 
         self.page1.btnDipendente.clicked.connect(self.btnDipendenteClicked)
         self.page1.btnTitolare.clicked.connect(self.btnTitolareClicked)

@@ -280,7 +280,7 @@
     <item>
      <widget class="QLabel" name="labelIntroduzione_2">
       <property name="text">
-       <string> Benvenuto, di seguito il menù dell'hotel per il pranzo:</string>
+       <string>Benvenuto, di seguito il menù dell'hotel per il pranzo:</string>
       </property>
      </widget>
     </item>
@@ -502,15 +502,27 @@
       </layout>
      </widget>
     </item>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QPushButton" name="btnModificaMenuPranzo">
+      <property name="minimumSize">
+       <size>
+        <width>450</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="text">
        <string>Modifica Menù</string>
       </property>
      </widget>
     </item>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QPushButton" name="btnTornarePaginaPrecedente_2">
+      <property name="minimumSize">
+       <size>
+        <width>450</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="text">
        <string>Tornare Indietro alla pagina precedente</string>
       </property>
@@ -748,15 +760,27 @@
       </layout>
      </widget>
     </item>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QPushButton" name="btnModificaMenuCena">
+      <property name="minimumSize">
+       <size>
+        <width>450</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="text">
        <string>Modifica Menù</string>
       </property>
      </widget>
     </item>
-    <item>
+    <item alignment="Qt::AlignHCenter">
      <widget class="QPushButton" name="btnTornarePaginaPrecedente_3">
+      <property name="minimumSize">
+       <size>
+        <width>450</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="text">
        <string>Tornare indietro alla pagina precedente</string>
       </property>

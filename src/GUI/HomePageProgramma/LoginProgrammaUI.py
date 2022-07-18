@@ -19,6 +19,7 @@ class LoginProgrammaUI(QTabWidget):
         self.addTab(self.page1, 'Login Programma')
         self.setMinimumSize(500, 200)
         self.setFont(QtGui.QFont('Arial', 10))
+        self.setWindowTitle('Struttura Alberghiera')
 
         eyeBtn = QToolButton()  # creati i bottoni per mostrare/nascondere la password
         self._connectEye(eyeBtn, self.page1.lineeditPassword) # collega eyeBtn alla line edit corrispondente
