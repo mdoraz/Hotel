@@ -309,7 +309,7 @@ class HomeGestioneVacanzeUI(QTabWidget):
 
 	def _btnModificaPrenotazioneClicked(self):
 		def onTipoSoggiornoModificato():
-			self.lineeditTipoSoggiornoPrenotazione.setText(self.comboboxTipoSoggiorno.currentText())
+			self.lineeditTipoSoggiornoPrenotazione.setText(str(self.prenotazioneVisualizzata.getTipoSoggiorno()))
 			if self.prenotazioneVisualizzata.getPeriodo().getInizio() == date.today() + timedelta(days = 1): # se la prenotazione è visualizzata nella lista di arrivi
 				i = 0
 				while i < self.treewidgetArrivi.topLevelItemCount():
